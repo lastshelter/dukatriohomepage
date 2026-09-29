@@ -855,7 +855,164 @@ export default function HomePage(): React.JSX.Element {
       <ArchitectureSnippets />
 
       {/* ========================================================================= */}
-      {/* 6C. PROJECT SCOPE & COST ESTIMATOR */}
+      {/* 6C. CLIENT ASSURANCE: ZERO VENDOR LOCK-IN & COMPLETE MODIFIABILITY */}
+      {/* ========================================================================= */}
+      <section className="py-20 sm:py-28 relative border-t border-zinc-800/80 bg-zinc-950/60">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-16">
+          {/* Section Header */}
+          <div className="max-w-3xl space-y-4">
+            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-cyan-950/40 border border-cyan-800/50 text-cyan-400 font-mono text-xs font-semibold">
+              <ShieldCheck className="w-3.5 h-3.5 text-cyan-400" />
+              <span>Client Assurance &amp; Architectural Freedom</span>
+            </div>
+
+            <h2 className="text-3xl sm:text-5xl font-extrabold text-white tracking-tight">
+              Zero Vendor Lock-In. Complete Modifiability.
+            </h2>
+
+            <p className="text-base text-zinc-400 leading-relaxed font-normal">
+              Most digital agencies build on proprietary black-box systems or fragile WordPress page builders that trap you forever. DukaTrio engineers modular, enterprise-grade code that you own 100%.
+            </p>
+          </div>
+
+          {/* 3-Column Frosted Glass Grid */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {/* Card 1: Modular Component Architecture */}
+            <div className="rounded-2xl border border-zinc-800/80 bg-zinc-900/40 p-8 shadow-sm hover:border-cyan-500/50 hover:bg-zinc-900/60 transition-all duration-300 space-y-4 group">
+              <div className="w-12 h-12 rounded-xl bg-cyan-950/60 border border-cyan-800/60 flex items-center justify-center text-cyan-400 group-hover:scale-105 transition-transform">
+                <Layers className="w-6 h-6" />
+              </div>
+              <h3 className="text-xl font-bold text-white tracking-tight">
+                Modular Component Architecture
+              </h3>
+              <p className="text-sm text-zinc-400 leading-relaxed">
+                Clean React 19 and TypeScript modular blocks. Swap sections, adjust layouts, or extend backend data schemas without legacy technical debt or spaghetti code.
+              </p>
+              <div className="pt-2 text-xs font-mono text-cyan-400/90 flex items-center gap-1.5">
+                <CheckCircle2 className="w-4 h-4 text-cyan-400" />
+                <span>Isolated Component Scope</span>
+              </div>
+            </div>
+
+            {/* Card 2: Optional Headless CMS Integration */}
+            <div className="rounded-2xl border border-zinc-800/80 bg-zinc-900/40 p-8 shadow-sm hover:border-emerald-500/50 hover:bg-zinc-900/60 transition-all duration-300 space-y-4 group">
+              <div className="w-12 h-12 rounded-xl bg-emerald-950/60 border border-emerald-800/60 flex items-center justify-center text-emerald-400 group-hover:scale-105 transition-transform">
+                <FileCode2 className="w-6 h-6" />
+              </div>
+              <h3 className="text-xl font-bold text-white tracking-tight">
+                Optional Headless CMS Integration
+              </h3>
+              <p className="text-sm text-zinc-400 leading-relaxed">
+                Non-technical staff can edit articles, market copy, and media in real time through an intuitive dashboard without touching raw code or triggering manual rebuilds.
+              </p>
+              <div className="pt-2 text-xs font-mono text-emerald-400/90 flex items-center gap-1.5">
+                <CheckCircle2 className="w-4 h-4 text-emerald-400" />
+                <span>Zero-Code Publishing Workflow</span>
+              </div>
+            </div>
+
+            {/* Card 3: 100% Code & Asset Ownership */}
+            <div className="rounded-2xl border border-zinc-800/80 bg-zinc-900/40 p-8 shadow-sm hover:border-indigo-500/50 hover:bg-zinc-900/60 transition-all duration-300 space-y-4 group">
+              <div className="w-12 h-12 rounded-xl bg-indigo-950/60 border border-indigo-800/60 flex items-center justify-center text-indigo-400 group-hover:scale-105 transition-transform">
+                <Lock className="w-6 h-6" />
+              </div>
+              <h3 className="text-xl font-bold text-white tracking-tight">
+                100% Code &amp; Asset Ownership
+              </h3>
+              <p className="text-sm text-zinc-400 leading-relaxed">
+                Complete Git repository, Docker configurations, and Linux server handover upon project delivery. Zero recurring platform tax, zero locked themes, zero royalties.
+              </p>
+              <div className="pt-2 text-xs font-mono text-indigo-400/90 flex items-center gap-1.5">
+                <CheckCircle2 className="w-4 h-4 text-indigo-400" />
+                <span>Full Intellectual Property Transfer</span>
+              </div>
+            </div>
+          </div>
+
+          {/* DukaTrio Next.js vs. Legacy WordPress / Page Builders Comparison Matrix */}
+          <div className="rounded-2xl border border-zinc-800 bg-zinc-950/80 overflow-hidden shadow-2xl">
+            <div className="p-6 border-b border-zinc-800/80 bg-zinc-900/60 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+              <div>
+                <span className="text-xs font-mono uppercase tracking-wider text-cyan-400 font-bold block">
+                  Architectural Benchmark
+                </span>
+                <h3 className="text-xl font-bold text-white tracking-tight mt-0.5">
+                  DukaTrio Next.js Engine vs. Legacy WordPress &amp; Page Builders
+                </h3>
+              </div>
+              <span className="px-3 py-1 rounded-full bg-emerald-950/60 border border-emerald-700/60 text-emerald-400 text-xs font-mono font-semibold w-fit">
+                INSTITUTIONAL GRADE
+              </span>
+            </div>
+
+            <div className="overflow-x-auto">
+              <table className="w-full text-left text-sm font-sans border-collapse">
+                <thead>
+                  <tr className="border-b border-zinc-800 bg-zinc-900/30 text-xs font-mono text-zinc-400 uppercase tracking-wider">
+                    <th className="py-4 px-6">Performance &amp; Posture Metric</th>
+                    <th className="py-4 px-6 text-cyan-400 bg-cyan-950/20 font-bold">
+                      DukaTrio Next.js Engine
+                    </th>
+                    <th className="py-4 px-6 text-zinc-400">Legacy WordPress / Elementor / Wix</th>
+                  </tr>
+                </thead>
+                <tbody className="divide-y divide-zinc-800/60 font-sans text-xs sm:text-sm">
+                  <tr className="hover:bg-zinc-900/30 transition-colors">
+                    <td className="py-4 px-6 font-medium text-white">
+                      TTFB &amp; Load Latency
+                    </td>
+                    <td className="py-4 px-6 font-mono font-semibold text-emerald-400 bg-cyan-950/10">
+                      &lt; 400ms Edge TTFB (Instant)
+                    </td>
+                    <td className="py-4 px-6 text-zinc-400">
+                      3.5s – 6.2s (Bloated scripts &amp; heavy PHP overhead)
+                    </td>
+                  </tr>
+
+                  <tr className="hover:bg-zinc-900/30 transition-colors">
+                    <td className="py-4 px-6 font-medium text-white">
+                      Security Posture &amp; Attack Surface
+                    </td>
+                    <td className="py-4 px-6 font-mono font-semibold text-emerald-400 bg-cyan-950/10">
+                      Isolated origin, static edge cache, zero plugin bloat
+                    </td>
+                    <td className="py-4 px-6 text-zinc-400">
+                      High attack surface, vulnerable third-party SQL/PHP plugins
+                    </td>
+                  </tr>
+
+                  <tr className="hover:bg-zinc-900/30 transition-colors">
+                    <td className="py-4 px-6 font-medium text-white">
+                      Google Core Web Vitals
+                    </td>
+                    <td className="py-4 px-6 font-mono font-semibold text-emerald-400 bg-cyan-950/10">
+                      95–100 Mobile &amp; Desktop (Guaranteed)
+                    </td>
+                    <td className="py-4 px-6 text-zinc-400">
+                      50–70 average (Severe render-blocking delays)
+                    </td>
+                  </tr>
+
+                  <tr className="hover:bg-zinc-900/30 transition-colors">
+                    <td className="py-4 px-6 font-medium text-white">
+                      Infrastructure Cost
+                    </td>
+                    <td className="py-4 px-6 font-mono font-semibold text-emerald-400 bg-cyan-950/10">
+                      High-efficiency Linux VPS ($5–$20/mo)
+                    </td>
+                    <td className="py-4 px-6 text-zinc-400">
+                      Expensive tiered managed WordPress hosting ($50–$200/mo)
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ========================================================================= */}
+      {/* 6D. PROJECT SCOPE & COST ESTIMATOR */}
       {/* ========================================================================= */}
       <Estimator />
 

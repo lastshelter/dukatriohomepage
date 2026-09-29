@@ -9,6 +9,8 @@ import {
   ShieldCheck,
   Sparkles,
   ArrowRight,
+  Copy,
+  Check,
 } from "lucide-react";
 
 const SCOPE_OPTIONS = [
@@ -30,6 +32,17 @@ export default function ContactForm(): React.JSX.Element {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
+  const [copied, setCopied] = useState(false);
+
+  const handleCopyEmail = async () => {
+    try {
+      await navigator.clipboard.writeText("contact@dukatrio.com");
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    } catch {
+      // Fallback
+    }
+  };
 
   useEffect(() => {
     const handlePopulate = (e: Event) => {
@@ -299,6 +312,36 @@ export default function ContactForm(): React.JSX.Element {
             </div>
           </form>
         )}
+      </div>
+
+      {/* 1-Click Direct Email Clipboard Utility */}
+      <div className="pt-6 flex justify-center">
+        <button
+          type="button"
+          onClick={handleCopyEmail}
+          className={`inline-flex items-center gap-2.5 px-4 py-2.5 rounded-full border text-xs font-mono transition-all cursor-pointer ${
+            copied
+              ? "bg-cyan-950/80 border-cyan-400 text-cyan-300 shadow-[0_0_20px_-3px_rgba(6,182,212,0.5)] animate-pulse"
+              : "bg-zinc-900/80 hover:bg-zinc-800 border-zinc-800 hover:border-zinc-700 text-zinc-400 hover:text-zinc-200"
+          }`}
+        >
+          {copied ? (
+            <>
+              <Check className="w-3.5 h-3.5 text-cyan-400" />
+              <span className="font-semibold text-cyan-300">✓ COPIED TO CLIPBOARD (contact@dukatrio.com)</span>
+            </>
+          ) : (
+            <>
+              <Copy className="w-3.5 h-3.5 text-zinc-400" />
+              <span>
+                Prefer your desktop mail client?{" "}
+                <span className="text-cyan-400 underline underline-offset-2">
+                  Copy Direct Engineering Desk
+                </span>
+              </span>
+            </>
+          )}
+        </button>
       </div>
     </div>
   );
