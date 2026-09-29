@@ -4,7 +4,6 @@ import React, { useState } from "react";
 import Link from "next/link";
 import ContactForm from "@/components/ContactForm";
 import TechStackMatrix from "@/components/TechStackMatrix";
-import ArchitectureSnippets from "@/components/ArchitectureSnippets";
 import Estimator from "@/components/Estimator";
 import {
   Terminal,
@@ -37,7 +36,6 @@ import {
 
 export default function HomePage(): React.JSX.Element {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [bfsFeatureTab, setBfsFeatureTab] = useState<"underwriting" | "amortization" | "security">("underwriting");
 
   return (
     <div className="relative min-h-screen bg-[#09090b] text-zinc-100 overflow-hidden font-sans">
@@ -70,10 +68,10 @@ export default function HomePage(): React.JSX.Element {
             </div>
           </Link>
 
-          {/* Desktop Navigation Links - Clean 4 Items */}
+          {/* Desktop Navigation Links - Clean 3 Items */}
           <nav className="hidden md:flex items-center gap-8 text-sm font-medium text-zinc-300">
-            <a href="#work" className="hover:text-cyan-400 transition-colors">
-              Work
+            <a href="#solutions" className="hover:text-cyan-400 transition-colors">
+              Solutions
             </a>
             <a href="#capabilities" className="hover:text-cyan-400 transition-colors">
               Capabilities
@@ -81,15 +79,6 @@ export default function HomePage(): React.JSX.Element {
             <a href="#estimator" className="hover:text-cyan-400 transition-colors">
               Estimator
             </a>
-            <Link
-              href="/systems/bfs"
-              className="hover:text-cyan-400 transition-colors flex items-center gap-1.5"
-            >
-              <span>BFS Platform</span>
-              <span className="text-[10px] font-mono text-cyan-400 bg-cyan-950/80 px-1.5 py-0.5 rounded border border-cyan-800/50">
-                LIVE
-              </span>
-            </Link>
           </nav>
 
           {/* CTA Button */}
@@ -119,11 +108,11 @@ export default function HomePage(): React.JSX.Element {
           <div className="md:hidden border-b border-zinc-800 bg-[#09090b]/95 px-6 py-6 space-y-4">
             <nav className="flex flex-col space-y-3 pt-2 text-sm font-medium text-zinc-200">
               <a
-                href="#work"
+                href="#solutions"
                 onClick={() => setMobileMenuOpen(false)}
                 className="hover:text-cyan-400 py-1"
               >
-                Work
+                Solutions
               </a>
               <a
                 href="#capabilities"
@@ -139,16 +128,6 @@ export default function HomePage(): React.JSX.Element {
               >
                 Estimator
               </a>
-              <Link
-                href="/systems/bfs"
-                onClick={() => setMobileMenuOpen(false)}
-                className="hover:text-cyan-400 py-1 flex items-center justify-between"
-              >
-                <span>BFS Platform</span>
-                <span className="text-[10px] font-mono text-cyan-400 bg-cyan-950/60 px-1.5 py-0.5 rounded border border-cyan-800/40">
-                  LIVE
-                </span>
-              </Link>
             </nav>
             <div className="pt-2">
               <a
@@ -165,266 +144,61 @@ export default function HomePage(): React.JSX.Element {
       </header>
 
       {/* ========================================================================= */}
-      {/* 2. HERO SECTION */}
+      {/* 2. HERO SECTION - BALANCED CENTERED HIGH-IMPACT LAYOUT */}
       {/* ========================================================================= */}
-      <section className="relative pt-20 pb-20 sm:pt-28 sm:pb-28">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-            {/* Left Column: Headline and CTAs (7 cols) */}
-            <div className="lg:col-span-7 space-y-6 sm:space-y-8">
-              {/* Precision Badge */}
-              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-cyan-950/40 border border-cyan-800/50 text-cyan-400 font-mono text-xs font-semibold">
-                <Radio className="w-3.5 h-3.5 animate-pulse text-cyan-400" />
-                <span>Next-Gen Systems Engineering &amp; Platform Architecture</span>
-              </div>
+      <section className="relative pt-24 pb-20 sm:pt-36 sm:pb-32 text-center">
+        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
+          {/* Precision Badge */}
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-cyan-950/50 border border-cyan-800/60 text-cyan-400 font-mono text-xs font-semibold shadow-inner">
+            <Radio className="w-3.5 h-3.5 animate-pulse text-cyan-400" />
+            <span>Next-Gen Systems Engineering &amp; Digital Infrastructure</span>
+          </div>
 
-              {/* Punchy Hero Title */}
-              <h1 className="text-4xl sm:text-6xl font-extrabold text-white tracking-tight leading-[1.08]">
-                Engineering High-Performance Web Applications &amp;{" "}
-                <span className="bg-gradient-to-r from-cyan-400 via-teal-300 to-indigo-400 bg-clip-text text-transparent">
-                  Resilient Digital Infrastructure.
-                </span>
-              </h1>
+          {/* Punchy Hero Title */}
+          <h1 className="text-4xl sm:text-6xl lg:text-7xl font-extrabold text-white tracking-tight leading-[1.08] max-w-4xl mx-auto">
+            Engineering High-Performance Web Applications &amp;{" "}
+            <span className="bg-gradient-to-r from-cyan-400 via-teal-300 to-indigo-400 bg-clip-text text-transparent">
+              Resilient Digital Infrastructure.
+            </span>
+          </h1>
 
-              {/* Subtitle */}
-              <p className="text-base sm:text-lg text-zinc-400 leading-relaxed font-normal max-w-2xl">
-                From institutional-grade fintech portals with automated underwriting to high-throughput cloud infrastructure. We build full-stack web platforms engineered for speed, security, and scale.
-              </p>
+          {/* Subtitle */}
+          <p className="text-base sm:text-xl text-zinc-400 leading-relaxed font-normal max-w-3xl mx-auto">
+            From institutional-grade fintech portals and automated decisioning engines to high-throughput cloud infrastructure. We build full-stack web platforms engineered for speed, security, and scale.
+          </p>
 
-              {/* Dual CTAs */}
-              <div className="pt-2 flex flex-col sm:flex-row items-stretch sm:items-center gap-4">
-                <a
-                  href="#work"
-                  className="py-3.5 px-7 rounded-xl bg-gradient-to-r from-cyan-500 to-cyan-600 hover:from-cyan-400 hover:to-cyan-500 text-zinc-950 font-bold text-xs uppercase tracking-wider transition-all shadow-[0_0_25px_-5px_rgba(6,182,212,0.4)] flex items-center justify-center gap-2.5 group cursor-pointer"
-                >
-                  <span>Explore Live Deployments</span>
-                  <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                </a>
+          {/* Primary Action Buttons */}
+          <div className="pt-4 flex flex-col sm:flex-row items-center justify-center gap-4">
+            <a
+              href="#capabilities"
+              className="w-full sm:w-auto py-3.5 px-8 rounded-xl bg-gradient-to-r from-cyan-500 to-cyan-600 hover:from-cyan-400 hover:to-cyan-500 text-zinc-950 font-bold text-xs uppercase tracking-wider transition-all shadow-[0_0_25px_-5px_rgba(6,182,212,0.5)] flex items-center justify-center gap-2.5 group cursor-pointer"
+            >
+              <span>Explore Capabilities</span>
+              <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+            </a>
 
-                <a
-                  href="#capabilities"
-                  className="py-3.5 px-7 rounded-xl bg-zinc-900/80 hover:bg-zinc-800 border border-zinc-700/80 hover:border-zinc-600 text-zinc-200 font-semibold text-xs uppercase tracking-wider transition-all flex items-center justify-center gap-2"
-                >
-                  <Code2 className="w-4 h-4 text-cyan-400" />
-                  <span>Technical Capabilities</span>
-                </a>
-              </div>
+            <a
+              href="#contact"
+              className="w-full sm:w-auto py-3.5 px-8 rounded-xl bg-zinc-900/90 hover:bg-zinc-800 border border-zinc-700/80 hover:border-zinc-600 text-zinc-200 hover:text-white font-semibold text-xs uppercase tracking-wider transition-all flex items-center justify-center gap-2"
+            >
+              <Mail className="w-4 h-4 text-cyan-400" />
+              <span>Start a Project</span>
+            </a>
+          </div>
 
-              {/* Micro-Trust Telemetry */}
-              <div className="pt-4 flex flex-wrap items-center gap-6 text-xs font-mono text-zinc-400 border-t border-zinc-800/80">
-                <div className="flex items-center gap-2">
-                  <ShieldCheck className="w-4 h-4 text-cyan-400" />
-                  <span>Bank-Grade Encryption</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <Cpu className="w-4 h-4 text-emerald-400" />
-                  <span>Node.js 22 LTS Runtime</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <Activity className="w-4 h-4 text-indigo-400" />
-                  <span>99.99% Uptime Architecture</span>
-                </div>
-              </div>
+          {/* Centered Micro-Trust Telemetry */}
+          <div className="pt-8 flex flex-wrap items-center justify-center gap-8 text-xs font-mono text-zinc-400 border-t border-zinc-800/80 max-w-2xl mx-auto">
+            <div className="flex items-center gap-2">
+              <ShieldCheck className="w-4 h-4 text-cyan-400" />
+              <span>Bank-Grade Encryption</span>
             </div>
-
-            {/* Right Column: Sleek Interactive Biggs Funding Solutions Showcase (5 cols) */}
-            <div className="lg:col-span-5">
-              <div className="relative rounded-2xl border border-zinc-800 bg-zinc-950/80 backdrop-blur-xl shadow-2xl p-1 overflow-hidden transition-all duration-300 hover:border-cyan-500/40 group">
-                {/* Ambient Card Backlight */}
-                <div className="absolute -inset-0.5 bg-gradient-to-r from-cyan-500/15 via-indigo-500/15 to-teal-500/15 rounded-2xl blur-xl opacity-60 group-hover:opacity-100 transition-opacity duration-500 -z-10" />
-
-                {/* Header Bar of Preview Card */}
-                <div className="p-4 sm:p-5 bg-zinc-900/90 rounded-t-xl border-b border-zinc-800/80 flex items-center justify-between gap-3">
-                  <div className="flex items-center gap-3">
-                    <div className="w-9 h-9 rounded-lg bg-gradient-to-br from-cyan-950 to-zinc-900 border border-cyan-800/60 flex items-center justify-center text-cyan-400 font-bold text-xs font-mono shadow-inner">
-                      BFS
-                    </div>
-                    <div>
-                      <div className="flex items-center gap-2">
-                        <span className="text-sm font-bold text-white tracking-tight">Biggs Funding Solutions</span>
-                        <span className="relative flex h-2 w-2">
-                          <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
-                          <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500" />
-                        </span>
-                      </div>
-                      <span className="text-[11px] font-mono text-zinc-400">Live Production Deployment</span>
-                    </div>
-                  </div>
-
-                  <a
-                    href="https://bfstrial.dukatrio.com"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="hidden sm:inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-zinc-800/80 hover:bg-zinc-700/80 border border-zinc-700/60 text-zinc-300 hover:text-cyan-300 font-mono text-[11px] transition-colors"
-                  >
-                    <span>bfstrial.dukatrio.com</span>
-                    <ExternalLink className="w-3 h-3 text-cyan-400" />
-                  </a>
-                </div>
-
-                {/* Interactive Metric Selectors / Tabs */}
-                <div className="p-4 sm:p-6 space-y-5 bg-gradient-to-b from-zinc-950/90 to-zinc-900/60 rounded-b-xl">
-                  {/* 3 Interactive Tab Selectors */}
-                  <div className="grid grid-cols-3 gap-1.5 p-1 bg-zinc-900/90 rounded-xl border border-zinc-800/80 text-xs">
-                    <button
-                      type="button"
-                      onClick={() => setBfsFeatureTab("underwriting")}
-                      className={`py-2 px-2 rounded-lg text-center font-mono text-[11px] transition-all cursor-pointer ${
-                        bfsFeatureTab === "underwriting"
-                          ? "bg-cyan-500 text-zinc-950 font-bold shadow-md"
-                          : "text-zinc-400 hover:text-white hover:bg-zinc-800/60"
-                      }`}
-                    >
-                      Underwriting
-                    </button>
-                    <button
-                      type="button"
-                      onClick={() => setBfsFeatureTab("amortization")}
-                      className={`py-2 px-2 rounded-lg text-center font-mono text-[11px] transition-all cursor-pointer ${
-                        bfsFeatureTab === "amortization"
-                          ? "bg-cyan-500 text-zinc-950 font-bold shadow-md"
-                          : "text-zinc-400 hover:text-white hover:bg-zinc-800/60"
-                      }`}
-                    >
-                      Amortization
-                    </button>
-                    <button
-                      type="button"
-                      onClick={() => setBfsFeatureTab("security")}
-                      className={`py-2 px-2 rounded-lg text-center font-mono text-[11px] transition-all cursor-pointer ${
-                        bfsFeatureTab === "security"
-                          ? "bg-cyan-500 text-zinc-950 font-bold shadow-md"
-                          : "text-zinc-400 hover:text-white hover:bg-zinc-800/60"
-                      }`}
-                    >
-                      A+ Security
-                    </button>
-                  </div>
-
-                  {/* Tab 1: Automated Underwriting Engine */}
-                  {bfsFeatureTab === "underwriting" && (
-                    <div className="space-y-4 rounded-xl border border-zinc-800/90 bg-zinc-900/50 p-4 transition-all">
-                      <div className="flex items-center justify-between pb-3 border-b border-zinc-800/60">
-                        <div className="flex items-center gap-2 text-xs font-mono text-zinc-300">
-                          <Zap className="w-3.5 h-3.5 text-cyan-400" />
-                          <span className="font-semibold text-white">Automated Underwriting Engine</span>
-                        </div>
-                        <span className="px-2 py-0.5 rounded text-[10px] font-mono font-bold bg-emerald-950/80 border border-emerald-700/60 text-emerald-400">
-                          APPROVED · TIER 1
-                        </span>
-                      </div>
-                      <div className="grid grid-cols-2 gap-3 text-xs font-mono">
-                        <div className="bg-zinc-950/70 p-2.5 rounded-lg border border-zinc-800/60">
-                          <span className="text-[10px] text-zinc-500 block uppercase">Facility Sizing</span>
-                          <span className="text-base font-bold text-white">$1,250,000</span>
-                          <span className="text-[10px] text-cyan-400 block mt-0.5">DSCR 1.42x Coverage</span>
-                        </div>
-                        <div className="bg-zinc-950/70 p-2.5 rounded-lg border border-zinc-800/60">
-                          <span className="text-[10px] text-zinc-500 block uppercase">Decision Latency</span>
-                          <span className="text-base font-bold text-emerald-400">&lt; 380 ms</span>
-                          <span className="text-[10px] text-zinc-400 block mt-0.5">Automated Rule Engine</span>
-                        </div>
-                      </div>
-                      <div className="flex items-center justify-between text-[11px] font-mono text-zinc-400 pt-1">
-                        <span className="flex items-center gap-1.5 text-zinc-300">
-                          <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400" />
-                          6 / 6 Risk Covenants Cleared
-                        </span>
-                        <span className="text-zinc-500">Max LTV: 68.5%</span>
-                      </div>
-                    </div>
-                  )}
-
-                  {/* Tab 2: Instant Amortization Schedules */}
-                  {bfsFeatureTab === "amortization" && (
-                    <div className="space-y-4 rounded-xl border border-zinc-800/90 bg-zinc-900/50 p-4 transition-all">
-                      <div className="flex items-center justify-between pb-3 border-b border-zinc-800/60">
-                        <div className="flex items-center gap-2 text-xs font-mono text-zinc-300">
-                          <Calculator className="w-3.5 h-3.5 text-cyan-400" />
-                          <span className="font-semibold text-white">Instant Amortization Schedules</span>
-                        </div>
-                        <span className="px-2 py-0.5 rounded text-[10px] font-mono font-bold bg-cyan-950/80 border border-cyan-700/60 text-cyan-400">
-                          DYNAMIC WATERFALL
-                        </span>
-                      </div>
-                      <div className="grid grid-cols-2 gap-3 text-xs font-mono">
-                        <div className="bg-zinc-950/70 p-2.5 rounded-lg border border-zinc-800/60">
-                          <span className="text-[10px] text-zinc-500 block uppercase">Note Rate / Term</span>
-                          <span className="text-base font-bold text-white">9.75% <span className="text-xs font-normal text-zinc-400">/ 24 Mo</span></span>
-                          <span className="text-[10px] text-cyan-400 block mt-0.5">Interest-Only Balloon</span>
-                        </div>
-                        <div className="bg-zinc-950/70 p-2.5 rounded-lg border border-zinc-800/60">
-                          <span className="text-[10px] text-zinc-500 block uppercase">Monthly Debt Service</span>
-                          <span className="text-base font-bold text-indigo-400">$10,156.25</span>
-                          <span className="text-[10px] text-zinc-400 block mt-0.5">Automated Remittance</span>
-                        </div>
-                      </div>
-                      <div className="flex items-center justify-between text-[11px] font-mono text-zinc-400 pt-1">
-                        <span className="flex items-center gap-1.5 text-zinc-300">
-                          <CheckCircle2 className="w-3.5 h-3.5 text-cyan-400" />
-                          Principal Paydown Curve
-                        </span>
-                        <span className="text-zinc-500">Zero Rounding Drift</span>
-                      </div>
-                    </div>
-                  )}
-
-                  {/* Tab 3: A+ Security */}
-                  {bfsFeatureTab === "security" && (
-                    <div className="space-y-4 rounded-xl border border-zinc-800/90 bg-zinc-900/50 p-4 transition-all">
-                      <div className="flex items-center justify-between pb-3 border-b border-zinc-800/60">
-                        <div className="flex items-center gap-2 text-xs font-mono text-zinc-300">
-                          <Lock className="w-3.5 h-3.5 text-emerald-400" />
-                          <span className="font-semibold text-white">Institutional A+ Security</span>
-                        </div>
-                        <span className="px-2 py-0.5 rounded text-[10px] font-mono font-bold bg-emerald-950/80 border border-emerald-700/60 text-emerald-400">
-                          AUDITED &amp; ISOLATED
-                        </span>
-                      </div>
-                      <div className="grid grid-cols-2 gap-3 text-xs font-mono">
-                        <div className="bg-zinc-950/70 p-2.5 rounded-lg border border-zinc-800/60">
-                          <span className="text-[10px] text-zinc-500 block uppercase">Data Protection</span>
-                          <span className="text-sm font-bold text-white">AES-256 GCM</span>
-                          <span className="text-[10px] text-emerald-400 block mt-0.5">Field-Level Enforced</span>
-                        </div>
-                        <div className="bg-zinc-950/70 p-2.5 rounded-lg border border-zinc-800/60">
-                          <span className="text-[10px] text-zinc-500 block uppercase">Access Control</span>
-                          <span className="text-sm font-bold text-white">Role-Based RBAC</span>
-                          <span className="text-[10px] text-indigo-400 block mt-0.5">Tenant Origin Isolated</span>
-                        </div>
-                      </div>
-                      <div className="flex items-center justify-between text-[11px] font-mono text-zinc-400 pt-1">
-                        <span className="flex items-center gap-1.5 text-zinc-300">
-                          <ShieldCheck className="w-3.5 h-3.5 text-emerald-400" />
-                          Zero-Trust Architecture
-                        </span>
-                        <span className="text-zinc-500">Automated Audit Log</span>
-                      </div>
-                    </div>
-                  )}
-
-                  {/* Sleek CTA Button Linking to Live Platform */}
-                  <div className="pt-2 flex flex-col sm:flex-row items-center gap-3">
-                    <a
-                      href="https://bfstrial.dukatrio.com"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="w-full sm:flex-1 py-3 px-4 rounded-xl bg-gradient-to-r from-cyan-500 to-cyan-600 hover:from-cyan-400 hover:to-cyan-500 text-zinc-950 font-bold text-xs uppercase tracking-wider transition-all shadow-[0_0_20px_-5px_rgba(6,182,212,0.5)] flex items-center justify-center gap-2 cursor-pointer"
-                    >
-                      <span>Launch Live Platform</span>
-                      <ArrowRight className="w-3.5 h-3.5" />
-                    </a>
-
-                    <Link
-                      href="/systems/bfs"
-                      className="w-full sm:w-auto py-3 px-4 rounded-xl bg-zinc-900 hover:bg-zinc-800 border border-zinc-800 hover:border-zinc-700 text-zinc-300 hover:text-white font-mono text-xs text-center transition-all flex items-center justify-center gap-1.5"
-                    >
-                      <span>View Case Study</span>
-                      <ExternalLink className="w-3 h-3 text-cyan-400" />
-                    </Link>
-                  </div>
-                </div>
-              </div>
+            <div className="flex items-center gap-2">
+              <Cpu className="w-4 h-4 text-emerald-400" />
+              <span>Node.js 22 LTS &amp; Next.js 16</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <Activity className="w-4 h-4 text-indigo-400" />
+              <span>99.99% Uptime Architecture</span>
             </div>
           </div>
         </div>
@@ -480,159 +254,294 @@ export default function HomePage(): React.JSX.Element {
       </section>
 
       {/* ========================================================================= */}
-      {/* 4. FEATURED WORK / LIVE CASE STUDY */}
+      {/* 4. CORE ENGINEERED SOLUTIONS ("WHAT WE ARCHITECT") */}
       {/* ========================================================================= */}
-      <section id="work" className="py-24 sm:py-32 relative">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
+      <section id="solutions" className="py-24 sm:py-32 relative border-t border-zinc-800/80">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-16">
           {/* Section Header */}
-          <div className="flex flex-col md:flex-row md:items-end justify-between gap-4">
+          <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
             <div className="space-y-3">
               <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-950/50 border border-cyan-800/50 text-cyan-400 font-mono text-xs font-semibold">
                 <Sparkles className="w-3.5 h-3.5 text-cyan-400" />
-                <span>Featured Production Deployments</span>
+                <span>Commercial Engineering Services</span>
               </div>
               <h2 className="text-3xl sm:text-5xl font-extrabold text-white tracking-tight">
-                Systems Engineered for Commercial Impact.
+                Core Engineered Solutions.
               </h2>
             </div>
-            <p className="text-sm text-zinc-400 max-w-md">
-              Explore our live production platforms. Every deployment is architected for zero data loss, strict compliance, and instantaneous user feedback.
+            <p className="text-sm sm:text-base text-zinc-400 max-w-md">
+              Proprietary full-stack systems, automated financial engines, and resilient cloud architectures tailored for commercial performance.
             </p>
           </div>
 
-          {/* Biggs Funding Solutions (BFS) Major Showcase Card */}
-          <div className="rounded-3xl border border-zinc-800 bg-gradient-to-b from-zinc-900/70 to-zinc-950/90 p-8 sm:p-12 shadow-2xl relative overflow-hidden glass-panel hover:border-cyan-500/40 transition-all duration-300">
-            {/* Ambient Background Blur */}
-            <div className="absolute top-0 right-0 w-96 h-96 bg-cyan-500/10 rounded-full blur-3xl pointer-events-none" />
-
-            <div className="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
-              {/* Left Column: Project Overview & Specs (7 cols) */}
-              <div className="lg:col-span-7 space-y-6">
-                <div className="flex flex-wrap items-center gap-3">
-                  <span className="px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-xs font-mono font-semibold flex items-center gap-1.5">
-                    <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-                    LIVE PRODUCTION DEPLOYMENT
-                  </span>
-                  <span className="text-xs font-mono text-zinc-400">
-                    Institutional FinTech Portal
-                  </span>
+          {/* 4-Card Interactive Grid */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            {/* Card 1: B2B Client Portals & Management Desks */}
+            <div className="rounded-2xl border border-zinc-800 bg-zinc-950/70 p-8 shadow-xl hover:border-cyan-500/50 hover:bg-zinc-900/60 transition-all duration-300 space-y-6 group">
+              <div className="flex items-center justify-between">
+                <div className="w-12 h-12 rounded-xl bg-cyan-950/60 border border-cyan-800/60 flex items-center justify-center text-cyan-400 group-hover:scale-105 transition-transform">
+                  <Layers className="w-6 h-6" />
                 </div>
-
-                <div className="space-y-2">
-                  <h3 className="text-2xl sm:text-4xl font-extrabold text-white tracking-tight">
-                    Biggs Funding Solutions (BFS Platform)
-                  </h3>
-                  <div className="flex items-center gap-2">
-                    <span className="font-mono text-sm text-cyan-400 font-semibold">
-                      bfstrial.dukatrio.com
-                    </span>
-                    <a
-                      href="https://bfstrial.dukatrio.com"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-zinc-400 hover:text-white transition"
-                    >
-                      <ArrowUpRight className="w-4 h-4 text-cyan-400" />
-                    </a>
-                  </div>
-                </div>
-
-                <p className="text-sm sm:text-base text-zinc-300 leading-relaxed font-normal">
-                  Institutional commercial debt syndication platform featuring real-time automated underwriting algorithms, complex amortization modelers, Debt Service Coverage Ratio (DSCR) sizing terminals, and client document vaults.
+                <span className="font-mono text-xs text-zinc-500 font-bold uppercase">
+                  SOLUTION // 01
+                </span>
+              </div>
+              <div className="space-y-2">
+                <h3 className="text-xl sm:text-2xl font-bold text-white tracking-tight">
+                  B2B Client Portals &amp; Management Desks
+                </h3>
+                <p className="text-sm text-zinc-400 leading-relaxed font-normal">
+                  Institutional client dashboards equipped with strict role-based access control (RBAC), multi-tenant isolation, encrypted document upload dropzones, intake workflows, and administrative audit trails.
                 </p>
-
-                {/* Tech Stack Pills */}
-                <div className="space-y-2">
-                  <span className="text-xs font-mono uppercase text-zinc-400 font-bold block">
-                    Underlying Engineering Stack:
-                  </span>
-                  <div className="flex flex-wrap gap-2 font-mono text-xs">
-                    <span className="px-2.5 py-1 rounded-lg bg-zinc-800/80 border border-zinc-700 text-zinc-200">
-                      Next.js 16 (App Router)
-                    </span>
-                    <span className="px-2.5 py-1 rounded-lg bg-zinc-800/80 border border-zinc-700 text-zinc-200">
-                      TypeScript
-                    </span>
-                    <span className="px-2.5 py-1 rounded-lg bg-zinc-800/80 border border-zinc-700 text-zinc-200">
-                      Prisma ORM (PostgreSQL / SQLite)
-                    </span>
-                    <span className="px-2.5 py-1 rounded-lg bg-zinc-800/80 border border-zinc-700 text-zinc-200">
-                      Reverse MCA Consolidation
-                    </span>
-                    <span className="px-2.5 py-1 rounded-lg bg-zinc-800/80 border border-zinc-700 text-zinc-200">
-                      DSCR Diagnostic Terminal
-                    </span>
-                    <span className="px-2.5 py-1 rounded-lg bg-zinc-800/80 border border-zinc-700 text-zinc-200">
-                      Client-Side Print PDF Engine
-                    </span>
-                  </div>
+              </div>
+              <div className="pt-2 border-t border-zinc-800/80 grid grid-cols-2 gap-3 text-xs font-mono text-zinc-300">
+                <div className="flex items-center gap-2">
+                  <CheckCircle2 className="w-3.5 h-3.5 text-cyan-400" />
+                  <span>Role-Based RBAC</span>
                 </div>
-
-                {/* Primary Launch Action */}
-                <div className="pt-2 flex flex-wrap items-center gap-4">
-                  <a
-                    href="https://bfstrial.dukatrio.com"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="py-3 px-6 rounded-xl bg-cyan-500 hover:bg-cyan-400 text-zinc-950 font-bold text-xs uppercase tracking-wider transition-all shadow-[0_0_20px_-5px_rgba(6,182,212,0.4)] flex items-center gap-2 group cursor-pointer"
-                  >
-                    <span>Launch BFS Platform</span>
-                    <ExternalLink className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
-                  </a>
-
-                  <Link
-                    href="/systems/bfs"
-                    className="py-3 px-6 rounded-xl bg-zinc-900/90 hover:bg-zinc-800 border border-zinc-700/80 hover:border-cyan-500/50 text-zinc-200 hover:text-white font-semibold text-xs uppercase tracking-wider transition-all flex items-center gap-2 group"
-                  >
-                    <span>Read Technical Case Study</span>
-                    <ArrowRight className="w-3.5 h-3.5 text-cyan-400 group-hover:translate-x-0.5 transition-transform" />
-                  </Link>
-
-                  <span className="text-xs text-zinc-400 font-mono">
-                    Direct Subdomain Integration
-                  </span>
+                <div className="flex items-center gap-2">
+                  <CheckCircle2 className="w-3.5 h-3.5 text-cyan-400" />
+                  <span>Encrypted Vaults</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <CheckCircle2 className="w-3.5 h-3.5 text-cyan-400" />
+                  <span>Audit Logging</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <CheckCircle2 className="w-3.5 h-3.5 text-cyan-400" />
+                  <span>Multi-Tenant Auth</span>
                 </div>
               </div>
+            </div>
 
-              {/* Right Column: Platform Architecture Breakdown (5 cols) */}
-              <div className="lg:col-span-5 bg-zinc-950/80 border border-zinc-800 rounded-2xl p-6 space-y-4 font-mono text-xs shadow-inner">
-                <div className="flex items-center justify-between pb-3 border-b border-zinc-800 text-zinc-400">
-                  <span className="font-bold text-white uppercase text-[11px]">
-                    Subsystem Architecture
-                  </span>
-                  <span className="text-emerald-400 text-[10px]">VERIFIED OK</span>
+            {/* Card 2: Algorithmic Decision & Diagnostic Engines */}
+            <div className="rounded-2xl border border-zinc-800 bg-zinc-950/70 p-8 shadow-xl hover:border-emerald-500/50 hover:bg-zinc-900/60 transition-all duration-300 space-y-6 group">
+              <div className="flex items-center justify-between">
+                <div className="w-12 h-12 rounded-xl bg-emerald-950/60 border border-emerald-800/60 flex items-center justify-center text-emerald-400 group-hover:scale-105 transition-transform">
+                  <Calculator className="w-6 h-6" />
                 </div>
-
-                <div className="space-y-3">
-                  <div className="p-3 rounded-xl bg-zinc-900/60 border border-zinc-800">
-                    <span className="text-cyan-400 font-bold block">01 · Amortization Engine</span>
-                    <span className="text-zinc-400 text-[11px] block mt-0.5">
-                      Real-time principal &amp; interest compounding for business lines of credit.
-                    </span>
-                  </div>
-
-                  <div className="p-3 rounded-xl bg-zinc-900/60 border border-zinc-800">
-                    <span className="text-cyan-400 font-bold block">02 · DSCR Coverage Terminal</span>
-                    <span className="text-zinc-400 text-[11px] block mt-0.5">
-                      Net Operating Income modeling with automatic risk tier categorization.
-                    </span>
-                  </div>
-
-                  <div className="p-3 rounded-xl bg-zinc-900/60 border border-zinc-800">
-                    <span className="text-cyan-400 font-bold block">03 · Encrypted Document Vault</span>
-                    <span className="text-zinc-400 text-[11px] block mt-0.5">
-                      Zero-knowledge AES-256 encrypted file dropzone for tax packages.
-                    </span>
-                  </div>
-
-                  <div className="p-3 rounded-xl bg-zinc-900/60 border border-zinc-800">
-                    <span className="text-cyan-400 font-bold block">04 · Zero-Overhead PDF Export</span>
-                    <span className="text-zinc-400 text-[11px] block mt-0.5">
-                      Native browser print stylesheet generating institutional term sheets.
-                    </span>
-                  </div>
+                <span className="font-mono text-xs text-zinc-500 font-bold uppercase">
+                  SOLUTION // 02
+                </span>
+              </div>
+              <div className="space-y-2">
+                <h3 className="text-xl sm:text-2xl font-bold text-white tracking-tight">
+                  Algorithmic Decision &amp; Diagnostic Engines
+                </h3>
+                <p className="text-sm text-zinc-400 leading-relaxed font-normal">
+                  High-precision computational calculation kernels. Custom debt amortizers, multi-variable risk calculators, dynamic waterfall schedule generators, and automated client-side PDF document exports.
+                </p>
+              </div>
+              <div className="pt-2 border-t border-zinc-800/80 grid grid-cols-2 gap-3 text-xs font-mono text-zinc-300">
+                <div className="flex items-center gap-2">
+                  <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400" />
+                  <span>Sub-50ms Calculation</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400" />
+                  <span>Zero Rounding Drift</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400" />
+                  <span>Dynamic Schedules</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400" />
+                  <span>PDF Term Sheets</span>
                 </div>
               </div>
+            </div>
+
+            {/* Card 3: High-Throughput Web Applications */}
+            <div className="rounded-2xl border border-zinc-800 bg-zinc-950/70 p-8 shadow-xl hover:border-indigo-500/50 hover:bg-zinc-900/60 transition-all duration-300 space-y-6 group">
+              <div className="flex items-center justify-between">
+                <div className="w-12 h-12 rounded-xl bg-indigo-950/60 border border-indigo-800/60 flex items-center justify-center text-indigo-400 group-hover:scale-105 transition-transform">
+                  <Zap className="w-6 h-6" />
+                </div>
+                <span className="font-mono text-xs text-zinc-500 font-bold uppercase">
+                  SOLUTION // 03
+                </span>
+              </div>
+              <div className="space-y-2">
+                <h3 className="text-xl sm:text-2xl font-bold text-white tracking-tight">
+                  High-Throughput Web Applications
+                </h3>
+                <p className="text-sm text-zinc-400 leading-relaxed font-normal">
+                  Next.js App Router, React 19, TypeScript, and Prisma ORM with PostgreSQL or SQLite. Engineered with optimized edge rendering, zero bloat, and sub-400ms time-to-first-byte across mobile and desktop.
+                </p>
+              </div>
+              <div className="pt-2 border-t border-zinc-800/80 grid grid-cols-2 gap-3 text-xs font-mono text-zinc-300">
+                <div className="flex items-center gap-2">
+                  <CheckCircle2 className="w-3.5 h-3.5 text-indigo-400" />
+                  <span>Edge SSR &amp; RSC</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <CheckCircle2 className="w-3.5 h-3.5 text-indigo-400" />
+                  <span>Type-Safe API Routes</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <CheckCircle2 className="w-3.5 h-3.5 text-indigo-400" />
+                  <span>Prisma 7 ORM</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <CheckCircle2 className="w-3.5 h-3.5 text-indigo-400" />
+                  <span>Lighthouse 95+ Score</span>
+                </div>
+              </div>
+            </div>
+
+            {/* Card 4: Production Linux Cloud Infrastructure */}
+            <div className="rounded-2xl border border-zinc-800 bg-zinc-950/70 p-8 shadow-xl hover:border-teal-500/50 hover:bg-zinc-900/60 transition-all duration-300 space-y-6 group">
+              <div className="flex items-center justify-between">
+                <div className="w-12 h-12 rounded-xl bg-teal-950/60 border border-teal-800/60 flex items-center justify-center text-teal-400 group-hover:scale-105 transition-transform">
+                  <Server className="w-6 h-6" />
+                </div>
+                <span className="font-mono text-xs text-zinc-500 font-bold uppercase">
+                  SOLUTION // 04
+                </span>
+              </div>
+              <div className="space-y-2">
+                <h3 className="text-xl sm:text-2xl font-bold text-white tracking-tight">
+                  Production Linux Cloud Infrastructure
+                </h3>
+                <p className="text-sm text-zinc-400 leading-relaxed font-normal">
+                  Dedicated cloud pod deployments on AMD EPYC NVMe compute, automated edge TLS, HTTP/3 transport, Caddy reverse proxy routing, and zero-downtime PM2 cluster process management.
+                </p>
+              </div>
+              <div className="pt-2 border-t border-zinc-800/80 grid grid-cols-2 gap-3 text-xs font-mono text-zinc-300">
+                <div className="flex items-center gap-2">
+                  <CheckCircle2 className="w-3.5 h-3.5 text-teal-400" />
+                  <span>HTTP/3 &amp; Auto TLS</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <CheckCircle2 className="w-3.5 h-3.5 text-teal-400" />
+                  <span>Zero-Downtime Swaps</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <CheckCircle2 className="w-3.5 h-3.5 text-teal-400" />
+                  <span>Bare-Metal VPS</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <CheckCircle2 className="w-3.5 h-3.5 text-teal-400" />
+                  <span>Hardware Encrypted</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ========================================================================= */}
+      {/* 4B. STRUCTURED 3-STAGE DELIVERY PROTOCOL */}
+      {/* ========================================================================= */}
+      <section className="py-20 sm:py-28 relative border-t border-zinc-800/80 bg-zinc-950/40">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-16">
+          {/* Section Header */}
+          <div className="max-w-3xl space-y-4">
+            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-cyan-950/40 border border-cyan-800/50 text-cyan-400 font-mono text-xs font-semibold">
+              <Workflow className="w-3.5 h-3.5 text-cyan-400" />
+              <span>Execution Methodology</span>
+            </div>
+
+            <h2 className="text-3xl sm:text-5xl font-extrabold text-white tracking-tight">
+              Structured 3-Stage Delivery Protocol
+            </h2>
+
+            <p className="text-base text-zinc-400 leading-relaxed font-normal">
+              Transparent, predictable delivery sprints designed to take institutional platforms from architectural scope to live production without delays or scope creep.
+            </p>
+          </div>
+
+          {/* 3 Stages Grid */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 relative">
+            {/* Stage 01 */}
+            <div className="rounded-2xl border border-zinc-800/80 bg-zinc-900/50 p-8 space-y-5 hover:border-cyan-500/50 transition-all">
+              <div className="flex items-center justify-between">
+                <span className="text-3xl font-black font-mono text-cyan-400">01</span>
+                <span className="px-2.5 py-1 rounded text-[10px] font-mono font-bold bg-cyan-950/80 border border-cyan-800/60 text-cyan-300 uppercase">
+                  Discovery &amp; Blueprint
+                </span>
+              </div>
+              <h3 className="text-xl font-bold text-white tracking-tight">
+                System Architecture &amp; Scope
+              </h3>
+              <p className="text-sm text-zinc-400 leading-relaxed">
+                Interactive UX wireframes, relational database schemas, computational formula specifications, and a fixed-scope delivery plan with zero ambiguity.
+              </p>
+              <ul className="pt-2 space-y-2 text-xs font-mono text-zinc-400">
+                <li className="flex items-center gap-2">
+                  <span className="w-1.5 h-1.5 rounded-full bg-cyan-400" />
+                  <span>Relational Schema Modeling</span>
+                </li>
+                <li className="flex items-center gap-2">
+                  <span className="w-1.5 h-1.5 rounded-full bg-cyan-400" />
+                  <span>API Contract Specification</span>
+                </li>
+                <li className="flex items-center gap-2">
+                  <span className="w-1.5 h-1.5 rounded-full bg-cyan-400" />
+                  <span>Fixed Milestone Roadmap</span>
+                </li>
+              </ul>
+            </div>
+
+            {/* Stage 02 */}
+            <div className="rounded-2xl border border-zinc-800/80 bg-zinc-900/50 p-8 space-y-5 hover:border-emerald-500/50 transition-all">
+              <div className="flex items-center justify-between">
+                <span className="text-3xl font-black font-mono text-emerald-400">02</span>
+                <span className="px-2.5 py-1 rounded-lg text-[10px] font-mono font-bold bg-emerald-950/80 border border-emerald-800/60 text-emerald-300 uppercase">
+                  Implementation Sprints
+                </span>
+              </div>
+              <h3 className="text-xl font-bold text-white tracking-tight">
+                Rapid Core Build &amp; Preview
+              </h3>
+              <p className="text-sm text-zinc-400 leading-relaxed">
+                Full-stack TypeScript development, responsive component assembly, algorithmic test suites, and private staging sandbox previews with continuous verification.
+              </p>
+              <ul className="pt-2 space-y-2 text-xs font-mono text-zinc-400">
+                <li className="flex items-center gap-2">
+                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
+                  <span>Next.js 16 + React 19 Frontend</span>
+                </li>
+                <li className="flex items-center gap-2">
+                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
+                  <span>Automated Unit &amp; Math Tests</span>
+                </li>
+                <li className="flex items-center gap-2">
+                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
+                  <span>Live Staging Sandbox Previews</span>
+                </li>
+              </ul>
+            </div>
+
+            {/* Stage 03 */}
+            <div className="rounded-2xl border border-zinc-800/80 bg-zinc-900/50 p-8 space-y-5 hover:border-indigo-500/50 transition-all">
+              <div className="flex items-center justify-between">
+                <span className="text-3xl font-black font-mono text-indigo-400">03</span>
+                <span className="px-2.5 py-1 rounded-lg text-[10px] font-mono font-bold bg-indigo-950/80 border border-indigo-800/60 text-indigo-300 uppercase">
+                  Cutover &amp; Handoff
+                </span>
+              </div>
+              <h3 className="text-xl font-bold text-white tracking-tight">
+                Production Handover &amp; Support
+              </h3>
+              <p className="text-sm text-zinc-400 leading-relaxed">
+                Zero-downtime DNS cutover, automated TLS provisioning, complete Git repository ownership transfer, and a 30-day post-launch warranty with ongoing support.
+              </p>
+              <ul className="pt-2 space-y-2 text-xs font-mono text-zinc-400">
+                <li className="flex items-center gap-2">
+                  <span className="w-1.5 h-1.5 rounded-full bg-indigo-400" />
+                  <span>Zero-Downtime Linux Deployment</span>
+                </li>
+                <li className="flex items-center gap-2">
+                  <span className="w-1.5 h-1.5 rounded-full bg-indigo-400" />
+                  <span>100% Repository IP Transfer</span>
+                </li>
+                <li className="flex items-center gap-2">
+                  <span className="w-1.5 h-1.5 rounded-full bg-indigo-400" />
+                  <span>30-Day Technical Warranty</span>
+                </li>
+              </ul>
             </div>
           </div>
         </div>
@@ -849,10 +758,6 @@ export default function HomePage(): React.JSX.Element {
         </div>
       </section>
 
-      {/* ========================================================================= */}
-      {/* 6B. ARCHITECTURE SNIPPETS VIEWER */}
-      {/* ========================================================================= */}
-      <ArchitectureSnippets />
 
       {/* ========================================================================= */}
       {/* 6C. CLIENT ASSURANCE: ZERO VENDOR LOCK-IN & COMPLETE MODIFIABILITY */}
@@ -1059,8 +964,8 @@ export default function HomePage(): React.JSX.Element {
             </div>
 
             <div className="flex flex-wrap items-center justify-center gap-5 sm:gap-6">
-              <a href="#work" className="hover:text-cyan-400 transition">
-                Work
+              <a href="#solutions" className="hover:text-cyan-400 transition">
+                Solutions
               </a>
               <a href="#capabilities" className="hover:text-cyan-400 transition">
                 Capabilities
@@ -1068,9 +973,6 @@ export default function HomePage(): React.JSX.Element {
               <a href="#estimator" className="hover:text-cyan-400 transition">
                 Estimator
               </a>
-              <Link href="/systems/bfs" className="hover:text-cyan-400 transition">
-                BFS Platform
-              </Link>
               <a href="#contact" className="hover:text-cyan-400 transition">
                 Contact Desk
               </a>
