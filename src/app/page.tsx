@@ -2,6 +2,7 @@
 
 import React, { useState } from "react";
 import Link from "next/link";
+import ContactForm from "@/components/ContactForm";
 import {
   Terminal,
   Cpu,
@@ -702,40 +703,25 @@ export default function HomePage(): React.JSX.Element {
       {/* 7. CONTACT / CALL TO ACTION & FOOTER */}
       {/* ========================================================================= */}
       <section id="contact" className="py-20 sm:py-28 border-t border-zinc-800/80 bg-zinc-950/80 relative">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="rounded-3xl border border-zinc-800 bg-gradient-to-b from-zinc-900/80 to-zinc-950 p-8 sm:p-14 text-center space-y-8 relative overflow-hidden glass-panel-glow">
-            {/* Ambient Accent Glow */}
-            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[300px] bg-cyan-500/10 rounded-full blur-[100px] pointer-events-none" />
-
-            <div className="relative z-10 max-w-2xl mx-auto space-y-4">
-              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-cyan-950/50 border border-cyan-800/50 text-cyan-400 font-mono text-xs font-semibold">
-                <Mail className="w-3.5 h-3.5 text-cyan-400" />
-                <span>Direct Engineering Inquiry</span>
-              </div>
-
-              <h2 className="text-3xl sm:text-5xl font-extrabold text-white tracking-tight">
-                Ready to Architect Your Next Platform?
-              </h2>
-
-              <p className="text-base text-zinc-400 leading-relaxed">
-                Whether you require an institutional fintech portal, custom financial algorithms, or high-throughput Linux cloud infrastructure, connect directly with our engineering desk.
-              </p>
-
-              <div className="pt-4 flex flex-col sm:flex-row items-center justify-center gap-4">
-                <a
-                  href="mailto:contact@dukatrio.com"
-                  className="w-full sm:w-auto py-3.5 px-8 rounded-xl bg-cyan-500 hover:bg-cyan-400 text-zinc-950 font-bold text-xs uppercase tracking-wider transition-all shadow-[0_0_25px_-5px_rgba(6,182,212,0.5)] flex items-center justify-center gap-2 cursor-pointer"
-                >
-                  <Mail className="w-4 h-4 text-zinc-950" />
-                  <span>Initiate Consultation · contact@dukatrio.com</span>
-                </a>
-              </div>
-
-              <p className="text-xs font-mono text-zinc-400 pt-2">
-                Inquiries reviewed within 12 business hours by our lead systems engineer.
-              </p>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
+          {/* Section Header */}
+          <div className="text-center max-w-2xl mx-auto space-y-4">
+            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-cyan-950/50 border border-cyan-800/50 text-cyan-400 font-mono text-xs font-semibold">
+              <Mail className="w-3.5 h-3.5 text-cyan-400" />
+              <span>Direct Engineering Inquiry</span>
             </div>
+
+            <h2 className="text-3xl sm:text-5xl font-extrabold text-white tracking-tight">
+              Ready to Architect Your Next Platform?
+            </h2>
+
+            <p className="text-base text-zinc-400 leading-relaxed">
+              Whether you require an institutional fintech portal, custom financial algorithms, or high-throughput Linux cloud infrastructure, connect directly with our engineering desk.
+            </p>
           </div>
+
+          {/* Interactive Frosted-Glass Contact Form */}
+          <ContactForm />
 
           {/* Footer Bar */}
           <footer className="mt-16 pt-8 border-t border-zinc-900 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs font-mono text-zinc-400">
@@ -759,8 +745,8 @@ export default function HomePage(): React.JSX.Element {
               <a href="#architecture" className="hover:text-cyan-400 transition">
                 Architecture
               </a>
-              <a href="mailto:contact@dukatrio.com" className="hover:text-cyan-400 transition">
-                Email Desk
+              <a href="#contact" className="hover:text-cyan-400 transition">
+                Contact Desk
               </a>
             </div>
           </footer>
