@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   Send,
   CheckCircle2,
@@ -30,6 +30,25 @@ export default function ContactForm(): React.JSX.Element {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
+
+  useEffect(() => {
+    const handlePopulate = (e: Event) => {
+      const customEvent = e as CustomEvent<{ scope?: ScopeType; message?: string }>;
+      if (customEvent.detail) {
+        if (customEvent.detail.scope && SCOPE_OPTIONS.includes(customEvent.detail.scope)) {
+          setScope(customEvent.detail.scope);
+        }
+        if (customEvent.detail.message) {
+          setMessage(customEvent.detail.message);
+        }
+      }
+    };
+
+    window.addEventListener("populate-estimator", handlePopulate);
+    return () => {
+      window.removeEventListener("populate-estimator", handlePopulate);
+    };
+  }, []);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -178,7 +197,7 @@ export default function ContactForm(): React.JSX.Element {
                   id="client-name"
                   type="text"
                   required
-                  placeholder="e.g. Alex Vance"
+                  placeholder="e.g. John Doe"
                   value={name}
                   onChange={(e) => setName(e.target.value)}
                   className="w-full px-4 py-2.5 rounded-xl bg-zinc-950/80 border border-zinc-800 text-sm text-zinc-100 placeholder:text-zinc-600 focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500 outline-none transition-all shadow-inner"
@@ -197,7 +216,7 @@ export default function ContactForm(): React.JSX.Element {
                   id="client-email"
                   type="email"
                   required
-                  placeholder="alex@company.com"
+                  placeholder="john@company.com"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   className="w-full px-4 py-2.5 rounded-xl bg-zinc-950/80 border border-zinc-800 text-sm text-zinc-100 placeholder:text-zinc-600 focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500 outline-none transition-all shadow-inner font-mono"

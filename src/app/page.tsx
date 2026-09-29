@@ -3,6 +3,9 @@
 import React, { useState } from "react";
 import Link from "next/link";
 import ContactForm from "@/components/ContactForm";
+import TechStackMatrix from "@/components/TechStackMatrix";
+import ArchitectureSnippets from "@/components/ArchitectureSnippets";
+import Estimator from "@/components/Estimator";
 import {
   Terminal,
   Cpu,
@@ -77,15 +80,30 @@ export default function HomePage(): React.JSX.Element {
           </div>
 
           {/* Desktop Navigation Links */}
-          <nav className="hidden md:flex items-center gap-8 text-sm font-medium text-zinc-300">
+          <nav className="hidden md:flex items-center gap-7 text-sm font-medium text-zinc-300">
             <a href="#capabilities" className="hover:text-cyan-400 transition-colors">
               Capabilities
+            </a>
+            <a href="#tech-matrix" className="hover:text-cyan-400 transition-colors">
+              Stack Matrix
             </a>
             <a href="#architecture" className="hover:text-cyan-400 transition-colors">
               Architecture
             </a>
             <a href="#work" className="hover:text-cyan-400 transition-colors">
               Work
+            </a>
+            <Link
+              href="/systems/bfs"
+              className="hover:text-cyan-400 transition-colors flex items-center gap-1.5"
+            >
+              <span>BFS Case Study</span>
+              <span className="text-[10px] font-mono text-cyan-400 bg-cyan-950/80 px-1.5 py-0.5 rounded border border-cyan-800/50">
+                LIVE
+              </span>
+            </Link>
+            <a href="#estimator" className="hover:text-cyan-400 transition-colors">
+              Estimator
             </a>
             <a href="#contact" className="hover:text-cyan-400 transition-colors">
               Contact
@@ -130,6 +148,13 @@ export default function HomePage(): React.JSX.Element {
                 Capabilities
               </a>
               <a
+                href="#tech-matrix"
+                onClick={() => setMobileMenuOpen(false)}
+                className="hover:text-cyan-400 py-1"
+              >
+                Stack Matrix
+              </a>
+              <a
                 href="#architecture"
                 onClick={() => setMobileMenuOpen(false)}
                 className="hover:text-cyan-400 py-1"
@@ -142,6 +167,23 @@ export default function HomePage(): React.JSX.Element {
                 className="hover:text-cyan-400 py-1"
               >
                 Work
+              </a>
+              <Link
+                href="/systems/bfs"
+                onClick={() => setMobileMenuOpen(false)}
+                className="hover:text-cyan-400 py-1 flex items-center justify-between"
+              >
+                <span>BFS Case Study</span>
+                <span className="text-[10px] font-mono text-cyan-400 bg-cyan-950/60 px-1.5 py-0.5 rounded border border-cyan-800/40">
+                  LIVE
+                </span>
+              </Link>
+              <a
+                href="#estimator"
+                onClick={() => setMobileMenuOpen(false)}
+                className="hover:text-cyan-400 py-1"
+              >
+                Estimator
               </a>
               <a
                 href="#contact"
@@ -249,8 +291,8 @@ export default function HomePage(): React.JSX.Element {
                 {/* Terminal Content */}
                 <div className="p-5 font-mono text-xs space-y-3.5 text-zinc-300">
                   <div className="flex items-center justify-between text-zinc-400 pb-2 border-b border-zinc-800/60">
-                    <span>HOST CLUSTER</span>
-                    <span className="text-zinc-200">Hetzner Cloud VPS (AMD EPYC NVMe)</span>
+                    <span>NODE ARCHITECTURE</span>
+                    <span className="text-zinc-200">Bare-Metal Cloud Pod · AMD EPYC™ NVMe Dedicated Compute</span>
                   </div>
 
                   <div className="flex items-center justify-between text-zinc-400 pb-2 border-b border-zinc-800/60">
@@ -269,8 +311,13 @@ export default function HomePage(): React.JSX.Element {
                   </div>
 
                   <div className="flex items-center justify-between text-zinc-400 pb-2 border-b border-zinc-800/60">
-                    <span>PROCESS ORCHESTRATION</span>
-                    <span className="text-zinc-200">PM2 Cluster (Zero-Downtime Rollouts)</span>
+                    <span>SECURITY POSTURE</span>
+                    <span className="text-teal-400 font-semibold">AES-256 GCM · Automated Edge TLS · Strict Origin Isolation</span>
+                  </div>
+
+                  <div className="flex items-center justify-between text-zinc-400 pb-2 border-b border-zinc-800/60">
+                    <span>DEPLOYMENT PIPELINE</span>
+                    <span className="text-zinc-200">Zero-Downtime Hot Swaps · Production PM2 Cluster</span>
                   </div>
 
                   <div className="pt-2 bg-zinc-900/60 rounded-xl p-3 border border-zinc-800">
@@ -432,7 +479,7 @@ export default function HomePage(): React.JSX.Element {
                 </div>
 
                 {/* Primary Launch Action */}
-                <div className="pt-2 flex items-center gap-4">
+                <div className="pt-2 flex flex-wrap items-center gap-4">
                   <a
                     href="https://bfstrial.dukatrio.com"
                     target="_blank"
@@ -442,6 +489,14 @@ export default function HomePage(): React.JSX.Element {
                     <span>Launch BFS Platform</span>
                     <ExternalLink className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
                   </a>
+
+                  <Link
+                    href="/systems/bfs"
+                    className="py-3 px-6 rounded-xl bg-zinc-900/90 hover:bg-zinc-800 border border-zinc-700/80 hover:border-cyan-500/50 text-zinc-200 hover:text-white font-semibold text-xs uppercase tracking-wider transition-all flex items-center gap-2 group"
+                  >
+                    <span>Read Technical Case Study</span>
+                    <ArrowRight className="w-3.5 h-3.5 text-cyan-400 group-hover:translate-x-0.5 transition-transform" />
+                  </Link>
 
                   <span className="text-xs text-zinc-400 font-mono">
                     Direct Subdomain Integration
@@ -582,7 +637,7 @@ export default function HomePage(): React.JSX.Element {
               <ul className="pt-2 space-y-2 text-xs font-mono text-zinc-300">
                 <li className="flex items-center gap-2">
                   <CheckCircle2 className="w-4 h-4 text-indigo-400 shrink-0" />
-                  <span>Hetzner Cloud VPS Deployment &amp; Hardening</span>
+                  <span>Bare-Metal Cloud Pod Deployment &amp; Hardening</span>
                 </li>
                 <li className="flex items-center gap-2">
                   <CheckCircle2 className="w-4 h-4 text-indigo-400 shrink-0" />
@@ -624,6 +679,11 @@ export default function HomePage(): React.JSX.Element {
           </div>
         </div>
       </section>
+
+      {/* ========================================================================= */}
+      {/* 5B. TECH STACK MATRIX */}
+      {/* ========================================================================= */}
+      <TechStackMatrix />
 
       {/* ========================================================================= */}
       {/* 6. ARCHITECTURE TOPOLOGY SECTION */}
@@ -700,6 +760,16 @@ export default function HomePage(): React.JSX.Element {
       </section>
 
       {/* ========================================================================= */}
+      {/* 6B. ARCHITECTURE SNIPPETS VIEWER */}
+      {/* ========================================================================= */}
+      <ArchitectureSnippets />
+
+      {/* ========================================================================= */}
+      {/* 6C. PROJECT SCOPE & COST ESTIMATOR */}
+      {/* ========================================================================= */}
+      <Estimator />
+
+      {/* ========================================================================= */}
       {/* 7. CONTACT / CALL TO ACTION & FOOTER */}
       {/* ========================================================================= */}
       <section id="contact" className="py-20 sm:py-28 border-t border-zinc-800/80 bg-zinc-950/80 relative">
@@ -730,7 +800,10 @@ export default function HomePage(): React.JSX.Element {
               <span>&copy; 2026 DukaTrio. All systems operational.</span>
             </div>
 
-            <div className="flex items-center gap-6">
+            <div className="flex flex-wrap items-center gap-6">
+              <Link href="/systems/bfs" className="hover:text-cyan-400 transition">
+                BFS Case Study
+              </Link>
               <a
                 href="https://bfstrial.dukatrio.com"
                 target="_blank"
@@ -742,8 +815,14 @@ export default function HomePage(): React.JSX.Element {
               <a href="#capabilities" className="hover:text-cyan-400 transition">
                 Capabilities
               </a>
+              <a href="#tech-matrix" className="hover:text-cyan-400 transition">
+                Stack Matrix
+              </a>
               <a href="#architecture" className="hover:text-cyan-400 transition">
                 Architecture
+              </a>
+              <a href="#estimator" className="hover:text-cyan-400 transition">
+                Estimator
               </a>
               <a href="#contact" className="hover:text-cyan-400 transition">
                 Contact Desk
