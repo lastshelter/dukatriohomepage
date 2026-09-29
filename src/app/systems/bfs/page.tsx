@@ -401,10 +401,21 @@ export default function BfsCaseStudyPage(): React.JSX.Element {
 
       {/* Footer */}
       <footer className="border-t border-zinc-900 bg-zinc-950 py-8">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs font-mono text-zinc-500">
-          <div className="flex items-center gap-2">
-            <span className="w-2 h-2 rounded-full bg-emerald-500" />
-            <span>&copy; 2026 DukaTrio Systems. All platforms verified.</span>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center justify-between gap-4 text-xs font-mono text-zinc-500">
+          <div className="flex flex-wrap items-center justify-center md:justify-start gap-3">
+            <div className="flex items-center gap-2">
+              <span className="w-2 h-2 rounded-full bg-emerald-500" />
+              <span>&copy; 2026 DukaTrio Systems. All platforms verified.</span>
+            </div>
+            <span className="hidden sm:inline text-zinc-700">·</span>
+            {/* Subtle Status Indicator */}
+            <div className="inline-flex items-center gap-2 px-2.5 py-1 rounded-full bg-zinc-900/90 border border-zinc-800 text-[11px] text-zinc-300">
+              <span className="relative flex h-2 w-2">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
+                <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500" />
+              </span>
+              <span>Core-01 · Systems Optimal · 99.9% Uptime</span>
+            </div>
           </div>
 
           <div className="flex items-center gap-6">
