@@ -62,52 +62,88 @@ export const metadata: Metadata = {
 
 const jsonLd = {
   "@context": "https://schema.org",
-  "@type": ["ProfessionalService", "Organization"],
+  "@type": ["ProfessionalService", "LocalBusiness", "Organization"],
   name: "DukaTrio",
   url: "https://dukatrio.com",
+  logo: "https://dukatrio.com/icon",
+  image: "https://dukatrio.com/opengraph-image",
   description:
-    "Institutional-grade digital engineering studio and systems architecture hub.",
+    "Institutional-grade digital engineering studio and systems architecture hub specializing in Next.js web applications, automated fintech calculation engines, and resilient Linux cloud infrastructure.",
+  telephone: "+381652028775",
+  email: "contact@dukatrio.com",
+  priceRange: "€€€",
+  address: {
+    "@type": "PostalAddress",
+    addressLocality: "Belgrade",
+    addressCountry: "RS",
+  },
+  geo: {
+    "@type": "GeoCoordinates",
+    latitude: 44.8176,
+    longitude: 20.4633,
+  },
+  areaServed: [
+    { "@type": "Country", name: "Serbia" },
+    { "@type": "AdministrativeArea", name: "European Union" },
+    { "@type": "AdministrativeArea", name: "Global" },
+  ],
+  openingHoursSpecification: [
+    {
+      "@type": "OpeningHoursSpecification",
+      dayOfWeek: [
+        "Monday",
+        "Tuesday",
+        "Wednesday",
+        "Thursday",
+        "Friday",
+      ],
+      opens: "09:00",
+      closes: "18:00",
+    },
+  ],
   founder: {
     "@type": "Person",
     name: "Petar D.",
+    jobTitle: "Principal Systems Architect",
   },
   knowsAbout: [
-    "Next.js",
-    "Fintech Architecture",
+    "Next.js 16 App Router",
+    "React 19 Server Components",
+    "Fintech Systems Architecture",
     "Automated Underwriting Engines",
     "Linux VPS Infrastructure",
-    "Caddy Edge Proxies",
-    "Prisma ORM",
+    "Caddy HTTP/3 Reverse Proxies",
+    "Prisma ORM & PostgreSQL",
   ],
   hasOfferCatalog: {
     "@type": "OfferCatalog",
-    name: "Engineering Services",
+    name: "Commercial Digital Engineering Services",
     itemListElement: [
       {
         "@type": "Offer",
         itemOffered: {
           "@type": "Service",
-          name: "Custom Web Applications",
+          name: "B2B Client Portals & Web Platforms",
           description:
-            "High-performance full-stack web applications engineered with Next.js and React.",
+            "High-performance full-stack web applications engineered with Next.js 16, React 19, and role-based access control.",
         },
       },
       {
         "@type": "Offer",
         itemOffered: {
           "@type": "Service",
-          name: "Financial Decision Engines",
+          name: "Algorithmic Decision & Diagnostic Engines",
           description:
-            "Automated underwriting, loan origination, and debt amortization systems.",
+            "Automated financial underwriting, loan origination, debt amortization, and sub-50ms computational calculators.",
         },
       },
       {
         "@type": "Offer",
         itemOffered: {
           "@type": "Service",
-          name: "Dedicated Cloud Architecture",
+          name: "Production Linux Cloud Infrastructure",
           description:
-            "Resilient Linux VPS deployments, Caddy HTTP/3 reverse proxies, and automated TLS.",
+            "Dedicated cloud pod deployments, Caddy HTTP/3 reverse proxies, edge TLS certificates, and zero-downtime clustering.",
         },
       },
     ],

@@ -4,7 +4,13 @@ import React, { useState } from "react";
 import Link from "next/link";
 import ContactForm from "@/components/ContactForm";
 import TechStackMatrix from "@/components/TechStackMatrix";
-import Estimator from "@/components/Estimator";
+import ScopeEstimator from "@/components/estimator/ScopeEstimator";
+import MobileQuickContact from "@/components/layout/MobileQuickContact";
+import ServiceComparison from "@/components/services/ServiceComparison";
+import BeforeAfterSlider from "@/components/ui/BeforeAfterSlider";
+import CaseStudySection from "@/components/portfolio/CaseStudyCard";
+import SocialProof from "@/components/testimonials/SocialProof";
+import { motion } from "framer-motion";
 import {
   Terminal,
   Cpu,
@@ -38,7 +44,7 @@ export default function HomePage(): React.JSX.Element {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   return (
-    <div className="relative min-h-screen bg-[#09090b] text-zinc-100 overflow-hidden font-sans">
+    <div className="relative min-h-screen bg-[#09090b] text-zinc-100 overflow-hidden font-sans pb-16 md:pb-0">
       {/* Background Glows & Grid */}
       <div className="absolute inset-0 bg-tech-grid opacity-60 pointer-events-none" />
       <div className="absolute -top-40 left-1/2 -translate-x-1/2 w-[700px] h-[350px] bg-cyan-500/10 rounded-full blur-[128px] pointer-events-none" />
@@ -68,13 +74,16 @@ export default function HomePage(): React.JSX.Element {
             </div>
           </Link>
 
-          {/* Desktop Navigation Links - Clean 3 Items */}
+          {/* Desktop Navigation Links */}
           <nav className="hidden md:flex items-center gap-8 text-sm font-medium text-zinc-300">
             <a href="#solutions" className="hover:text-cyan-400 transition-colors">
               Solutions
             </a>
             <a href="#capabilities" className="hover:text-cyan-400 transition-colors">
               Capabilities
+            </a>
+            <a href="#case-studies" className="hover:text-cyan-400 transition-colors">
+              Case Studies
             </a>
             <a href="#estimator" className="hover:text-cyan-400 transition-colors">
               Estimator
@@ -122,6 +131,13 @@ export default function HomePage(): React.JSX.Element {
                 Capabilities
               </a>
               <a
+                href="#case-studies"
+                onClick={() => setMobileMenuOpen(false)}
+                className="hover:text-cyan-400 py-1"
+              >
+                Case Studies
+              </a>
+              <a
                 href="#estimator"
                 onClick={() => setMobileMenuOpen(false)}
                 className="hover:text-cyan-400 py-1"
@@ -147,7 +163,12 @@ export default function HomePage(): React.JSX.Element {
       {/* 2. HERO SECTION - BALANCED CENTERED HIGH-IMPACT LAYOUT */}
       {/* ========================================================================= */}
       <section className="relative pt-24 pb-20 sm:pt-36 sm:pb-32 text-center">
-        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
+        <motion.div
+          initial={{ opacity: 0, y: 18 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, ease: "easeOut" }}
+          className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8"
+        >
           {/* Precision Badge */}
           <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-cyan-950/50 border border-cyan-800/60 text-cyan-400 font-mono text-xs font-semibold shadow-inner">
             <Radio className="w-3.5 h-3.5 animate-pulse text-cyan-400" />
@@ -201,7 +222,7 @@ export default function HomePage(): React.JSX.Element {
               <span>99.99% Uptime Architecture</span>
             </div>
           </div>
-        </div>
+        </motion.div>
       </section>
 
       {/* ========================================================================= */}
@@ -760,6 +781,16 @@ export default function HomePage(): React.JSX.Element {
 
 
       {/* ========================================================================= */}
+      {/* 6B. PROOF OF CRAFT: BEFORE / AFTER ARCHITECTURAL SLIDER */}
+      {/* ========================================================================= */}
+      <BeforeAfterSlider />
+
+      {/* ========================================================================= */}
+      {/* 6B-2. STRUCTURED CASE STUDIES */}
+      {/* ========================================================================= */}
+      <CaseStudySection />
+
+      {/* ========================================================================= */}
       {/* 6C. CLIENT ASSURANCE: ZERO VENDOR LOCK-IN & COMPLETE MODIFIABILITY */}
       {/* ========================================================================= */}
       <section className="py-20 sm:py-28 relative border-t border-zinc-800/80 bg-zinc-950/60">
@@ -833,93 +864,23 @@ export default function HomePage(): React.JSX.Element {
               </div>
             </div>
           </div>
-
-          {/* DukaTrio Next.js vs. Legacy WordPress / Page Builders Comparison Matrix */}
-          <div className="rounded-2xl border border-zinc-800 bg-zinc-950/80 overflow-hidden shadow-2xl">
-            <div className="p-6 border-b border-zinc-800/80 bg-zinc-900/60 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
-              <div>
-                <span className="text-xs font-mono uppercase tracking-wider text-cyan-400 font-bold block">
-                  Architectural Benchmark
-                </span>
-                <h3 className="text-xl font-bold text-white tracking-tight mt-0.5">
-                  DukaTrio Next.js Engine vs. Legacy WordPress &amp; Page Builders
-                </h3>
-              </div>
-              <span className="px-3 py-1 rounded-full bg-emerald-950/60 border border-emerald-700/60 text-emerald-400 text-xs font-mono font-semibold w-fit">
-                INSTITUTIONAL GRADE
-              </span>
-            </div>
-
-            <div className="overflow-x-auto">
-              <table className="w-full text-left text-sm font-sans border-collapse">
-                <thead>
-                  <tr className="border-b border-zinc-800 bg-zinc-900/30 text-xs font-mono text-zinc-400 uppercase tracking-wider">
-                    <th className="py-4 px-6">Performance &amp; Posture Metric</th>
-                    <th className="py-4 px-6 text-cyan-400 bg-cyan-950/20 font-bold">
-                      DukaTrio Next.js Engine
-                    </th>
-                    <th className="py-4 px-6 text-zinc-400">Legacy WordPress / Elementor / Wix</th>
-                  </tr>
-                </thead>
-                <tbody className="divide-y divide-zinc-800/60 font-sans text-xs sm:text-sm">
-                  <tr className="hover:bg-zinc-900/30 transition-colors">
-                    <td className="py-4 px-6 font-medium text-white">
-                      TTFB &amp; Load Latency
-                    </td>
-                    <td className="py-4 px-6 font-mono font-semibold text-emerald-400 bg-cyan-950/10">
-                      &lt; 400ms Edge TTFB (Instant)
-                    </td>
-                    <td className="py-4 px-6 text-zinc-400">
-                      3.5s – 6.2s (Bloated scripts &amp; heavy PHP overhead)
-                    </td>
-                  </tr>
-
-                  <tr className="hover:bg-zinc-900/30 transition-colors">
-                    <td className="py-4 px-6 font-medium text-white">
-                      Security Posture &amp; Attack Surface
-                    </td>
-                    <td className="py-4 px-6 font-mono font-semibold text-emerald-400 bg-cyan-950/10">
-                      Isolated origin, static edge cache, zero plugin bloat
-                    </td>
-                    <td className="py-4 px-6 text-zinc-400">
-                      High attack surface, vulnerable third-party SQL/PHP plugins
-                    </td>
-                  </tr>
-
-                  <tr className="hover:bg-zinc-900/30 transition-colors">
-                    <td className="py-4 px-6 font-medium text-white">
-                      Google Core Web Vitals
-                    </td>
-                    <td className="py-4 px-6 font-mono font-semibold text-emerald-400 bg-cyan-950/10">
-                      95–100 Mobile &amp; Desktop (Guaranteed)
-                    </td>
-                    <td className="py-4 px-6 text-zinc-400">
-                      50–70 average (Severe render-blocking delays)
-                    </td>
-                  </tr>
-
-                  <tr className="hover:bg-zinc-900/30 transition-colors">
-                    <td className="py-4 px-6 font-medium text-white">
-                      Infrastructure Cost
-                    </td>
-                    <td className="py-4 px-6 font-mono font-semibold text-emerald-400 bg-cyan-950/10">
-                      High-efficiency Linux VPS ($5–$20/mo)
-                    </td>
-                    <td className="py-4 px-6 text-zinc-400">
-                      Expensive tiered managed WordPress hosting ($50–$200/mo)
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-          </div>
         </div>
       </section>
 
       {/* ========================================================================= */}
-      {/* 6D. PROJECT SCOPE & COST ESTIMATOR */}
+      {/* 6D. SERVICE DELIVERABLES: STANDARD VS. DUKATRIO FLAGSHIP */}
       {/* ========================================================================= */}
-      <Estimator />
+      <ServiceComparison />
+
+      {/* ========================================================================= */}
+      {/* 6E. VERIFIED SOCIAL PROOF & CLIENT FEEDBACK */}
+      {/* ========================================================================= */}
+      <SocialProof />
+
+      {/* ========================================================================= */}
+      {/* 6F. INTERACTIVE SCOPE & COST ESTIMATOR */}
+      {/* ========================================================================= */}
+      <ScopeEstimator />
 
       {/* ========================================================================= */}
       {/* 7. CONTACT / CALL TO ACTION & FOOTER */}
@@ -970,6 +931,9 @@ export default function HomePage(): React.JSX.Element {
               <a href="#capabilities" className="hover:text-cyan-400 transition">
                 Capabilities
               </a>
+              <a href="#case-studies" className="hover:text-cyan-400 transition">
+                Case Studies
+              </a>
               <a href="#estimator" className="hover:text-cyan-400 transition">
                 Estimator
               </a>
@@ -980,6 +944,9 @@ export default function HomePage(): React.JSX.Element {
           </footer>
         </div>
       </section>
+
+      {/* Mobile Quick-Contact Floating Dock (Strictly Mobile md:hidden) */}
+      <MobileQuickContact />
     </div>
   );
 }
