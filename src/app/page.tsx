@@ -5,6 +5,7 @@ import Link from "next/link";
 import ContactForm from "@/components/ContactForm";
 import TechStackMatrix from "@/components/TechStackMatrix";
 import ScopeEstimator from "@/components/estimator/ScopeEstimator";
+import ProductionGuarantees from "@/components/home/ProductionGuarantees";
 import MobileQuickContact from "@/components/layout/MobileQuickContact";
 import ServiceComparison from "@/components/services/ServiceComparison";
 import BeforeAfterSlider from "@/components/ui/BeforeAfterSlider";
@@ -781,7 +782,12 @@ export default function HomePage(): React.JSX.Element {
 
 
       {/* ========================================================================= */}
-      {/* 6B. PROOF OF CRAFT: BEFORE / AFTER ARCHITECTURAL SLIDER */}
+      {/* 6B. ENTERPRISE ENGINEERING & SLA GUARANTEES */}
+      {/* ========================================================================= */}
+      <ProductionGuarantees />
+
+      {/* ========================================================================= */}
+      {/* 6C. PROOF OF CRAFT: BEFORE / AFTER ARCHITECTURAL SLIDER */}
       {/* ========================================================================= */}
       <BeforeAfterSlider />
 
