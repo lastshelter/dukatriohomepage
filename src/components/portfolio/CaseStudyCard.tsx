@@ -25,9 +25,29 @@ export interface CaseStudyData {
   execution: string;
   result: string;
   metrics: { label: string; value: string }[];
+  liveUrl?: string;
 }
 
 export const CASE_STUDIES: CaseStudyData[] = [
+  {
+    id: "gradiliste_saas",
+    badge: "ACTIVE IN-HOUSE SAAS PRODUCT",
+    title: "Gradilište Dukatrio - Enterprise Construction OS & Daily Log Platform",
+    clientType: "Proprietary B2B SaaS Product · Serbia & Europe",
+    techStack: ["Next.js 16", "React 19", "TypeScript", "Prisma ORM", "SQLite / PostgreSQL", "Offline PWA"],
+    challenge:
+      "Regional construction contractors lose 12-18% gross margin to untracked worker hours, chaotic paper daily logs, fuel theft, and manual EUR/RSD currency exchange discrepancies.",
+    execution:
+      "Architected and deployed a multi-tenant enterprise construction OS featuring digital daily logs, real-time worker attendance with multi-trade tracking, weather-based concrete curing telemetry, and 1-click Excel/PDF exports.",
+    result:
+      "Active production deployment serving construction companies with automated workflows, sub-second query response times, and zero-overhead offline PWA capabilities.",
+    metrics: [
+      { label: "Payroll Latency", value: "< 2s" },
+      { label: "Attendance Precision", value: "100%" },
+      { label: "Production Uptime", value: "99.9%" },
+    ],
+    liveUrl: "https://gradiliste.dukatrio.com",
+  },
   {
     id: "fintech_calc",
     badge: "FINTECH & ALGORITHMIC SYSTEMS",
@@ -124,16 +144,29 @@ export default function CaseStudySection(): React.JSX.Element {
                   </h3>
                 </div>
 
-                {/* Tech Pills */}
-                <div className="flex flex-wrap gap-1.5 max-w-sm">
-                  {study.techStack.map((tech) => (
-                    <span
-                      key={tech}
-                      className="px-2.5 py-1 rounded-lg bg-zinc-950/80 border border-zinc-800 text-[11px] font-mono text-zinc-300"
+                {/* Tech Pills & Live Link */}
+                <div className="flex flex-col sm:items-end gap-2.5">
+                  <div className="flex flex-wrap gap-1.5 max-w-sm">
+                    {study.techStack.map((tech) => (
+                      <span
+                        key={tech}
+                        className="px-2.5 py-1 rounded-lg bg-zinc-950/80 border border-zinc-800 text-[11px] font-mono text-zinc-300"
+                      >
+                        {tech}
+                      </span>
+                    ))}
+                  </div>
+                  {study.liveUrl && (
+                    <a
+                      href={study.liveUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-amber-500/10 hover:bg-amber-500/20 text-amber-400 border border-amber-500/30 text-xs font-mono font-semibold transition-colors"
                     >
-                      {tech}
-                    </span>
-                  ))}
+                      <span>Visit Live SaaS Platform</span>
+                      <ExternalLink className="w-3.5 h-3.5" />
+                    </a>
+                  )}
                 </div>
               </div>
 

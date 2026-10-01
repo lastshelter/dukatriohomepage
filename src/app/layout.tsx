@@ -9,43 +9,53 @@ export const viewport: Viewport = {
 };
 
 export const metadata: Metadata = {
-  title: "DukaTrio | High-Performance Web Applications & Resilient Digital Infrastructure",
+  title: "Dukatrio | Custom Software Solutions & Enterprise SaaS Development",
   description:
-    "Institutional-grade digital engineering studio and systems architecture hub. We build full-stack web applications, automated fintech underwriting engines, and resilient cloud infrastructure engineered for speed, security, and scale.",
+    "Dukatrio builds mission-critical custom software, bespoke web applications, and scalable SaaS platforms. Dukatrio razvija napredna softverska rešenja, prilagođene web platforme i specijalizovane SaaS sisteme za automatizaciju poslovanja.",
   metadataBase: new URL("https://dukatrio.com"),
   alternates: {
     canonical: "https://dukatrio.com",
+    languages: {
+      "en-US": "https://dukatrio.com",
+      "sr-RS": "https://dukatrio.com",
+    },
+  },
+  other: {
+    "description:sr":
+      "Dukatrio razvija napredna softverska rešenja, prilagođene web platforme i specijalizovane SaaS sisteme za automatizaciju poslovanja.",
+    "description:en":
+      "Dukatrio builds mission-critical custom software, bespoke web applications, and scalable SaaS platforms.",
   },
   keywords: [
-    "DukaTrio",
-    "Full-Stack Engineering",
+    "Dukatrio",
+    "Custom Software Engineering",
+    "SaaS Product Development",
+    "Enterprise Web Applications",
+    "Cloud Architecture",
+    "B2B SaaS Systems",
     "Next.js Development",
-    "Fintech Systems",
-    "Cloud Infrastructure",
-    "Caddy Reverse Proxy",
-    "Node.js Systems",
-    "Systems Architecture",
-    "Automated Underwriting Engines",
-    "Institutional Web Portals",
+    "Full-Stack Engineering",
+    "Gradilište Dukatrio",
     "High-Performance Web Applications",
   ],
-  authors: [{ name: "DukaTrio Systems Engineering" }, { name: "Petar D." }],
+  authors: [{ name: "Dukatrio Engineering Studio" }, { name: "Petar D." }],
   creator: "Petar D.",
-  publisher: "DukaTrio",
+  publisher: "Dukatrio",
   openGraph: {
-    title: "DukaTrio | High-Performance Web Applications & Resilient Digital Infrastructure",
+    title: "Dukatrio | Custom Software Solutions & Enterprise SaaS Development",
     description:
-      "Full-stack engineering studio specializing in institutional web portals, automated financial decisioning engines, and resilient Linux VPS deployments.",
+      "Dukatrio builds mission-critical custom software, bespoke web applications, and scalable SaaS platforms. Dukatrio razvija napredna softverska rešenja i SaaS sisteme.",
     url: "https://dukatrio.com",
-    siteName: "DukaTrio",
+    siteName: "Dukatrio",
     locale: "en_US",
+    alternateLocale: ["sr_RS"],
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: "DukaTrio | Systems Engineering & Web Applications",
+    title: "Dukatrio | Custom Software Solutions & Enterprise SaaS Development",
     description:
-      "Engineering institutional web portals, automated financial decisioning engines, and high-throughput cloud infrastructure.",
+      "Dukatrio builds mission-critical custom software, bespoke web applications, and scalable SaaS platforms.",
   },
   robots: {
     index: true,
@@ -62,92 +72,120 @@ export const metadata: Metadata = {
 
 const jsonLd = {
   "@context": "https://schema.org",
-  "@type": ["ProfessionalService", "LocalBusiness", "Organization"],
-  name: "DukaTrio",
-  url: "https://dukatrio.com",
-  logo: "https://dukatrio.com/icon",
-  image: "https://dukatrio.com/opengraph-image",
-  description:
-    "Institutional-grade digital engineering studio and systems architecture hub specializing in Next.js web applications, automated fintech calculation engines, and resilient Linux cloud infrastructure.",
-  telephone: "+381652028775",
-  email: "contact@dukatrio.com",
-  priceRange: "€€€",
-  address: {
-    "@type": "PostalAddress",
-    addressLocality: "Belgrade",
-    addressCountry: "RS",
-  },
-  geo: {
-    "@type": "GeoCoordinates",
-    latitude: 44.8176,
-    longitude: 20.4633,
-  },
-  areaServed: [
-    { "@type": "Country", name: "Serbia" },
-    { "@type": "AdministrativeArea", name: "European Union" },
-    { "@type": "AdministrativeArea", name: "Global" },
-  ],
-  openingHoursSpecification: [
+  "@graph": [
     {
-      "@type": "OpeningHoursSpecification",
-      dayOfWeek: [
-        "Monday",
-        "Tuesday",
-        "Wednesday",
-        "Thursday",
-        "Friday",
+      "@type": "Organization",
+      "@id": "https://dukatrio.com/#organization",
+      name: "Dukatrio",
+      alternateName: "DukaTrio Technology Solutions Studio",
+      url: "https://dukatrio.com",
+      logo: "https://dukatrio.com/icon",
+      image: "https://dukatrio.com/opengraph-image",
+      description:
+        "Dukatrio builds mission-critical custom software, bespoke web applications, and scalable SaaS platforms. Dukatrio razvija napredna softverska rešenja, prilagođene web platforme i specijalizovane SaaS sisteme za automatizaciju poslovanja.",
+      telephone: "+381652028775",
+      email: "contact@dukatrio.com",
+      address: {
+        "@type": "PostalAddress",
+        addressLocality: "Belgrade",
+        addressCountry: "RS",
+      },
+      sameAs: [
+        "https://gradiliste.dukatrio.com",
+        "https://github.com/lastshelter",
       ],
-      opens: "09:00",
-      closes: "18:00",
+      founder: {
+        "@type": "Person",
+        name: "Petar D.",
+        jobTitle: "Principal Systems Architect",
+      },
+    },
+    {
+      "@type": "ProfessionalService",
+      "@id": "https://dukatrio.com/#service",
+      name: "Dukatrio - Software Agency & Technology Solutions Studio",
+      url: "https://dukatrio.com",
+      priceRange: "€€€",
+      provider: {
+        "@id": "https://dukatrio.com/#organization",
+      },
+      description:
+        "Professional software agency specializing in Custom Software Engineering, SaaS Product Development, Enterprise Web Applications, and Cloud Systems Architecture.",
+      areaServed: [
+        { "@type": "Country", name: "Serbia" },
+        { "@type": "AdministrativeArea", name: "European Union" },
+        { "@type": "AdministrativeArea", name: "Global" },
+      ],
+      knowsAbout: [
+        "Custom Software Engineering",
+        "SaaS Product Development",
+        "Enterprise Web Applications",
+        "Cloud Architecture & Distributed Systems",
+        "Next.js 16 App Router",
+        "React 19 Server Components",
+        "Fintech & Computational Calculation Engines",
+        "High-Throughput Linux VPS Deployments",
+      ],
+      hasOfferCatalog: {
+        "@type": "OfferCatalog",
+        name: "Enterprise Digital Engineering & SaaS Services",
+        itemListElement: [
+          {
+            "@type": "Offer",
+            itemOffered: {
+              "@type": "Service",
+              name: "Custom Software Engineering",
+              description:
+                "Bespoke full-stack web applications, mission-critical workflow systems, and role-based client portals.",
+            },
+          },
+          {
+            "@type": "Offer",
+            itemOffered: {
+              "@type": "Service",
+              name: "SaaS Product Development",
+              description:
+                "End-to-end multi-tenant SaaS architecture, subscription engines, metering, and enterprise integrations.",
+            },
+          },
+          {
+            "@type": "Offer",
+            itemOffered: {
+              "@type": "Service",
+              name: "Enterprise Web Applications",
+              description:
+                "High-performance institutional portals engineered with Next.js 16, React 19, and rigorous security standards.",
+            },
+          },
+          {
+            "@type": "Offer",
+            itemOffered: {
+              "@type": "Service",
+              name: "Cloud Architecture & Infrastructure",
+              description:
+                "High-throughput Linux cloud pods, Caddy HTTP/3 reverse proxies, automated TLS, and zero-downtime container clusters.",
+            },
+          },
+          {
+            "@type": "Offer",
+            name: "Enterprise SaaS Case Study: Gradilište Dukatrio",
+            description:
+              "Active in-house enterprise SaaS case study: Gradilište Dukatrio (https://gradiliste.dukatrio.com), a dedicated B2B Construction Management OS with digital daily logs, worker attendance, and fixed EUR/RSD payroll engine.",
+            url: "https://gradiliste.dukatrio.com",
+            itemOffered: {
+              "@type": "SoftwareApplication",
+              name: "Gradilište Dukatrio - Construction OS",
+              applicationCategory: "BusinessApplication",
+              operatingSystem: "Web, Android, iOS (PWA)",
+              url: "https://gradiliste.dukatrio.com",
+              description:
+                "Sveobuhvatna cloud platforma za digitalno vođenje gradilišta, evidenciju radnika, mehanizacije, građevinskog dnevnika i napredno izveštavanje za građevinske firme.",
+            },
+          },
+        ],
+      },
     },
   ],
-  founder: {
-    "@type": "Person",
-    name: "Petar D.",
-    jobTitle: "Principal Systems Architect",
-  },
-  knowsAbout: [
-    "Next.js 16 App Router",
-    "React 19 Server Components",
-    "Fintech Systems Architecture",
-    "Automated Underwriting Engines",
-    "Linux VPS Infrastructure",
-    "Caddy HTTP/3 Reverse Proxies",
-    "Prisma ORM & PostgreSQL",
-  ],
-  hasOfferCatalog: {
-    "@type": "OfferCatalog",
-    name: "Commercial Digital Engineering Services",
-    itemListElement: [
-      {
-        "@type": "Offer",
-        itemOffered: {
-          "@type": "Service",
-          name: "B2B Client Portals & Web Platforms",
-          description:
-            "High-performance full-stack web applications engineered with Next.js 16, React 19, and role-based access control.",
-        },
-      },
-      {
-        "@type": "Offer",
-        itemOffered: {
-          "@type": "Service",
-          name: "Algorithmic Decision & Diagnostic Engines",
-          description:
-            "Automated financial underwriting, loan origination, debt amortization, and sub-50ms computational calculators.",
-        },
-      },
-      {
-        "@type": "Offer",
-        itemOffered: {
-          "@type": "Service",
-          name: "Production Linux Cloud Infrastructure",
-          description:
-            "Dedicated cloud pod deployments, Caddy HTTP/3 reverse proxies, edge TLS certificates, and zero-downtime clustering.",
-        },
-      },
-    ],
-  },
 };
 
 export default function RootLayout({
