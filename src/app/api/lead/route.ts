@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
+import nodemailer from "nodemailer";
 import { z } from "zod";
 
 export const dynamic = "force-dynamic";
@@ -233,6 +234,63 @@ export async function POST(req: NextRequest): Promise<NextResponse> {
           timestamp: new Date().toISOString(),
         }
       );
+    }
+
+    // 5. Dispatch Email to petar@dukatrio.com
+    const host = process.env["SMTP_HOST"];
+    const port = Number(process.env["SMTP_PORT"]) || 587;
+    const user = process.env["SMTP_USER"];
+    const pass = process.env["SMTP_PASS"];
+    const destinationEmail = "petar@dukatrio.com";
+
+    if (host && user && pass) {
+      try {
+        const transporter = nodemailer.createTransport({
+          host,
+          port,
+          secure: port === 465,
+          auth: { user, pass },
+        });
+
+        await transporter.sendMail({
+          from: `"DukaTrio Lead Intake" <${user}>`,
+          to: destinationEmail,
+          replyTo: email,
+          subject: `[DukaTrio Lead] ${name} - ${serviceType}`,
+          text: `
+New Lead from dukatrio.com:
+------------------------------------
+Name:         ${name}
+Email:        ${email}
+Phone:        ${phone || "N/A"}
+Service:      ${serviceType}
+Scope:        ${scopeScale}
+Timeline:     ${timeline}
+Source:       ${source} (IP: ${clientIp})
+
+Message:
+${message || "N/A"}
+`,
+          html: `
+<div style="font-family: sans-serif; background-color: #09090b; color: #f4f4f5; padding: 24px; border-radius: 12px; max-width: 600px; margin: 0 auto; border: 1px solid #27272a;">
+  <h2 style="color: #38bdf8; margin: 0 0 16px 0;">New Lead Received (dukatrio.com)</h2>
+  <table style="width: 100%; border-collapse: collapse; font-size: 14px; margin-bottom: 20px;">
+    <tr><td style="color: #a1a1aa; padding: 6px 0; width: 120px;">Name:</td><td style="color: #fff; font-weight: bold;">${name}</td></tr>
+    <tr><td style="color: #a1a1aa; padding: 6px 0;">Email:</td><td><a href="mailto:${email}" style="color: #38bdf8;">${email}</a></td></tr>
+    <tr><td style="color: #a1a1aa; padding: 6px 0;">Phone:</td><td style="color: #fff;">${phone || "N/A"}</td></tr>
+    <tr><td style="color: #a1a1aa; padding: 6px 0;">Service:</td><td style="color: #10b981;">${serviceType}</td></tr>
+    <tr><td style="color: #a1a1aa; padding: 6px 0;">Source:</td><td style="color: #71717a;">${source} (IP: ${clientIp})</td></tr>
+  </table>
+  <div style="background-color: #18181b; border: 1px solid #27272a; border-radius: 8px; padding: 14px; margin-top: 10px;">
+    <div style="color: #a1a1aa; font-size: 11px; text-transform: uppercase; margin-bottom: 6px;">Message / Scope:</div>
+    <div style="color: #fff; font-size: 14px; white-space: pre-wrap;">${message || "N/A"}</div>
+  </div>
+</div>
+`,
+        });
+      } catch (mailErr) {
+        console.error("[Email Dispatch Error in /api/lead]:", mailErr);
+      }
     }
 
     return NextResponse.json(

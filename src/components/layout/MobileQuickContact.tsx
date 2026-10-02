@@ -10,7 +10,7 @@ import {
   Sparkles,
   Loader2,
   CheckCircle2,
-  Zap,
+  Mail,
 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
@@ -79,7 +79,7 @@ export default function MobileQuickContact(): React.JSX.Element {
         <div className="max-w-md mx-auto grid grid-cols-4 gap-2">
           {/* 1. Direct Phone Call */}
           <a
-            href="tel:+381652028775"
+            href="tel:+38166258258"
             className="flex flex-col items-center justify-center py-2 px-1 rounded-xl bg-zinc-900 border border-zinc-800 hover:border-cyan-500/50 text-zinc-300 hover:text-cyan-400 active:scale-95 transition-all text-center group"
           >
             <Phone className="w-4 h-4 text-cyan-400 mb-1 group-hover:animate-bounce" />
@@ -88,7 +88,7 @@ export default function MobileQuickContact(): React.JSX.Element {
 
           {/* 2. Viber Direct Chat */}
           <a
-            href="viber://chat?number=%2B381652028775"
+            href="viber://chat?number=%2B38166258258"
             className="flex flex-col items-center justify-center py-2 px-1 rounded-xl bg-zinc-900 border border-zinc-800 hover:border-purple-500/50 text-zinc-300 hover:text-purple-400 active:scale-95 transition-all text-center group"
           >
             <MessageSquare className="w-4 h-4 text-purple-400 mb-1" />
@@ -97,7 +97,7 @@ export default function MobileQuickContact(): React.JSX.Element {
 
           {/* 3. WhatsApp Direct Chat */}
           <a
-            href="https://wa.me/381652028775?text=Hello%20DukaTrio%2C%20I%20would%20like%20to%20discuss%20a%20project"
+            href="https://wa.me/38166258258"
             target="_blank"
             rel="noopener noreferrer"
             className="flex flex-col items-center justify-center py-2 px-1 rounded-xl bg-zinc-900 border border-zinc-800 hover:border-emerald-500/50 text-zinc-300 hover:text-emerald-400 active:scale-95 transition-all text-center group"
@@ -106,14 +106,14 @@ export default function MobileQuickContact(): React.JSX.Element {
             <span className="text-[10px] font-mono font-semibold">WhatsApp</span>
           </a>
 
-          {/* 4. Fast Inquiry Modal Toggle */}
+          {/* 4. Fast Email Modal Toggle */}
           <button
             type="button"
             onClick={() => setModalOpen(true)}
             className="flex flex-col items-center justify-center py-2 px-1 rounded-xl bg-gradient-to-r from-cyan-500 to-cyan-600 active:scale-95 text-zinc-950 font-bold shadow-[0_0_15px_rgba(6,182,212,0.4)] transition-all text-center"
           >
-            <Zap className="w-4 h-4 mb-1" />
-            <span className="text-[10px] font-mono font-bold tracking-tight">Inquiry</span>
+            <Mail className="w-4 h-4 mb-1" />
+            <span className="text-[10px] font-mono font-bold tracking-tight">E-Mail</span>
           </button>
         </div>
       </div>

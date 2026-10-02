@@ -163,7 +163,7 @@ export async function POST(req: NextRequest): Promise<NextResponse> {
     const port = Number(process.env["SMTP_PORT"]) || 587;
     const user = process.env["SMTP_USER"];
     const pass = process.env["SMTP_PASS"];
-    const destinationEmail = "neooozx@gmail.com";
+    const destinationEmail = "petar@dukatrio.com";
 
     const subject = `[DukaTrio Inquiry] ${scope} from ${name}`;
     const textContent = `
