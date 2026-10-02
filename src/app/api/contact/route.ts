@@ -222,32 +222,34 @@ Replying to this notification sends directly to ${email} (replyTo header configu
 </div>
 `;
 
-    if (host && user && pass) {
-      const transporter = nodemailer.createTransport({
-        host,
-        port,
-        secure: port === 465,
-        auth: { user, pass },
-      });
+    const transporter = nodemailer.createTransport({
+      host: process.env.SMTP_HOST || "smtp-relay.brevo.com",
+      port: Number(process.env.SMTP_PORT) || 587,
+      secure: false,
+      auth: {
+        user: process.env.SMTP_USER || "bc1ab0001@smtp-brevo.com",
+        pass: process.env.SMTP_PASS,
+      },
+    });
 
-      await transporter.sendMail({
-        from: `"DukaTrio Transmission Desk" <${user}>`,
-        to: destinationEmail,
+    try {
+      const info = await transporter.sendMail({
+        from: process.env.CONTACT_FROM || '"Dukatrio Kontakt" <petar@dukatrio.com>',
+        to: "petar@dukatrio.com, neooozx@gmail.com",
         replyTo: email,
-        subject,
-        text: textContent,
-        html: htmlContent,
+        subject: `[DukaTrio Novi Upit] ${name} (${email}) - ${scope}`,
+        text: `Ime / Firma: ${name}\nKontakt: ${email}\nProjekat: ${scope}\nPoruka: ${message}\nIP: ${clientIp}`,
+        html: `<h3>Novi upit sa sajta DukaTrio</h3>
+<p><strong>Ime / Firma:</strong> ${sanitizedName}</p>
+<p><strong>Kontakt:</strong> ${sanitizedEmail}</p>
+<p><strong>Projekat / Oblast:</strong> ${sanitizedScope}</p>
+<p><strong>Poruka:</strong> ${sanitizedMessage}</p>
+<p><strong>IP Adresa:</strong> ${clientIp}</p>
+<p><strong>Vreme:</strong> ${new Date().toLocaleString("sr-RS", { timeZone: "Europe/Belgrade" })}</p>`,
       });
-    } else {
-      console.log("ℹ [DukaTrio Contact Intake] SMTP not configured. Logged transmission payload:");
-      console.log({
-        clientIp,
-        name,
-        email,
-        scope,
-        messageLength: message.length,
-        timestamp: new Date().toISOString(),
-      });
+      console.log("[SMTP SUCCESS] Mail delivered:", info.messageId);
+    } catch (err) {
+      console.error("[SMTP ERROR] Failed to send email via Brevo:", err);
     }
 
     return NextResponse.json(
