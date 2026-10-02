@@ -176,120 +176,63 @@ export async function POST(req: NextRequest): Promise<NextResponse> {
       );
     }
 
-    // 4. Dispatch Telegram Notification
-    const telegramToken = process.env.TELEGRAM_BOT_TOKEN;
-    const telegramChatId = process.env.TELEGRAM_CHAT_ID;
+    // 4. Dispatch Email via Brevo SMTP
+    const transporter = nodemailer.createTransport({
+      host: process.env.SMTP_HOST || "smtp-relay.brevo.com",
+      port: Number(process.env.SMTP_PORT) || 587,
+      secure: false,
+      auth: {
+        user: process.env.SMTP_USER || "bc1ab0001@smtp-brevo.com",
+        pass: process.env.SMTP_PASS,
+      },
+    });
 
-    if (telegramToken && telegramChatId) {
-      const telegramText = [
-        "🚨 *NEW DUKATRIO LEAD RECEIVED*",
-        "------------------------------------",
-        `👤 *Client:* ${name}`,
-        `📧 *Email:* \`${email}\``,
-        phone ? `📱 *Phone:* \`${phone}\`` : null,
-        `🛠 *Service:* ${serviceType}`,
-        `📐 *Scope / Scale:* ${scopeScale}`,
-        `⏱ *Timeline:* ${timeline}`,
-        estimatedBudget ? `💰 *Est. Budget:* ${estimatedBudget}` : null,
-        `📍 *Source:* ${source} (IP: ${clientIp})`,
-        "------------------------------------",
-        message ? `📝 *Notes:* \n${message}` : null,
-      ]
-        .filter(Boolean)
-        .join("\n");
-
-      try {
-        const tgRes = await fetch(
-          `https://api.telegram.org/bot${telegramToken}/sendMessage`,
-          {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({
-              chat_id: telegramChatId,
-              text: telegramText,
-              parse_mode: "Markdown",
-            }),
-          }
-        );
-
-        if (!tgRes.ok) {
-          const errBody = await tgRes.text();
-          console.warn("[Telegram Dispatch Warning] Failed to send lead:", errBody);
-        }
-      } catch (tgErr) {
-        console.error("[Telegram Dispatch Error]:", tgErr);
-      }
-    } else {
-      console.log(
-        "ℹ [DukaTrio Lead Intake] Telegram webhook not configured. Lead recorded:",
-        {
-          name,
-          email,
-          phone,
-          serviceType,
-          scopeScale,
-          timeline,
-          estimatedBudget,
-          clientIp,
-          timestamp: new Date().toISOString(),
-        }
-      );
+    try {
+      const info = await transporter.sendMail({
+        from: process.env.CONTACT_FROM || '"Dukatrio Agencija" <petar@dukatrio.com>',
+        to: "petar@dukatrio.com, neooozx@gmail.com",
+        replyTo: email && email.includes("@") ? email : "petar@dukatrio.com",
+        subject: `[Dukatrio Upit] ${name} (${phone || email})`,
+        text: `Novi upit sa dukatrio.com:
+------------------------------------
+Ime:          ${name}
+Telefon:      ${phone || "Nije navedeno"}
+Email:        ${email}
+Usluga / Tip: ${serviceType || scopeScale || "Opšti upit"}
+Poruka / Rok: ${timeline || message || "Nije navedeno"}
+IP Adresa:    ${clientIp}
+Vreme:        ${new Date().toLocaleString("sr-RS", { timeZone: "Europe/Belgrade" })}`,
+        html: `<h3>Novi upit sa dukatrio.com</h3>
+<p><strong>Ime:</strong> ${name}</p>
+<p><strong>Telefon:</strong> <a href="tel:${phone}">${phone}</a></p>
+<p><strong>Email:</strong> ${email}</p>
+<p><strong>Usluga / Tip:</strong> ${serviceType || scopeScale || "Opšti upit"}</p>
+<p><strong>Poruka / Rok:</strong> ${timeline || "Nije navedeno"}</p>
+<p><strong>IP:</strong> ${clientIp}</p>
+<p><strong>Vreme:</strong> ${new Date().toLocaleString("sr-RS")}</p>`,
+      });
+      console.log("[SMTP SUCCESS] Dukatrio lead email sent:", info.messageId);
+    } catch (err) {
+      console.error("[SMTP ERROR] Failed sending lead email:", err);
     }
 
-    // 5. Dispatch Email to petar@dukatrio.com
-    const host = process.env["SMTP_HOST"];
-    const port = Number(process.env["SMTP_PORT"]) || 587;
-    const user = process.env["SMTP_USER"];
-    const pass = process.env["SMTP_PASS"];
-    const destinationEmail = "petar@dukatrio.com";
-
-    if (host && user && pass) {
+    // Optional Telegram notification if token is provided
+    const telegramToken = process.env.TELEGRAM_BOT_TOKEN;
+    const telegramChatId = process.env.TELEGRAM_CHAT_ID;
+    if (telegramToken && telegramChatId) {
       try {
-        const transporter = nodemailer.createTransport({
-          host,
-          port,
-          secure: port === 465,
-          auth: { user, pass },
+        const telegramText = `🚨 *NEW DUKATRIO LEAD RECEIVED*\n👤 *Client:* ${name}\n📧 *Email:* \`${email}\`${phone ? `\n📱 *Phone:* \`${phone}\`` : ""}\n🛠 *Service:* ${serviceType}\n📍 *IP:* ${clientIp}`;
+        await fetch(`https://api.telegram.org/bot${telegramToken}/sendMessage`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            chat_id: telegramChatId,
+            text: telegramText,
+            parse_mode: "Markdown",
+          }),
         });
-
-        await transporter.sendMail({
-          from: `"DukaTrio Lead Intake" <${user}>`,
-          to: destinationEmail,
-          replyTo: email,
-          subject: `[DukaTrio Lead] ${name} - ${serviceType}`,
-          text: `
-New Lead from dukatrio.com:
-------------------------------------
-Name:         ${name}
-Email:        ${email}
-Phone:        ${phone || "N/A"}
-Service:      ${serviceType}
-Scope:        ${scopeScale}
-Timeline:     ${timeline}
-Source:       ${source} (IP: ${clientIp})
-
-Message:
-${message || "N/A"}
-`,
-          html: `
-<div style="font-family: sans-serif; background-color: #09090b; color: #f4f4f5; padding: 24px; border-radius: 12px; max-width: 600px; margin: 0 auto; border: 1px solid #27272a;">
-  <h2 style="color: #38bdf8; margin: 0 0 16px 0;">New Lead Received (dukatrio.com)</h2>
-  <table style="width: 100%; border-collapse: collapse; font-size: 14px; margin-bottom: 20px;">
-    <tr><td style="color: #a1a1aa; padding: 6px 0; width: 120px;">Name:</td><td style="color: #fff; font-weight: bold;">${name}</td></tr>
-    <tr><td style="color: #a1a1aa; padding: 6px 0;">Email:</td><td><a href="mailto:${email}" style="color: #38bdf8;">${email}</a></td></tr>
-    <tr><td style="color: #a1a1aa; padding: 6px 0;">Phone:</td><td style="color: #fff;">${phone || "N/A"}</td></tr>
-    <tr><td style="color: #a1a1aa; padding: 6px 0;">Service:</td><td style="color: #10b981;">${serviceType}</td></tr>
-    <tr><td style="color: #a1a1aa; padding: 6px 0;">Source:</td><td style="color: #71717a;">${source} (IP: ${clientIp})</td></tr>
-  </table>
-  <div style="background-color: #18181b; border: 1px solid #27272a; border-radius: 8px; padding: 14px; margin-top: 10px;">
-    <div style="color: #a1a1aa; font-size: 11px; text-transform: uppercase; margin-bottom: 6px;">Message / Scope:</div>
-    <div style="color: #fff; font-size: 14px; white-space: pre-wrap;">${message || "N/A"}</div>
-  </div>
-</div>
-`,
-        });
-      } catch (mailErr) {
-        console.error("[Email Dispatch Error in /api/lead]:", mailErr);
+      } catch (tgErr) {
+        console.error("[Telegram Dispatch Error]:", tgErr);
       }
     }
 
