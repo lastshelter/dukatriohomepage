@@ -77,9 +77,12 @@ export default function HomePage(): React.JSX.Element {
           </Link>
 
           {/* Desktop Navigation Links */}
-          <nav className="hidden md:flex items-center gap-8 text-sm font-medium text-zinc-300">
+          <nav className="hidden md:flex items-center gap-7 text-sm font-medium text-zinc-300">
             <a href="#solutions" className="hover:text-cyan-400 transition-colors">
               Solutions
+            </a>
+            <a href="#demo" className="hover:text-cyan-400 transition-colors">
+              Live Demo
             </a>
             <a href="#capabilities" className="hover:text-cyan-400 transition-colors">
               Capabilities
@@ -87,8 +90,8 @@ export default function HomePage(): React.JSX.Element {
             <a href="#case-studies" className="hover:text-cyan-400 transition-colors">
               Case Studies
             </a>
-            <a href="#estimator" className="hover:text-cyan-400 transition-colors">
-              Estimator
+            <a href="#calculator" className="hover:text-cyan-400 transition-colors">
+              Cost Estimator
             </a>
           </nav>
 
@@ -126,6 +129,13 @@ export default function HomePage(): React.JSX.Element {
                 Solutions
               </a>
               <a
+                href="#demo"
+                onClick={() => setMobileMenuOpen(false)}
+                className="hover:text-cyan-400 py-1"
+              >
+                Live Demo
+              </a>
+              <a
                 href="#capabilities"
                 onClick={() => setMobileMenuOpen(false)}
                 className="hover:text-cyan-400 py-1"
@@ -140,11 +150,11 @@ export default function HomePage(): React.JSX.Element {
                 Case Studies
               </a>
               <a
-                href="#estimator"
+                href="#calculator"
                 onClick={() => setMobileMenuOpen(false)}
                 className="hover:text-cyan-400 py-1"
               >
-                Estimator
+                Cost Estimator
               </a>
             </nav>
             <div className="pt-2">
@@ -174,38 +184,55 @@ export default function HomePage(): React.JSX.Element {
           {/* Precision Badge */}
           <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-cyan-950/50 border border-cyan-800/60 text-cyan-400 font-mono text-xs font-semibold shadow-inner">
             <Radio className="w-3.5 h-3.5 animate-pulse text-cyan-400" />
-            <span>Next-Gen Systems Engineering &amp; Digital Infrastructure</span>
+            <span>High-Performance Engineering Studio</span>
           </div>
 
           {/* Punchy Hero Title */}
           <h1 className="text-4xl sm:text-6xl lg:text-7xl font-extrabold text-white tracking-tight leading-[1.08] max-w-4xl mx-auto">
-            Engineering High-Performance Web Applications &amp;{" "}
+            Custom Web Applications &amp; Portals That{" "}
             <span className="bg-gradient-to-r from-cyan-400 via-teal-300 to-indigo-400 bg-clip-text text-transparent">
-              Resilient Digital Infrastructure.
+              Streamline Business Operations.
             </span>
           </h1>
 
           {/* Subtitle */}
           <p className="text-base sm:text-xl text-zinc-400 leading-relaxed font-normal max-w-3xl mx-auto">
-            From institutional-grade fintech portals and automated decisioning engines to high-throughput cloud infrastructure. We build full-stack web platforms engineered for speed, security, and scale.
+            We build dedicated client portals, field tools, and custom internal systems that replace messy spreadsheets and sluggish off-the-shelf software—fast, self-hosted, and engineered to scale.
           </p>
 
+          {/* Key Differentiator Badges */}
+          <div className="flex flex-wrap items-center justify-center gap-2.5 sm:gap-3 max-w-2xl mx-auto pt-2">
+            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-zinc-900/80 border border-cyan-500/30 text-zinc-200 text-xs font-medium shadow-sm">
+              <span className="text-cyan-400">⚡</span>
+              <span>Sub-Second Load Times</span>
+            </div>
+            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-zinc-900/80 border border-emerald-500/30 text-zinc-200 text-xs font-medium shadow-sm">
+              <span className="text-emerald-400">🔒</span>
+              <span>Self-Hosted &amp; Full Data Ownership</span>
+            </div>
+            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-zinc-900/80 border border-indigo-500/30 text-zinc-200 text-xs font-medium shadow-sm">
+              <span className="text-indigo-400">🛠️</span>
+              <span>Zero Generic Templates</span>
+            </div>
+          </div>
+
           {/* Primary Action Buttons */}
-          <div className="pt-4 flex flex-col sm:flex-row items-center justify-center gap-4">
+          <div className="pt-2 flex flex-col sm:flex-row items-center justify-center gap-4">
             <a
-              href="#capabilities"
+              href="#calculator"
               className="w-full sm:w-auto py-3.5 px-8 rounded-xl bg-gradient-to-r from-cyan-500 to-cyan-600 hover:from-cyan-400 hover:to-cyan-500 text-zinc-950 font-bold text-xs uppercase tracking-wider transition-all shadow-[0_0_25px_-5px_rgba(6,182,212,0.5)] flex items-center justify-center gap-2.5 group cursor-pointer"
             >
-              <span>Explore Capabilities</span>
+              <Calculator className="w-4 h-4 text-zinc-950" />
+              <span>Calculate Project Cost</span>
               <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
             </a>
 
             <a
-              href="#contact"
+              href="#case-studies"
               className="w-full sm:w-auto py-3.5 px-8 rounded-xl bg-zinc-900/90 hover:bg-zinc-800 border border-zinc-700/80 hover:border-zinc-600 text-zinc-200 hover:text-white font-semibold text-xs uppercase tracking-wider transition-all flex items-center justify-center gap-2"
             >
-              <Mail className="w-4 h-4 text-cyan-400" />
-              <span>Start a Project</span>
+              <Layers className="w-4 h-4 text-cyan-400" />
+              <span>View Case Studies</span>
             </a>
           </div>
 
@@ -708,6 +735,11 @@ export default function HomePage(): React.JSX.Element {
       <TechStackMatrix />
 
       {/* ========================================================================= */}
+      {/* 5C. INTERACTIVE DEMO SANDBOX WIDGET */}
+      {/* ========================================================================= */}
+      <InteractiveDemo />
+
+      {/* ========================================================================= */}
       {/* 6. ARCHITECTURE TOPOLOGY SECTION */}
       {/* ========================================================================= */}
       <section id="architecture" className="py-24 sm:py-32 relative">
@@ -887,6 +919,7 @@ export default function HomePage(): React.JSX.Element {
       {/* ========================================================================= */}
       {/* 6F. INTERACTIVE SCOPE & COST ESTIMATOR */}
       {/* ========================================================================= */}
+      <div id="calculator" className="scroll-mt-24" />
       <ScopeEstimator />
 
       {/* ========================================================================= */}
