@@ -11,6 +11,7 @@ import ServiceComparison from "@/components/services/ServiceComparison";
 import BeforeAfterSlider from "@/components/ui/BeforeAfterSlider";
 import CaseStudySection from "@/components/portfolio/CaseStudyCard";
 import SocialProof from "@/components/testimonials/SocialProof";
+import InteractiveDemo from "@/components/InteractiveDemo";
 import { motion } from "framer-motion";
 import {
   Terminal,

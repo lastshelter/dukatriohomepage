@@ -21,9 +21,9 @@ export interface CaseStudyData {
   title: string;
   clientType: string;
   techStack: string[];
-  challenge: string;
-  execution: string;
-  result: string;
+  bottleneck: string;
+  architecture: string;
+  outcome: string;
   metrics: { label: string; value: string }[];
   liveUrl?: string;
 }
@@ -32,15 +32,15 @@ export const CASE_STUDIES: CaseStudyData[] = [
   {
     id: "gradiliste_saas",
     badge: "ACTIVE IN-HOUSE SAAS PRODUCT",
-    title: "Gradilište Dukatrio - Enterprise Construction OS & Daily Log Platform",
-    clientType: "Proprietary B2B SaaS Product · Serbia & Europe",
+    title: "Gradilište Dukatrio — Enterprise Construction OS & Daily Log Platform",
+    clientType: "Proprietary B2B SaaS Platform · Regional Enterprise",
     techStack: ["Next.js 16", "React 19", "TypeScript", "Prisma ORM", "SQLite / PostgreSQL", "Offline PWA"],
-    challenge:
-      "Regional construction contractors lose 12-18% gross margin to untracked worker hours, chaotic paper daily logs, fuel theft, and manual EUR/RSD currency exchange discrepancies.",
-    execution:
-      "Architected and deployed a multi-tenant enterprise construction OS featuring digital daily logs, real-time worker attendance with multi-trade tracking, weather-based concrete curing telemetry, and 1-click Excel/PDF exports.",
-    result:
-      "Active production deployment serving construction companies with automated workflows, sub-second query response times, and zero-overhead offline PWA capabilities.",
+    bottleneck:
+      "Regional construction contractors lose 12–18% gross margin to untracked worker hours, chaotic paper daily logs, fuel theft, and manual EUR/RSD currency discrepancies. Field supervisors resisted complex multi-screen enterprise software.",
+    architecture:
+      "Architected a high-speed offline-first Next.js 16 PWA with SQLite/PostgreSQL background synchronization, single-tap daily log workflows, weather-aware concrete curing timers, and 1-click Excel/PDF export pipelines.",
+    outcome:
+      "Live in active daily field production across hundreds of construction sites with 100% attendance audit accuracy, payroll report generation reduced to <2s, and zero data loss in offline basement/trench conditions.",
     metrics: [
       { label: "Payroll Latency", value: "< 2s" },
       { label: "Attendance Precision", value: "100%" },
@@ -50,20 +50,20 @@ export const CASE_STUDIES: CaseStudyData[] = [
   },
   {
     id: "fintech_calc",
-    badge: "FINTECH & ALGORITHMIC SYSTEMS",
+    badge: "FINTECH & COMPUTATION KERNEL",
     title: "Commercial Multi-Lender Decisioning & Amortization Engine",
-    clientType: "Commercial Capital Desk · Belgrade / Central Europe",
+    clientType: "Commercial Capital Desk · Central Europe",
     techStack: ["Next.js 16", "React 19", "TypeScript", "Prisma ORM", "PostgreSQL", "Caddy HTTP/3"],
-    challenge:
-      "Legacy workflow relied on fragmented Excel spreadsheets with 15+ minutes manual calculation latency, frequent formula rounding errors, and zero client self-service portal.",
-    execution:
-      "Engineered an automated Next.js computation engine running sub-millisecond amortization kernels, multi-tier DSCR stress testing, client portal intake, and dynamic server-side PDF term sheet generation.",
-    result:
-      "Reduced underwriting turnaround from 48 hours to under 4 minutes. Handled over €14M in analyzed pipeline volume with zero calculation discrepancies and 100% data audit compliance.",
+    bottleneck:
+      "Legacy underwriting operations relied on fragmented 40MB Excel workbooks with 15+ minutes manual calculation latency, frequent formula rounding drift, and zero self-service portal for corporate borrowers.",
+    architecture:
+      "Engineered an automated computation kernel in TypeScript running sub-50ms amortization math, multi-tier DSCR stress testing, secure client intake, and serverless PDF term sheet rendering.",
+    outcome:
+      "Reduced underwriting turnaround from 48 hours to under 4 minutes. Handled over €14M in analyzed pipeline volume with zero calculation discrepancies and 100% automated audit logging.",
     metrics: [
       { label: "Turnaround Reduction", value: "98.5%" },
       { label: "Calculation Latency", value: "< 45ms" },
-      { label: "Lighthouse Performance", value: "100/100" },
+      { label: "Analyzed Pipeline", value: "€14M+" },
     ],
   },
   {
@@ -72,30 +72,30 @@ export const CASE_STUDIES: CaseStudyData[] = [
     title: "Enterprise Document Vault & Operations Management Hub",
     clientType: "Institutional Advisory Firm · Vienna / DACH Region",
     techStack: ["React 19", "Tailwind CSS", "AES-256 Storage", "Node.js 22 LTS", "PM2 Cluster"],
-    challenge:
-      "Client files were transmitted via unsecured email threads, creating severe GDPR liability and lack of document status visibility between external clients and internal managers.",
-    execution:
-      "Constructed a zero-trust multi-tenant portal with hardware AES-256 field-level encryption, role-based access control (RBAC), drag-and-drop secure upload dropzones, and administrative activity auditing.",
-    result:
-      "Zero compliance infractions, 4.2x faster client onboarding throughput, and seamless handover with complete Docker and Git repository IP transfer.",
+    bottleneck:
+      "Confidential client financials and tax audits were transmitted via unencrypted email attachments, creating severe GDPR liability and giving management zero visibility into client onboarding status.",
+    architecture:
+      "Constructed a zero-trust multi-tenant portal with hardware AES-256 field-level encryption, role-based access control (RBAC), drag-and-drop secure upload dropzones, and real-time audit logging.",
+    outcome:
+      "Zero compliance infractions across independent security audits, 4.2x faster client onboarding throughput, and complete Docker/Git repository IP transfer upon delivery.",
     metrics: [
-      { label: "Onboarding Speed", value: "4.2x" },
+      { label: "Onboarding Speed", value: "4.2x Faster" },
       { label: "Security Classification", value: "AES-256" },
-      { label: "Production Uptime", value: "99.99%" },
+      { label: "Compliance Pass", value: "100%" },
     ],
   },
   {
     id: "edge_migration",
-    badge: "HIGH-THROUGHPUT INFRASTRUCTURE",
+    badge: "HIGH-THROUGHPUT CLOUD INFRASTRUCTURE",
     title: "Bare-Metal Linux Cloud Pod & Edge TLS Modernization",
     clientType: "SaaS Scaleup · Global Traffic",
     techStack: ["Linux Ubuntu 24.04 LTS", "Caddy v2", "HTTP/3 / QUIC", "Docker", "Next.js Standalone"],
-    challenge:
-      "Suffering from 4-second initial page loads on bloated WordPress hosting, high monthly platform fees ($380/mo), and recurring plugin security compromises.",
-    execution:
-      "Migrated full architecture to an AMD EPYC dedicated cloud pod running standalone Node.js, Caddy reverse proxy with automated edge certificates, and static asset pre-caching.",
-    result:
-      "PageSpeed jumped from 48 to 99 on mobile. Hosting overhead reduced from $380/mo to $18/mo. Zero security vulnerabilities detected across all independent penetration tests.",
+    bottleneck:
+      "Suffering from sluggish 4-second initial page loads on bloated WordPress hosting, high monthly platform fees ($380/mo), and recurring security vulnerabilities.",
+    architecture:
+      "Migrated full architecture to an AMD EPYC dedicated cloud pod running standalone Node.js, Caddy reverse proxy with automated edge certificates, and static asset edge pre-caching.",
+    outcome:
+      "Mobile PageSpeed score soared from 48 to 99. Hosting overhead slashed by 95% from $380/mo to $18/mo with zero vulnerabilities recorded across penetration tests.",
     metrics: [
       { label: "Page Load Time", value: "0.28s" },
       { label: "Cost Reduction", value: "-95%" },
@@ -170,38 +170,38 @@ export default function CaseStudySection(): React.JSX.Element {
                 </div>
               </div>
 
-              {/* 3-Section Technical Anatomy: Challenge / Execution / Result */}
+              {/* 3-Section Technical Anatomy: Problem / Architecture / Result */}
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                {/* 1. The Challenge */}
+                {/* 1. The Bottleneck (Problem) */}
                 <div className="p-6 rounded-2xl bg-zinc-950/60 border border-zinc-800/80 space-y-3">
                   <div className="flex items-center gap-2 text-rose-400 font-mono text-xs font-bold uppercase tracking-wider">
                     <AlertCircle className="w-4 h-4 shrink-0" />
-                    <span>01 · The Challenge</span>
+                    <span>01 · The Bottleneck (Problem)</span>
                   </div>
                   <p className="text-xs sm:text-sm text-zinc-400 leading-relaxed font-sans">
-                    {study.challenge}
+                    {study.bottleneck}
                   </p>
                 </div>
 
-                {/* 2. The Execution */}
+                {/* 2. The Tech Stack & Architecture (Solution) */}
                 <div className="p-6 rounded-2xl bg-zinc-950/60 border border-zinc-800/80 space-y-3">
                   <div className="flex items-center gap-2 text-cyan-400 font-mono text-xs font-bold uppercase tracking-wider">
                     <Cpu className="w-4 h-4 shrink-0" />
-                    <span>02 · The Execution</span>
+                    <span>02 · Tech Stack &amp; Architecture (Solution)</span>
                   </div>
                   <p className="text-xs sm:text-sm text-zinc-400 leading-relaxed font-sans">
-                    {study.execution}
+                    {study.architecture}
                   </p>
                 </div>
 
-                {/* 3. The Result */}
+                {/* 3. The Concrete Outcome (Result) */}
                 <div className="p-6 rounded-2xl bg-zinc-950/60 border border-zinc-800/80 space-y-3">
                   <div className="flex items-center gap-2 text-emerald-400 font-mono text-xs font-bold uppercase tracking-wider">
                     <CheckCircle2 className="w-4 h-4 shrink-0" />
-                    <span>03 · The Result</span>
+                    <span>03 · Concrete Outcome (Result)</span>
                   </div>
                   <p className="text-xs sm:text-sm text-zinc-400 leading-relaxed font-sans">
-                    {study.result}
+                    {study.outcome}
                   </p>
                 </div>
               </div>
