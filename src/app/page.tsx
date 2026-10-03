@@ -9,6 +9,7 @@ import ProductionGuarantees from "@/components/home/ProductionGuarantees";
 import MobileQuickContact from "@/components/layout/MobileQuickContact";
 import ServiceComparison from "@/components/services/ServiceComparison";
 import BeforeAfterSlider from "@/components/ui/BeforeAfterSlider";
+import FlagshipCaseStudy from "@/components/portfolio/FlagshipCaseStudy";
 import CaseStudySection from "@/components/portfolio/CaseStudyCard";
 import SocialProof from "@/components/testimonials/SocialProof";
 import InteractiveDemo from "@/components/InteractiveDemo";
@@ -825,7 +826,12 @@ export default function HomePage(): React.JSX.Element {
       <BeforeAfterSlider />
 
       {/* ========================================================================= */}
-      {/* 6B-2. STRUCTURED CASE STUDIES */}
+      {/* 6B-2. FLAGSHIP CASE STUDY SPOTLIGHT */}
+      {/* ========================================================================= */}
+      <FlagshipCaseStudy />
+
+      {/* ========================================================================= */}
+      {/* 6B-3. STRUCTURED CASE STUDIES */}
       {/* ========================================================================= */}
       <CaseStudySection />
 

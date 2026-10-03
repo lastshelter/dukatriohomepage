@@ -88,7 +88,7 @@ export default function OpenGraphImage() {
               borderRadius: "9999px",
               backgroundColor: "rgba(6, 182, 212, 0.12)",
               border: "1px solid rgba(6, 182, 212, 0.4)",
-              width: "fit-content",
+              alignSelf: "flex-start",
             }}
           >
             <div

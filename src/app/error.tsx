@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useEffect } from "react";
+import Link from "next/link";
 import { RefreshCw, AlertTriangle, ShieldCheck } from "lucide-react";
 
 export default function GlobalError({
@@ -28,7 +29,7 @@ export default function GlobalError({
 
         <div className="space-y-2">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-rose-950/40 border border-rose-800/60 text-rose-400 font-mono text-xs font-semibold">
-            <span>// EXCEPTION_ISOLATED · FAILSAFE_ENGAGED</span>
+            <span>{"// EXCEPTION_ISOLATED · FAILSAFE_ENGAGED"}</span>
           </div>
           <h1 className="text-2xl sm:text-4xl font-extrabold text-white tracking-tight">
             System Self-Healing Protocol Activated
@@ -54,13 +55,13 @@ export default function GlobalError({
             <span>REINITIALIZE RUNTIME</span>
           </button>
 
-          <a
+          <Link
             href="/"
             className="w-full sm:w-auto py-3 px-6 rounded-xl bg-zinc-900 hover:bg-zinc-800 border border-zinc-800 text-zinc-300 hover:text-white font-mono text-xs transition-colors flex items-center justify-center gap-2"
           >
             <ShieldCheck className="w-4 h-4 text-emerald-400" />
             <span>RETURN TO HUB</span>
-          </a>
+          </Link>
         </div>
       </div>
     </div>

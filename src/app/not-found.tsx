@@ -21,7 +21,7 @@ export default function NotFound(): React.JSX.Element {
         {/* Monospace Error Badge */}
         <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-cyan-950/40 border border-cyan-800/60 text-cyan-400 font-mono text-xs font-semibold">
           <Terminal className="w-3.5 h-3.5 text-cyan-400 animate-pulse" />
-          <span>// ERROR_CODE: 404 · ROUTE_NOT_FOUND</span>
+          <span>{"// ERROR_CODE: 404 · ROUTE_NOT_FOUND"}</span>
         </div>
 
         {/* Error Title and Description */}

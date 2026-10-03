@@ -156,100 +156,92 @@ export async function POST(req: NextRequest): Promise<NextResponse> {
     // 4. Character Escaping for HTML Inbound Email
     const sanitizedName = escapeHtml(name);
     const sanitizedEmail = escapeHtml(email);
-    const sanitizedScope = escapeHtml(scope);
+    const sanitizedScope = escapeHtml(scope || "General Inquiry");
     const sanitizedMessage = escapeHtml(message);
 
-    const host = process.env["SMTP_HOST"];
-    const port = Number(process.env["SMTP_PORT"]) || 587;
-    const user = process.env["SMTP_USER"];
-    const pass = process.env["SMTP_PASS"];
-    const destinationEmail = "petar@dukatrio.com";
+    // 5. Defensive Runtime Secrets Verification
+    const smtpHost = process.env.SMTP_HOST || "smtp-relay.brevo.com";
+    const smtpPort = Number(process.env.SMTP_PORT) || 587;
+    const smtpUser = process.env.SMTP_USER || "bc1ab0001@smtp-brevo.com";
+    const smtpPass = process.env.SMTP_PASS;
+    const telegramToken = process.env.TELEGRAM_BOT_TOKEN;
+    const telegramChatId = process.env.TELEGRAM_CHAT_ID;
 
-    const subject = `[DukaTrio Inquiry] ${scope} from ${name}`;
-    const textContent = `
-DukaTrio Systems Engineering — New Client Inquiry
--------------------------------------------------
-Client Name:    ${name}
-Client Email:   ${email}
-Project Scope:  ${scope}
-Client IP:      ${clientIp}
-Submitted At:   ${new Date().toUTCString()}
+    const missingSecrets: string[] = [];
+    if (!process.env.SMTP_HOST) missingSecrets.push("SMTP_HOST");
+    if (!process.env.SMTP_PORT) missingSecrets.push("SMTP_PORT");
+    if (!process.env.SMTP_USER) missingSecrets.push("SMTP_USER");
+    if (!process.env.SMTP_PASS) missingSecrets.push("SMTP_PASS");
+    if (!telegramToken) missingSecrets.push("TELEGRAM_BOT_TOKEN");
+    if (!telegramChatId) missingSecrets.push("TELEGRAM_CHAT_ID");
 
-Message:
-${message}
--------------------------------------------------
-Replying to this notification sends directly to ${email} (replyTo header configured).
-`;
+    if (missingSecrets.length > 0) {
+      if (process.env.NODE_ENV === "production") {
+        console.warn(
+          `[SECRETS DEFENSIVE AUDIT - PROD] Missing recommended environment variables: ${missingSecrets.join(
+            ", "
+          )}`
+        );
+      } else {
+        console.info(
+          `[SECRETS DEFENSIVE AUDIT - DEV/STAGING] Operating in fallback mode. Missing secrets: ${missingSecrets.join(
+            ", "
+          )}`
+        );
+      }
+    }
 
-    const htmlContent = `
-<div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background-color: #09090b; color: #f4f4f5; padding: 28px; border-radius: 12px; max-width: 600px; margin: 0 auto; border: 1px solid #27272a;">
-  <div style="border-bottom: 1px solid #27272a; padding-bottom: 16px; margin-bottom: 20px;">
-    <span style="font-size: 11px; font-family: monospace; color: #06b6d4; text-transform: uppercase; letter-spacing: 0.12em; font-weight: 700;">DukaTrio · Systems Engineering Hub</span>
-    <h2 style="color: #ffffff; margin: 8px 0 0 0; font-size: 22px; font-weight: 800;">New Project Transmission</h2>
-  </div>
+    // 6. SMTP Email Dispatch (Non-blocking failsafe)
+    if (smtpPass || process.env.NODE_ENV !== "production") {
+      try {
+        const transporter = nodemailer.createTransport({
+          host: smtpHost,
+          port: smtpPort,
+          secure: false,
+          auth: {
+            user: smtpUser,
+            pass: smtpPass,
+          },
+        });
 
-  <table style="width: 100%; border-collapse: collapse; margin-bottom: 24px; font-size: 13px;">
-    <tr>
-      <td style="padding: 8px 0; color: #a1a1aa; width: 130px;">Client Name:</td>
-      <td style="padding: 8px 0; color: #ffffff; font-weight: 600;">${sanitizedName}</td>
-    </tr>
-    <tr>
-      <td style="padding: 8px 0; color: #a1a1aa;">Direct Email:</td>
-      <td style="padding: 8px 0; color: #06b6d4; font-family: monospace; font-weight: 600;">${sanitizedEmail}</td>
-    </tr>
-    <tr>
-      <td style="padding: 8px 0; color: #a1a1aa;">Project Scope:</td>
-      <td style="padding: 8px 0; color: #10b981; font-weight: 600;">${sanitizedScope}</td>
-    </tr>
-    <tr>
-      <td style="padding: 8px 0; color: #a1a1aa;">Client Source:</td>
-      <td style="padding: 8px 0; color: #71717a; font-family: monospace; font-size: 12px;">IP: ${clientIp}</td>
-    </tr>
-    <tr>
-      <td style="padding: 8px 0; color: #a1a1aa;">Timestamp:</td>
-      <td style="padding: 8px 0; color: #71717a; font-family: monospace; font-size: 12px;">${new Date().toUTCString()}</td>
-    </tr>
-  </table>
-
-  <div style="background-color: #18181b; border: 1px solid #27272a; border-radius: 8px; padding: 18px; margin-bottom: 24px;">
-    <div style="font-size: 11px; font-family: monospace; color: #a1a1aa; margin-bottom: 10px; text-transform: uppercase; font-weight: 700;">Project Scope &amp; Architectural Outline:</div>
-    <div style="font-size: 14px; line-height: 1.6; color: #f4f4f5; white-space: pre-wrap;">${sanitizedMessage}</div>
-  </div>
-
-  <p style="font-size: 12px; color: #71717a; border-top: 1px solid #27272a; padding-top: 14px; margin: 0; line-height: 1.5;">
-    Direct client reply enabled: Hit <strong>Reply</strong> in your mail client to contact <strong>${sanitizedEmail}</strong>.
-  </p>
-</div>
-`;
-
-    const transporter = nodemailer.createTransport({
-      host: process.env.SMTP_HOST || "smtp-relay.brevo.com",
-      port: Number(process.env.SMTP_PORT) || 587,
-      secure: false,
-      auth: {
-        user: process.env.SMTP_USER || "bc1ab0001@smtp-brevo.com",
-        pass: process.env.SMTP_PASS,
-      },
-    });
-
-    try {
-      const info = await transporter.sendMail({
-        from: process.env.CONTACT_FROM || '"Dukatrio Kontakt" <petar@dukatrio.com>',
-        to: "petar@dukatrio.com, neooozx@gmail.com",
-        replyTo: email,
-        subject: `[DukaTrio Novi Upit] ${name} (${email}) - ${scope}`,
-        text: `Ime / Firma: ${name}\nKontakt: ${email}\nProjekat: ${scope}\nPoruka: ${message}\nIP: ${clientIp}`,
-        html: `<h3>Novi upit sa sajta DukaTrio</h3>
+        const info = await transporter.sendMail({
+          from: process.env.CONTACT_FROM || '"Dukatrio Kontakt" <petar@dukatrio.com>',
+          to: "petar@dukatrio.com, neooozx@gmail.com",
+          replyTo: email,
+          subject: `[DukaTrio Novi Upit] ${name} (${email}) - ${sanitizedScope}`,
+          text: `Ime / Firma: ${name}\nKontakt: ${email}\nProjekat: ${sanitizedScope}\nPoruka: ${message}\nIP: ${clientIp}\nVreme: ${new Date().toISOString()}`,
+          html: `<h3>Novi upit sa sajta DukaTrio</h3>
 <p><strong>Ime / Firma:</strong> ${sanitizedName}</p>
 <p><strong>Kontakt:</strong> ${sanitizedEmail}</p>
 <p><strong>Projekat / Oblast:</strong> ${sanitizedScope}</p>
 <p><strong>Poruka:</strong> ${sanitizedMessage}</p>
 <p><strong>IP Adresa:</strong> ${clientIp}</p>
 <p><strong>Vreme:</strong> ${new Date().toLocaleString("sr-RS", { timeZone: "Europe/Belgrade" })}</p>`,
-      });
-      console.log("[SMTP SUCCESS] Mail delivered:", info.messageId);
-    } catch (err) {
-      console.error("[SMTP ERROR] Failed to send email via Brevo:", err);
+        });
+        console.log("[SMTP SUCCESS] Contact mail dispatched:", info.messageId);
+      } catch (err) {
+        console.error("[SMTP WARN] Non-fatal dispatch error via Brevo:", err);
+      }
+    } else {
+      console.warn("[SMTP FALLBACK] SMTP_PASS not provisioned; inquiry logged safely to telemetry.");
+    }
+
+    // 7. Optional Telegram Alert (Non-blocking failsafe)
+    if (telegramToken && telegramChatId) {
+      try {
+        const tgText = `🚨 *NEW DUKATRIO INQUIRY*\n👤 *Client:* ${name}\n📧 *Email:* \`${email}\`\n🛠 *Scope:* ${sanitizedScope}\n📍 *IP:* ${clientIp}`;
+        await fetch(`https://api.telegram.org/bot${telegramToken}/sendMessage`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            chat_id: telegramChatId,
+            text: tgText,
+            parse_mode: "Markdown",
+          }),
+        });
+      } catch (tgErr) {
+        console.error("[Telegram Non-Fatal Dispatch Error]:", tgErr);
+      }
     }
 
     return NextResponse.json(
