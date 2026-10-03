@@ -3,24 +3,14 @@
 import React, { useState } from "react";
 import {
   ExternalLink,
-  ShieldCheck,
-  TrendingUp,
   Cpu,
-  Layers,
-  Server,
-  Zap,
   CheckCircle2,
   AlertTriangle,
   Clock,
   Camera,
   WifiOff,
   Sparkles,
-  ArrowRight,
-  FileText,
-  Flame,
-  Check,
 } from "lucide-react";
-import { motion } from "framer-motion";
 
 export default function FlagshipCaseStudy(): React.JSX.Element {
   const [activeTab, setActiveTab] = useState<"ocr" | "timer" | "offline">("ocr");

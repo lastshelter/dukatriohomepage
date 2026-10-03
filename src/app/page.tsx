@@ -15,7 +15,6 @@ import SocialProof from "@/components/testimonials/SocialProof";
 import InteractiveDemo from "@/components/InteractiveDemo";
 import { motion } from "framer-motion";
 import {
-  Terminal,
   Cpu,
   ShieldCheck,
   Layers,
@@ -23,7 +22,6 @@ import {
   Server,
   Zap,
   ArrowRight,
-  ExternalLink,
   Code2,
   Database,
   Lock,
@@ -31,13 +29,10 @@ import {
   Activity,
   Menu,
   X,
-  ChevronRight,
   Radio,
   FileCode2,
-  ArrowUpRight,
   Mail,
   Network,
-  Gauge,
   Workflow,
   Sparkles,
   Calculator,

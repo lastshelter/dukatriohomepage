@@ -176,49 +176,102 @@ export async function POST(req: NextRequest): Promise<NextResponse> {
       );
     }
 
-    // 4. Dispatch Email via Brevo SMTP
-    const transporter = nodemailer.createTransport({
-      host: process.env.SMTP_HOST || "smtp-relay.brevo.com",
-      port: Number(process.env.SMTP_PORT) || 587,
-      secure: false,
-      auth: {
-        user: process.env.SMTP_USER || "bc1ab0001@smtp-brevo.com",
-        pass: process.env.SMTP_PASS,
-      },
-    });
+    // 4. Character Escaping for HTML Inbound Email
+    const escapeHtml = (str: string) =>
+      str
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
 
-    try {
-      const info = await transporter.sendMail({
-        from: process.env.CONTACT_FROM || '"Dukatrio Agencija" <petar@dukatrio.com>',
-        to: "petar@dukatrio.com, neooozx@gmail.com",
-        replyTo: email && email.includes("@") ? email : "petar@dukatrio.com",
-        subject: `[Dukatrio Upit] ${name} (${phone || email})`,
-        text: `Novi upit sa dukatrio.com:
-------------------------------------
-Ime:          ${name}
-Telefon:      ${phone || "Nije navedeno"}
-Email:        ${email}
-Usluga / Tip: ${serviceType || scopeScale || "Opšti upit"}
-Poruka / Rok: ${timeline || message || "Nije navedeno"}
-IP Adresa:    ${clientIp}
-Vreme:        ${new Date().toLocaleString("sr-RS", { timeZone: "Europe/Belgrade" })}`,
-        html: `<h3>Novi upit sa dukatrio.com</h3>
-<p><strong>Ime:</strong> ${name}</p>
-<p><strong>Telefon:</strong> <a href="tel:${phone}">${phone}</a></p>
-<p><strong>Email:</strong> ${email}</p>
-<p><strong>Usluga / Tip:</strong> ${serviceType || scopeScale || "Opšti upit"}</p>
-<p><strong>Poruka / Rok:</strong> ${timeline || "Nije navedeno"}</p>
-<p><strong>IP:</strong> ${clientIp}</p>
-<p><strong>Vreme:</strong> ${new Date().toLocaleString("sr-RS")}</p>`,
-      });
-      console.log("[SMTP SUCCESS] Dukatrio lead email sent:", info.messageId);
-    } catch (err) {
-      console.error("[SMTP ERROR] Failed sending lead email:", err);
-    }
+    const sanitizedName = escapeHtml(name);
+    const sanitizedEmail = escapeHtml(email);
+    const sanitizedService = escapeHtml(serviceType || scopeScale || "Opšti upit");
+    const sanitizedBudget = escapeHtml(estimatedBudget || "Nije navedeno");
+    const sanitizedMessage = escapeHtml(timeline || message || "Nije navedeno");
 
-    // Optional Telegram notification if token is provided
+    // 5. Defensive Runtime Secrets Verification
+    const smtpHost = process.env.SMTP_HOST || "smtp-relay.brevo.com";
+    const smtpPort = Number(process.env.SMTP_PORT) || 587;
+    const smtpUser = process.env.SMTP_USER || "bc1ab0001@smtp-brevo.com";
+    const smtpPass = process.env.SMTP_PASS;
     const telegramToken = process.env.TELEGRAM_BOT_TOKEN;
     const telegramChatId = process.env.TELEGRAM_CHAT_ID;
+
+    const missingSecrets: string[] = [];
+    if (!process.env.SMTP_HOST) missingSecrets.push("SMTP_HOST");
+    if (!process.env.SMTP_PORT) missingSecrets.push("SMTP_PORT");
+    if (!process.env.SMTP_USER) missingSecrets.push("SMTP_USER");
+    if (!process.env.SMTP_PASS) missingSecrets.push("SMTP_PASS");
+    if (!telegramToken) missingSecrets.push("TELEGRAM_BOT_TOKEN");
+    if (!telegramChatId) missingSecrets.push("TELEGRAM_CHAT_ID");
+
+    if (missingSecrets.length > 0) {
+      if (process.env.NODE_ENV === "production") {
+        console.warn(
+          `[SECRETS DEFENSIVE AUDIT - PROD] Missing recommended environment variables: ${missingSecrets.join(
+            ", "
+          )}`
+        );
+      } else {
+        console.info(
+          `[SECRETS DEFENSIVE AUDIT - DEV/STAGING] Operating in fallback mode. Missing secrets: ${missingSecrets.join(
+            ", "
+          )}`
+        );
+      }
+    }
+
+    // 6. Dispatch Email via Brevo SMTP (Non-blocking failsafe)
+    if (smtpPass || process.env.NODE_ENV !== "production") {
+      try {
+        const transporter = nodemailer.createTransport({
+          host: smtpHost,
+          port: smtpPort,
+          secure: false,
+          auth: {
+            user: smtpUser,
+            pass: smtpPass,
+          },
+        });
+
+        const info = await transporter.sendMail({
+          from: process.env.CONTACT_FROM || '"Dukatrio Agencija" <petar@dukatrio.com>',
+          to: "petar@dukatrio.com, neooozx@gmail.com",
+          replyTo: email && email.includes("@") ? email : "petar@dukatrio.com",
+          subject: `[Dukatrio Upit] ${sanitizedName} (${phone || email})`,
+          text: `Novi upit sa dukatrio.com:
+------------------------------------
+Ime:          ${sanitizedName}
+Telefon:      ${phone || "Nije navedeno"}
+Email:        ${sanitizedEmail}
+Usluga / Tip: ${sanitizedService}
+Budžet:       ${sanitizedBudget}
+Poruka / Rok: ${sanitizedMessage}
+Izvor:        ${source || "website_lead"}
+IP Adresa:    ${clientIp}
+Vreme:        ${new Date().toLocaleString("sr-RS", { timeZone: "Europe/Belgrade" })}`,
+          html: `<h3>Novi upit sa dukatrio.com</h3>
+<p><strong>Ime:</strong> ${sanitizedName}</p>
+<p><strong>Telefon:</strong> <a href="tel:${escapeHtml(phone || "")}">${escapeHtml(phone || "Nije navedeno")}</a></p>
+<p><strong>Email:</strong> ${sanitizedEmail}</p>
+<p><strong>Usluga / Tip:</strong> ${sanitizedService}</p>
+<p><strong>Budžet:</strong> ${sanitizedBudget}</p>
+<p><strong>Poruka / Rok:</strong> ${sanitizedMessage}</p>
+<p><strong>Izvor:</strong> ${escapeHtml(source || "website_lead")}</p>
+<p><strong>IP:</strong> ${clientIp}</p>
+<p><strong>Vreme:</strong> ${new Date().toLocaleString("sr-RS", { timeZone: "Europe/Belgrade" })}</p>`,
+        });
+        console.log("[SMTP SUCCESS] Dukatrio lead email sent:", info.messageId);
+      } catch (err) {
+        console.error("[SMTP WARN] Non-fatal dispatch error via Brevo:", err);
+      }
+    } else {
+      console.warn("[SMTP FALLBACK] SMTP_PASS not provisioned; lead logged safely to telemetry.");
+    }
+
+    // 7. Optional Telegram notification (Non-blocking failsafe)
     if (telegramToken && telegramChatId) {
       try {
         const telegramText = `🚨 *NEW DUKATRIO LEAD RECEIVED*\n👤 *Client:* ${name}\n📧 *Email:* \`${email}\`${phone ? `\n📱 *Phone:* \`${phone}\`` : ""}\n🛠 *Service:* ${serviceType}\n📍 *IP:* ${clientIp}`;
@@ -232,7 +285,7 @@ Vreme:        ${new Date().toLocaleString("sr-RS", { timeZone: "Europe/Belgrade"
           }),
         });
       } catch (tgErr) {
-        console.error("[Telegram Dispatch Error]:", tgErr);
+        console.error("[Telegram Non-Fatal Dispatch Error]:", tgErr);
       }
     }
 
