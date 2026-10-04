@@ -1,19 +1,12 @@
 "use client";
 
-import React from "react";
 import {
   ExternalLink,
-  ShieldCheck,
-  TrendingUp,
   Cpu,
   Layers,
-  Server,
-  Zap,
   CheckCircle2,
   AlertCircle,
-  Sparkles,
 } from "lucide-react";
-import { motion } from "framer-motion";
 
 export interface CaseStudyData {
   id: string;
@@ -126,7 +119,7 @@ export default function CaseStudySection(): React.JSX.Element {
 
         {/* Case Studies Grid */}
         <div className="space-y-8">
-          {CASE_STUDIES.map((study, idx) => (
+          {CASE_STUDIES.map((study) => (
             <div
               key={study.id}
               className="rounded-3xl border border-zinc-800 bg-zinc-900/40 backdrop-blur-xl p-6 sm:p-10 shadow-2xl hover:border-cyan-500/40 transition-all duration-300 space-y-8 group"

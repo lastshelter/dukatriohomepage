@@ -2,11 +2,8 @@
 
 import React, { useState, useMemo } from "react";
 import {
-  Play,
   RotateCcw,
-  ShieldCheck,
   Search,
-  Filter,
   CheckCircle2,
   Clock,
   AlertTriangle,
@@ -14,11 +11,9 @@ import {
   Copy,
   Check,
   Terminal,
-  Activity,
   Layers,
   Sparkles,
   Database,
-  ArrowUpRight,
   UserCheck,
   Lock,
 } from "lucide-react";

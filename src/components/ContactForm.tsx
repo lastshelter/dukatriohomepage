@@ -14,7 +14,6 @@ import {
   MessageCircle,
   Phone,
   MessageSquare,
-  Clock,
   Mail,
   Zap,
 } from "lucide-react";
@@ -27,6 +26,13 @@ const SCOPE_OPTIONS = [
 ] as const;
 
 type ScopeType = (typeof SCOPE_OPTIONS)[number];
+
+interface PopulateEstimatorDetail {
+  scope?: ScopeType;
+  message?: string;
+  budget?: string;
+  timeline?: string;
+}
 
 export default function ContactForm(): React.JSX.Element {
   // Tab mode: 'quick' (1-field callback) vs 'rfp' (detailed project form)
@@ -61,7 +67,7 @@ export default function ContactForm(): React.JSX.Element {
 
   useEffect(() => {
     const handlePopulate = (e: Event) => {
-      const customEvent = e as CustomEvent<{ scope?: ScopeType; message?: string }>;
+      const customEvent = e as CustomEvent<PopulateEstimatorDetail>;
       if (customEvent.detail) {
         setActiveTab("rfp");
         if (customEvent.detail.scope && SCOPE_OPTIONS.includes(customEvent.detail.scope)) {
@@ -69,6 +75,10 @@ export default function ContactForm(): React.JSX.Element {
         }
         if (customEvent.detail.message) {
           setMessage(customEvent.detail.message);
+        } else if (customEvent.detail.budget || customEvent.detail.timeline) {
+          setMessage(
+            `Estimated Budget: ${customEvent.detail.budget || "N/A"}\nTimeline: ${customEvent.detail.timeline || "N/A"}`
+          );
         }
       }
     };

@@ -10,7 +10,6 @@ import {
   Activity,
   AlertTriangle,
   CheckCircle2,
-  Lock,
   Server,
   Code2,
 } from "lucide-react";

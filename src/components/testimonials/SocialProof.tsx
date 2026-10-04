@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { Star, ShieldCheck, CheckCircle2, Award, ExternalLink, MapPin } from "lucide-react";
+import { Star, CheckCircle2, Award, MapPin } from "lucide-react";
 
 interface Testimonial {
   name: string;

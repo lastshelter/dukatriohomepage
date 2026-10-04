@@ -5,15 +5,7 @@ import {
   Code2,
   Database,
   Server,
-  Layers,
   Cpu,
-  ShieldCheck,
-  Zap,
-  Globe,
-  Lock,
-  Workflow,
-  Sparkles,
-  CheckCircle2,
 } from "lucide-react";
 
 interface TechItem {

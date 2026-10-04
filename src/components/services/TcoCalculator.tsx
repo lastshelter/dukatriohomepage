@@ -4,18 +4,13 @@ import React, { useState, useMemo } from "react";
 import {
   TrendingDown,
   Users,
-  Server,
   ShieldCheck,
   CheckCircle2,
   XCircle,
   ArrowRight,
-  Zap,
   Sparkles,
   Lock,
-  Layers,
   Euro,
-  Clock,
-  HelpCircle,
 } from "lucide-react";
 
 interface SaasTierPreset {
@@ -45,6 +40,8 @@ const SAAS_TIER_PRESETS: SaasTierPreset[] = [
     examples: "Salesforce Cloud, SAP ByDesign, ServiceNow",
   },
 ];
+
+const fmt = (num: number): string => num.toLocaleString("en-US");
 
 export default function TcoCalculator(): React.JSX.Element {
   // 1. Dynamic Input Controls State
@@ -96,17 +93,21 @@ export default function TcoCalculator(): React.JSX.Element {
 
   // Handle CTA Click: dispatch populate-estimator event and smooth scroll to #contact
   const handleCtaClick = () => {
+    const dedicatedCostStr = `€${calculations.dedicatedTotal.toLocaleString("en-US")} (€${calculations.oneTimeBuild.toLocaleString("en-US")} build + €${calculations.dedicatedHostingTotal.toLocaleString("en-US")} VPS hosting)`;
+    const horizonStr = `${timeHorizonYears} Year${timeHorizonYears > 1 ? "s" : ""}`;
     const inquiryMessage = `Inquiry regarding Dedicated Self-Hosted System build:
 - Team Size: ${teamSize} users
 - Estimated SaaS cost replaced: €${costPerUser}/seat/month
-- Time Horizon: ${timeHorizonYears} Year${timeHorizonYears > 1 ? "s" : ""}
-- Projected TCO Savings: €${calculations.totalSavings.toLocaleString()} (€${calculations.saasTotal.toLocaleString()} SaaS vs. €${calculations.dedicatedTotal.toLocaleString()} Dedicated).`;
+- Time Horizon: ${horizonStr}
+- Projected TCO Savings: €${calculations.totalSavings.toLocaleString("en-US")} (€${calculations.saasTotal.toLocaleString("en-US")} SaaS vs. €${calculations.dedicatedTotal.toLocaleString("en-US")} Dedicated).`;
 
     if (typeof window !== "undefined") {
       window.dispatchEvent(
         new CustomEvent("populate-estimator", {
           detail: {
             scope: "Cloud Infrastructure / VPS",
+            budget: dedicatedCostStr,
+            timeline: `${horizonStr} TCO Horizon`,
             message: inquiryMessage,
           },
         })
@@ -301,14 +302,14 @@ export default function TcoCalculator(): React.JSX.Element {
               <div className="flex justify-between items-baseline text-xs text-zinc-400">
                 <span>Monthly Burn ({teamSize} seats × €{costPerUser}/mo):</span>
                 <span className="text-base font-bold text-rose-400">
-                  €{calculations.saasMonthly.toLocaleString()} / mo
+                  €{fmt(calculations.saasMonthly)} / mo
                 </span>
               </div>
 
               <div className="flex justify-between items-baseline text-xs text-zinc-400">
                 <span>Annual Expense:</span>
                 <span className="text-sm font-semibold text-zinc-200">
-                  €{(calculations.saasMonthly * 12).toLocaleString()} / yr
+                  €{fmt(calculations.saasMonthly * 12)} / yr
                 </span>
               </div>
 
@@ -317,7 +318,7 @@ export default function TcoCalculator(): React.JSX.Element {
                   {timeHorizonYears}-Year Total SaaS Cost:
                 </span>
                 <span className="text-2xl sm:text-3xl font-black text-rose-400">
-                  €{calculations.saasTotal.toLocaleString()}
+                  €{fmt(calculations.saasTotal)}
                 </span>
               </div>
             </div>
@@ -382,14 +383,14 @@ export default function TcoCalculator(): React.JSX.Element {
               <div className="flex justify-between items-baseline text-xs text-zinc-400">
                 <span>One-Time Engineering Build:</span>
                 <span className="text-base font-bold text-white">
-                  €{calculations.oneTimeBuild.toLocaleString()}
+                  €{fmt(calculations.oneTimeBuild)}
                 </span>
               </div>
 
               <div className="flex justify-between items-baseline text-xs text-zinc-400">
                 <span>Dedicated VPS ({timeHorizonYears * 12} mo @ €15/mo):</span>
                 <span className="text-sm font-semibold text-emerald-400">
-                  €{calculations.dedicatedHostingTotal.toLocaleString()}
+                  €{fmt(calculations.dedicatedHostingTotal)}
                 </span>
               </div>
 
@@ -399,10 +400,10 @@ export default function TcoCalculator(): React.JSX.Element {
                 </span>
                 <div className="text-right">
                   <span className="text-2xl sm:text-3xl font-black text-emerald-400">
-                    €{calculations.dedicatedTotal.toLocaleString()}
+                    €{fmt(calculations.dedicatedTotal)}
                   </span>
                   <span className="text-[10px] text-zinc-400 block font-normal">
-                    (Approx. €{calculations.dedicatedMonthlyAmortized}/mo all-in)
+                    (Approx. €{fmt(calculations.dedicatedMonthlyAmortized)}/mo all-in)
                   </span>
                 </div>
               </div>
@@ -457,7 +458,7 @@ export default function TcoCalculator(): React.JSX.Element {
               Estimated {timeHorizonYears}-Year Savings:
             </h4>
             <span className="text-3xl sm:text-4xl font-mono font-black text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 via-teal-300 to-cyan-400">
-              €{calculations.totalSavings.toLocaleString()}
+              €{fmt(calculations.totalSavings)}
             </span>
             <span className="px-2.5 py-1 rounded-full bg-emerald-500/20 text-emerald-300 font-mono text-xs font-bold border border-emerald-500/30">
               {calculations.savingsPercent}% Lower TCO
@@ -473,13 +474,13 @@ export default function TcoCalculator(): React.JSX.Element {
                 </strong>
                 . Every month thereafter generates{" "}
                 <strong className="text-emerald-400 font-mono">
-                  €{(calculations.saasMonthly - calculations.vpsMonthly).toLocaleString()}/month
+                  €{fmt(calculations.saasMonthly - calculations.vpsMonthly)}/month
                 </strong>{" "}
                 in recurring cash flow kept inside your business.
               </>
             ) : (
               <>
-                Save €{calculations.totalSavings.toLocaleString()} over {timeHorizonYears} year
+                Save €{fmt(calculations.totalSavings)} over {timeHorizonYears} year
                 {timeHorizonYears > 1 ? "s" : ""} by commissioning an owned system instead of leasing SaaS seats.
               </>
             )}
