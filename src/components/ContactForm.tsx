@@ -34,7 +34,13 @@ interface PopulateEstimatorDetail {
   timeline?: string;
 }
 
-export default function ContactForm(): React.JSX.Element {
+export interface ContactFormProps {
+  hideDirectDock?: boolean;
+}
+
+export default function ContactForm({
+  hideDirectDock = false,
+}: ContactFormProps = {}): React.JSX.Element {
   // Tab mode: 'quick' (1-field callback) vs 'rfp' (detailed project form)
   const [activeTab, setActiveTab] = useState<"quick" | "rfp">("quick");
 
@@ -195,66 +201,68 @@ export default function ContactForm(): React.JSX.Element {
       {/* ========================================================================= */}
       {/* PATH 1: DIRECT MESSAGING & INSTANT CONNECT DOCK */}
       {/* ========================================================================= */}
-      <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-        {/* WhatsApp Direct */}
-        <a
-          href="https://wa.me/38166258258?text=Hi%20DukaTrio,%20I'd%20like%20to%20discuss%20a%20project."
-          target="_blank"
-          rel="noopener noreferrer"
-          className="p-5 rounded-2xl bg-zinc-900/60 border border-zinc-800 hover:border-emerald-500/50 hover:bg-zinc-900/90 transition-all duration-300 group flex items-start gap-3.5 shadow-lg"
-        >
-          <div className="w-10 h-10 rounded-xl bg-emerald-950/60 border border-emerald-800/60 flex items-center justify-center text-emerald-400 group-hover:scale-105 transition-transform shrink-0">
-            <MessageCircle className="w-5 h-5" />
-          </div>
-          <div className="space-y-0.5">
-            <span className="text-[10px] font-mono text-emerald-400 font-bold uppercase tracking-wider block">
-              Fastest Response
-            </span>
-            <h4 className="text-sm font-bold text-white group-hover:text-emerald-300 transition-colors">
-              Chat on WhatsApp
-            </h4>
-            <p className="text-xs text-zinc-400">Typically replies in &lt; 15 mins</p>
-          </div>
-        </a>
+      {!hideDirectDock && (
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+          {/* WhatsApp Direct */}
+          <a
+            href="https://wa.me/38166258258?text=Hi%20DukaTrio,%20I'd%20like%20to%20discuss%20a%20project."
+            target="_blank"
+            rel="noopener noreferrer"
+            className="p-5 rounded-2xl bg-zinc-900/60 border border-zinc-800 hover:border-emerald-500/50 hover:bg-zinc-900/90 transition-all duration-300 group flex items-start gap-3.5 shadow-lg"
+          >
+            <div className="w-10 h-10 rounded-xl bg-emerald-950/60 border border-emerald-800/60 flex items-center justify-center text-emerald-400 group-hover:scale-105 transition-transform shrink-0">
+              <MessageCircle className="w-5 h-5" />
+            </div>
+            <div className="space-y-0.5">
+              <span className="text-[10px] font-mono text-emerald-400 font-bold uppercase tracking-wider block">
+                Fastest Response
+              </span>
+              <h4 className="text-sm font-bold text-white group-hover:text-emerald-300 transition-colors">
+                Chat on WhatsApp
+              </h4>
+              <p className="text-xs text-zinc-400">Typically replies in &lt; 15 mins</p>
+            </div>
+          </a>
 
-        {/* Direct Phone Call */}
-        <a
-          href="tel:+38166258258"
-          className="p-5 rounded-2xl bg-zinc-900/60 border border-zinc-800 hover:border-cyan-500/50 hover:bg-zinc-900/90 transition-all duration-300 group flex items-start gap-3.5 shadow-lg"
-        >
-          <div className="w-10 h-10 rounded-xl bg-cyan-950/60 border border-cyan-800/60 flex items-center justify-center text-cyan-400 group-hover:scale-105 transition-transform shrink-0">
-            <Phone className="w-5 h-5" />
-          </div>
-          <div className="space-y-0.5">
-            <span className="text-[10px] font-mono text-cyan-400 font-bold uppercase tracking-wider block">
-              Direct Engineering Desk
-            </span>
-            <h4 className="text-sm font-bold text-white group-hover:text-cyan-300 transition-colors">
-              +381 66 258 258
-            </h4>
-            <p className="text-xs text-zinc-400">Mon-Fri 08:00 - 18:00 CET</p>
-          </div>
-        </a>
+          {/* Direct Phone Call */}
+          <a
+            href="tel:+38166258258"
+            className="p-5 rounded-2xl bg-zinc-900/60 border border-zinc-800 hover:border-cyan-500/50 hover:bg-zinc-900/90 transition-all duration-300 group flex items-start gap-3.5 shadow-lg"
+          >
+            <div className="w-10 h-10 rounded-xl bg-cyan-950/60 border border-cyan-800/60 flex items-center justify-center text-cyan-400 group-hover:scale-105 transition-transform shrink-0">
+              <Phone className="w-5 h-5" />
+            </div>
+            <div className="space-y-0.5">
+              <span className="text-[10px] font-mono text-cyan-400 font-bold uppercase tracking-wider block">
+                Direct Engineering Desk
+              </span>
+              <h4 className="text-sm font-bold text-white group-hover:text-cyan-300 transition-colors">
+                +381 66 258 258
+              </h4>
+              <p className="text-xs text-zinc-400">Mon-Fri 08:00 - 18:00 CET</p>
+            </div>
+          </a>
 
-        {/* Viber / Email Direct */}
-        <a
-          href="viber://chat?number=%2B38166258258"
-          className="p-5 rounded-2xl bg-zinc-900/60 border border-zinc-800 hover:border-purple-500/50 hover:bg-zinc-900/90 transition-all duration-300 group flex items-start gap-3.5 shadow-lg"
-        >
-          <div className="w-10 h-10 rounded-xl bg-purple-950/60 border border-purple-800/60 flex items-center justify-center text-purple-400 group-hover:scale-105 transition-transform shrink-0">
-            <MessageSquare className="w-5 h-5" />
-          </div>
-          <div className="space-y-0.5">
-            <span className="text-[10px] font-mono text-purple-400 font-bold uppercase tracking-wider block">
-              Direct Viber Chat
-            </span>
-            <h4 className="text-sm font-bold text-white group-hover:text-purple-300 transition-colors">
-              Viber Messenger
-            </h4>
-            <p className="text-xs text-zinc-400">+381 66 258 258</p>
-          </div>
-        </a>
-      </div>
+          {/* Viber / Email Direct */}
+          <a
+            href="viber://chat?number=%2B38166258258"
+            className="p-5 rounded-2xl bg-zinc-900/60 border border-zinc-800 hover:border-purple-500/50 hover:bg-zinc-900/90 transition-all duration-300 group flex items-start gap-3.5 shadow-lg"
+          >
+            <div className="w-10 h-10 rounded-xl bg-purple-950/60 border border-purple-800/60 flex items-center justify-center text-purple-400 group-hover:scale-105 transition-transform shrink-0">
+              <MessageSquare className="w-5 h-5" />
+            </div>
+            <div className="space-y-0.5">
+              <span className="text-[10px] font-mono text-purple-400 font-bold uppercase tracking-wider block">
+                Direct Viber Chat
+              </span>
+              <h4 className="text-sm font-bold text-white group-hover:text-purple-300 transition-colors">
+                Viber Messenger
+              </h4>
+              <p className="text-xs text-zinc-400">+381 66 258 258</p>
+            </div>
+          </a>
+        </div>
+      )}
 
       {/* ========================================================================= */}
       {/* PATH 2: TABBED INTAKE TERMINAL (1-FIELD CALLBACK vs. DETAILED RFP) */}
