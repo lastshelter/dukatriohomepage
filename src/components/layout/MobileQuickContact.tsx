@@ -2,9 +2,6 @@
 
 import React, { useState } from "react";
 import {
-  Phone,
-  MessageSquare,
-  MessageCircle,
   Send,
   X,
   Sparkles,
@@ -66,7 +63,7 @@ export default function MobileQuickContact(): React.JSX.Element {
         setMessage("");
       }, 3000);
     } catch (err: unknown) {
-      setErrorMessage(err instanceof Error ? err.message : "Error submitting. Please use direct phone/WhatsApp.");
+      setErrorMessage(err instanceof Error ? err.message : "Error submitting. Please contact office@dukatrio.com directly.");
     } finally {
       setIsSubmitting(false);
     }
@@ -75,45 +72,25 @@ export default function MobileQuickContact(): React.JSX.Element {
   return (
     <>
       {/* Sticky Bottom Dock: Strictly mobile (md:hidden) */}
-      <div className="fixed bottom-0 left-0 right-0 z-50 md:hidden bg-zinc-950/90 backdrop-blur-xl border-t border-zinc-800/80 px-3 py-2.5 shadow-[0_-8px_30px_rgba(0,0,0,0.8)]">
-        <div className="max-w-md mx-auto grid grid-cols-4 gap-2">
-          {/* 1. Direct Phone Call */}
+      <div className="fixed bottom-0 left-0 right-0 z-50 md:hidden bg-zinc-950/90 backdrop-blur-xl border-t border-zinc-800/80 px-4 py-2.5 shadow-[0_-8px_30px_rgba(0,0,0,0.8)]">
+        <div className="max-w-md mx-auto grid grid-cols-2 gap-3">
+          {/* 1. Direct Email Desk */}
           <a
-            href="tel:+38166258258"
-            className="flex flex-col items-center justify-center py-2 px-1 rounded-xl bg-zinc-900 border border-zinc-800 hover:border-cyan-500/50 text-zinc-300 hover:text-cyan-400 active:scale-95 transition-all text-center group"
+            href="mailto:office@dukatrio.com"
+            className="flex items-center justify-center gap-2 py-2.5 px-3 rounded-xl bg-zinc-900 border border-zinc-800 hover:border-cyan-500/50 text-zinc-300 hover:text-cyan-400 active:scale-95 transition-all text-center group"
           >
-            <Phone className="w-4 h-4 text-cyan-400 mb-1 group-hover:animate-bounce" />
-            <span className="text-[10px] font-mono font-semibold">Call</span>
+            <Mail className="w-4 h-4 text-cyan-400 shrink-0" />
+            <span className="text-xs font-mono font-semibold">Email Desk</span>
           </a>
 
-          {/* 2. Viber Direct Chat */}
-          <a
-            href="viber://chat?number=%2B38166258258"
-            className="flex flex-col items-center justify-center py-2 px-1 rounded-xl bg-zinc-900 border border-zinc-800 hover:border-purple-500/50 text-zinc-300 hover:text-purple-400 active:scale-95 transition-all text-center group"
-          >
-            <MessageSquare className="w-4 h-4 text-purple-400 mb-1" />
-            <span className="text-[10px] font-mono font-semibold">Viber</span>
-          </a>
-
-          {/* 3. WhatsApp Direct Chat */}
-          <a
-            href="https://wa.me/38166258258"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex flex-col items-center justify-center py-2 px-1 rounded-xl bg-zinc-900 border border-zinc-800 hover:border-emerald-500/50 text-zinc-300 hover:text-emerald-400 active:scale-95 transition-all text-center group"
-          >
-            <MessageCircle className="w-4 h-4 text-emerald-400 mb-1" />
-            <span className="text-[10px] font-mono font-semibold">WhatsApp</span>
-          </a>
-
-          {/* 4. Fast Email Modal Toggle */}
+          {/* 2. Fast Inquiry Modal Toggle */}
           <button
             type="button"
             onClick={() => setModalOpen(true)}
-            className="flex flex-col items-center justify-center py-2 px-1 rounded-xl bg-gradient-to-r from-cyan-500 to-cyan-600 active:scale-95 text-zinc-950 font-bold shadow-[0_0_15px_rgba(6,182,212,0.4)] transition-all text-center"
+            className="flex items-center justify-center gap-2 py-2.5 px-3 rounded-xl bg-gradient-to-r from-cyan-500 to-cyan-600 active:scale-95 text-zinc-950 font-bold shadow-[0_0_15px_rgba(6,182,212,0.4)] transition-all text-center cursor-pointer"
           >
-            <Mail className="w-4 h-4 mb-1" />
-            <span className="text-[10px] font-mono font-bold tracking-tight">E-Mail</span>
+            <Sparkles className="w-4 h-4 shrink-0" />
+            <span className="text-xs font-mono font-bold tracking-tight">Start Inquiry</span>
           </button>
         </div>
       </div>
@@ -158,7 +135,7 @@ export default function MobileQuickContact(): React.JSX.Element {
                   </div>
                   <h4 className="text-lg font-bold text-white">Transmission Sent!</h4>
                   <p className="text-xs text-zinc-400 max-w-xs mx-auto">
-                    Our lead systems engineer has received your alert and will call or message you shortly.
+                    Our lead systems engineer has received your alert and will review your specifications shortly.
                   </p>
                 </div>
               ) : (
@@ -185,12 +162,12 @@ export default function MobileQuickContact(): React.JSX.Element {
 
                   <div className="space-y-1">
                     <label className="text-[11px] font-mono uppercase text-zinc-400">
-                      Email or Phone / WhatsApp <span className="text-cyan-400">*</span>
+                      Corporate Email or Callback Handle <span className="text-cyan-400">*</span>
                     </label>
                     <input
                       type="text"
                       required
-                      placeholder="Email or +381 6..."
+                      placeholder="name@company.com or callback handle"
                       value={contact}
                       onChange={(e) => setContact(e.target.value)}
                       className="w-full px-3.5 py-2.5 rounded-xl bg-zinc-900 border border-zinc-800 text-sm text-white placeholder:text-zinc-600 focus:border-cyan-500 outline-none font-mono"

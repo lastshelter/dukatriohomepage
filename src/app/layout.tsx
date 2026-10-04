@@ -83,8 +83,7 @@ const jsonLd = {
       image: "https://dukatrio.com/opengraph-image",
       description:
         "Dukatrio builds mission-critical custom software, bespoke web applications, and scalable SaaS platforms. Dukatrio razvija napredna softverska rešenja, prilagođene web platforme i specijalizovane SaaS sisteme za automatizaciju poslovanja.",
-      telephone: "+38166258258",
-      email: "contact@dukatrio.com",
+      email: "office@dukatrio.com",
       address: {
         "@type": "PostalAddress",
         addressLocality: "Belgrade",

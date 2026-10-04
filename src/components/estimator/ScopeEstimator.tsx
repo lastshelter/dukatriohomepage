@@ -612,8 +612,8 @@ export default function ScopeEstimator(): React.JSX.Element {
                       className="w-full px-3.5 py-2 rounded-xl bg-zinc-950/90 border border-zinc-800 text-xs text-white placeholder:text-zinc-600 focus:border-cyan-500 outline-none transition font-mono"
                     />
                     <input
-                      type="tel"
-                      placeholder="Phone / WhatsApp / Telegram (Optional)"
+                      type="text"
+                      placeholder="Contact email or callback handle (Optional)"
                       value={clientPhone}
                       onChange={(e) => setClientPhone(e.target.value)}
                       className="w-full px-3.5 py-2 rounded-xl bg-zinc-950/90 border border-zinc-800 text-xs text-white placeholder:text-zinc-600 focus:border-cyan-500 outline-none transition font-mono"

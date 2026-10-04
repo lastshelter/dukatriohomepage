@@ -2,7 +2,6 @@
 
 import React, { useState } from "react";
 import {
-  MessageCircle,
   Mail,
   Copy,
   Check,
@@ -17,10 +16,7 @@ import {
 
 export default function ContactDirectChannels(): React.JSX.Element {
   const [emailCopied, setEmailCopied] = useState(false);
-
   const corporateEmail = "office@dukatrio.com";
-  const whatsappUrl =
-    "https://wa.me/381640232230?text=Hello%20DukaTrio,%20I'd%20like%20to%20request%20an%20architectural%20consultation%20for%20my%20project.";
 
   const handleCopyEmail = async () => {
     try {
@@ -34,55 +30,7 @@ export default function ContactDirectChannels(): React.JSX.Element {
 
   return (
     <div className="space-y-6">
-      {/* 1. DIRECT WHATSAPP ACTION CARD (NO PLAIN TEXT PHONE DISPLAY) */}
-      <a
-        href={whatsappUrl}
-        target="_blank"
-        rel="noopener noreferrer"
-        className="block p-6 rounded-3xl bg-zinc-900/60 border border-emerald-500/40 hover:border-emerald-400 hover:bg-zinc-900/90 transition-all duration-300 shadow-[0_0_35px_-10px_rgba(16,185,129,0.15)] group relative overflow-hidden"
-      >
-        <div className="absolute top-0 right-0 w-32 h-32 bg-emerald-500/10 rounded-full blur-2xl pointer-events-none" />
-
-        <div className="flex items-start justify-between gap-4">
-          <div className="flex items-center gap-3.5">
-            <div className="w-12 h-12 rounded-2xl bg-emerald-950/70 border border-emerald-500/50 flex items-center justify-center text-emerald-400 group-hover:scale-105 transition-transform shrink-0 shadow-lg">
-              <MessageCircle className="w-6 h-6" />
-            </div>
-            <div>
-              <div className="flex items-center gap-2">
-                <span className="text-[10px] font-mono text-emerald-400 font-bold uppercase tracking-wider">
-                  Direct Messenger
-                </span>
-                <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 text-[10px] font-mono font-semibold">
-                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
-                  LIVE
-                </span>
-              </div>
-              <h3 className="text-lg font-extrabold text-white group-hover:text-emerald-300 transition-colors">
-                Chat on WhatsApp
-              </h3>
-            </div>
-          </div>
-
-          <div className="p-2 rounded-xl bg-zinc-950/60 border border-zinc-800 text-zinc-400 group-hover:text-emerald-400 group-hover:border-emerald-500/50 transition-all shrink-0">
-            <ExternalLink className="w-4 h-4" />
-          </div>
-        </div>
-
-        <p className="mt-3.5 text-xs sm:text-sm text-zinc-300 leading-relaxed font-sans">
-          Connect immediately with our principal systems engineering desk. Pre-loaded with an initial discovery inquiry prompt.
-        </p>
-
-        <div className="mt-4 pt-4 border-t border-zinc-800/80 flex flex-wrap items-center justify-between gap-2 text-xs font-mono">
-          <span className="text-zinc-400 font-semibold">End-to-End Encrypted</span>
-          <span className="text-emerald-400 font-bold flex items-center gap-1 group-hover:translate-x-1 transition-transform">
-            <span>Open Consultation</span>
-            <ArrowRight className="w-3.5 h-3.5" />
-          </span>
-        </div>
-      </a>
-
-      {/* 2. DIRECT CORPORATE EMAIL CARD */}
+      {/* 1. CORPORATE EMAIL CARD */}
       <div className="p-6 rounded-3xl bg-zinc-900/60 border border-cyan-800/40 hover:border-cyan-500/50 transition-all duration-300 shadow-xl relative overflow-hidden group">
         <div className="absolute top-0 right-0 w-32 h-32 bg-cyan-500/10 rounded-full blur-2xl pointer-events-none" />
 
@@ -137,7 +85,7 @@ export default function ContactDirectChannels(): React.JSX.Element {
         </div>
       </div>
 
-      {/* 3. BOOK A 15-MINUTE TECHNICAL DISCOVERY CTA */}
+      {/* 2. BOOK A 15-MINUTE TECHNICAL DISCOVERY CTA */}
       <a
         href="#intake"
         className="block p-5 rounded-2xl bg-gradient-to-r from-cyan-950/40 via-zinc-900/80 to-zinc-950 border border-cyan-800/50 hover:border-cyan-500/60 transition-all duration-300 group shadow-lg"
@@ -160,7 +108,7 @@ export default function ContactDirectChannels(): React.JSX.Element {
         </div>
       </a>
 
-      {/* 4. RESPONSE GUARANTEE BADGE: 4-HOUR SCOPED RESPONSE SLA */}
+      {/* 3. RESPONSE GUARANTEE BADGE: 4-HOUR SCOPED RESPONSE SLA */}
       <div className="p-6 rounded-3xl bg-gradient-to-br from-emerald-950/40 via-zinc-900/80 to-zinc-950 border border-emerald-500/30 space-y-3.5 shadow-xl relative overflow-hidden">
         <div className="flex items-center justify-between gap-3">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-950/80 border border-emerald-500/50 text-emerald-400 font-mono text-xs font-bold">
@@ -192,7 +140,7 @@ export default function ContactDirectChannels(): React.JSX.Element {
         </div>
       </div>
 
-      {/* 5. DATA PRIVACY & SECURITY BADGE */}
+      {/* 4. DATA PRIVACY & SECURITY BADGE */}
       <div className="p-6 rounded-3xl bg-zinc-950/90 border border-zinc-800/80 space-y-3.5 shadow-xl">
         <div className="flex items-center gap-2 text-xs font-mono text-cyan-400 font-bold uppercase tracking-wider">
           <ShieldCheck className="w-4 h-4 text-cyan-400" />
