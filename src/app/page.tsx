@@ -1,11 +1,11 @@
 "use client";
 
-import React, { useState } from "react";
-import Link from "next/link";
+import React from "react";
 import ContactForm from "@/components/ContactForm";
 import TechStackMatrix from "@/components/TechStackMatrix";
 import ScopeEstimator from "@/components/estimator/ScopeEstimator";
 import ProductionGuarantees from "@/components/home/ProductionGuarantees";
+import Navbar from "@/components/layout/Navbar";
 import MobileQuickContact from "@/components/layout/MobileQuickContact";
 import ServiceComparison from "@/components/services/ServiceComparison";
 import BeforeAfterSlider from "@/components/ui/BeforeAfterSlider";
@@ -27,8 +27,6 @@ import {
   Lock,
   CheckCircle2,
   Activity,
-  Menu,
-  X,
   Radio,
   FileCode2,
   Mail,
@@ -39,7 +37,6 @@ import {
 } from "lucide-react";
 
 export default function HomePage(): React.JSX.Element {
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   return (
     <div className="relative min-h-screen bg-[#09090b] text-zinc-100 overflow-hidden font-sans pb-16 md:pb-0">
@@ -52,120 +49,7 @@ export default function HomePage(): React.JSX.Element {
       {/* ========================================================================= */}
       {/* 1. NAVBAR */}
       {/* ========================================================================= */}
-      <header className="sticky top-0 z-50 w-full border-b border-zinc-800/80 bg-[#09090b]/80 backdrop-blur-xl transition-all">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
-          {/* Brand Logo */}
-          <Link href="/" className="flex items-center gap-3 group">
-            <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-zinc-800 to-zinc-950 border border-zinc-700/80 flex items-center justify-center shadow-lg group-hover:border-cyan-500/50 transition-all duration-300">
-              <span className="font-mono font-black text-lg bg-gradient-to-r from-cyan-400 to-indigo-400 bg-clip-text text-transparent">
-                D
-              </span>
-            </div>
-            <div className="flex flex-col">
-              <span className="text-xl font-bold tracking-tight text-white flex items-center gap-1">
-                DukaTrio
-                <span className="w-1.5 h-1.5 rounded-full bg-cyan-400 inline-block animate-pulse" />
-              </span>
-              <span className="text-[10px] font-mono text-zinc-400 uppercase tracking-widest -mt-1">
-                Systems Studio
-              </span>
-            </div>
-          </Link>
-
-          {/* Desktop Navigation Links */}
-          <nav className="hidden md:flex items-center gap-7 text-sm font-medium text-zinc-300">
-            <a href="#solutions" className="hover:text-cyan-400 transition-colors">
-              Solutions
-            </a>
-            <a href="#demo" className="hover:text-cyan-400 transition-colors">
-              Live Demo
-            </a>
-            <a href="#capabilities" className="hover:text-cyan-400 transition-colors">
-              Capabilities
-            </a>
-            <a href="#case-studies" className="hover:text-cyan-400 transition-colors">
-              Case Studies
-            </a>
-            <a href="#calculator" className="hover:text-cyan-400 transition-colors">
-              Cost Estimator
-            </a>
-          </nav>
-
-          {/* CTA Button */}
-          <div className="hidden md:flex items-center">
-            <a
-              href="#contact"
-              className="py-2.5 px-5 rounded-xl bg-gradient-to-r from-cyan-500 to-cyan-600 hover:from-cyan-400 hover:to-cyan-500 text-zinc-950 font-semibold text-xs tracking-wider uppercase transition-all shadow-[0_0_20px_-5px_rgba(6,182,212,0.5)] flex items-center gap-2 group cursor-pointer"
-            >
-              <span>Start a Project</span>
-              <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" />
-            </a>
-          </div>
-
-          {/* Mobile Hamburger Toggle */}
-          <button
-            type="button"
-            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="md:hidden p-2 rounded-lg text-zinc-400 hover:text-white hover:bg-zinc-800/80 transition"
-            aria-label="Toggle menu"
-          >
-            {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
-          </button>
-        </div>
-
-        {/* Mobile Dropdown Menu */}
-        {mobileMenuOpen && (
-          <div className="md:hidden border-b border-zinc-800 bg-[#09090b]/95 px-6 py-6 space-y-4">
-            <nav className="flex flex-col space-y-3 pt-2 text-sm font-medium text-zinc-200">
-              <a
-                href="#solutions"
-                onClick={() => setMobileMenuOpen(false)}
-                className="hover:text-cyan-400 py-1"
-              >
-                Solutions
-              </a>
-              <a
-                href="#demo"
-                onClick={() => setMobileMenuOpen(false)}
-                className="hover:text-cyan-400 py-1"
-              >
-                Live Demo
-              </a>
-              <a
-                href="#capabilities"
-                onClick={() => setMobileMenuOpen(false)}
-                className="hover:text-cyan-400 py-1"
-              >
-                Capabilities
-              </a>
-              <a
-                href="#case-studies"
-                onClick={() => setMobileMenuOpen(false)}
-                className="hover:text-cyan-400 py-1"
-              >
-                Case Studies
-              </a>
-              <a
-                href="#calculator"
-                onClick={() => setMobileMenuOpen(false)}
-                className="hover:text-cyan-400 py-1"
-              >
-                Cost Estimator
-              </a>
-            </nav>
-            <div className="pt-2">
-              <a
-                href="#contact"
-                onClick={() => setMobileMenuOpen(false)}
-                className="w-full py-3 rounded-xl bg-cyan-500 text-zinc-950 font-bold text-xs uppercase tracking-wider flex items-center justify-center gap-2"
-              >
-                <span>Start a Project</span>
-                <ArrowRight className="w-4 h-4" />
-              </a>
-            </div>
-          </div>
-        )}
-      </header>
+      <Navbar />
 
       {/* ========================================================================= */}
       {/* 2. HERO SECTION - BALANCED CENTERED HIGH-IMPACT LAYOUT */}

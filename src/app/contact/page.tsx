@@ -3,14 +3,13 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import ContactForm from "@/components/ContactForm";
 import ContactDirectChannels from "@/components/contact/ContactDirectChannels";
+import Navbar from "@/components/layout/Navbar";
 import MobileQuickContact from "@/components/layout/MobileQuickContact";
 import {
-  ArrowLeft,
   Terminal,
   ShieldCheck,
   CheckCircle2,
   Lock,
-  ArrowRight,
   Server,
 } from "lucide-react";
 
@@ -50,65 +49,7 @@ export default function ContactPage(): React.JSX.Element {
       {/* ========================================================================= */}
       {/* 1. TOP NAVIGATION HEADER */}
       {/* ========================================================================= */}
-      <header className="sticky top-0 z-50 w-full border-b border-zinc-800/80 bg-[#09090b]/80 backdrop-blur-xl transition-all">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
-          {/* Brand Logo */}
-          <Link href="/" className="flex items-center gap-3 group">
-            <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-zinc-800 to-zinc-950 border border-zinc-700/80 flex items-center justify-center shadow-lg group-hover:border-cyan-500/50 transition-all duration-300">
-              <span className="font-mono font-black text-lg bg-gradient-to-r from-cyan-400 to-indigo-400 bg-clip-text text-transparent">
-                D
-              </span>
-            </div>
-            <div className="flex flex-col">
-              <span className="text-xl font-bold tracking-tight text-white flex items-center gap-1">
-                DukaTrio
-                <span className="w-1.5 h-1.5 rounded-full bg-cyan-400 inline-block animate-pulse" />
-              </span>
-              <span className="text-[10px] font-mono text-zinc-400 uppercase tracking-widest -mt-1">
-                Systems Studio
-              </span>
-            </div>
-          </Link>
-
-          {/* Desktop Navigation Links */}
-          <nav className="hidden md:flex items-center gap-7 text-sm font-medium text-zinc-300">
-            <Link href="/#solutions" className="hover:text-cyan-400 transition-colors">
-              Solutions
-            </Link>
-            <Link href="/#demo" className="hover:text-cyan-400 transition-colors">
-              Live Demo
-            </Link>
-            <Link href="/#capabilities" className="hover:text-cyan-400 transition-colors">
-              Capabilities
-            </Link>
-            <Link href="/#case-studies" className="hover:text-cyan-400 transition-colors">
-              Case Studies
-            </Link>
-            <Link href="/#calculator" className="hover:text-cyan-400 transition-colors">
-              Cost Estimator
-            </Link>
-          </nav>
-
-          {/* Back to Systems Hub Link */}
-          <div className="flex items-center gap-3">
-            <Link
-              href="/"
-              className="py-2.5 px-4 rounded-xl bg-zinc-900 border border-zinc-800 hover:border-zinc-700 text-zinc-300 hover:text-white text-xs font-mono font-medium transition-all flex items-center gap-2 group cursor-pointer"
-            >
-              <ArrowLeft className="w-3.5 h-3.5 group-hover:-translate-x-0.5 transition-transform" />
-              <span className="hidden sm:inline">Systems Hub</span>
-            </Link>
-
-            <a
-              href="#intake"
-              className="py-2.5 px-4 rounded-xl bg-gradient-to-r from-cyan-500 to-cyan-600 hover:from-cyan-400 hover:to-cyan-500 text-zinc-950 font-semibold text-xs tracking-wider uppercase transition-all shadow-[0_0_20px_-5px_rgba(6,182,212,0.5)] flex items-center gap-1.5 group cursor-pointer"
-            >
-              <span>Intake Form</span>
-              <ArrowRight className="w-3 h-3 group-hover:translate-x-0.5 transition-transform" />
-            </a>
-          </div>
-        </div>
-      </header>
+      <Navbar />
 
       {/* ========================================================================= */}
       {/* 2. MAIN CONTENT AREA */}
