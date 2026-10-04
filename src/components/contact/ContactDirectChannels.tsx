@@ -12,16 +12,13 @@ import {
   Server,
   ArrowRight,
   ExternalLink,
-  Phone,
   Zap,
 } from "lucide-react";
 
 export default function ContactDirectChannels(): React.JSX.Element {
   const [emailCopied, setEmailCopied] = useState(false);
-  const [phoneCopied, setPhoneCopied] = useState(false);
 
   const corporateEmail = "office@dukatrio.com";
-  const primaryPhone = "+381 64 023 2230";
   const whatsappUrl =
     "https://wa.me/381640232230?text=Hello%20DukaTrio,%20I'd%20like%20to%20request%20an%20architectural%20consultation%20for%20my%20project.";
 
@@ -35,19 +32,9 @@ export default function ContactDirectChannels(): React.JSX.Element {
     }
   };
 
-  const handleCopyPhone = async () => {
-    try {
-      await navigator.clipboard.writeText("+381640232230");
-      setPhoneCopied(true);
-      setTimeout(() => setPhoneCopied(false), 2200);
-    } catch {
-      // Fallback
-    }
-  };
-
   return (
     <div className="space-y-6">
-      {/* 1. DIRECT WHATSAPP ACTION CARD */}
+      {/* 1. DIRECT WHATSAPP ACTION CARD (NO PLAIN TEXT PHONE DISPLAY) */}
       <a
         href={whatsappUrl}
         target="_blank"
@@ -87,9 +74,9 @@ export default function ContactDirectChannels(): React.JSX.Element {
         </p>
 
         <div className="mt-4 pt-4 border-t border-zinc-800/80 flex flex-wrap items-center justify-between gap-2 text-xs font-mono">
-          <span className="text-zinc-400 font-semibold">{primaryPhone}</span>
+          <span className="text-zinc-400 font-semibold">End-to-End Encrypted</span>
           <span className="text-emerald-400 font-bold flex items-center gap-1 group-hover:translate-x-1 transition-transform">
-            <span>Open click-to-chat</span>
+            <span>Open Consultation</span>
             <ArrowRight className="w-3.5 h-3.5" />
           </span>
         </div>
@@ -150,34 +137,28 @@ export default function ContactDirectChannels(): React.JSX.Element {
         </div>
       </div>
 
-      {/* 3. DIRECT PHONE DESK OPTION */}
-      <div className="p-5 rounded-2xl bg-zinc-950/80 border border-zinc-800/90 flex items-center justify-between gap-4 font-mono text-xs">
-        <div className="flex items-center gap-3">
-          <div className="w-9 h-9 rounded-xl bg-zinc-900 border border-zinc-800 flex items-center justify-center text-cyan-400 shrink-0">
-            <Phone className="w-4 h-4" />
+      {/* 3. BOOK A 15-MINUTE TECHNICAL DISCOVERY CTA */}
+      <a
+        href="#intake"
+        className="block p-5 rounded-2xl bg-gradient-to-r from-cyan-950/40 via-zinc-900/80 to-zinc-950 border border-cyan-800/50 hover:border-cyan-500/60 transition-all duration-300 group shadow-lg"
+      >
+        <div className="flex items-center justify-between gap-3">
+          <div className="flex items-center gap-3.5">
+            <div className="w-10 h-10 rounded-xl bg-cyan-950/80 border border-cyan-800/60 flex items-center justify-center text-cyan-400 group-hover:scale-105 transition-transform shrink-0">
+              <Zap className="w-5 h-5 text-cyan-400" />
+            </div>
+            <div>
+              <span className="text-[10px] font-mono text-cyan-400 uppercase tracking-wider font-bold block">
+                Direct Architect Callback
+              </span>
+              <h4 className="text-sm font-bold text-white group-hover:text-cyan-300 transition-colors">
+                Book a 15-Minute Technical Discovery
+              </h4>
+            </div>
           </div>
-          <div>
-            <span className="text-[10px] text-zinc-400 uppercase tracking-wider block">
-              Direct Engineering Line
-            </span>
-            <a
-              href="tel:+381640232230"
-              className="text-sm font-bold text-white hover:text-cyan-400 transition-colors"
-            >
-              +381 64 023 2230
-            </a>
-          </div>
+          <ArrowRight className="w-4 h-4 text-cyan-400 group-hover:translate-x-1 transition-transform shrink-0" />
         </div>
-
-        <button
-          type="button"
-          onClick={handleCopyPhone}
-          aria-label="Copy phone number"
-          className="py-1.5 px-3 rounded-lg bg-zinc-900 border border-zinc-800 hover:border-zinc-700 text-zinc-400 hover:text-zinc-200 text-[11px] transition cursor-pointer"
-        >
-          {phoneCopied ? "Copied" : "Copy"}
-        </button>
-      </div>
+      </a>
 
       {/* 4. RESPONSE GUARANTEE BADGE: 4-HOUR SCOPED RESPONSE SLA */}
       <div className="p-6 rounded-3xl bg-gradient-to-br from-emerald-950/40 via-zinc-900/80 to-zinc-950 border border-emerald-500/30 space-y-3.5 shadow-xl relative overflow-hidden">
