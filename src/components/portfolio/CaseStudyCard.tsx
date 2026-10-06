@@ -58,6 +58,7 @@ export const CASE_STUDIES: CaseStudyData[] = [
       { label: "Calculation Latency", value: "< 45ms" },
       { label: "Analyzed Pipeline", value: "€14M+" },
     ],
+    liveUrl: "https://fundingsolutions.dukatrio.com",
   },
   {
     id: "b2b_portal",

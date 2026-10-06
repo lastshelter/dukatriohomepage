@@ -91,6 +91,7 @@ const jsonLd = {
       },
       sameAs: [
         "https://gradiliste.dukatrio.com",
+        "https://fundingsolutions.dukatrio.com",
         "https://github.com/lastshelter",
       ],
       founder: {
@@ -179,6 +180,22 @@ const jsonLd = {
               url: "https://gradiliste.dukatrio.com",
               description:
                 "Sveobuhvatna cloud platforma za digitalno vođenje gradilišta, evidenciju radnika, mehanizacije, građevinskog dnevnika i napredno izveštavanje za građevinske firme.",
+            },
+          },
+          {
+            "@type": "Offer",
+            name: "Fintech Platform Case Study: FundingSolutions",
+            description:
+              "Active in-house commercial capital platform: FundingSolutions (https://fundingsolutions.dukatrio.com), institutional underwriting engine, interactive demo sandbox, and broker lead desk.",
+            url: "https://fundingsolutions.dukatrio.com",
+            itemOffered: {
+              "@type": "SoftwareApplication",
+              name: "FundingSolutions - Commercial Capital Desk",
+              applicationCategory: "FintechApplication",
+              operatingSystem: "Web",
+              url: "https://fundingsolutions.dukatrio.com",
+              description:
+                "Enterprise commercial funding portal featuring multi-tier underwriting sandboxes, DSCR stress-testing engines, and automated deal pipeline tracking.",
             },
           },
         ],
