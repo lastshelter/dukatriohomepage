@@ -39,6 +39,13 @@ export default function GlobalError({
           </p>
         </div>
 
+        {error.message && (
+          <div className="p-3 bg-rose-950/30 border border-rose-800/50 rounded-xl font-mono text-xs text-rose-300 max-w-md mx-auto text-left break-words">
+            <span className="text-[10px] text-rose-400 font-bold block uppercase mb-1">Runtime Exception:</span>
+            <span>{error.message}</span>
+          </div>
+        )}
+
         {error.digest && (
           <div className="p-3 bg-zinc-950/90 border border-zinc-800 rounded-xl font-mono text-xs text-zinc-500 max-w-sm mx-auto">
             <span>DIGEST: {error.digest}</span>
