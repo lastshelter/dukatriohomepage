@@ -805,6 +805,7 @@ export default function HomePage(): React.JSX.Element {
       {/* 6F. INTERACTIVE SCOPE & COST ESTIMATOR */}
       {/* ========================================================================= */}
       <div id="calculator" className="scroll-mt-24" />
+      <div id="estimator" className="scroll-mt-24" />
       <ScopeEstimator />
 
       {/* ========================================================================= */}
