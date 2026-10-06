@@ -20,6 +20,7 @@ import {
   Building2,
   Flame,
   Check,
+  Download,
 } from "lucide-react";
 
 interface ServiceType {
@@ -189,6 +190,147 @@ export default function ScopeEstimator(): React.JSX.Element {
     calculatedMinWeeks + 1,
     Math.round(activeService.weeksMax * activeScale.timeMultiplier * activeTimeline.timeDiscount)
   );
+
+  const [isExportingPdf, setIsExportingPdf] = useState(false);
+
+  const handleDownloadPdf = async () => {
+    try {
+      setIsExportingPdf(true);
+      const { jsPDF } = await import("jspdf");
+      const doc = new jsPDF({ orientation: "portrait", unit: "mm", format: "a4" });
+
+      // Branded Header Banner
+      doc.setFillColor(15, 23, 42); // slate-900
+      doc.rect(0, 0, 210, 42, "F");
+
+      // Cyan accent line
+      doc.setFillColor(6, 182, 212); // cyan-500
+      doc.rect(0, 42, 210, 2.5, "F");
+
+      // Brand Title
+      doc.setTextColor(255, 255, 255);
+      doc.setFont("helvetica", "bold");
+      doc.setFontSize(20);
+      doc.text("DUKATRIO SYSTEMS STUDIO", 20, 20);
+
+      doc.setFont("helvetica", "normal");
+      doc.setFontSize(9.5);
+      doc.setTextColor(148, 163, 184); // slate-400
+      doc.text("ENGINEERING & ARCHITECTURE SCOPE PROPOSAL", 20, 28);
+      doc.text(`Generated: ${new Date().toLocaleDateString("en-GB")} | dukatrio.com`, 20, 35);
+
+      // Section 1: Executive Summary
+      doc.setTextColor(15, 23, 42);
+      doc.setFont("helvetica", "bold");
+      doc.setFontSize(13);
+      doc.text("Project Architecture & Investment Scope", 20, 56);
+
+      // Scope Specification Box
+      doc.setFillColor(248, 250, 252);
+      doc.setDrawColor(226, 232, 240);
+      doc.roundedRect(20, 62, 170, 46, 3, 3, "FD");
+
+      doc.setFontSize(10);
+      doc.setFont("helvetica", "bold");
+      doc.setTextColor(71, 85, 105);
+      doc.text("Selected Solution Architecture:", 25, 72);
+      doc.setFont("helvetica", "normal");
+      doc.setTextColor(15, 23, 42);
+      doc.text(`${activeService.name} (${activeService.badge})`, 88, 72);
+
+      doc.setFont("helvetica", "bold");
+      doc.setTextColor(71, 85, 105);
+      doc.text("Operational Scope Tier:", 25, 82);
+      doc.setFont("helvetica", "normal");
+      doc.setTextColor(15, 23, 42);
+      doc.text(`${activeScale.name} (${activeScale.badge})`, 88, 82);
+
+      doc.setFont("helvetica", "bold");
+      doc.setTextColor(71, 85, 105);
+      doc.text("Delivery Velocity & SLA:", 25, 92);
+      doc.setFont("helvetica", "normal");
+      doc.setTextColor(15, 23, 42);
+      doc.text(`${activeTimeline.name} - ${activeTimeline.slaTag}`, 88, 92);
+
+      doc.setFont("helvetica", "bold");
+      doc.setTextColor(71, 85, 105);
+      doc.text("Estimated Delivery Window:", 25, 102);
+      doc.setFont("helvetica", "bold");
+      doc.setTextColor(16, 185, 129);
+      doc.text(`${calculatedMinWeeks} - ${calculatedMaxWeeks} Weeks`, 88, 102);
+
+      // Section 2: Financial Projection
+      doc.setFont("helvetica", "bold");
+      doc.setTextColor(15, 23, 42);
+      doc.setFontSize(13);
+      doc.text("Projected Capital Investment Bracket", 20, 122);
+
+      doc.setFillColor(240, 253, 250);
+      doc.setDrawColor(153, 246, 228);
+      doc.roundedRect(20, 128, 170, 30, 3, 3, "FD");
+
+      doc.setFontSize(9.5);
+      doc.setTextColor(15, 118, 110);
+      doc.setFont("helvetica", "normal");
+      doc.text("Fixed Milestone Pricing (Zero Hidden Surprises):", 25, 138);
+      doc.setFontSize(16);
+      doc.setFont("helvetica", "bold");
+      doc.setTextColor(14, 116, 144);
+      doc.text(`€${calculatedMinCost.toLocaleString()} — €${calculatedMaxCost.toLocaleString()} EUR`, 25, 149);
+
+      // Section 3: Technical Deliverables & Guarantees
+      doc.setFontSize(13);
+      doc.setFont("helvetica", "bold");
+      doc.setTextColor(15, 23, 42);
+      doc.text("Included Dukatrio Engineering Standards", 20, 172);
+
+      const deliverables = [
+        "✓ Production-Ready Next.js & React Full-Stack Architecture",
+        "✓ Zero-Downtime Deployment & Automated Edge TLS Reverse Proxy",
+        "✓ Automated Daily Encrypted Off-Site Database Backups",
+        "✓ Complete Source Code Ownership & Full Intellectual Property Transfer",
+        "✓ Post-Launch Milestone Support & Dedicated Engineering SLA Warranty",
+      ];
+
+      doc.setFontSize(9.5);
+      doc.setFont("helvetica", "normal");
+      doc.setTextColor(51, 65, 85);
+      let deliverableY = 182;
+      deliverables.forEach((item) => {
+        doc.text(item, 25, deliverableY);
+        deliverableY += 8;
+      });
+
+      // Section 4: Client & Contact Context
+      if (clientName || clientEmail) {
+        doc.setFontSize(12);
+        doc.setFont("helvetica", "bold");
+        doc.setTextColor(15, 23, 42);
+        doc.text("Prepared Exclusively For:", 20, 235);
+
+        doc.setFontSize(9.5);
+        doc.setFont("helvetica", "normal");
+        doc.setTextColor(71, 85, 105);
+        if (clientName) doc.text(`Client: ${clientName}`, 25, 243);
+        if (clientEmail) doc.text(`Email: ${clientEmail}`, 25, 250);
+      }
+
+      // Footer
+      doc.setFillColor(241, 245, 249);
+      doc.rect(0, 275, 210, 22, "F");
+      doc.setFontSize(8.5);
+      doc.setTextColor(100, 116, 139);
+      doc.setFont("helvetica", "normal");
+      doc.text("Dukatrio Systems Studio | Belgrade, Serbia | https://dukatrio.com", 20, 284);
+      doc.text("Official Technical Proposal — Valid for 30 calendar days from issue date.", 20, 290);
+
+      doc.save("Dukatrio Project Scope & Architecture Proposal.pdf");
+    } catch (err) {
+      console.error("PDF generation failed:", err);
+    } finally {
+      setIsExportingPdf(false);
+    }
+  };
 
   const handleCaptureLead = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -563,6 +705,26 @@ export default function ScopeEstimator(): React.JSX.Element {
                 </div>
               </div>
 
+              {/* Proposal PDF Download Trigger */}
+              <button
+                type="button"
+                onClick={handleDownloadPdf}
+                disabled={isExportingPdf}
+                className="w-full py-2.5 px-4 rounded-xl bg-zinc-950/90 hover:bg-zinc-800/80 border border-zinc-800 hover:border-cyan-500/50 text-xs font-mono text-cyan-300 font-bold flex items-center justify-center gap-2 transition cursor-pointer shadow-sm disabled:opacity-60"
+              >
+                {isExportingPdf ? (
+                  <>
+                    <Loader2 className="w-3.5 h-3.5 animate-spin text-cyan-400" />
+                    <span>Compiling Architecture Proposal...</span>
+                  </>
+                ) : (
+                  <>
+                    <Download className="w-3.5 h-3.5 text-cyan-400" />
+                    <span>Download Proposal Summary (PDF)</span>
+                  </>
+                )}
+              </button>
+
               {/* Instant Lead Capture Drawer */}
               {isSubmitted ? (
                 <div className="p-5 rounded-2xl bg-emerald-950/50 border border-emerald-800/80 space-y-3 text-center animate-in fade-in">
@@ -573,6 +735,15 @@ export default function ScopeEstimator(): React.JSX.Element {
                   <p className="text-xs text-zinc-300 leading-relaxed font-sans">
                     Your customized scope estimate has been routed directly to our engineering desk via instant push alert. We will respond within 12 business hours.
                   </p>
+                  <button
+                    type="button"
+                    onClick={handleDownloadPdf}
+                    disabled={isExportingPdf}
+                    className="w-full py-2 px-3 rounded-xl bg-emerald-900/60 hover:bg-emerald-800/70 border border-emerald-700/80 text-xs font-mono text-emerald-200 font-bold flex items-center justify-center gap-2 transition cursor-pointer shadow-sm"
+                  >
+                    <Download className="w-3.5 h-3.5 text-emerald-300" />
+                    <span>Download Proposal (PDF)</span>
+                  </button>
                   <button
                     type="button"
                     onClick={() => setIsSubmitted(false)}
