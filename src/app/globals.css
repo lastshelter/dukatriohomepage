@@ -91,3 +91,18 @@ body {
 .animate-pulse-subtle {
   animation: pulse-subtle 6s ease-in-out infinite;
 }
+
+@keyframes ambient-drift {
+  0%, 100% {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 0.75;
+  }
+  50% {
+    transform: translate(-50%, -46%) scale(1.06);
+    opacity: 1;
+  }
+}
+
+.animate-ambient-drift {
+  animation: ambient-drift 12s ease-in-out infinite;
+}

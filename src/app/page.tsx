@@ -13,6 +13,7 @@ import FlagshipCaseStudy from "@/components/portfolio/FlagshipCaseStudy";
 import CaseStudySection from "@/components/portfolio/CaseStudyCard";
 import SocialProof from "@/components/testimonials/SocialProof";
 import InteractiveDemo from "@/components/InteractiveDemo";
+import Hero from "@/components/Hero";
 import { motion } from "framer-motion";
 import {
   Cpu,
@@ -27,7 +28,6 @@ import {
   Lock,
   CheckCircle2,
   Activity,
-  Radio,
   FileCode2,
   Mail,
   Network,
@@ -54,93 +54,15 @@ export default function HomePage(): React.JSX.Element {
       {/* ========================================================================= */}
       {/* 2. HERO SECTION - BALANCED CENTERED HIGH-IMPACT LAYOUT */}
       {/* ========================================================================= */}
-      <section className="relative pt-24 pb-20 sm:pt-36 sm:pb-32 text-center">
-        <motion.div
-          initial={{ opacity: 0, y: 18 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, ease: "easeOut" }}
-          className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8"
-        >
-          {/* Precision Badge */}
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-cyan-950/50 border border-cyan-800/60 text-cyan-400 font-mono text-xs font-semibold shadow-inner">
-            <Radio className="w-3.5 h-3.5 animate-pulse text-cyan-400" />
-            <span>High-Performance Engineering Studio</span>
-          </div>
-
-          {/* Punchy Hero Title */}
-          <h1 className="text-4xl sm:text-6xl lg:text-7xl font-extrabold text-white tracking-tight leading-[1.08] max-w-4xl mx-auto">
-            Custom Web Applications &amp; Portals That{" "}
-            <span className="bg-gradient-to-r from-cyan-400 via-teal-300 to-indigo-400 bg-clip-text text-transparent">
-              Streamline Business Operations.
-            </span>
-          </h1>
-
-          {/* Subtitle */}
-          <p className="text-base sm:text-xl text-zinc-400 leading-relaxed font-normal max-w-3xl mx-auto">
-            We build dedicated client portals, field tools, and custom internal systems that replace messy spreadsheets and sluggish off-the-shelf software—fast, self-hosted, and engineered to scale.
-          </p>
-
-          {/* Key Differentiator Badges */}
-          <div className="flex flex-wrap items-center justify-center gap-2.5 sm:gap-3 max-w-2xl mx-auto pt-2">
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-zinc-900/80 border border-cyan-500/30 text-zinc-200 text-xs font-medium shadow-sm">
-              <span className="text-cyan-400">⚡</span>
-              <span>Sub-Second Load Times</span>
-            </div>
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-zinc-900/80 border border-emerald-500/30 text-zinc-200 text-xs font-medium shadow-sm">
-              <span className="text-emerald-400">🔒</span>
-              <span>Self-Hosted &amp; Full Data Ownership</span>
-            </div>
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-zinc-900/80 border border-indigo-500/30 text-zinc-200 text-xs font-medium shadow-sm">
-              <span className="text-indigo-400">🛠️</span>
-              <span>Zero Generic Templates</span>
-            </div>
-          </div>
-
-          {/* Primary Action Buttons */}
-          <div className="pt-2 flex flex-col sm:flex-row items-center justify-center gap-4">
-            <a
-              href="#calculator"
-              className="w-full sm:w-auto py-3.5 px-8 rounded-xl bg-gradient-to-r from-cyan-500 to-cyan-600 hover:from-cyan-400 hover:to-cyan-500 text-zinc-950 font-bold text-xs uppercase tracking-wider transition-all shadow-[0_0_25px_-5px_rgba(6,182,212,0.5)] flex items-center justify-center gap-2.5 group cursor-pointer"
-            >
-              <Calculator className="w-4 h-4 text-zinc-950" />
-              <span>Calculate Project Cost</span>
-              <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-            </a>
-
-            <a
-              href="#case-studies"
-              className="w-full sm:w-auto py-3.5 px-8 rounded-xl bg-zinc-900/90 hover:bg-zinc-800 border border-zinc-700/80 hover:border-zinc-600 text-zinc-200 hover:text-white font-semibold text-xs uppercase tracking-wider transition-all flex items-center justify-center gap-2"
-            >
-              <Layers className="w-4 h-4 text-cyan-400" />
-              <span>View Case Studies</span>
-            </a>
-          </div>
-
-          {/* Centered Micro-Trust Telemetry */}
-          <div className="pt-8 flex flex-wrap items-center justify-center gap-8 text-xs font-mono text-zinc-400 border-t border-zinc-800/80 max-w-2xl mx-auto">
-            <div className="flex items-center gap-2">
-              <ShieldCheck className="w-4 h-4 text-cyan-400" />
-              <span>Bank-Grade Encryption</span>
-            </div>
-            <div className="flex items-center gap-2">
-              <Cpu className="w-4 h-4 text-emerald-400" />
-              <span>Node.js 22 LTS &amp; Next.js 16</span>
-            </div>
-            <div className="flex items-center gap-2">
-              <Activity className="w-4 h-4 text-indigo-400" />
-              <span>99.99% Uptime Architecture</span>
-            </div>
-          </div>
-        </motion.div>
-      </section>
+      <Hero />
 
       {/* ========================================================================= */}
       {/* 3. TECHNICAL METRICS / SYSTEM STATUS BANNER */}
       {/* ========================================================================= */}
       <section className="py-6 border-y border-zinc-800/80 bg-zinc-950/60 backdrop-blur-md">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 font-mono text-xs">
-            <div className="flex items-center gap-3">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6 font-mono text-xs">
+            <div className="flex items-center gap-3 p-3 rounded-xl border border-slate-800/80 hover:border-slate-600 bg-zinc-900/40 transition-colors duration-200">
               <div className="w-8 h-8 rounded-lg bg-cyan-950/50 border border-cyan-800/50 flex items-center justify-center text-cyan-400 shrink-0">
                 <Lock className="w-4 h-4" />
               </div>
@@ -150,7 +72,7 @@ export default function HomePage(): React.JSX.Element {
               </div>
             </div>
 
-            <div className="flex items-center gap-3">
+            <div className="flex items-center gap-3 p-3 rounded-xl border border-slate-800/80 hover:border-slate-600 bg-zinc-900/40 transition-colors duration-200">
               <div className="w-8 h-8 rounded-lg bg-emerald-950/50 border border-emerald-800/50 flex items-center justify-center text-emerald-400 shrink-0">
                 <Zap className="w-4 h-4" />
               </div>
@@ -160,7 +82,7 @@ export default function HomePage(): React.JSX.Element {
               </div>
             </div>
 
-            <div className="flex items-center gap-3">
+            <div className="flex items-center gap-3 p-3 rounded-xl border border-slate-800/80 hover:border-slate-600 bg-zinc-900/40 transition-colors duration-200">
               <div className="w-8 h-8 rounded-lg bg-indigo-950/50 border border-indigo-800/50 flex items-center justify-center text-indigo-400 shrink-0">
                 <Cpu className="w-4 h-4" />
               </div>
@@ -170,7 +92,7 @@ export default function HomePage(): React.JSX.Element {
               </div>
             </div>
 
-            <div className="flex items-center gap-3">
+            <div className="flex items-center gap-3 p-3 rounded-xl border border-slate-800/80 hover:border-slate-600 bg-zinc-900/40 transition-colors duration-200">
               <div className="w-8 h-8 rounded-lg bg-teal-950/50 border border-teal-800/50 flex items-center justify-center text-teal-400 shrink-0">
                 <Network className="w-4 h-4" />
               </div>
@@ -207,7 +129,7 @@ export default function HomePage(): React.JSX.Element {
           {/* 4-Card Interactive Grid */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             {/* Card 1: B2B Client Portals & Management Desks */}
-            <div className="rounded-2xl border border-zinc-800 bg-zinc-950/70 p-8 shadow-xl hover:border-cyan-500/50 hover:bg-zinc-900/60 transition-all duration-300 space-y-6 group">
+            <div className="rounded-2xl border border-zinc-800 bg-zinc-950/70 p-8 shadow-xl hover:-translate-y-1 hover:border-cyan-500/30 hover:bg-zinc-900/60 transition-all duration-300 space-y-6 group">
               <div className="flex items-center justify-between">
                 <div className="w-12 h-12 rounded-xl bg-cyan-950/60 border border-cyan-800/60 flex items-center justify-center text-cyan-400 group-hover:scale-105 transition-transform">
                   <Layers className="w-6 h-6" />
@@ -245,7 +167,7 @@ export default function HomePage(): React.JSX.Element {
             </div>
 
             {/* Card 2: Algorithmic Decision & Diagnostic Engines */}
-            <div className="rounded-2xl border border-zinc-800 bg-zinc-950/70 p-8 shadow-xl hover:border-emerald-500/50 hover:bg-zinc-900/60 transition-all duration-300 space-y-6 group">
+            <div className="rounded-2xl border border-zinc-800 bg-zinc-950/70 p-8 shadow-xl hover:-translate-y-1 hover:border-emerald-500/30 hover:bg-zinc-900/60 transition-all duration-300 space-y-6 group">
               <div className="flex items-center justify-between">
                 <div className="w-12 h-12 rounded-xl bg-emerald-950/60 border border-emerald-800/60 flex items-center justify-center text-emerald-400 group-hover:scale-105 transition-transform">
                   <Calculator className="w-6 h-6" />
@@ -283,7 +205,7 @@ export default function HomePage(): React.JSX.Element {
             </div>
 
             {/* Card 3: High-Throughput Web Applications */}
-            <div className="rounded-2xl border border-zinc-800 bg-zinc-950/70 p-8 shadow-xl hover:border-indigo-500/50 hover:bg-zinc-900/60 transition-all duration-300 space-y-6 group">
+            <div className="rounded-2xl border border-zinc-800 bg-zinc-950/70 p-8 shadow-xl hover:-translate-y-1 hover:border-indigo-500/30 hover:bg-zinc-900/60 transition-all duration-300 space-y-6 group">
               <div className="flex items-center justify-between">
                 <div className="w-12 h-12 rounded-xl bg-indigo-950/60 border border-indigo-800/60 flex items-center justify-center text-indigo-400 group-hover:scale-105 transition-transform">
                   <Zap className="w-6 h-6" />
@@ -321,7 +243,7 @@ export default function HomePage(): React.JSX.Element {
             </div>
 
             {/* Card 4: Production Linux Cloud Infrastructure */}
-            <div className="rounded-2xl border border-zinc-800 bg-zinc-950/70 p-8 shadow-xl hover:border-teal-500/50 hover:bg-zinc-900/60 transition-all duration-300 space-y-6 group">
+            <div className="rounded-2xl border border-zinc-800 bg-zinc-950/70 p-8 shadow-xl hover:-translate-y-1 hover:border-teal-500/30 hover:bg-zinc-900/60 transition-all duration-300 space-y-6 group">
               <div className="flex items-center justify-between">
                 <div className="w-12 h-12 rounded-xl bg-teal-950/60 border border-teal-800/60 flex items-center justify-center text-teal-400 group-hover:scale-105 transition-transform">
                   <Server className="w-6 h-6" />
@@ -385,7 +307,7 @@ export default function HomePage(): React.JSX.Element {
           {/* 3 Stages Grid */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 relative">
             {/* Stage 01 */}
-            <div className="rounded-2xl border border-zinc-800/80 bg-zinc-900/50 p-8 space-y-5 hover:border-cyan-500/50 transition-all">
+            <div className="rounded-2xl border border-zinc-800/80 bg-zinc-900/50 p-8 space-y-5 hover:-translate-y-1 hover:border-cyan-500/30 transition-all duration-300">
               <div className="flex items-center justify-between">
                 <span className="text-3xl font-black font-mono text-cyan-400">01</span>
                 <span className="px-2.5 py-1 rounded text-[10px] font-mono font-bold bg-cyan-950/80 border border-cyan-800/60 text-cyan-300 uppercase">
@@ -415,7 +337,7 @@ export default function HomePage(): React.JSX.Element {
             </div>
 
             {/* Stage 02 */}
-            <div className="rounded-2xl border border-zinc-800/80 bg-zinc-900/50 p-8 space-y-5 hover:border-emerald-500/50 transition-all">
+            <div className="rounded-2xl border border-zinc-800/80 bg-zinc-900/50 p-8 space-y-5 hover:-translate-y-1 hover:border-emerald-500/30 transition-all duration-300">
               <div className="flex items-center justify-between">
                 <span className="text-3xl font-black font-mono text-emerald-400">02</span>
                 <span className="px-2.5 py-1 rounded-lg text-[10px] font-mono font-bold bg-emerald-950/80 border border-emerald-800/60 text-emerald-300 uppercase">
@@ -445,7 +367,7 @@ export default function HomePage(): React.JSX.Element {
             </div>
 
             {/* Stage 03 */}
-            <div className="rounded-2xl border border-zinc-800/80 bg-zinc-900/50 p-8 space-y-5 hover:border-indigo-500/50 transition-all">
+            <div className="rounded-2xl border border-zinc-800/80 bg-zinc-900/50 p-8 space-y-5 hover:-translate-y-1 hover:border-indigo-500/30 transition-all duration-300">
               <div className="flex items-center justify-between">
                 <span className="text-3xl font-black font-mono text-indigo-400">03</span>
                 <span className="px-2.5 py-1 rounded-lg text-[10px] font-mono font-bold bg-indigo-950/80 border border-indigo-800/60 text-indigo-300 uppercase">
@@ -499,7 +421,7 @@ export default function HomePage(): React.JSX.Element {
           {/* 4 Cards Grid */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             {/* Card 1: Full-Stack Web Architecture */}
-            <div className="rounded-2xl border border-zinc-800/80 bg-zinc-900/40 p-8 shadow-sm hover:border-cyan-500/50 hover:bg-zinc-900/60 transition-all duration-300 space-y-4 group">
+            <div className="rounded-2xl border border-zinc-800/80 bg-zinc-900/40 p-8 shadow-sm hover:-translate-y-1 hover:border-cyan-500/30 hover:bg-zinc-900/60 transition-all duration-300 space-y-4 group">
               <div className="w-12 h-12 rounded-xl bg-cyan-950/50 border border-cyan-800/50 flex items-center justify-center text-cyan-400 group-hover:scale-105 transition-transform">
                 <Code2 className="w-6 h-6" />
               </div>
@@ -526,7 +448,7 @@ export default function HomePage(): React.JSX.Element {
             </div>
 
             {/* Card 2: Fintech & Data Systems */}
-            <div className="rounded-2xl border border-zinc-800/80 bg-zinc-900/40 p-8 shadow-sm hover:border-cyan-500/50 hover:bg-zinc-900/60 transition-all duration-300 space-y-4 group">
+            <div className="rounded-2xl border border-zinc-800/80 bg-zinc-900/40 p-8 shadow-sm hover:-translate-y-1 hover:border-emerald-500/30 hover:bg-zinc-900/60 transition-all duration-300 space-y-4 group">
               <div className="w-12 h-12 rounded-xl bg-emerald-950/50 border border-emerald-800/50 flex items-center justify-center text-emerald-400 group-hover:scale-105 transition-transform">
                 <Database className="w-6 h-6" />
               </div>
@@ -553,7 +475,7 @@ export default function HomePage(): React.JSX.Element {
             </div>
 
             {/* Card 3: Cloud & Infrastructure */}
-            <div className="rounded-2xl border border-zinc-800/80 bg-zinc-900/40 p-8 shadow-sm hover:border-cyan-500/50 hover:bg-zinc-900/60 transition-all duration-300 space-y-4 group">
+            <div className="rounded-2xl border border-zinc-800/80 bg-zinc-900/40 p-8 shadow-sm hover:-translate-y-1 hover:border-indigo-500/30 hover:bg-zinc-900/60 transition-all duration-300 space-y-4 group">
               <div className="w-12 h-12 rounded-xl bg-indigo-950/50 border border-indigo-800/50 flex items-center justify-center text-indigo-400 group-hover:scale-105 transition-transform">
                 <Server className="w-6 h-6" />
               </div>
@@ -580,7 +502,7 @@ export default function HomePage(): React.JSX.Element {
             </div>
 
             {/* Card 4: Process Automation & Portals */}
-            <div className="rounded-2xl border border-zinc-800/80 bg-zinc-900/40 p-8 shadow-sm hover:border-cyan-500/50 hover:bg-zinc-900/60 transition-all duration-300 space-y-4 group">
+            <div className="rounded-2xl border border-zinc-800/80 bg-zinc-900/40 p-8 shadow-sm hover:-translate-y-1 hover:border-teal-500/30 hover:bg-zinc-900/60 transition-all duration-300 space-y-4 group">
               <div className="w-12 h-12 rounded-xl bg-teal-950/50 border border-teal-800/50 flex items-center justify-center text-teal-400 group-hover:scale-105 transition-transform">
                 <Workflow className="w-6 h-6" />
               </div>
@@ -642,7 +564,7 @@ export default function HomePage(): React.JSX.Element {
           <div className="rounded-3xl border border-zinc-800 bg-zinc-950 p-6 sm:p-10 glass-panel">
             <div className="grid grid-cols-1 md:grid-cols-4 gap-6 relative">
               {/* Step 1 */}
-              <div className="p-5 rounded-2xl bg-zinc-900/60 border border-zinc-800 space-y-3">
+              <div className="p-5 rounded-2xl bg-zinc-900/60 border border-zinc-800 hover:border-slate-600 hover:-translate-y-0.5 transition-all duration-200 space-y-3">
                 <div className="flex items-center justify-between">
                   <span className="font-mono text-xs text-cyan-400 font-bold">01 · EDGE</span>
                   <Globe className="w-4 h-4 text-zinc-500" />
@@ -654,7 +576,7 @@ export default function HomePage(): React.JSX.Element {
               </div>
 
               {/* Step 2 */}
-              <div className="p-5 rounded-2xl bg-zinc-900/60 border border-zinc-800 space-y-3">
+              <div className="p-5 rounded-2xl bg-zinc-900/60 border border-zinc-800 hover:border-slate-600 hover:-translate-y-0.5 transition-all duration-200 space-y-3">
                 <div className="flex items-center justify-between">
                   <span className="font-mono text-xs text-cyan-400 font-bold">02 · REVERSE PROXY</span>
                   <Lock className="w-4 h-4 text-zinc-500" />
@@ -666,7 +588,7 @@ export default function HomePage(): React.JSX.Element {
               </div>
 
               {/* Step 3 */}
-              <div className="p-5 rounded-2xl bg-zinc-900/60 border border-zinc-800 space-y-3">
+              <div className="p-5 rounded-2xl bg-zinc-900/60 border border-zinc-800 hover:border-slate-600 hover:-translate-y-0.5 transition-all duration-200 space-y-3">
                 <div className="flex items-center justify-between">
                   <span className="font-mono text-xs text-cyan-400 font-bold">03 · COMPUTE</span>
                   <Cpu className="w-4 h-4 text-zinc-500" />
@@ -678,7 +600,7 @@ export default function HomePage(): React.JSX.Element {
               </div>
 
               {/* Step 4 */}
-              <div className="p-5 rounded-2xl bg-zinc-900/60 border border-zinc-800 space-y-3">
+              <div className="p-5 rounded-2xl bg-zinc-900/60 border border-zinc-800 hover:border-slate-600 hover:-translate-y-0.5 transition-all duration-200 space-y-3">
                 <div className="flex items-center justify-between">
                   <span className="font-mono text-xs text-cyan-400 font-bold">04 · PERSISTENCE</span>
                   <Database className="w-4 h-4 text-zinc-500" />
@@ -738,7 +660,7 @@ export default function HomePage(): React.JSX.Element {
           {/* 3-Column Frosted Glass Grid */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {/* Card 1: Modular Component Architecture */}
-            <div className="rounded-2xl border border-zinc-800/80 bg-zinc-900/40 p-8 shadow-sm hover:border-cyan-500/50 hover:bg-zinc-900/60 transition-all duration-300 space-y-4 group">
+            <div className="rounded-2xl border border-zinc-800/80 bg-zinc-900/40 p-8 shadow-sm hover:-translate-y-1 hover:border-cyan-500/30 hover:bg-zinc-900/60 transition-all duration-300 space-y-4 group">
               <div className="w-12 h-12 rounded-xl bg-cyan-950/60 border border-cyan-800/60 flex items-center justify-center text-cyan-400 group-hover:scale-105 transition-transform">
                 <Layers className="w-6 h-6" />
               </div>
@@ -755,7 +677,7 @@ export default function HomePage(): React.JSX.Element {
             </div>
 
             {/* Card 2: Optional Headless CMS Integration */}
-            <div className="rounded-2xl border border-zinc-800/80 bg-zinc-900/40 p-8 shadow-sm hover:border-emerald-500/50 hover:bg-zinc-900/60 transition-all duration-300 space-y-4 group">
+            <div className="rounded-2xl border border-zinc-800/80 bg-zinc-900/40 p-8 shadow-sm hover:-translate-y-1 hover:border-emerald-500/30 hover:bg-zinc-900/60 transition-all duration-300 space-y-4 group">
               <div className="w-12 h-12 rounded-xl bg-emerald-950/60 border border-emerald-800/60 flex items-center justify-center text-emerald-400 group-hover:scale-105 transition-transform">
                 <FileCode2 className="w-6 h-6" />
               </div>
@@ -772,7 +694,7 @@ export default function HomePage(): React.JSX.Element {
             </div>
 
             {/* Card 3: 100% Code & Asset Ownership */}
-            <div className="rounded-2xl border border-zinc-800/80 bg-zinc-900/40 p-8 shadow-sm hover:border-indigo-500/50 hover:bg-zinc-900/60 transition-all duration-300 space-y-4 group">
+            <div className="rounded-2xl border border-zinc-800/80 bg-zinc-900/40 p-8 shadow-sm hover:-translate-y-1 hover:border-indigo-500/30 hover:bg-zinc-900/60 transition-all duration-300 space-y-4 group">
               <div className="w-12 h-12 rounded-xl bg-indigo-950/60 border border-indigo-800/60 flex items-center justify-center text-indigo-400 group-hover:scale-105 transition-transform">
                 <Lock className="w-6 h-6" />
               </div>

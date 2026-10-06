@@ -123,7 +123,7 @@ export default function CaseStudySection(): React.JSX.Element {
           {CASE_STUDIES.map((study) => (
             <div
               key={study.id}
-              className="rounded-3xl border border-zinc-800 bg-zinc-900/40 backdrop-blur-xl p-6 sm:p-10 shadow-2xl hover:border-cyan-500/40 transition-all duration-300 space-y-8 group"
+              className="rounded-3xl border border-zinc-800 bg-zinc-900/40 backdrop-blur-xl p-6 sm:p-10 shadow-2xl hover:-translate-y-1 hover:border-cyan-500/30 transition-all duration-300 space-y-8 group"
             >
               {/* Card Header */}
               <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6 border-b border-zinc-800">
@@ -144,7 +144,7 @@ export default function CaseStudySection(): React.JSX.Element {
                     {study.techStack.map((tech) => (
                       <span
                         key={tech}
-                        className="px-2.5 py-1 rounded-lg bg-zinc-950/80 border border-zinc-800 text-[11px] font-mono text-zinc-300"
+                        className="px-2.5 py-1 rounded-lg bg-zinc-950/80 border border-slate-800 hover:border-slate-600 transition-colors duration-200 text-[11px] font-mono text-zinc-300"
                       >
                         {tech}
                       </span>
@@ -203,7 +203,7 @@ export default function CaseStudySection(): React.JSX.Element {
               {/* Metrics Summary Strip */}
               <div className="pt-4 border-t border-zinc-800/80 grid grid-cols-3 gap-4 font-mono text-center">
                 {study.metrics.map((m) => (
-                  <div key={m.label} className="p-3 rounded-xl bg-zinc-950/50 border border-zinc-800/60">
+                  <div key={m.label} className="p-3 rounded-xl bg-zinc-950/50 border border-slate-800 hover:border-slate-600 transition-colors duration-200">
                     <div className="text-xl sm:text-2xl font-bold text-white tracking-tight">
                       {m.value}
                     </div>

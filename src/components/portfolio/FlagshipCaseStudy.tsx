@@ -83,7 +83,7 @@ export default function FlagshipCaseStudy(): React.JSX.Element {
           {/* 3-Part Deep Dive Anatomy: Problem, Execution, Result */}
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
             {/* 1. Physical Bottlenecks (Problem) */}
-            <div className="p-6 sm:p-8 rounded-2xl bg-zinc-950/70 border border-zinc-800/80 space-y-4 relative overflow-hidden group hover:border-rose-500/40 transition-colors">
+            <div className="p-6 sm:p-8 rounded-2xl bg-zinc-950/70 border border-zinc-800/80 space-y-4 relative overflow-hidden group hover:-translate-y-1 hover:border-rose-500/30 transition-all duration-300">
               <div className="w-10 h-10 rounded-xl bg-rose-950/60 border border-rose-800/60 flex items-center justify-center text-rose-400">
                 <AlertTriangle className="w-5 h-5" />
               </div>
@@ -115,7 +115,7 @@ export default function FlagshipCaseStudy(): React.JSX.Element {
             </div>
 
             {/* 2. Technical Execution */}
-            <div className="p-6 sm:p-8 rounded-2xl bg-zinc-950/70 border border-zinc-800/80 space-y-4 relative overflow-hidden group hover:border-cyan-500/40 transition-colors">
+            <div className="p-6 sm:p-8 rounded-2xl bg-zinc-950/70 border border-zinc-800/80 space-y-4 relative overflow-hidden group hover:-translate-y-1 hover:border-cyan-500/30 transition-all duration-300">
               <div className="w-10 h-10 rounded-xl bg-cyan-950/60 border border-cyan-800/60 flex items-center justify-center text-cyan-400">
                 <Cpu className="w-5 h-5" />
               </div>
@@ -147,7 +147,7 @@ export default function FlagshipCaseStudy(): React.JSX.Element {
             </div>
 
             {/* 3. Concrete Result */}
-            <div className="p-6 sm:p-8 rounded-2xl bg-zinc-950/70 border border-zinc-800/80 space-y-4 relative overflow-hidden group hover:border-emerald-500/40 transition-colors">
+            <div className="p-6 sm:p-8 rounded-2xl bg-zinc-950/70 border border-zinc-800/80 space-y-4 relative overflow-hidden group hover:-translate-y-1 hover:border-emerald-500/30 transition-all duration-300">
               <div className="w-10 h-10 rounded-xl bg-emerald-950/60 border border-emerald-800/60 flex items-center justify-center text-emerald-400">
                 <CheckCircle2 className="w-5 h-5" />
               </div>
