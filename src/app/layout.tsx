@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import "./globals.css";
+import { FAQS } from "@/config/faqs";
 
 export const viewport: Viewport = {
   themeColor: "#09090b",
@@ -9,9 +10,9 @@ export const viewport: Viewport = {
 };
 
 export const metadata: Metadata = {
-  title: "Dukatrio | Custom Software Solutions & Enterprise SaaS Development",
+  title: "Dukatrio | Custom Software, SaaS & Client Portal Development",
   description:
-    "Dukatrio builds mission-critical custom software, bespoke web applications, and scalable SaaS platforms. Dukatrio razvija napredna softverska rešenja, prilagođene web platforme i specijalizovane SaaS sisteme za automatizaciju poslovanja.",
+    "Belgrade-based Next.js software studio building bespoke web applications, SaaS platforms and B2B client portals — 100% code ownership, sub-400ms speed, fixed-milestone pricing. Izrada namenskog softvera i web aplikacija.",
   metadataBase: new URL("https://dukatrio.com"),
   alternates: {
     canonical: "https://dukatrio.com",
@@ -28,21 +29,26 @@ export const metadata: Metadata = {
   },
   keywords: [
     "Dukatrio",
-    "Custom Software Engineering",
-    "SaaS Product Development",
-    "Enterprise Web Applications",
-    "Cloud Architecture",
-    "B2B SaaS Systems",
-    "Next.js Development",
-    "Full-Stack Engineering",
+    "custom software development",
+    "bespoke SaaS development studio",
+    "custom Next.js web application development",
+    "enterprise client portal development",
+    "B2B portal software",
+    "self-hosted web platforms",
+    "full code ownership software agency",
+    "software development Belgrade",
+    "izrada namenskog softvera Beograd",
+    "razvoj custom web aplikacija Srbija",
+    "izrada B2B portala",
+    "SaaS razvoj Srbija",
     "Gradilište Dukatrio",
-    "High-Performance Web Applications",
+    "FundingSolutions",
   ],
   authors: [{ name: "Dukatrio Engineering Studio" }, { name: "Petar D." }],
   creator: "Petar D.",
   publisher: "Dukatrio",
   openGraph: {
-    title: "Dukatrio | Custom Software Solutions & Enterprise SaaS Development",
+    title: "Dukatrio | Custom Software, SaaS & Client Portal Development",
     description:
       "Dukatrio builds mission-critical custom software, bespoke web applications, and scalable SaaS platforms. Dukatrio razvija napredna softverska rešenja i SaaS sisteme.",
     url: "https://dukatrio.com",
@@ -53,7 +59,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Dukatrio | Custom Software Solutions & Enterprise SaaS Development",
+    title: "Dukatrio | Custom Software, SaaS & Client Portal Development",
     description:
       "Dukatrio builds mission-critical custom software, bespoke web applications, and scalable SaaS platforms.",
   },
@@ -200,6 +206,23 @@ const jsonLd = {
           },
         ],
       },
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://dukatrio.com/#website",
+      url: "https://dukatrio.com",
+      name: "Dukatrio",
+      inLanguage: ["en", "sr"],
+      publisher: { "@id": "https://dukatrio.com/#organization" },
+    },
+    {
+      "@type": "FAQPage",
+      "@id": "https://dukatrio.com/#faq",
+      mainEntity: FAQS.map((item) => ({
+        "@type": "Question",
+        name: item.question,
+        acceptedAnswer: { "@type": "Answer", text: item.answer },
+      })),
     },
   ],
 };

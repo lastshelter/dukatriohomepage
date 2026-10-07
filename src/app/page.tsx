@@ -14,6 +14,8 @@ import CaseStudySection from "@/components/portfolio/CaseStudyCard";
 import SocialProof from "@/components/testimonials/SocialProof";
 import InteractiveDemo from "@/components/InteractiveDemo";
 import Hero from "@/components/Hero";
+import ScrollEffects from "@/components/ui/ScrollEffects";
+import FaqSection from "@/components/home/FaqSection";
 import { motion } from "framer-motion";
 import {
   Cpu,
@@ -40,6 +42,8 @@ export default function HomePage(): React.JSX.Element {
 
   return (
     <div className="relative min-h-screen bg-[#09090b] text-zinc-100 overflow-hidden font-sans pb-16 md:pb-0">
+      <ScrollEffects />
+
       {/* Background Glows & Grid */}
       <div className="absolute inset-0 bg-tech-grid opacity-60 pointer-events-none" />
       <div className="absolute -top-40 left-1/2 -translate-x-1/2 w-[700px] h-[350px] bg-cyan-500/10 rounded-full blur-[128px] pointer-events-none" />
@@ -61,7 +65,7 @@ export default function HomePage(): React.JSX.Element {
       {/* ========================================================================= */}
       <section className="py-6 border-y border-zinc-800/80 bg-zinc-950/60 backdrop-blur-md">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6 font-mono text-xs">
+          <div data-stagger className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6 font-mono text-xs">
             <div className="flex items-center gap-3 p-3 rounded-xl border border-slate-800/80 hover:border-slate-600 bg-zinc-900/40 transition-colors duration-200">
               <div className="w-8 h-8 rounded-lg bg-cyan-950/50 border border-cyan-800/50 flex items-center justify-center text-cyan-400 shrink-0">
                 <Lock className="w-4 h-4" />
@@ -127,9 +131,9 @@ export default function HomePage(): React.JSX.Element {
           </div>
 
           {/* 4-Card Interactive Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <div data-stagger className="grid grid-cols-1 md:grid-cols-2 gap-8">
             {/* Card 1: B2B Client Portals & Management Desks */}
-            <div className="rounded-2xl border border-zinc-800 bg-zinc-950/70 p-8 shadow-xl hover:-translate-y-1 hover:border-cyan-500/30 hover:bg-zinc-900/60 transition-all duration-300 space-y-6 group">
+            <div className="rounded-2xl border border-zinc-800 bg-zinc-950/70 p-8 shadow-xl spotlight-card hover:-translate-y-1 hover:border-cyan-500/30 hover:bg-zinc-900/60 transition-all duration-300 space-y-6 group">
               <div className="flex items-center justify-between">
                 <div className="w-12 h-12 rounded-xl bg-cyan-950/60 border border-cyan-800/60 flex items-center justify-center text-cyan-400 group-hover:scale-105 transition-transform">
                   <Layers className="w-6 h-6" />
@@ -167,7 +171,7 @@ export default function HomePage(): React.JSX.Element {
             </div>
 
             {/* Card 2: Algorithmic Decision & Diagnostic Engines */}
-            <div className="rounded-2xl border border-zinc-800 bg-zinc-950/70 p-8 shadow-xl hover:-translate-y-1 hover:border-emerald-500/30 hover:bg-zinc-900/60 transition-all duration-300 space-y-6 group">
+            <div className="rounded-2xl border border-zinc-800 bg-zinc-950/70 p-8 shadow-xl spotlight-card hover:-translate-y-1 hover:border-emerald-500/30 hover:bg-zinc-900/60 transition-all duration-300 space-y-6 group">
               <div className="flex items-center justify-between">
                 <div className="w-12 h-12 rounded-xl bg-emerald-950/60 border border-emerald-800/60 flex items-center justify-center text-emerald-400 group-hover:scale-105 transition-transform">
                   <Calculator className="w-6 h-6" />
@@ -205,7 +209,7 @@ export default function HomePage(): React.JSX.Element {
             </div>
 
             {/* Card 3: High-Throughput Web Applications */}
-            <div className="rounded-2xl border border-zinc-800 bg-zinc-950/70 p-8 shadow-xl hover:-translate-y-1 hover:border-indigo-500/30 hover:bg-zinc-900/60 transition-all duration-300 space-y-6 group">
+            <div className="rounded-2xl border border-zinc-800 bg-zinc-950/70 p-8 shadow-xl spotlight-card hover:-translate-y-1 hover:border-indigo-500/30 hover:bg-zinc-900/60 transition-all duration-300 space-y-6 group">
               <div className="flex items-center justify-between">
                 <div className="w-12 h-12 rounded-xl bg-indigo-950/60 border border-indigo-800/60 flex items-center justify-center text-indigo-400 group-hover:scale-105 transition-transform">
                   <Zap className="w-6 h-6" />
@@ -243,7 +247,7 @@ export default function HomePage(): React.JSX.Element {
             </div>
 
             {/* Card 4: Production Linux Cloud Infrastructure */}
-            <div className="rounded-2xl border border-zinc-800 bg-zinc-950/70 p-8 shadow-xl hover:-translate-y-1 hover:border-teal-500/30 hover:bg-zinc-900/60 transition-all duration-300 space-y-6 group">
+            <div className="rounded-2xl border border-zinc-800 bg-zinc-950/70 p-8 shadow-xl spotlight-card hover:-translate-y-1 hover:border-teal-500/30 hover:bg-zinc-900/60 transition-all duration-300 space-y-6 group">
               <div className="flex items-center justify-between">
                 <div className="w-12 h-12 rounded-xl bg-teal-950/60 border border-teal-800/60 flex items-center justify-center text-teal-400 group-hover:scale-105 transition-transform">
                   <Server className="w-6 h-6" />
@@ -305,7 +309,7 @@ export default function HomePage(): React.JSX.Element {
           </div>
 
           {/* 3 Stages Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 relative">
+          <div data-stagger className="grid grid-cols-1 md:grid-cols-3 gap-8 relative">
             {/* Stage 01 */}
             <div className="rounded-2xl border border-zinc-800/80 bg-zinc-900/50 p-8 space-y-5 hover:-translate-y-1 hover:border-cyan-500/30 transition-all duration-300">
               <div className="flex items-center justify-between">
@@ -419,9 +423,9 @@ export default function HomePage(): React.JSX.Element {
           </div>
 
           {/* 4 Cards Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <div data-stagger className="grid grid-cols-1 md:grid-cols-2 gap-8">
             {/* Card 1: Full-Stack Web Architecture */}
-            <div className="rounded-2xl border border-zinc-800/80 bg-zinc-900/40 p-8 shadow-sm hover:-translate-y-1 hover:border-cyan-500/30 hover:bg-zinc-900/60 transition-all duration-300 space-y-4 group">
+            <div className="rounded-2xl border border-zinc-800/80 bg-zinc-900/40 p-8 shadow-sm spotlight-card hover:-translate-y-1 hover:border-cyan-500/30 hover:bg-zinc-900/60 transition-all duration-300 space-y-4 group">
               <div className="w-12 h-12 rounded-xl bg-cyan-950/50 border border-cyan-800/50 flex items-center justify-center text-cyan-400 group-hover:scale-105 transition-transform">
                 <Code2 className="w-6 h-6" />
               </div>
@@ -448,7 +452,7 @@ export default function HomePage(): React.JSX.Element {
             </div>
 
             {/* Card 2: Fintech & Data Systems */}
-            <div className="rounded-2xl border border-zinc-800/80 bg-zinc-900/40 p-8 shadow-sm hover:-translate-y-1 hover:border-emerald-500/30 hover:bg-zinc-900/60 transition-all duration-300 space-y-4 group">
+            <div className="rounded-2xl border border-zinc-800/80 bg-zinc-900/40 p-8 shadow-sm spotlight-card hover:-translate-y-1 hover:border-emerald-500/30 hover:bg-zinc-900/60 transition-all duration-300 space-y-4 group">
               <div className="w-12 h-12 rounded-xl bg-emerald-950/50 border border-emerald-800/50 flex items-center justify-center text-emerald-400 group-hover:scale-105 transition-transform">
                 <Database className="w-6 h-6" />
               </div>
@@ -475,7 +479,7 @@ export default function HomePage(): React.JSX.Element {
             </div>
 
             {/* Card 3: Cloud & Infrastructure */}
-            <div className="rounded-2xl border border-zinc-800/80 bg-zinc-900/40 p-8 shadow-sm hover:-translate-y-1 hover:border-indigo-500/30 hover:bg-zinc-900/60 transition-all duration-300 space-y-4 group">
+            <div className="rounded-2xl border border-zinc-800/80 bg-zinc-900/40 p-8 shadow-sm spotlight-card hover:-translate-y-1 hover:border-indigo-500/30 hover:bg-zinc-900/60 transition-all duration-300 space-y-4 group">
               <div className="w-12 h-12 rounded-xl bg-indigo-950/50 border border-indigo-800/50 flex items-center justify-center text-indigo-400 group-hover:scale-105 transition-transform">
                 <Server className="w-6 h-6" />
               </div>
@@ -502,7 +506,7 @@ export default function HomePage(): React.JSX.Element {
             </div>
 
             {/* Card 4: Process Automation & Portals */}
-            <div className="rounded-2xl border border-zinc-800/80 bg-zinc-900/40 p-8 shadow-sm hover:-translate-y-1 hover:border-teal-500/30 hover:bg-zinc-900/60 transition-all duration-300 space-y-4 group">
+            <div className="rounded-2xl border border-zinc-800/80 bg-zinc-900/40 p-8 shadow-sm spotlight-card hover:-translate-y-1 hover:border-teal-500/30 hover:bg-zinc-900/60 transition-all duration-300 space-y-4 group">
               <div className="w-12 h-12 rounded-xl bg-teal-950/50 border border-teal-800/50 flex items-center justify-center text-teal-400 group-hover:scale-105 transition-transform">
                 <Workflow className="w-6 h-6" />
               </div>
@@ -658,7 +662,7 @@ export default function HomePage(): React.JSX.Element {
           </div>
 
           {/* 3-Column Frosted Glass Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div data-stagger className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {/* Card 1: Modular Component Architecture */}
             <div className="rounded-2xl border border-zinc-800/80 bg-zinc-900/40 p-8 shadow-sm hover:-translate-y-1 hover:border-cyan-500/30 hover:bg-zinc-900/60 transition-all duration-300 space-y-4 group">
               <div className="w-12 h-12 rounded-xl bg-cyan-950/60 border border-cyan-800/60 flex items-center justify-center text-cyan-400 group-hover:scale-105 transition-transform">
@@ -729,6 +733,11 @@ export default function HomePage(): React.JSX.Element {
       <div id="calculator" className="scroll-mt-24" />
       <div id="estimator" className="scroll-mt-24" />
       <ScopeEstimator />
+
+      {/* ========================================================================= */}
+      {/* 6G. FAQ (mirrors FAQPage JSON-LD in layout.tsx) */}
+      {/* ========================================================================= */}
+      <FaqSection />
 
       {/* ========================================================================= */}
       {/* 7. CONTACT / CALL TO ACTION & FOOTER */}

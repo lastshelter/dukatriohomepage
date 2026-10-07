@@ -22,6 +22,7 @@ import {
   Check,
   Download,
 } from "lucide-react";
+import AnimatedNumber from "@/components/ui/AnimatedNumber";
 
 interface ServiceType {
   id: string;
@@ -679,9 +680,9 @@ export default function ScopeEstimator(): React.JSX.Element {
                   <span>Projected Investment Bracket</span>
                 </div>
                 <div className="text-2xl sm:text-3xl font-extrabold text-white font-mono tracking-tight flex items-baseline gap-2">
-                  <span className="text-cyan-400">€{calculatedMinCost.toLocaleString()}</span>
+                  <span className="text-cyan-400">€<AnimatedNumber value={calculatedMinCost} /></span>
                   <span className="text-zinc-500 text-lg font-normal">—</span>
-                  <span>€{calculatedMaxCost.toLocaleString()}</span>
+                  <span>€<AnimatedNumber value={calculatedMaxCost} /></span>
                 </div>
                 <p className="text-[11px] font-mono text-zinc-400">
                   Fixed milestone pricing with zero hidden surcharges or surprise billing.
@@ -696,7 +697,7 @@ export default function ScopeEstimator(): React.JSX.Element {
                 </div>
                 <div className="text-xl sm:text-2xl font-bold text-white font-mono tracking-tight flex items-baseline gap-2">
                   <span className="text-emerald-400">
-                    {calculatedMinWeeks} – {calculatedMaxWeeks} Weeks
+                    <AnimatedNumber value={calculatedMinWeeks} /> – <AnimatedNumber value={calculatedMaxWeeks} /> Weeks
                   </span>
                 </div>
                 <div className="flex items-center justify-between text-[11px] font-mono text-zinc-400 pt-1">
