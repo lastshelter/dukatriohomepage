@@ -17,6 +17,7 @@ export default function Navbar(): React.JSX.Element {
 
   // Streamlined Center Navigation
   const navLinks = [
+    { label: "Services", href: isHome ? "#solutions" : "/#solutions" },
     { label: "Capabilities", href: isHome ? "#capabilities" : "/#capabilities" },
     { label: "Case Studies", href: isHome ? "#case-studies" : "/#case-studies" },
     { label: "Cost Estimator", href: isHome ? "#estimator" : "/#estimator" },
@@ -39,12 +40,26 @@ export default function Navbar(): React.JSX.Element {
         setEcosystemOpen(false);
       }
     };
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        setMobileMenuOpen(false);
+        setEcosystemOpen(false);
+      }
+    };
     document.addEventListener("mousedown", handleClickOutside);
+    document.addEventListener("keydown", handleKeyDown);
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
+      document.removeEventListener("keydown", handleKeyDown);
       if (timeoutRef.current) clearTimeout(timeoutRef.current);
     };
   }, []);
+
+  // Close the drawer whenever the route changes
+  useEffect(() => {
+    const id = requestAnimationFrame(() => setMobileMenuOpen(false));
+    return () => cancelAnimationFrame(id);
+  }, [pathname]);
 
   const handleCtaClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
     setMobileMenuOpen(false);
@@ -78,7 +93,7 @@ export default function Navbar(): React.JSX.Element {
               DukaTrio
               <span className="w-1.5 h-1.5 rounded-full bg-cyan-400 inline-block animate-pulse" />
             </span>
-            <span className="hidden sm:inline-flex items-center px-2 py-0.5 rounded-full bg-cyan-950/70 border border-cyan-800/60 text-[9px] font-mono font-bold tracking-wider text-cyan-400 uppercase">
+            <span className="hidden sm:inline-flex lg:hidden xl:inline-flex items-center px-2 py-0.5 rounded-full bg-cyan-950/70 border border-cyan-800/60 text-[9px] font-mono font-bold tracking-wider text-cyan-400 uppercase">
               ENGINEERING STUDIO
             </span>
           </div>
@@ -211,6 +226,8 @@ export default function Navbar(): React.JSX.Element {
           onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
           className="lg:hidden p-2 rounded-xl text-slate-400 hover:text-white hover:bg-slate-900 border border-transparent hover:border-slate-800 transition cursor-pointer"
           aria-label="Toggle navigation menu"
+          aria-expanded={mobileMenuOpen}
+          aria-controls="mobile-nav-drawer"
         >
           {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
         </button>
@@ -218,7 +235,7 @@ export default function Navbar(): React.JSX.Element {
 
       {/* Responsive Mobile / Tablet Sheet */}
       {mobileMenuOpen && (
-        <div className="lg:hidden mt-2 p-5 rounded-2xl bg-slate-950/95 backdrop-blur-xl border border-slate-800/80 shadow-2xl shadow-black/80 space-y-4 animate-in fade-in slide-in-from-top-2 duration-200">
+        <div id="mobile-nav-drawer" className="lg:hidden mt-2 p-5 max-h-[calc(100dvh-6rem)] overflow-y-auto overscroll-contain rounded-2xl bg-slate-950/95 backdrop-blur-xl border border-white/10 shadow-2xl shadow-black/80 space-y-4 animate-in fade-in slide-in-from-top-2 duration-200">
           <nav className="flex flex-col space-y-2 text-sm font-medium text-slate-200">
             {navLinks.map((link) => (
               <Link

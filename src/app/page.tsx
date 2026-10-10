@@ -16,7 +16,7 @@ import InteractiveDemo from "@/components/InteractiveDemo";
 import Hero from "@/components/Hero";
 import ScrollEffects from "@/components/ui/ScrollEffects";
 import FaqSection from "@/components/home/FaqSection";
-import { motion } from "framer-motion";
+import ServicePillars from "@/components/services/ServicePillars";
 import {
   Cpu,
   ShieldCheck,
@@ -24,18 +24,14 @@ import {
   Globe,
   Server,
   Zap,
-  ArrowRight,
   Code2,
   Database,
   Lock,
   CheckCircle2,
-  Activity,
   FileCode2,
   Mail,
   Network,
   Workflow,
-  Sparkles,
-  Calculator,
 } from "lucide-react";
 
 export default function HomePage(): React.JSX.Element {
@@ -110,182 +106,9 @@ export default function HomePage(): React.JSX.Element {
       </section>
 
       {/* ========================================================================= */}
-      {/* 4. CORE ENGINEERED SOLUTIONS ("WHAT WE ARCHITECT") */}
+      {/* 4. ENGINEERING SERVICE PILLARS (data-driven: src/config/servicePillars.ts) */}
       {/* ========================================================================= */}
-      <section id="solutions" className="py-24 sm:py-32 relative border-t border-zinc-800/80">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-16">
-          {/* Section Header */}
-          <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
-            <div className="space-y-3">
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-950/50 border border-cyan-800/50 text-cyan-400 font-mono text-xs font-semibold">
-                <Sparkles className="w-3.5 h-3.5 text-cyan-400" />
-                <span>Commercial Engineering Services</span>
-              </div>
-              <h2 className="text-3xl sm:text-5xl font-extrabold text-white tracking-tight">
-                Core Engineered Solutions.
-              </h2>
-            </div>
-            <p className="text-sm sm:text-base text-zinc-400 max-w-md">
-              Proprietary full-stack systems, automated financial engines, and resilient cloud architectures tailored for commercial performance.
-            </p>
-          </div>
-
-          {/* 4-Card Interactive Grid */}
-          <div data-stagger className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            {/* Card 1: B2B Client Portals & Management Desks */}
-            <div className="rounded-2xl border border-zinc-800 bg-zinc-950/70 p-8 shadow-xl spotlight-card hover:-translate-y-1 hover:border-cyan-500/30 hover:bg-zinc-900/60 transition-all duration-300 space-y-6 group">
-              <div className="flex items-center justify-between">
-                <div className="w-12 h-12 rounded-xl bg-cyan-950/60 border border-cyan-800/60 flex items-center justify-center text-cyan-400 group-hover:scale-105 transition-transform">
-                  <Layers className="w-6 h-6" />
-                </div>
-                <span className="font-mono text-xs text-zinc-500 font-bold uppercase">
-                  SOLUTION // 01
-                </span>
-              </div>
-              <div className="space-y-2">
-                <h3 className="text-xl sm:text-2xl font-bold text-white tracking-tight">
-                  B2B Client Portals &amp; Management Desks
-                </h3>
-                <p className="text-sm text-zinc-400 leading-relaxed font-normal">
-                  Institutional client dashboards equipped with strict role-based access control (RBAC), multi-tenant isolation, encrypted document upload dropzones, intake workflows, and administrative audit trails.
-                </p>
-              </div>
-              <div className="pt-2 border-t border-zinc-800/80 grid grid-cols-2 gap-3 text-xs font-mono text-zinc-300">
-                <div className="flex items-center gap-2">
-                  <CheckCircle2 className="w-3.5 h-3.5 text-cyan-400" />
-                  <span>Role-Based RBAC</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <CheckCircle2 className="w-3.5 h-3.5 text-cyan-400" />
-                  <span>Encrypted Vaults</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <CheckCircle2 className="w-3.5 h-3.5 text-cyan-400" />
-                  <span>Audit Logging</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <CheckCircle2 className="w-3.5 h-3.5 text-cyan-400" />
-                  <span>Multi-Tenant Auth</span>
-                </div>
-              </div>
-            </div>
-
-            {/* Card 2: Algorithmic Decision & Diagnostic Engines */}
-            <div className="rounded-2xl border border-zinc-800 bg-zinc-950/70 p-8 shadow-xl spotlight-card hover:-translate-y-1 hover:border-emerald-500/30 hover:bg-zinc-900/60 transition-all duration-300 space-y-6 group">
-              <div className="flex items-center justify-between">
-                <div className="w-12 h-12 rounded-xl bg-emerald-950/60 border border-emerald-800/60 flex items-center justify-center text-emerald-400 group-hover:scale-105 transition-transform">
-                  <Calculator className="w-6 h-6" />
-                </div>
-                <span className="font-mono text-xs text-zinc-500 font-bold uppercase">
-                  SOLUTION // 02
-                </span>
-              </div>
-              <div className="space-y-2">
-                <h3 className="text-xl sm:text-2xl font-bold text-white tracking-tight">
-                  Algorithmic Decision &amp; Diagnostic Engines
-                </h3>
-                <p className="text-sm text-zinc-400 leading-relaxed font-normal">
-                  High-precision computational calculation kernels. Custom debt amortizers, multi-variable risk calculators, dynamic waterfall schedule generators, and automated client-side PDF document exports.
-                </p>
-              </div>
-              <div className="pt-2 border-t border-zinc-800/80 grid grid-cols-2 gap-3 text-xs font-mono text-zinc-300">
-                <div className="flex items-center gap-2">
-                  <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400" />
-                  <span>Sub-50ms Calculation</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400" />
-                  <span>Zero Rounding Drift</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400" />
-                  <span>Dynamic Schedules</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400" />
-                  <span>PDF Term Sheets</span>
-                </div>
-              </div>
-            </div>
-
-            {/* Card 3: High-Throughput Web Applications */}
-            <div className="rounded-2xl border border-zinc-800 bg-zinc-950/70 p-8 shadow-xl spotlight-card hover:-translate-y-1 hover:border-indigo-500/30 hover:bg-zinc-900/60 transition-all duration-300 space-y-6 group">
-              <div className="flex items-center justify-between">
-                <div className="w-12 h-12 rounded-xl bg-indigo-950/60 border border-indigo-800/60 flex items-center justify-center text-indigo-400 group-hover:scale-105 transition-transform">
-                  <Zap className="w-6 h-6" />
-                </div>
-                <span className="font-mono text-xs text-zinc-500 font-bold uppercase">
-                  SOLUTION // 03
-                </span>
-              </div>
-              <div className="space-y-2">
-                <h3 className="text-xl sm:text-2xl font-bold text-white tracking-tight">
-                  High-Throughput Web Applications
-                </h3>
-                <p className="text-sm text-zinc-400 leading-relaxed font-normal">
-                  Next.js App Router, React 19, TypeScript, and Prisma ORM with PostgreSQL or SQLite. Engineered with optimized edge rendering, zero bloat, and sub-400ms time-to-first-byte across mobile and desktop.
-                </p>
-              </div>
-              <div className="pt-2 border-t border-zinc-800/80 grid grid-cols-2 gap-3 text-xs font-mono text-zinc-300">
-                <div className="flex items-center gap-2">
-                  <CheckCircle2 className="w-3.5 h-3.5 text-indigo-400" />
-                  <span>Edge SSR &amp; RSC</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <CheckCircle2 className="w-3.5 h-3.5 text-indigo-400" />
-                  <span>Type-Safe API Routes</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <CheckCircle2 className="w-3.5 h-3.5 text-indigo-400" />
-                  <span>Prisma 7 ORM</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <CheckCircle2 className="w-3.5 h-3.5 text-indigo-400" />
-                  <span>Lighthouse 95+ Score</span>
-                </div>
-              </div>
-            </div>
-
-            {/* Card 4: Production Linux Cloud Infrastructure */}
-            <div className="rounded-2xl border border-zinc-800 bg-zinc-950/70 p-8 shadow-xl spotlight-card hover:-translate-y-1 hover:border-teal-500/30 hover:bg-zinc-900/60 transition-all duration-300 space-y-6 group">
-              <div className="flex items-center justify-between">
-                <div className="w-12 h-12 rounded-xl bg-teal-950/60 border border-teal-800/60 flex items-center justify-center text-teal-400 group-hover:scale-105 transition-transform">
-                  <Server className="w-6 h-6" />
-                </div>
-                <span className="font-mono text-xs text-zinc-500 font-bold uppercase">
-                  SOLUTION // 04
-                </span>
-              </div>
-              <div className="space-y-2">
-                <h3 className="text-xl sm:text-2xl font-bold text-white tracking-tight">
-                  Production Linux Cloud Infrastructure
-                </h3>
-                <p className="text-sm text-zinc-400 leading-relaxed font-normal">
-                  Dedicated cloud pod deployments on AMD EPYC NVMe compute, automated edge TLS, HTTP/3 transport, Caddy reverse proxy routing, and zero-downtime PM2 cluster process management.
-                </p>
-              </div>
-              <div className="pt-2 border-t border-zinc-800/80 grid grid-cols-2 gap-3 text-xs font-mono text-zinc-300">
-                <div className="flex items-center gap-2">
-                  <CheckCircle2 className="w-3.5 h-3.5 text-teal-400" />
-                  <span>HTTP/3 &amp; Auto TLS</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <CheckCircle2 className="w-3.5 h-3.5 text-teal-400" />
-                  <span>Zero-Downtime Swaps</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <CheckCircle2 className="w-3.5 h-3.5 text-teal-400" />
-                  <span>Bare-Metal VPS</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <CheckCircle2 className="w-3.5 h-3.5 text-teal-400" />
-                  <span>Hardware Encrypted</span>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
+      <ServicePillars />
 
       {/* ========================================================================= */}
       {/* 4B. STRUCTURED 3-STAGE DELIVERY PROTOCOL */}
@@ -731,7 +554,6 @@ export default function HomePage(): React.JSX.Element {
       {/* 6F. INTERACTIVE SCOPE & COST ESTIMATOR */}
       {/* ========================================================================= */}
       <div id="calculator" className="scroll-mt-24" />
-      <div id="estimator" className="scroll-mt-24" />
       <ScopeEstimator />
 
       {/* ========================================================================= */}

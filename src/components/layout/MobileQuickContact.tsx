@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Send,
   X,
@@ -19,6 +19,21 @@ export default function MobileQuickContact(): React.JSX.Element {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
+
+  // Modal hygiene: Escape closes the sheet, and the page behind it stops scrolling.
+  useEffect(() => {
+    if (!modalOpen) return;
+    const onKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setModalOpen(false);
+    };
+    document.addEventListener("keydown", onKeyDown);
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.removeEventListener("keydown", onKeyDown);
+      document.body.style.overflow = previousOverflow;
+    };
+  }, [modalOpen]);
 
   const handleSubmitFastInquiry = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -72,7 +87,7 @@ export default function MobileQuickContact(): React.JSX.Element {
   return (
     <>
       {/* Sticky Bottom Dock: Strictly mobile (md:hidden) */}
-      <div className="fixed bottom-0 left-0 right-0 z-50 md:hidden bg-zinc-950/90 backdrop-blur-xl border-t border-zinc-800/80 px-4 py-2.5 shadow-[0_-8px_30px_rgba(0,0,0,0.8)]">
+      <div className="fixed bottom-0 left-0 right-0 z-50 md:hidden bg-zinc-950/90 backdrop-blur-xl border-t border-white/10 px-4 pt-2.5 pb-[max(0.625rem,env(safe-area-inset-bottom))] shadow-[0_-8px_30px_rgba(0,0,0,0.8)]">
         <div className="max-w-md mx-auto grid grid-cols-2 gap-3">
           {/* 1. Direct Email Desk */}
           <a
@@ -98,12 +113,18 @@ export default function MobileQuickContact(): React.JSX.Element {
       {/* Fast Inquiry Modal Bottom Sheet */}
       <AnimatePresence>
         {modalOpen && (
-          <div className="fixed inset-0 z-50 md:hidden flex items-end sm:items-center justify-center p-0 sm:p-4 bg-black/80 backdrop-blur-sm">
+          <div onClick={() => setModalOpen(false)}
+            className="fixed inset-0 z-50 md:hidden flex items-end sm:items-center justify-center p-0 sm:p-4 bg-black/80 backdrop-blur-sm"
+          >
             <motion.div
               initial={{ opacity: 0, y: 100 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: 100 }}
               transition={{ duration: 0.25 }}
+              role="dialog"
+              aria-modal="true"
+              aria-labelledby="quick-inquiry-title"
+              onClick={(e) => e.stopPropagation()}
               className="w-full max-w-lg bg-zinc-950 border-t sm:border border-zinc-800 rounded-t-3xl sm:rounded-3xl p-6 shadow-2xl relative max-h-[90vh] overflow-y-auto"
             >
               {/* Modal Header */}
@@ -113,7 +134,7 @@ export default function MobileQuickContact(): React.JSX.Element {
                     <Sparkles className="w-3.5 h-3.5" />
                   </div>
                   <div>
-                    <h3 className="text-base font-bold text-white tracking-tight">
+                    <h3 id="quick-inquiry-title" className="text-base font-bold text-white tracking-tight">
                       Fast Mobile Inquiry
                     </h3>
                     <p className="text-[10px] font-mono text-zinc-400">Direct response within 2 hours</p>
@@ -122,6 +143,7 @@ export default function MobileQuickContact(): React.JSX.Element {
                 <button
                   type="button"
                   onClick={() => setModalOpen(false)}
+                  aria-label="Close quick inquiry"
                   className="p-2 rounded-lg text-zinc-400 hover:text-white bg-zinc-900 border border-zinc-800"
                 >
                   <X className="w-4 h-4" />
@@ -147,43 +169,48 @@ export default function MobileQuickContact(): React.JSX.Element {
                   )}
 
                   <div className="space-y-1">
-                    <label className="text-[11px] font-mono uppercase text-zinc-400">
+                    <label htmlFor="quick-name" className="text-[11px] font-mono uppercase text-zinc-400">
                       Your Name <span className="text-cyan-400">*</span>
                     </label>
                     <input
+                      id="quick-name"
                       type="text"
+                      autoComplete="name"
                       required
                       placeholder="e.g. Marko Markovic"
                       value={name}
                       onChange={(e) => setName(e.target.value)}
-                      className="w-full px-3.5 py-2.5 rounded-xl bg-zinc-900 border border-zinc-800 text-sm text-white placeholder:text-zinc-600 focus:border-cyan-500 outline-none"
+                      className="w-full px-3.5 py-2.5 rounded-xl bg-zinc-900 border border-zinc-800 text-base text-white placeholder:text-zinc-600 focus:border-cyan-500 outline-none"
                     />
                   </div>
 
                   <div className="space-y-1">
-                    <label className="text-[11px] font-mono uppercase text-zinc-400">
+                    <label htmlFor="quick-contact" className="text-[11px] font-mono uppercase text-zinc-400">
                       Corporate Email or Callback Handle <span className="text-cyan-400">*</span>
                     </label>
                     <input
+                      id="quick-contact"
                       type="text"
+                      autoComplete="email"
                       required
                       placeholder="name@company.com or callback handle"
                       value={contact}
                       onChange={(e) => setContact(e.target.value)}
-                      className="w-full px-3.5 py-2.5 rounded-xl bg-zinc-900 border border-zinc-800 text-sm text-white placeholder:text-zinc-600 focus:border-cyan-500 outline-none font-mono"
+                      className="w-full px-3.5 py-2.5 rounded-xl bg-zinc-900 border border-zinc-800 text-base text-white placeholder:text-zinc-600 focus:border-cyan-500 outline-none font-mono"
                     />
                   </div>
 
                   <div className="space-y-1">
-                    <label className="text-[11px] font-mono uppercase text-zinc-400">
+                    <label htmlFor="quick-message" className="text-[11px] font-mono uppercase text-zinc-400">
                       Brief Note / Project Scope
                     </label>
                     <textarea
+                      id="quick-message"
                       rows={3}
                       placeholder="What are you looking to build?"
                       value={message}
                       onChange={(e) => setMessage(e.target.value)}
-                      className="w-full px-3.5 py-2.5 rounded-xl bg-zinc-900 border border-zinc-800 text-sm text-white placeholder:text-zinc-600 focus:border-cyan-500 outline-none resize-none"
+                      className="w-full px-3.5 py-2.5 rounded-xl bg-zinc-900 border border-zinc-800 text-base text-white placeholder:text-zinc-600 focus:border-cyan-500 outline-none resize-none"
                     />
                   </div>
 

@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { animate, useReducedMotion } from "framer-motion";
 
 interface AnimatedNumberProps {
@@ -26,7 +26,7 @@ export default function AnimatedNumber({
   className,
 }: AnimatedNumberProps): React.JSX.Element {
   const ref = useRef<HTMLSpanElement>(null);
-  const initial = useRef(value).current;
+  const [initial] = useState<number>(() => value);
   const latest = useRef(value);
   const reduceMotion = useReducedMotion();
 

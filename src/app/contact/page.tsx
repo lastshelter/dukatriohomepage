@@ -14,16 +14,16 @@ import {
 } from "lucide-react";
 
 export const metadata: Metadata = {
-  title: "Contact & Discovery Intake | Dukatrio Web Agency",
+  title: "Contact & Discovery Intake | Dukatrio Engineering Studio",
   description:
-    "Initiate direct architectural consultation for custom web applications, internal tools, and high-performance business portals. 4-hour SLA.",
+    "Initiate direct architectural consultation for enterprise Next.js platforms, Astro SEO portals, real-time desks, and cloud-native backends. 4-hour SLA.",
   alternates: {
     canonical: "https://dukatrio.com/contact",
   },
   openGraph: {
-    title: "Contact & Discovery Intake | Dukatrio Web Agency",
+    title: "Contact & Discovery Intake | Dukatrio Engineering Studio",
     description:
-      "Initiate direct architectural consultation for custom web applications, internal tools, and high-performance business portals. 4-hour SLA.",
+      "Initiate direct architectural consultation for enterprise Next.js platforms, Astro SEO portals, real-time desks, and cloud-native backends. 4-hour SLA.",
     url: "https://dukatrio.com/contact",
     siteName: "Dukatrio",
     locale: "en_US",
@@ -31,9 +31,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Contact & Discovery Intake | Dukatrio Web Agency",
+    title: "Contact & Discovery Intake | Dukatrio Engineering Studio",
     description:
-      "Initiate direct architectural consultation for custom web applications, internal tools, and high-performance business portals. 4-hour SLA.",
+      "Initiate direct architectural consultation for enterprise Next.js platforms, Astro SEO portals, real-time desks, and cloud-native backends. 4-hour SLA.",
   },
 };
 

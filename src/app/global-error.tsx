@@ -24,7 +24,7 @@ export default function GlobalError({
 
           <div className="space-y-2">
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-rose-950/40 border border-rose-800/60 text-rose-400 font-mono text-xs font-semibold">
-              <span>// GLOBAL_ROOT_BOUNDARY_ENGAGED</span>
+              <span>{"// GLOBAL_ROOT_BOUNDARY_ENGAGED"}</span>
             </div>
             <h1 className="text-2xl font-extrabold text-white tracking-tight">
               Platform Interface Interrupted
@@ -59,6 +59,9 @@ export default function GlobalError({
               <span>Retry Session</span>
             </button>
 
+            {/* Intentional hard navigation: global-error replaces the root layout, so the
+                client router may be unusable. A full page load also resets broken state. */}
+            {/* eslint-disable-next-line @next/next/no-html-link-for-pages */}
             <a
               href="/"
               className="w-full sm:w-auto py-2.5 px-5 rounded-xl bg-zinc-900 hover:bg-zinc-800 border border-zinc-800 text-zinc-300 hover:text-white font-mono text-xs transition-colors flex items-center justify-center gap-2"

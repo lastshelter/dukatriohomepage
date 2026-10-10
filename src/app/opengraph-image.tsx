@@ -1,7 +1,5 @@
 import { ImageResponse } from "next/og";
 
-export const runtime = "edge";
-
 export const alt = "DukaTrio Systems Engineering";
 export const size = {
   width: 1200,
@@ -132,7 +130,7 @@ export default function OpenGraphImage() {
               lineHeight: 1.4,
             }}
           >
-            Institutional Fintech Portals · Automated Underwriting Engines · Resilient Cloud VPS
+            Next.js Platforms · Astro SEO Portals · Real-Time Desks · Cloud-Native Backends
           </p>
         </div>
 

@@ -344,7 +344,7 @@ export default function InteractiveDemo(): React.JSX.Element {
                 placeholder="Search event, client, or record ID..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full pl-10 pr-4 py-2 rounded-xl bg-zinc-900 border border-zinc-800 text-sm text-zinc-100 placeholder:text-zinc-600 focus:border-cyan-500 outline-none transition font-sans"
+                className="w-full pl-10 pr-4 py-2 rounded-xl bg-zinc-900 border border-zinc-800 text-base sm:text-sm text-zinc-100 placeholder:text-zinc-600 focus:border-cyan-500 outline-none transition font-sans"
               />
             </div>
 

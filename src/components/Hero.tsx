@@ -16,7 +16,7 @@ export default function Hero(): React.JSX.Element {
   return (
     <section className="relative pt-24 pb-20 sm:pt-36 sm:pb-32 text-center overflow-hidden">
       {/* Ambient Glow & Canvas Depth: Slow-drifting radial gradient centered behind hero title */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-5xl h-[460px] bg-[radial-gradient(ellipse_80%_80%_at_50%_-20%,rgba(6,182,212,0.15),rgba(255,255,255,0))] pointer-events-none blur-2xl -z-10 animate-ambient-drift" />
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-5xl h-[460px] bg-[radial-gradient(ellipse_80%_80%_at_50%_-20%,rgba(6,182,212,0.15),rgba(255,255,255,0))] pointer-events-none blur-2xl z-0 animate-ambient-drift" />
 
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8 relative z-10">
         {/* 1. Precision Badge Pill: fade-in + slide-down (duration 400ms, ease-out) */}

@@ -7,7 +7,7 @@
     "build": "next build --webpack",
     "postbuild": "node scripts/copy-standalone.js",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "eslint src"
   },
   "dependencies": {
     "clsx": "^2.1.1",

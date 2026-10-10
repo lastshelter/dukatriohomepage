@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import "./globals.css";
 import { FAQS } from "@/config/faqs";
+import { SERVICE_PILLARS } from "@/config/servicePillars";
 
 export const viewport: Viewport = {
   themeColor: "#09090b",
@@ -43,6 +44,11 @@ export const metadata: Metadata = {
     "SaaS razvoj Srbija",
     "Gradilište Dukatrio",
     "FundingSolutions",
+    "Astro SEO Portals",
+    "SvelteKit Real-Time Desks",
+    "Nuxt 3 Operations",
+    "Supabase PostgreSQL Architecture",
+    "Headless CMS Directus Payload",
   ],
   authors: [{ name: "Dukatrio Engineering Studio" }, { name: "Petar D." }],
   creator: "Petar D.",
@@ -116,17 +122,39 @@ const jsonLd = {
         "@id": "https://dukatrio.com/#organization",
       },
       description:
-        "Professional software agency specializing in Custom Software Engineering, SaaS Product Development, Enterprise Web Applications, and Cloud Systems Architecture.",
+        "Elite engineering studio delivering Enterprise Next.js & React platforms, high-performance Astro SEO portals, real-time SvelteKit/Nuxt operational desks, and cloud-native Supabase/PostgreSQL backends.",
+      telephone: undefined,
+      email: "office@dukatrio.com",
+      address: {
+        "@type": "PostalAddress",
+        addressLocality: "Belgrade",
+        addressCountry: "RS",
+      },
+      contactPoint: {
+        "@type": "ContactPoint",
+        contactType: "sales",
+        email: "office@dukatrio.com",
+        url: "https://dukatrio.com/contact",
+        availableLanguage: ["English", "Serbian"],
+        areaServed: ["RS", "EU", "Worldwide"],
+      },
       areaServed: [
         { "@type": "Country", name: "Serbia" },
+        { "@type": "City", name: "Belgrade" },
         { "@type": "AdministrativeArea", name: "European Union" },
         { "@type": "AdministrativeArea", name: "Global" },
       ],
+      availableLanguage: ["English", "Serbian"],
       knowsAbout: [
-        "Custom Software Engineering",
-        "SaaS Product Development",
-        "Enterprise Web Applications",
-        "Cloud Architecture & Distributed Systems",
+        "Enterprise Next.js & React Platforms",
+        "Multi-tenant B2B SaaS",
+        "Astro Islands & Zero-JS Content Delivery",
+        "Technical SEO & Core Web Vitals",
+        "SvelteKit & Nuxt 3 Real-Time Interfaces",
+        "Operational Telemetry & Field Dispatch Consoles",
+        "Supabase & PostgreSQL",
+        "Directus & Payload Headless CMS",
+        "Dockerized Self-Hosted Infrastructure",
         "Next.js 16 App Router",
         "React 19 Server Components",
         "Fintech & Computational Calculation Engines",
@@ -136,42 +164,19 @@ const jsonLd = {
         "@type": "OfferCatalog",
         name: "Enterprise Digital Engineering & SaaS Services",
         itemListElement: [
-          {
+          ...SERVICE_PILLARS.map((pillar) => ({
             "@type": "Offer",
             itemOffered: {
               "@type": "Service",
-              name: "Custom Software Engineering",
-              description:
-                "Bespoke full-stack web applications, mission-critical workflow systems, and role-based client portals.",
+              "@id": `https://dukatrio.com/#service-${pillar.id}`,
+              name: pillar.title,
+              serviceType: pillar.title,
+              description: pillar.schemaDescription,
+              provider: { "@id": "https://dukatrio.com/#organization" },
+              areaServed: ["RS", "EU", "Worldwide"],
+              url: `https://dukatrio.com/#solutions`,
             },
-          },
-          {
-            "@type": "Offer",
-            itemOffered: {
-              "@type": "Service",
-              name: "SaaS Product Development",
-              description:
-                "End-to-end multi-tenant SaaS architecture, subscription engines, metering, and enterprise integrations.",
-            },
-          },
-          {
-            "@type": "Offer",
-            itemOffered: {
-              "@type": "Service",
-              name: "Enterprise Web Applications",
-              description:
-                "High-performance institutional portals engineered with Next.js 16, React 19, and rigorous security standards.",
-            },
-          },
-          {
-            "@type": "Offer",
-            itemOffered: {
-              "@type": "Service",
-              name: "Cloud Architecture & Infrastructure",
-              description:
-                "High-throughput Linux cloud pods, Caddy HTTP/3 reverse proxies, automated TLS, and zero-downtime container clusters.",
-            },
-          },
+          })),
           {
             "@type": "Offer",
             name: "Enterprise SaaS Case Study: Gradilište Dukatrio",
