@@ -1,0 +1,25 @@
+dukatrio.com, www.dukatrio.com {
+    tls internal
+    reverse_proxy 127.0.0.1:3001
+}
+
+gradiliste.dukatrio.com {
+    tls internal
+    reverse_proxy 127.0.0.1:3002
+}
+
+fundingsolutions.dukatrio.com {
+    tls internal
+    header {
+        X-Robots-Tag "noindex, nofollow, noarchive"
+    }
+    reverse_proxy 127.0.0.1:3009
+}
+
+bfstrial.dukatrio.com {
+    tls internal
+    header {
+        X-Robots-Tag "noindex, nofollow, noarchive"
+    }
+    reverse_proxy 127.0.0.1:3000
+}
