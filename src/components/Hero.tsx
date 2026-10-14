@@ -39,11 +39,11 @@ export default function Hero(): React.JSX.Element {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.15, ease: "easeOut" }}
-          className="text-4xl sm:text-6xl lg:text-7xl font-extrabold text-white tracking-tight leading-[1.08] max-w-4xl mx-auto"
+          className="text-4xl sm:text-6xl lg:text-7xl font-extrabold text-white tracking-tight leading-[1.08] max-w-4xl mx-auto text-balance"
         >
-          We Build Custom Internal Tools &amp; Portals That{" "}
-          <span className="bg-gradient-to-r from-cyan-400 via-teal-300 to-indigo-400 bg-clip-text text-transparent">
-            Eliminate Monthly SaaS Taxes.
+          We Build Custom Internal Tools &amp; Portals{" "}
+          <span className="bg-gradient-to-r from-cyan-400 via-teal-300 to-indigo-400 bg-clip-text text-transparent block sm:inline">
+            That Eliminate Monthly SaaS Taxes.
           </span>
         </motion.h1>
 

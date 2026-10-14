@@ -110,10 +110,10 @@ export default function PricingTiers(): React.JSX.Element {
             return (
               <div
                 key={plan.id}
-                className={`rounded-3xl p-8 sm:p-9 flex flex-col justify-between transition-all duration-300 relative group spotlight-card ${
+                className={`rounded-3xl p-8 sm:p-9 flex flex-col justify-between transition-all duration-300 relative group ${
                   isHighlighted
-                    ? "bg-[#12151E] border-2 border-emerald-500/50 shadow-2xl shadow-emerald-500/10 hover:border-emerald-400"
-                    : "bg-[#12151E] border border-white/10 hover:border-white/25 hover:bg-[#181C28]"
+                    ? "bg-[#12151E] border-2 border-emerald-500/60 shadow-2xl shadow-emerald-500/15 hover:border-emerald-400"
+                    : "bg-[#12151E] border border-white/15 hover:border-white/30 hover:bg-[#181C28] shadow-lg shadow-black/40 hover:-translate-y-1"
                 }`}
               >
                 {/* Optional Highlight Badge */}

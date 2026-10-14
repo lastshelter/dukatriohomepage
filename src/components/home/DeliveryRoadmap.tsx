@@ -5,8 +5,8 @@ import { Workflow, CheckCircle2, ArrowRight, Clock, FileCode2, Rocket } from "lu
 
 export default function DeliveryRoadmap(): React.JSX.Element {
   return (
-    <section id="process" className="py-24 sm:py-32 relative border-t border-white/10 bg-[#0B0D13]">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-16">
+    <section id="process" className="pt-14 sm:pt-16 pb-20 sm:pb-28 relative border-t border-white/10 bg-[#0B0D13]">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
         {/* Section Header */}
         <div className="max-w-3xl space-y-4">
           <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-cyan-950/40 border border-cyan-800/50 text-cyan-400 font-mono text-xs font-semibold">

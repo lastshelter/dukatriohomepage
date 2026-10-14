@@ -377,7 +377,7 @@ export default function ScopeEstimator(): React.JSX.Element {
   };
 
   return (
-    <section id="estimator" className="py-24 sm:py-32 relative border-t border-zinc-800/80 bg-zinc-950/60">
+    <section id="estimator" className="pt-20 sm:pt-28 pb-12 sm:pb-16 relative border-t border-zinc-800/80 bg-zinc-950/60">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
         {/* Section Header */}
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">

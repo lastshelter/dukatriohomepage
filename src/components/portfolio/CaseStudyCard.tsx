@@ -6,6 +6,7 @@ import {
   Layers,
   CheckCircle2,
   AlertCircle,
+  ArrowRight,
 } from "lucide-react";
 
 export interface CaseStudyData {
@@ -19,6 +20,7 @@ export interface CaseStudyData {
   outcome: string;
   metrics: { label: string; value: string }[];
   liveUrl?: string;
+  ctaLabel?: string;
 }
 
 export const CASE_STUDIES: CaseStudyData[] = [
@@ -40,6 +42,7 @@ export const CASE_STUDIES: CaseStudyData[] = [
       { label: "Reconnection Sync", value: "< 400ms" },
     ],
     liveUrl: "https://gradiliste.dukatrio.com",
+    ctaLabel: "Explore Live PWA",
   },
   {
     id: "capital_syndication_terminal",
@@ -58,7 +61,8 @@ export const CASE_STUDIES: CaseStudyData[] = [
       { label: "Recurring Seat Fees", value: "€0" },
       { label: "Analyzed Pipeline", value: "€14M+" },
     ],
-    liveUrl: "https://fundingsolutions.dukatrio.com",
+    liveUrl: "#contact",
+    ctaLabel: "Request Architecture Blueprint",
   },
   {
     id: "b2b_portal",
@@ -77,6 +81,8 @@ export const CASE_STUDIES: CaseStudyData[] = [
       { label: "Security Classification", value: "AES-256" },
       { label: "Compliance Pass", value: "100%" },
     ],
+    liveUrl: "#contact",
+    ctaLabel: "Request Demo Access",
   },
   {
     id: "edge_migration",
@@ -95,6 +101,8 @@ export const CASE_STUDIES: CaseStudyData[] = [
       { label: "Cost Reduction", value: "-95%" },
       { label: "Core Web Vitals", value: "99/100" },
     ],
+    liveUrl: "#contact",
+    ctaLabel: "Audit Your Infrastructure",
   },
 ];
 
@@ -168,12 +176,17 @@ export default function CaseStudySection(): React.JSX.Element {
                   {study.liveUrl && (
                     <a
                       href={study.liveUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
+                      {...(study.liveUrl.startsWith("http")
+                        ? { target: "_blank", rel: "noopener noreferrer" }
+                        : {})}
                       className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-cyan-500/10 hover:bg-cyan-500/20 text-cyan-400 border border-cyan-500/30 text-xs font-mono font-semibold transition-colors btn-tactile"
                     >
-                      <span>Explore Live System</span>
-                      <ExternalLink className="w-3.5 h-3.5" />
+                      <span>{study.ctaLabel || "Explore Live System"}</span>
+                      {study.liveUrl.startsWith("http") ? (
+                        <ExternalLink className="w-3.5 h-3.5" />
+                      ) : (
+                        <ArrowRight className="w-3.5 h-3.5" />
+                      )}
                     </a>
                   )}
                 </div>
