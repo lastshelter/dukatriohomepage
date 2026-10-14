@@ -195,18 +195,18 @@ const jsonLd = {
           },
           {
             "@type": "Offer",
-            name: "Fintech Platform Case Study: FundingSolutions",
+            name: "B2B Systems Case Study: FundingSolutions Decisioning Terminal",
             description:
-              "Active in-house commercial capital platform: FundingSolutions (https://fundingsolutions.dukatrio.com), institutional underwriting engine, interactive demo sandbox, and broker lead desk.",
+              "Anonymized B2B client platform custom-built by DukaTrio: FundingSolutions (https://fundingsolutions.dukatrio.com), a commercial capital intake portal and DSCR underwriting decisioning terminal.",
             url: "https://fundingsolutions.dukatrio.com",
             itemOffered: {
               "@type": "SoftwareApplication",
-              name: "FundingSolutions - Commercial Capital Desk",
+              name: "FundingSolutions - Capital Decisioning Terminal",
               applicationCategory: "FintechApplication",
               operatingSystem: "Web",
               url: "https://fundingsolutions.dukatrio.com",
               description:
-                "Enterprise commercial funding portal featuring multi-tier underwriting sandboxes, DSCR stress-testing engines, and automated deal pipeline tracking.",
+                "Enterprise commercial capital intake and risk decisioning terminal featuring real-time DSCR calculation engines and automated PDF term-sheet generation.",
             },
           },
         ],

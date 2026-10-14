@@ -18,7 +18,8 @@ export default function Navbar(): React.JSX.Element {
   // Streamlined Center Navigation
   const navLinks = [
     { label: "Services", href: isHome ? "#solutions" : "/#solutions" },
-    { label: "Capabilities", href: isHome ? "#capabilities" : "/#capabilities" },
+    { label: "Pricing", href: isHome ? "#pricing" : "/#pricing" },
+    { label: "Process", href: isHome ? "#process" : "/#process" },
     { label: "Case Studies", href: isHome ? "#case-studies" : "/#case-studies" },
     { label: "Cost Estimator", href: isHome ? "#estimator" : "/#estimator" },
   ];
@@ -139,7 +140,7 @@ export default function Navbar(): React.JSX.Element {
               <div className="absolute top-full -left-12 pt-2.5 w-80 z-50 animate-in fade-in slide-in-from-top-1 duration-150">
                 <div className="p-2 rounded-2xl bg-slate-950/95 backdrop-blur-xl border border-slate-800/90 shadow-2xl shadow-black/80 space-y-1">
                   <div className="px-3 py-1.5 text-[10px] font-mono uppercase tracking-widest text-slate-500 font-semibold border-b border-slate-800/80">
-                    Proprietary Production Platforms
+                    Engineered Client Platforms
                   </div>
 
                   {/* FundingSolutions */}
@@ -155,14 +156,14 @@ export default function Navbar(): React.JSX.Element {
                     <div className="flex-1 min-w-0">
                       <div className="flex items-center justify-between gap-2">
                         <span className="text-xs font-bold text-slate-200 group-hover/eco:text-emerald-400 transition-colors">
-                          FundingSolutions
+                          FundingSolutions Terminal
                         </span>
                         <span className="text-[9px] font-mono font-bold uppercase tracking-wider px-1.5 py-0.5 rounded bg-emerald-950/80 border border-emerald-800/60 text-emerald-300">
-                          Live SaaS
+                          B2B Build
                         </span>
                       </div>
                       <p className="text-[11px] text-slate-400 leading-snug mt-0.5">
-                        Commercial Lending &amp; Intake Syndicate Portal
+                        Commercial Capital Intake &amp; DSCR Decisioning Terminal
                       </p>
                     </div>
                     <ExternalLink className="w-3.5 h-3.5 text-slate-500 group-hover/eco:text-emerald-400 transition-colors shrink-0 mt-1" />
@@ -263,7 +264,7 @@ export default function Navbar(): React.JSX.Element {
           {/* Mobile Live Ecosystem Section */}
           <div className="pt-3 border-t border-slate-800/80 space-y-2">
             <span className="text-[10px] font-mono uppercase tracking-widest text-slate-500 block font-semibold px-1">
-              Live SaaS Ecosystem
+              Engineered Client Platforms
             </span>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
               <a
@@ -277,7 +278,7 @@ export default function Navbar(): React.JSX.Element {
                   <span className="text-base">💼</span>
                   <div>
                     <span className="font-bold block">FundingSolutions</span>
-                    <span className="text-[10px] text-slate-400">Commercial Underwriting</span>
+                    <span className="text-[10px] text-slate-400">DSCR Underwriting Engine</span>
                   </div>
                 </div>
                 <ExternalLink className="w-3.5 h-3.5 text-slate-500" />

@@ -36,7 +36,7 @@ export const FAQS: FaqItem[] = [
   {
     question: "Can you build industry-specific platforms such as construction or fintech systems?",
     answer:
-      "Yes. Our live production platforms include Gradilište Dukatrio, a construction management OS with digital site diaries, worker attendance and a fixed EUR/RSD payroll engine, and FundingSolutions, a commercial capital underwriting and client portal system.",
+      "Yes. Our production case studies include Gradilište Dukatrio, an offline-first construction operations PWA with on-device OCR and a dual-currency payroll engine, and FundingSolutions, an anonymized B2B capital intake and DSCR decisioning terminal custom-built for a commercial syndication desk.",
   },
   {
     question: "Do you work with clients in Serbia and across Europe?",

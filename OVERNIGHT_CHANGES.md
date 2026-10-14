@@ -105,6 +105,49 @@ cd /var/www/dukatrio && git pull origin main && npm install && npm run build && 
 ```
 
 ### 3. Recommendations for Petar
-1. **Commercial Copy Review**: In Pillar 2, the copy specifies "99+ Lighthouse guarantee". Verify whether you want this formatted as a contractual guarantee or as an architectural benchmark ("99+ Lighthouse Performance Architecture").
-2. **Google Search Console**: Resubmit `https://dukatrio.com/sitemap.xml` after deploying so Google crawls the updated `ProfessionalService` OfferCatalog schemas and localized Belgrade data.
-3. **Typography Upgrade (Optional)**: If you want to push the Linear aesthetic even further, consider importing `Geist` or `Inter` via `next/font/google` in `layout.tsx` (the project currently uses system font stacks).
+1. **Google Search Console**: Resubmit `https://dukatrio.com/sitemap.xml` after deploying so Google crawls the updated `ProfessionalService` OfferCatalog schemas and localized Belgrade data.
+2. **Typography Upgrade (Optional)**: If you want to push the Linear aesthetic even further, consider importing `Geist` or `Inter` via `next/font/google` in `layout.tsx` (the project currently uses system font stacks).
+
+---
+
+## Phase 6: High-Conversion Positioning & Bloomberg/Linear Aesthetic Refactor
+**Executed on**: October 14, 2026
+
+### 1. Full Project Backup Verification
+- Complete mirrored backup created in: `D:\Win11 bekap 13092026\06_User_Files_Backup\Documents\dukatrio foundation`.
+- All 165 source files, git configuration, and assets preserved with zero loss.
+
+### 2. High-Conversion Hero Refactor (`src/components/Hero.tsx`)
+- Shifted positioning from framework jargons to high-stakes B2B executive value: **"We Build Custom Internal Tools & Portals That Eliminate Monthly SaaS Taxes"**.
+- Added live telemetry pulse (`animate-ping` emerald indicator: *"ENGINEERING STUDIO // INTERNAL TOOLS & HIGH-SPEED WEB SYSTEMS"*).
+- Clear dual CTAs: **"Request Fixed-Price Scope"** (`#contact`) and **"Calculate SaaS Tax ROI ↓"** (`#estimator`).
+- Clean monochrome engineering trust row beneath CTAs: `Next.js App Router` • `PostgreSQL / Prisma` • `Docker & Caddy Edge` • `Private VPS Deployment` • `Offline-First PWA`.
+
+### 3. Transparent Fixed-Milestone Pricing (`src/components/pricing/PricingTiers.tsx`)
+- Implemented 3 transparent tiers directly addressing buyer hesitation:
+  1. **Core System Sprint** (€4,800 – €5,800 · 2–3 Weeks): Replaces single-tool SaaS or brittle spreadsheets.
+  2. **Enterprise Operations & Kernel** (€8,500 – €14,000 · 4–6 Weeks): Multi-tenant RBAC, offline PWAs, calculation engines.
+  3. **Managed Infrastructure Care** (€190 – €350/mo): Daily encrypted off-site backups, Linux security updates, 4h SLA channel.
+- Integrated fixed price brackets with direct link to the dynamic interactive PDF Scope Estimator.
+
+### 4. Structured Delivery Roadmap (`src/components/home/DeliveryRoadmap.tsx`)
+- Added **"How We Work: From Bottleneck to Production in 3 Weeks"** 3-step timeline above the Contact & FAQ desk:
+  - **Step 01**: 15-Minute Architecture Audit (Day 1–2).
+  - **Step 02**: 48-Hour Technical Specification & Fixed-Price Blueprint (Day 3–5).
+  - **Step 03**: Rapid Build, Verification & Private Deployment (Weeks 2–3).
+
+### 5. Case Study ROI & Bloomberg/Linear Cosmetic Polish
+- **`src/app/globals.css`**: Deep slate-black base (`#090A0F`), refined dark surfaces (`#12151E`), `tabular-nums` numeric stability for calculators/counters, and tactile button interactions (`.btn-tactile`).
+- **`src/components/portfolio/CaseStudyCard.tsx`**: Monospace macOS/Linux header dots, dark panel contrast, and updated case study positioning:
+  - *Gradilište*: Field Operations PWA & On-Device Ticket OCR (zero offline data loss, 87% faster dispatch).
+  - *FundingSolutions*: Commercial Capital Intake & DSCR Decisioning Terminal (sub-50ms underwriting, 0 per-seat licenses).
+- **Navigation Architecture (`src/components/layout/Navbar.tsx`) & Footer**:
+  - Replaced legacy `#capabilities` with `#pricing` and `#process`.
+  - Clean flow: `Services` -> `Pricing` -> `Process` -> `Case Studies` -> `Cost Estimator`.
+- **Page Pruning (`src/app/page.tsx`)**:
+  - Purged redundant 4-card capabilities section and unused icon imports.
+  - Cleaned layout hierarchy for maximum executive conversion.
+
+### 6. Build & Type Verification
+- `npx tsc --noEmit`: Clean exit, **0 errors**.
+

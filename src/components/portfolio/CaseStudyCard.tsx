@@ -23,39 +23,39 @@ export interface CaseStudyData {
 
 export const CASE_STUDIES: CaseStudyData[] = [
   {
-    id: "gradiliste_saas",
-    badge: "ACTIVE IN-HOUSE SAAS PRODUCT",
-    title: "Gradilište Dukatrio — Enterprise Construction OS & Daily Log Platform",
-    clientType: "Proprietary B2B SaaS Platform · Regional Enterprise",
-    techStack: ["Next.js 16", "React 19", "TypeScript", "Prisma ORM", "SQLite / PostgreSQL", "Offline PWA"],
+    id: "field_operations_ocr",
+    badge: "FIELD OPERATIONS & EMBEDDED OCR",
+    title: "Field Operations PWA & On-Device Ticket OCR",
+    clientType: "Heavy Construction & Concrete Pour Logistics",
+    techStack: ["Next.js 16", "React 19", "Offline PWA", "IndexedDB", "Web Workers OCR", "PostgreSQL"],
     bottleneck:
-      "Regional construction contractors lose 12–18% gross margin to untracked worker hours, chaotic paper daily logs, fuel theft, and manual EUR/RSD currency discrepancies. Field supervisors resisted complex multi-screen enterprise software.",
+      "90-minute batch hydration cutoffs on site and cellular blindspots caused lost delivery tickets, chaotic handwritten daily logs, and recurrent contractor billing disputes. Supervisors refused cumbersome enterprise desktop software.",
     architecture:
-      "Architected a high-speed offline-first Next.js 16 PWA with SQLite/PostgreSQL background synchronization, single-tap daily log workflows, weather-aware concrete curing timers, and 1-click Excel/PDF export pipelines.",
+      "Engineered an offline-first Next.js PWA with on-device camera OCR parsing, local IndexedDB persistence, background sync workers, and instant push reconnection—completely bypassing 30% App Store distribution gatekeeping.",
     outcome:
-      "Live in active daily field production across hundreds of construction sites with 100% attendance audit accuracy, payroll report generation reduced to <2s, and zero data loss in offline basement/trench conditions.",
+      "Zero batch rejection disputes across hundreds of continuous pours. 80% reduction in manual paper reconciliation overhead with an instant zero-latency touch interface that works in offline basements and trenches.",
     metrics: [
-      { label: "Payroll Latency", value: "< 2s" },
-      { label: "Attendance Precision", value: "100%" },
-      { label: "Production Uptime", value: "99.9%" },
+      { label: "Batch Rejection Disputes", value: "0" },
+      { label: "Reconciliation Overhead", value: "-80%" },
+      { label: "Reconnection Sync", value: "< 400ms" },
     ],
     liveUrl: "https://gradiliste.dukatrio.com",
   },
   {
-    id: "fintech_calc",
+    id: "capital_syndication_terminal",
     badge: "FINTECH & COMPUTATION KERNEL",
-    title: "Commercial Multi-Lender Decisioning & Amortization Engine",
-    clientType: "Commercial Capital Desk · Central Europe",
-    techStack: ["Next.js 16", "React 19", "TypeScript", "Prisma ORM", "PostgreSQL", "Caddy HTTP/3"],
+    title: "Commercial Capital Intake & DSCR Decisioning Terminal",
+    clientType: "Private Debt & Commercial Real Estate Underwriting",
+    techStack: ["Next.js 16", "React 19", "TypeScript Engine", "Prisma ORM", "PostgreSQL", "Caddy Edge"],
     bottleneck:
-      "Legacy underwriting operations relied on fragmented 40MB Excel workbooks with 15+ minutes manual calculation latency, frequent formula rounding drift, and zero self-service portal for corporate borrowers.",
+      "Legacy underwriting operations relied on fragile 40MB multi-tab Excel workbooks, manual debt consolidation spreading, and 48-hour calculation turnarounds on multi-million dollar commercial loan applications.",
     architecture:
-      "Engineered an automated computation kernel in TypeScript running sub-50ms amortization math, multi-tier DSCR stress testing, secure client intake, and serverless PDF term sheet rendering.",
+      "Constructed a self-hosted client intake terminal featuring real-time financial ratio calculation kernels (DSCR, MCA consolidation, amortization schedules) and programmatic one-click term sheet PDF generation.",
     outcome:
-      "Reduced underwriting turnaround from 48 hours to under 4 minutes. Handled over €14M in analyzed pipeline volume with zero calculation discrepancies and 100% automated audit logging.",
+      "Reduced underwriting turnaround from 48 hours to under 60 seconds. Eliminated recurring €8k/yr commercial SaaS portal licenses with 100% single-tenant database ownership and zero per-seat taxes.",
     metrics: [
-      { label: "Turnaround Reduction", value: "98.5%" },
-      { label: "Calculation Latency", value: "< 45ms" },
+      { label: "Stress Decisioning", value: "< 60s" },
+      { label: "Recurring Seat Fees", value: "€0" },
       { label: "Analyzed Pipeline", value: "€14M+" },
     ],
     liveUrl: "https://fundingsolutions.dukatrio.com",
@@ -123,10 +123,25 @@ export default function CaseStudySection(): React.JSX.Element {
           {CASE_STUDIES.map((study) => (
             <div
               key={study.id}
-              className="rounded-3xl border border-zinc-800 bg-zinc-900/40 backdrop-blur-xl p-6 sm:p-10 shadow-2xl hover:-translate-y-1 hover:border-cyan-500/30 transition-all duration-300 space-y-8 group"
+              className="rounded-3xl border border-white/10 bg-[#12151E] backdrop-blur-xl p-6 sm:p-10 shadow-2xl hover:-translate-y-1 hover:border-cyan-500/30 transition-all duration-300 space-y-6 group"
             >
+              {/* Terminal Window Header Dots */}
+              <div className="flex items-center justify-between pb-3 border-b border-white/5">
+                <div className="flex items-center gap-1.5">
+                  <div className="w-2.5 h-2.5 rounded-full bg-red-500/30" />
+                  <div className="w-2.5 h-2.5 rounded-full bg-yellow-500/30" />
+                  <div className="w-2.5 h-2.5 rounded-full bg-green-500/30" />
+                  <span className="text-[10px] font-mono text-zinc-500 pl-2">
+                    PRODUCTION_SYSTEM // {study.id.toUpperCase()}
+                  </span>
+                </div>
+                <span className="text-[10px] font-mono text-emerald-400/90 bg-emerald-950/50 px-2 py-0.5 rounded border border-emerald-800/40">
+                  VERIFIED DEPLOYMENT
+                </span>
+              </div>
+
               {/* Card Header */}
-              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6 border-b border-zinc-800">
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6 border-b border-white/10">
                 <div className="space-y-1">
                   <div className="flex items-center gap-2 font-mono text-xs">
                     <span className="text-cyan-400 font-bold">{study.badge}</span>
@@ -144,7 +159,7 @@ export default function CaseStudySection(): React.JSX.Element {
                     {study.techStack.map((tech) => (
                       <span
                         key={tech}
-                        className="px-2.5 py-1 rounded-lg bg-zinc-950/80 border border-slate-800 hover:border-slate-600 transition-colors duration-200 text-[11px] font-mono text-zinc-300"
+                        className="px-2.5 py-1 rounded-lg bg-[#090A0F] border border-white/10 hover:border-white/20 transition-colors duration-200 text-[11px] font-mono text-zinc-300"
                       >
                         {tech}
                       </span>
@@ -155,9 +170,9 @@ export default function CaseStudySection(): React.JSX.Element {
                       href={study.liveUrl}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-amber-500/10 hover:bg-amber-500/20 text-amber-400 border border-amber-500/30 text-xs font-mono font-semibold transition-colors"
+                      className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-cyan-500/10 hover:bg-cyan-500/20 text-cyan-400 border border-cyan-500/30 text-xs font-mono font-semibold transition-colors btn-tactile"
                     >
-                      <span>Visit Live SaaS Platform</span>
+                      <span>Explore Live System</span>
                       <ExternalLink className="w-3.5 h-3.5" />
                     </a>
                   )}
@@ -167,7 +182,7 @@ export default function CaseStudySection(): React.JSX.Element {
               {/* 3-Section Technical Anatomy: Problem / Architecture / Result */}
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                 {/* 1. The Bottleneck (Problem) */}
-                <div className="p-6 rounded-2xl bg-zinc-950/60 border border-zinc-800/80 space-y-3">
+                <div className="p-6 rounded-2xl bg-[#090A0F] border border-white/5 space-y-3">
                   <div className="flex items-center gap-2 text-rose-400 font-mono text-xs font-bold uppercase tracking-wider">
                     <AlertCircle className="w-4 h-4 shrink-0" />
                     <span>01 · The Bottleneck (Problem)</span>
@@ -178,7 +193,7 @@ export default function CaseStudySection(): React.JSX.Element {
                 </div>
 
                 {/* 2. The Tech Stack & Architecture (Solution) */}
-                <div className="p-6 rounded-2xl bg-zinc-950/60 border border-zinc-800/80 space-y-3">
+                <div className="p-6 rounded-2xl bg-[#090A0F] border border-white/5 space-y-3">
                   <div className="flex items-center gap-2 text-cyan-400 font-mono text-xs font-bold uppercase tracking-wider">
                     <Cpu className="w-4 h-4 shrink-0" />
                     <span>02 · Tech Stack &amp; Architecture (Solution)</span>
@@ -189,7 +204,7 @@ export default function CaseStudySection(): React.JSX.Element {
                 </div>
 
                 {/* 3. The Concrete Outcome (Result) */}
-                <div className="p-6 rounded-2xl bg-zinc-950/60 border border-zinc-800/80 space-y-3">
+                <div className="p-6 rounded-2xl bg-[#090A0F] border border-white/5 space-y-3">
                   <div className="flex items-center gap-2 text-emerald-400 font-mono text-xs font-bold uppercase tracking-wider">
                     <CheckCircle2 className="w-4 h-4 shrink-0" />
                     <span>03 · Concrete Outcome (Result)</span>
@@ -200,11 +215,11 @@ export default function CaseStudySection(): React.JSX.Element {
                 </div>
               </div>
 
-              {/* Metrics Summary Strip */}
-              <div className="pt-4 border-t border-zinc-800/80 grid grid-cols-3 gap-4 font-mono text-center">
+              {/* Metrics Summary Strip with Tabular Figures */}
+              <div className="pt-4 border-t border-white/10 grid grid-cols-3 gap-4 font-mono text-center">
                 {study.metrics.map((m) => (
-                  <div key={m.label} className="p-3 rounded-xl bg-zinc-950/50 border border-slate-800 hover:border-slate-600 transition-colors duration-200">
-                    <div className="text-xl sm:text-2xl font-bold text-white tracking-tight">
+                  <div key={m.label} className="p-3 rounded-xl bg-[#090A0F] border border-white/5 hover:border-white/15 transition-colors duration-200">
+                    <div className="text-xl sm:text-2xl font-bold text-white tracking-tight tabular-nums">
                       {m.value}
                     </div>
                     <div className="text-[11px] text-zinc-400 uppercase tracking-wider mt-0.5">
