@@ -75,12 +75,12 @@ export default function HomePage(): React.JSX.Element {
       {/* ========================================================================= */}
       {/* 10. DIRECT ENGINEERING INQUIRY DESK & FOOTER */}
       {/* ========================================================================= */}
-      <section id="contact" className="py-20 sm:py-28 border-t border-zinc-800/80 bg-zinc-950/80 relative">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
+      <section id="contact" className="py-28 sm:py-36 border-t border-slate-800/80 bg-[#0B0F19] relative">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-14">
           {/* Section Header */}
           <div className="text-center max-w-2xl mx-auto space-y-4">
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-cyan-950/50 border border-cyan-800/50 text-cyan-400 font-mono text-xs font-semibold">
-              <Mail className="w-3.5 h-3.5 text-cyan-400" />
+            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#0D121F] border border-slate-800/80 text-teal-400 font-mono text-xs font-semibold">
+              <Mail className="w-3.5 h-3.5 text-teal-400" />
               <span>Direct Engineering Inquiry</span>
             </div>
 
@@ -88,7 +88,7 @@ export default function HomePage(): React.JSX.Element {
               Ready to Architect Your Next Platform?
             </h2>
 
-            <p className="text-base text-zinc-400 leading-relaxed">
+            <p className="text-base text-slate-400 leading-relaxed">
               Whether you require a bespoke client intake portal, algorithmic financial computation engine, or high-throughput private cloud infrastructure, connect directly with our engineering desk.
             </p>
           </div>
@@ -97,40 +97,40 @@ export default function HomePage(): React.JSX.Element {
           <ContactForm />
 
           {/* Footer Bar */}
-          <footer className="mt-16 pt-8 border-t border-zinc-900 flex flex-col md:flex-row items-center justify-between gap-4 text-xs font-mono text-zinc-400">
+          <footer className="mt-16 pt-8 border-t border-slate-800/80 flex flex-col md:flex-row items-center justify-between gap-4 text-xs font-mono text-slate-400">
             <div className="flex flex-wrap items-center justify-center md:justify-start gap-3">
               <div className="flex items-center gap-2">
-                <span className="w-2 h-2 rounded-full bg-emerald-500" />
+                <span className="w-2 h-2 rounded-full bg-teal-400" />
                 <span>&copy; 2026 DukaTrio. All systems operational.</span>
               </div>
-              <span className="hidden sm:inline text-zinc-700">·</span>
+              <span className="hidden sm:inline text-slate-700">·</span>
               {/* Subtle Status Indicator */}
-              <div className="inline-flex items-center gap-2 px-2.5 py-1 rounded-full bg-zinc-900/90 border border-zinc-800 text-[11px] text-zinc-300">
+              <div className="inline-flex items-center gap-2 px-2.5 py-1 rounded-full bg-[#0D121F] border border-slate-800/80 text-[11px] text-slate-300">
                 <span className="relative flex h-2 w-2">
-                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
-                  <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500" />
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-teal-400 opacity-75" />
+                  <span className="relative inline-flex rounded-full h-2 w-2 bg-teal-400" />
                 </span>
                 <span>Core-01 · Systems Optimal · 99.9% Uptime</span>
               </div>
             </div>
 
             <div className="flex flex-wrap items-center justify-center gap-5 sm:gap-6">
-              <a href="#solutions" className="hover:text-cyan-400 transition">
+              <a href="#solutions" className="hover:text-teal-400 transition">
                 Services
               </a>
-              <a href="#pricing" className="hover:text-cyan-400 transition">
+              <a href="#pricing" className="hover:text-teal-400 transition">
                 Pricing
               </a>
-              <a href="#process" className="hover:text-cyan-400 transition">
+              <a href="#process" className="hover:text-teal-400 transition">
                 Process
               </a>
-              <a href="#case-studies" className="hover:text-cyan-400 transition">
+              <a href="#case-studies" className="hover:text-teal-400 transition">
                 Case Studies
               </a>
-              <a href="#estimator" className="hover:text-cyan-400 transition">
+              <a href="#estimator" className="hover:text-teal-400 transition">
                 Estimator
               </a>
-              <a href="#contact" className="hover:text-cyan-400 transition">
+              <a href="#contact" className="hover:text-teal-400 transition">
                 Contact Desk
               </a>
             </div>

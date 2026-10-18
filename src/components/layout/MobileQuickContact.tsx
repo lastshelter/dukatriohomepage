@@ -7,7 +7,7 @@ import {
   Sparkles,
   Loader2,
   CheckCircle2,
-  Mail,
+  ArrowRight,
 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
@@ -50,10 +50,10 @@ export default function MobileQuickContact(): React.JSX.Element {
       name: name.trim(),
       email: isEmail ? contact.trim() : `${name.toLowerCase().replace(/\s+/g, "")}@inquiry.dukatrio.com`,
       phone: !isEmail ? contact.trim() : "",
-      serviceType: "Mobile Fast Inquiry",
-      scopeScale: "Quick Mobile Lead",
+      serviceType: "15-Min Feasibility Audit",
+      scopeScale: "Mobile Feasibility Audit",
       timeline: "Urgent / Fast Callback",
-      message: message.trim() || "Immediate callback requested from mobile quick-contact dock.",
+      message: message.trim() || "15-Min Feasibility Audit requested from mobile quick-contact dock.",
       source: "mobile_dock",
     };
 
@@ -86,26 +86,17 @@ export default function MobileQuickContact(): React.JSX.Element {
 
   return (
     <>
-      {/* Sticky Bottom Dock: Strictly mobile (md:hidden) */}
-      <div className="fixed bottom-0 left-0 right-0 z-50 md:hidden bg-zinc-950/90 backdrop-blur-xl border-t border-white/10 px-4 pt-2.5 pb-[max(0.625rem,env(safe-area-inset-bottom))] shadow-[0_-8px_30px_rgba(0,0,0,0.8)]">
-        <div className="max-w-md mx-auto grid grid-cols-2 gap-3">
-          {/* 1. Direct Email Desk */}
-          <a
-            href="mailto:office@dukatrio.com"
-            className="flex items-center justify-center gap-2 py-2.5 px-3 rounded-xl bg-zinc-900 border border-zinc-800 hover:border-cyan-500/50 text-zinc-300 hover:text-cyan-400 active:scale-95 transition-all text-center group"
-          >
-            <Mail className="w-4 h-4 text-cyan-400 shrink-0" />
-            <span className="text-xs font-mono font-semibold">Email Desk</span>
-          </a>
-
-          {/* 2. Fast Inquiry Modal Toggle */}
+      {/* Sticky Bottom Dock: Strictly mobile (md:hidden) — Single Consolidated CTA */}
+      <div className="fixed bottom-0 left-0 right-0 z-50 md:hidden bg-[#0D121F]/95 backdrop-blur-xl border-t border-slate-800/80 px-4 pt-2.5 pb-[max(0.625rem,env(safe-area-inset-bottom))] shadow-[0_-8px_30px_rgba(0,0,0,0.8)]">
+        <div className="max-w-md mx-auto">
           <button
             type="button"
             onClick={() => setModalOpen(true)}
-            className="flex items-center justify-center gap-2 py-2.5 px-3 rounded-xl bg-gradient-to-r from-cyan-500 to-cyan-600 active:scale-95 text-zinc-950 font-bold shadow-[0_0_15px_rgba(6,182,212,0.4)] transition-all text-center cursor-pointer"
+            className="w-full flex items-center justify-center gap-2.5 py-3 px-5 rounded-xl bg-teal-400 hover:bg-teal-300 active:scale-[0.98] text-slate-950 font-bold text-xs uppercase tracking-wider shadow-md transition-all text-center cursor-pointer"
           >
             <Sparkles className="w-4 h-4 shrink-0" />
-            <span className="text-xs font-mono font-bold tracking-tight">Start Inquiry</span>
+            <span>Book 15-Min Feasibility Audit</span>
+            <ArrowRight className="w-4 h-4 shrink-0" />
           </button>
         </div>
       </div>
@@ -113,7 +104,8 @@ export default function MobileQuickContact(): React.JSX.Element {
       {/* Fast Inquiry Modal Bottom Sheet */}
       <AnimatePresence>
         {modalOpen && (
-          <div onClick={() => setModalOpen(false)}
+          <div
+            onClick={() => setModalOpen(false)}
             className="fixed inset-0 z-50 md:hidden flex items-end sm:items-center justify-center p-0 sm:p-4 bg-black/80 backdrop-blur-sm"
           >
             <motion.div
@@ -125,26 +117,26 @@ export default function MobileQuickContact(): React.JSX.Element {
               aria-modal="true"
               aria-labelledby="quick-inquiry-title"
               onClick={(e) => e.stopPropagation()}
-              className="w-full max-w-lg bg-zinc-950 border-t sm:border border-zinc-800 rounded-t-3xl sm:rounded-3xl p-6 shadow-2xl relative max-h-[90vh] overflow-y-auto"
+              className="w-full max-w-lg bg-[#0D121F] border-t sm:border border-slate-800/80 rounded-t-3xl sm:rounded-3xl p-6 shadow-2xl relative max-h-[90vh] overflow-y-auto"
             >
               {/* Modal Header */}
-              <div className="flex items-center justify-between pb-3 border-b border-zinc-800">
-                <div className="flex items-center gap-2">
-                  <div className="w-7 h-7 rounded-lg bg-cyan-950/80 border border-cyan-800 flex items-center justify-center text-cyan-400">
+              <div className="flex items-center justify-between pb-3 border-b border-slate-800/80">
+                <div className="flex items-center gap-2.5">
+                  <div className="w-7 h-7 rounded-lg bg-teal-950/60 border border-teal-800/60 flex items-center justify-center text-teal-400">
                     <Sparkles className="w-3.5 h-3.5" />
                   </div>
                   <div>
                     <h3 id="quick-inquiry-title" className="text-base font-bold text-white tracking-tight">
-                      Fast Mobile Inquiry
+                      Book 15-Min Feasibility Audit
                     </h3>
-                    <p className="text-[10px] font-mono text-zinc-400">Direct response within 2 hours</p>
+                    <p className="text-[10px] font-mono text-slate-400">Direct engineer response within 2 hours</p>
                   </div>
                 </div>
                 <button
                   type="button"
                   onClick={() => setModalOpen(false)}
                   aria-label="Close quick inquiry"
-                  className="p-2 rounded-lg text-zinc-400 hover:text-white bg-zinc-900 border border-zinc-800"
+                  className="p-2 rounded-lg text-slate-400 hover:text-white bg-slate-900 border border-slate-800/80"
                 >
                   <X className="w-4 h-4" />
                 </button>
@@ -155,9 +147,9 @@ export default function MobileQuickContact(): React.JSX.Element {
                   <div className="w-12 h-12 rounded-full bg-emerald-950/80 border border-emerald-800 text-emerald-400 mx-auto flex items-center justify-center">
                     <CheckCircle2 className="w-6 h-6" />
                   </div>
-                  <h4 className="text-lg font-bold text-white">Transmission Sent!</h4>
-                  <p className="text-xs text-zinc-400 max-w-xs mx-auto">
-                    Our lead systems engineer has received your alert and will review your specifications shortly.
+                  <h4 className="text-lg font-bold text-white">Audit Request Logged!</h4>
+                  <p className="text-xs text-slate-400 max-w-xs mx-auto">
+                    Our lead systems engineer has received your alert and will review your feasibility parameters shortly.
                   </p>
                 </div>
               ) : (
@@ -169,8 +161,8 @@ export default function MobileQuickContact(): React.JSX.Element {
                   )}
 
                   <div className="space-y-1">
-                    <label htmlFor="quick-name" className="text-[11px] font-mono uppercase text-zinc-400">
-                      Your Name <span className="text-cyan-400">*</span>
+                    <label htmlFor="quick-name" className="text-[11px] font-mono uppercase text-slate-400">
+                      Your Name <span className="text-teal-400">*</span>
                     </label>
                     <input
                       id="quick-name"
@@ -180,13 +172,13 @@ export default function MobileQuickContact(): React.JSX.Element {
                       placeholder="e.g. Marko Markovic"
                       value={name}
                       onChange={(e) => setName(e.target.value)}
-                      className="w-full px-3.5 py-2.5 rounded-xl bg-zinc-900 border border-zinc-800 text-base text-white placeholder:text-zinc-600 focus:border-cyan-500 outline-none"
+                      className="w-full px-3.5 py-2.5 rounded-xl bg-slate-950 border border-slate-800/80 text-base text-white placeholder:text-slate-600 focus:border-teal-400 outline-none"
                     />
                   </div>
 
                   <div className="space-y-1">
-                    <label htmlFor="quick-contact" className="text-[11px] font-mono uppercase text-zinc-400">
-                      Corporate Email or Callback Handle <span className="text-cyan-400">*</span>
+                    <label htmlFor="quick-contact" className="text-[11px] font-mono uppercase text-slate-400">
+                      Corporate Email or Callback Handle <span className="text-teal-400">*</span>
                     </label>
                     <input
                       id="quick-contact"
@@ -196,43 +188,43 @@ export default function MobileQuickContact(): React.JSX.Element {
                       placeholder="name@company.com or callback handle"
                       value={contact}
                       onChange={(e) => setContact(e.target.value)}
-                      className="w-full px-3.5 py-2.5 rounded-xl bg-zinc-900 border border-zinc-800 text-base text-white placeholder:text-zinc-600 focus:border-cyan-500 outline-none font-mono"
+                      className="w-full px-3.5 py-2.5 rounded-xl bg-slate-950 border border-slate-800/80 text-base text-white placeholder:text-slate-600 focus:border-teal-400 outline-none font-mono"
                     />
                   </div>
 
                   <div className="space-y-1">
-                    <label htmlFor="quick-message" className="text-[11px] font-mono uppercase text-zinc-400">
-                      Brief Note / Project Scope
+                    <label htmlFor="quick-message" className="text-[11px] font-mono uppercase text-slate-400">
+                      Core Bottleneck / Scope Note
                     </label>
                     <textarea
                       id="quick-message"
                       rows={3}
-                      placeholder="What are you looking to build?"
+                      placeholder="Which SaaS or spreadsheet workflow are you replacing?"
                       value={message}
                       onChange={(e) => setMessage(e.target.value)}
-                      className="w-full px-3.5 py-2.5 rounded-xl bg-zinc-900 border border-zinc-800 text-base text-white placeholder:text-zinc-600 focus:border-cyan-500 outline-none resize-none"
+                      className="w-full px-3.5 py-2.5 rounded-xl bg-slate-950 border border-slate-800/80 text-base text-white placeholder:text-slate-600 focus:border-teal-400 outline-none resize-none"
                     />
                   </div>
 
                   <button
                     type="submit"
                     disabled={isSubmitting}
-                    className="w-full py-3 px-4 rounded-xl bg-gradient-to-r from-cyan-500 to-cyan-600 text-zinc-950 font-bold text-xs uppercase tracking-wider flex items-center justify-center gap-2 shadow-[0_0_20px_rgba(6,182,212,0.4)] disabled:opacity-60"
+                    className="w-full py-3 px-4 rounded-xl bg-teal-400 hover:bg-teal-300 text-slate-950 font-bold text-xs uppercase tracking-wider flex items-center justify-center gap-2 shadow-md disabled:opacity-60"
                   >
                     {isSubmitting ? (
                       <>
-                        <Loader2 className="w-4 h-4 animate-spin text-zinc-950" />
-                        <span>Sending Instant Alert...</span>
+                        <Loader2 className="w-4 h-4 animate-spin text-slate-950" />
+                        <span>Booking Audit...</span>
                       </>
                     ) : (
                       <>
-                        <span>Send Rapid Inquiry</span>
+                        <span>Confirm Feasibility Audit</span>
                         <Send className="w-3.5 h-3.5" />
                       </>
                     )}
                   </button>
 
-                  <div className="pt-2 flex items-center justify-center gap-4 text-[11px] font-mono text-zinc-500">
+                  <div className="pt-2 flex items-center justify-center gap-4 text-[11px] font-mono text-slate-500">
                     <span>Direct Desk Routing</span>
                     <span>·</span>
                     <span>Zero Spam Guarantee</span>

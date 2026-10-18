@@ -108,53 +108,55 @@ export const CASE_STUDIES: CaseStudyData[] = [
 
 export default function CaseStudySection(): React.JSX.Element {
   return (
-    <section id="case-studies" className="py-24 sm:py-32 relative border-t border-zinc-800/80 bg-zinc-950/40">
+    <section id="case-studies" className="py-28 sm:py-36 relative border-t border-slate-800/80 bg-[#0B0D13]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-16">
         {/* Section Header */}
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
           <div className="space-y-3">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-950/50 border border-cyan-800/50 text-cyan-400 font-mono text-xs font-semibold">
-              <Layers className="w-3.5 h-3.5 text-cyan-400" />
-              <span>Technical Verification &amp; Case Studies</span>
+            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#0D121F] border border-slate-800/80 text-teal-400 font-mono text-xs font-semibold">
+              <Layers className="w-3.5 h-3.5 text-teal-400" />
+              <span>Verified Production Outcomes</span>
             </div>
             <h2 className="text-3xl sm:text-5xl font-extrabold text-white tracking-tight">
               Structured Case Studies.
             </h2>
           </div>
-          <p className="text-sm sm:text-base text-zinc-400 max-w-md">
-            Direct insight into the technical constraints, architectural blueprints, and measurable results achieved for real-world deployments.
+          <p className="text-sm sm:text-base text-slate-400 max-w-md leading-relaxed">
+            Measurable operational returns first — backed by the underlying architectural blueprints and production stacks.
           </p>
         </div>
 
         {/* Case Studies Grid */}
-        <div className="space-y-8">
+        <div className="space-y-10">
           {CASE_STUDIES.map((study) => (
             <div
               key={study.id}
-              className="rounded-3xl border border-white/10 bg-[#12151E] backdrop-blur-xl p-6 sm:p-10 shadow-2xl hover:-translate-y-1 hover:border-cyan-500/30 transition-all duration-300 space-y-6 group"
+              className="rounded-3xl border border-slate-800/80 bg-[#0D121F] p-6 sm:p-10 shadow-xl hover:border-slate-700/90 transition-all duration-300 space-y-8 group"
             >
-              {/* Terminal Window Header Dots */}
-              <div className="flex items-center justify-between pb-3 border-b border-white/5">
-                <div className="flex items-center gap-1.5">
-                  <div className="w-2.5 h-2.5 rounded-full bg-red-500/30" />
-                  <div className="w-2.5 h-2.5 rounded-full bg-yellow-500/30" />
-                  <div className="w-2.5 h-2.5 rounded-full bg-green-500/30" />
-                  <span className="text-[10px] font-mono text-zinc-500 pl-2">
-                    PRODUCTION_SYSTEM // {study.id.toUpperCase()}
-                  </span>
-                </div>
-                <span className="text-[10px] font-mono text-emerald-400/90 bg-emerald-950/50 px-2 py-0.5 rounded border border-emerald-800/40">
-                  VERIFIED DEPLOYMENT
-                </span>
+              {/* 1. Prominent Outcome Metrics Strip (Top of Card Hierarchy) */}
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 pb-6 border-b border-slate-800/80 font-mono">
+                {study.metrics.map((m) => (
+                  <div
+                    key={m.label}
+                    className="p-4 sm:p-5 rounded-2xl bg-slate-950/80 border border-slate-800/80 flex flex-col justify-center"
+                  >
+                    <div className="text-2xl sm:text-3xl font-extrabold text-teal-400 tracking-tight tabular-nums">
+                      {m.value}
+                    </div>
+                    <div className="text-xs text-slate-300 uppercase tracking-wider mt-1 font-semibold">
+                      {m.label}
+                    </div>
+                  </div>
+                ))}
               </div>
 
-              {/* Card Header */}
-              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6 border-b border-white/10">
-                <div className="space-y-1">
-                  <div className="flex items-center gap-2 font-mono text-xs">
-                    <span className="text-cyan-400 font-bold">{study.badge}</span>
-                    <span className="text-zinc-600">·</span>
-                    <span className="text-zinc-400">{study.clientType}</span>
+              {/* 2. Card Title, Context & Action Header */}
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6 border-b border-slate-800/80">
+                <div className="space-y-1.5">
+                  <div className="flex flex-wrap items-center gap-2 font-mono text-xs">
+                    <span className="text-teal-400 font-bold">{study.badge}</span>
+                    <span className="text-slate-600">·</span>
+                    <span className="text-slate-400">{study.clientType}</span>
                   </div>
                   <h3 className="text-2xl sm:text-3xl font-extrabold text-white tracking-tight">
                     {study.title}
@@ -162,12 +164,12 @@ export default function CaseStudySection(): React.JSX.Element {
                 </div>
 
                 {/* Tech Pills & Live Link */}
-                <div className="flex flex-col sm:items-end gap-2.5">
+                <div className="flex flex-col sm:items-end gap-3">
                   <div className="flex flex-wrap gap-1.5 max-w-sm">
                     {study.techStack.map((tech) => (
                       <span
                         key={tech}
-                        className="px-2.5 py-1 rounded-lg bg-[#090A0F] border border-white/10 hover:border-white/20 transition-colors duration-200 text-[11px] font-mono text-zinc-300"
+                        className="px-2.5 py-1 rounded-lg bg-slate-950/80 border border-slate-800/80 text-[11px] font-mono text-slate-300"
                       >
                         {tech}
                       </span>
@@ -179,7 +181,7 @@ export default function CaseStudySection(): React.JSX.Element {
                       {...(study.liveUrl.startsWith("http")
                         ? { target: "_blank", rel: "noopener noreferrer" }
                         : {})}
-                      className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-cyan-500/10 hover:bg-cyan-500/20 text-cyan-400 border border-cyan-500/30 text-xs font-mono font-semibold transition-colors btn-tactile"
+                      className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-teal-950/40 hover:bg-teal-950/70 text-teal-300 border border-teal-800/60 text-xs font-mono font-semibold transition-colors btn-tactile"
                     >
                       <span>{study.ctaLabel || "Explore Live System"}</span>
                       {study.liveUrl.startsWith("http") ? (
@@ -192,54 +194,40 @@ export default function CaseStudySection(): React.JSX.Element {
                 </div>
               </div>
 
-              {/* 3-Section Technical Anatomy: Problem / Architecture / Result */}
+              {/* 3. Technical Anatomy: Problem / Architecture / Result */}
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                {/* 1. The Bottleneck (Problem) */}
-                <div className="p-6 rounded-2xl bg-[#090A0F] border border-white/5 space-y-3">
+                {/* 01. The Bottleneck (Problem) */}
+                <div className="p-6 rounded-2xl bg-slate-950/60 border border-slate-800/80 space-y-3">
                   <div className="flex items-center gap-2 text-rose-400 font-mono text-xs font-bold uppercase tracking-wider">
                     <AlertCircle className="w-4 h-4 shrink-0" />
-                    <span>01 · The Bottleneck (Problem)</span>
+                    <span>01 · The Bottleneck</span>
                   </div>
-                  <p className="text-xs sm:text-sm text-zinc-400 leading-relaxed font-sans">
+                  <p className="text-xs sm:text-sm text-slate-400 leading-relaxed font-sans">
                     {study.bottleneck}
                   </p>
                 </div>
 
-                {/* 2. The Tech Stack & Architecture (Solution) */}
-                <div className="p-6 rounded-2xl bg-[#090A0F] border border-white/5 space-y-3">
-                  <div className="flex items-center gap-2 text-cyan-400 font-mono text-xs font-bold uppercase tracking-wider">
+                {/* 02. Tech Stack & Architecture (Solution) */}
+                <div className="p-6 rounded-2xl bg-slate-950/60 border border-slate-800/80 space-y-3">
+                  <div className="flex items-center gap-2 text-teal-400 font-mono text-xs font-bold uppercase tracking-wider">
                     <Cpu className="w-4 h-4 shrink-0" />
-                    <span>02 · Tech Stack &amp; Architecture (Solution)</span>
+                    <span>02 · System Architecture</span>
                   </div>
-                  <p className="text-xs sm:text-sm text-zinc-400 leading-relaxed font-sans">
+                  <p className="text-xs sm:text-sm text-slate-400 leading-relaxed font-sans">
                     {study.architecture}
                   </p>
                 </div>
 
-                {/* 3. The Concrete Outcome (Result) */}
-                <div className="p-6 rounded-2xl bg-[#090A0F] border border-white/5 space-y-3">
+                {/* 03. Concrete Outcome (Result) */}
+                <div className="p-6 rounded-2xl bg-slate-950/60 border border-slate-800/80 space-y-3">
                   <div className="flex items-center gap-2 text-emerald-400 font-mono text-xs font-bold uppercase tracking-wider">
                     <CheckCircle2 className="w-4 h-4 shrink-0" />
-                    <span>03 · Concrete Outcome (Result)</span>
+                    <span>03 · Production Impact</span>
                   </div>
-                  <p className="text-xs sm:text-sm text-zinc-400 leading-relaxed font-sans">
+                  <p className="text-xs sm:text-sm text-slate-400 leading-relaxed font-sans">
                     {study.outcome}
                   </p>
                 </div>
-              </div>
-
-              {/* Metrics Summary Strip with Tabular Figures */}
-              <div className="pt-4 border-t border-white/10 grid grid-cols-3 gap-4 font-mono text-center">
-                {study.metrics.map((m) => (
-                  <div key={m.label} className="p-3 rounded-xl bg-[#090A0F] border border-white/5 hover:border-white/15 transition-colors duration-200">
-                    <div className="text-xl sm:text-2xl font-bold text-white tracking-tight tabular-nums">
-                      {m.value}
-                    </div>
-                    <div className="text-[11px] text-zinc-400 uppercase tracking-wider mt-0.5">
-                      {m.label}
-                    </div>
-                  </div>
-                ))}
               </div>
             </div>
           ))}
