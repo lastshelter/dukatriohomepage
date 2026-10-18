@@ -18,8 +18,8 @@ export const metadata: Metadata = {
   alternates: {
     canonical: "https://dukatrio.com",
     languages: {
-      "en-US": "https://dukatrio.com",
-      "sr-RS": "https://dukatrio.com",
+      en: "https://dukatrio.com",
+      "x-default": "https://dukatrio.com",
     },
   },
   other: {
@@ -123,7 +123,6 @@ const jsonLd = {
       },
       description:
         "Elite engineering studio delivering Enterprise Next.js & React platforms, high-performance Astro SEO portals, real-time SvelteKit/Nuxt operational desks, and cloud-native Supabase/PostgreSQL backends.",
-      telephone: undefined,
       email: "office@dukatrio.com",
       address: {
         "@type": "PostalAddress",
@@ -166,6 +165,9 @@ const jsonLd = {
         itemListElement: [
           ...SERVICE_PILLARS.map((pillar) => ({
             "@type": "Offer",
+            name: pillar.title,
+            description: pillar.schemaDescription,
+            url: "https://dukatrio.com/#solutions",
             itemOffered: {
               "@type": "Service",
               "@id": `https://dukatrio.com/#service-${pillar.id}`,
@@ -217,12 +219,18 @@ const jsonLd = {
       "@id": "https://dukatrio.com/#website",
       url: "https://dukatrio.com",
       name: "Dukatrio",
-      inLanguage: ["en", "sr"],
+      description:
+        "Belgrade-based Next.js software studio building bespoke web applications, SaaS platforms and B2B client portals.",
+      inLanguage: "en",
       publisher: { "@id": "https://dukatrio.com/#organization" },
     },
     {
       "@type": "FAQPage",
       "@id": "https://dukatrio.com/#faq",
+      url: "https://dukatrio.com/#faq",
+      name: "Dukatrio Engineering Studio FAQs",
+      description:
+        "Common questions regarding Dukatrio custom software engineering, pricing models, intellectual property ownership, and technical architectures.",
       mainEntity: FAQS.map((item) => ({
         "@type": "Question",
         name: item.question,

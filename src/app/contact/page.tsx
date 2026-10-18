@@ -19,6 +19,10 @@ export const metadata: Metadata = {
     "Initiate direct architectural consultation for enterprise Next.js platforms, Astro SEO portals, real-time desks, and cloud-native backends. 4-hour SLA.",
   alternates: {
     canonical: "https://dukatrio.com/contact",
+    languages: {
+      en: "https://dukatrio.com/contact",
+      "x-default": "https://dukatrio.com/contact",
+    },
   },
   openGraph: {
     title: "Contact & Discovery Intake | Dukatrio Engineering Studio",
@@ -154,8 +158,8 @@ export default function ContactPage(): React.JSX.Element {
             <Link href="/#solutions" className="hover:text-cyan-400 transition">
               Solutions
             </Link>
-            <Link href="/#capabilities" className="hover:text-cyan-400 transition">
-              Capabilities
+            <Link href="/#pricing" className="hover:text-cyan-400 transition">
+              Pricing
             </Link>
             <Link href="/#case-studies" className="hover:text-cyan-400 transition">
               Case Studies
