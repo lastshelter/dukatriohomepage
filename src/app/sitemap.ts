@@ -15,6 +15,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.9,
     },
     {
+      url: "https://dukatrio.com/case-studies/gradiliste-os",
+      lastModified: new Date(),
+      changeFrequency: "monthly",
+      priority: 0.9,
+    },
+    {
       url: "https://dukatrio.com/solutions/excel-to-custom-portal",
       lastModified: new Date(),
       changeFrequency: "weekly",

@@ -81,6 +81,7 @@ export default function ContactForm({
     const params = new URLSearchParams(window.location.search);
     const solutionParam = params.get("solution");
     if (solutionParam) {
+      const normalizedKey = solutionParam.trim().toLowerCase().replace(/\s+/g, "-");
       const solutionMap: Record<string, { scope: ScopeType; message: string }> = {
         "excel-to-custom-portal": {
           scope: "Excel-to-Custom Portal",
@@ -98,7 +99,7 @@ export default function ContactForm({
             "[Solution Inquiry: B2B Client Intake & Underwriting Engine]\nTarget Scope: Bespoke qualification engine & encrypted client vault (€4,800 flat milestone · 10–14 days).\nCore Focus: Sub-60s algorithmic decisioning, KYC document ingestion & private VPS isolation.",
         },
       };
-      const matched = solutionMap[solutionParam];
+      const matched = solutionMap[normalizedKey];
       if (matched) {
         setActiveTab("rfp");
         setScope(matched.scope);

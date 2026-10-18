@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import {
   ExternalLink,
   Cpu,
@@ -21,28 +22,36 @@ export interface CaseStudyData {
   metrics: { label: string; value: string }[];
   liveUrl?: string;
   ctaLabel?: string;
+  externalUrl?: string;
 }
 
 export const CASE_STUDIES: CaseStudyData[] = [
   {
     id: "field_operations_ocr",
     badge: "FIELD OPERATIONS & EMBEDDED OCR",
-    title: "Field Operations PWA & On-Device Ticket OCR",
+    title: "Gradilište OS: Field Operations PWA & On-Device Ticket OCR",
     clientType: "Heavy Construction & Concrete Pour Logistics",
-    techStack: ["Next.js 16", "React 19", "Offline PWA", "IndexedDB", "Web Workers OCR", "PostgreSQL"],
+    techStack: [
+      "SvelteKit (Field PWA) + Next.js 16 (Command Portal)",
+      "PocketBase (Embedded SQLite WAL)",
+      "IndexedDB Outbox",
+      "Web Workers OCR",
+      "Docker + Caddy v2",
+    ],
     bottleneck:
       "90-minute batch hydration cutoffs on site and cellular blindspots caused lost delivery tickets, chaotic handwritten daily logs, and recurrent contractor billing disputes. Supervisors refused cumbersome enterprise desktop software.",
     architecture:
-      "Engineered an offline-first Next.js PWA with on-device camera OCR parsing, local IndexedDB persistence, background sync workers, and instant push reconnection—completely bypassing 30% App Store distribution gatekeeping.",
+      "Engineered a split-surface architecture: a runtime-light SvelteKit Field PWA with on-device WebAssembly camera OCR and an IndexedDB UUIDv7 outbox queue, paired with a Next.js 16 Command Portal backed by PocketBase (Embedded SQLite WAL) on a single-tenant Hetzner VPS.",
     outcome:
-      "Zero batch rejection disputes across hundreds of continuous pours. 80% reduction in manual paper reconciliation overhead with an instant zero-latency touch interface that works in offline basements and trenches.",
+      "Zero batch rejection disputes across hundreds of continuous pours. 80% reduction in administrative ticketing delay, €0 recurring per-seat licensing, and an amortized infrastructure footprint under €15/month.",
     metrics: [
-      { label: "Batch Rejection Disputes", value: "0" },
-      { label: "Reconciliation Overhead", value: "-80%" },
-      { label: "Reconnection Sync", value: "< 400ms" },
+      { label: "Ticketing Delay", value: "-80%" },
+      { label: "Recurring Seat Fees", value: "€0" },
+      { label: "Infra Footprint", value: "< €15/mo" },
     ],
-    liveUrl: "https://gradiliste.dukatrio.com",
-    ctaLabel: "Explore Live PWA",
+    liveUrl: "/case-studies/gradiliste-os",
+    ctaLabel: "Read Technical Case Study",
+    externalUrl: "https://gradiliste.dukatrio.com",
   },
   {
     id: "capital_syndication_terminal",
@@ -175,22 +184,45 @@ export default function CaseStudySection(): React.JSX.Element {
                       </span>
                     ))}
                   </div>
-                  {study.liveUrl && (
-                    <a
-                      href={study.liveUrl}
-                      {...(study.liveUrl.startsWith("http")
-                        ? { target: "_blank", rel: "noopener noreferrer" }
-                        : {})}
-                      className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-teal-950/40 hover:bg-teal-950/70 text-teal-300 border border-teal-800/60 text-xs font-mono font-semibold transition-colors btn-tactile"
-                    >
-                      <span>{study.ctaLabel || "Explore Live System"}</span>
-                      {study.liveUrl.startsWith("http") ? (
-                        <ExternalLink className="w-3.5 h-3.5" />
+                  <div className="flex flex-wrap items-center gap-2">
+                    {study.liveUrl && (
+                      study.liveUrl.startsWith("/") ? (
+                        <Link
+                          href={study.liveUrl}
+                          className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-teal-400 hover:bg-teal-300 text-slate-950 text-xs font-mono font-bold transition-colors btn-tactile"
+                        >
+                          <span>{study.ctaLabel || "Read Case Study"}</span>
+                          <ArrowRight className="w-3.5 h-3.5" />
+                        </Link>
                       ) : (
-                        <ArrowRight className="w-3.5 h-3.5" />
-                      )}
-                    </a>
-                  )}
+                        <a
+                          href={study.liveUrl}
+                          {...(study.liveUrl.startsWith("http")
+                            ? { target: "_blank", rel: "noopener noreferrer" }
+                            : {})}
+                          className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-teal-950/40 hover:bg-teal-950/70 text-teal-300 border border-teal-800/60 text-xs font-mono font-semibold transition-colors btn-tactile"
+                        >
+                          <span>{study.ctaLabel || "Explore Live System"}</span>
+                          {study.liveUrl.startsWith("http") ? (
+                            <ExternalLink className="w-3.5 h-3.5" />
+                          ) : (
+                            <ArrowRight className="w-3.5 h-3.5" />
+                          )}
+                        </a>
+                      )
+                    )}
+                    {study.externalUrl && (
+                      <a
+                        href={study.externalUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-slate-950/80 hover:bg-slate-900 text-slate-300 border border-slate-800 text-xs font-mono font-semibold transition-colors"
+                      >
+                        <span>Live PWA</span>
+                        <ExternalLink className="w-3.5 h-3.5 text-teal-400" />
+                      </a>
+                    )}
+                  </div>
                 </div>
               </div>
 

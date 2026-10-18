@@ -244,7 +244,7 @@ export default function OfflineFieldOperationsPwaPage(): React.JSX.Element {
                     variant="primary"
                   />
                   <Link
-                    href="/#case-studies"
+                    href="/case-studies/gradiliste-os"
                     className="inline-flex items-center justify-center gap-2 px-6 py-4 rounded-xl bg-[#0D121F] hover:bg-slate-800/90 border border-slate-800/80 text-slate-200 font-semibold text-sm transition-all"
                   >
                     <span>See Gradilište OS Case Study</span>
@@ -432,10 +432,10 @@ export default function OfflineFieldOperationsPwaPage(): React.JSX.Element {
                   <Database className="w-5 h-5" />
                 </div>
                 <h3 className="text-lg font-bold text-white">
-                  PocketBase &amp; PostgreSQL Core
+                  PocketBase (Embedded SQLite WAL)
                 </h3>
                 <p className="text-sm text-slate-400 leading-relaxed">
-                  Centralized relational ledger with real-time WebSocket dispatch feeds so headquarters sees field completions the instant they sync.
+                  Single-binary Go backend with SQLite in WAL mode, declarative collection access rules, and real-time SSE feeds so headquarters sees field completions the instant they sync.
                 </p>
               </div>
 
@@ -444,10 +444,10 @@ export default function OfflineFieldOperationsPwaPage(): React.JSX.Element {
                   <Layers className="w-5 h-5" />
                 </div>
                 <h3 className="text-lg font-bold text-white">
-                  Next.js &amp; High-Contrast Tailwind UI
+                  SvelteKit (Field PWA) + Next.js 16 (Portal)
                 </h3>
                 <p className="text-sm text-slate-400 leading-relaxed">
-                  Installable iOS/Android home-screen PWA with oversized tap targets, high-luminance outdoor contrast, and instant sub-100ms view transitions.
+                  Runtime-light SvelteKit PWA for low-end field devices and gloved outdoor use, paired with a Next.js 16 back-office reconciliation command portal.
                 </p>
               </div>
 
@@ -456,10 +456,10 @@ export default function OfflineFieldOperationsPwaPage(): React.JSX.Element {
                   <Server className="w-5 h-5" />
                 </div>
                 <h3 className="text-lg font-bold text-white">
-                  Docker &amp; Dedicated Hetzner VPS
+                  Docker + Caddy v2 on Hetzner VPS
                 </h3>
                 <p className="text-sm text-slate-400 leading-relaxed">
-                  Single-tenant container deployment on EU bare-metal/NVMe storage for high-volume image retention, automated backups, and 100% IP ownership.
+                  Single-tenant container deployment on EU NVMe storage with automated Let&apos;s Encrypt TLS, HTTP/3, off-site backups, and 100% IP ownership.
                 </p>
               </div>
             </div>
@@ -473,26 +473,26 @@ export default function OfflineFieldOperationsPwaPage(): React.JSX.Element {
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 pb-6 border-b border-slate-800/80">
                 <div className="p-4 rounded-2xl bg-slate-950/80 border border-slate-800/80">
                   <div className="text-2xl sm:text-3xl font-mono font-black text-teal-400">
-                    100% Offline
+                    -80% Delay
                   </div>
                   <div className="text-xs font-mono text-slate-400 mt-1">
-                    IndexedDB Jobsite Queue &amp; Auto-Sync
+                    Administrative Ticketing Delay Eliminated
                   </div>
                 </div>
                 <div className="p-4 rounded-2xl bg-slate-950/80 border border-slate-800/80">
                   <div className="text-2xl sm:text-3xl font-mono font-black text-white">
-                    -80% Overhead
+                    €0 Licensing
                   </div>
                   <div className="text-xs font-mono text-slate-400 mt-1">
-                    Instant Concrete &amp; Material OCR
+                    Unlimited Foremen &amp; Site Operators
                   </div>
                 </div>
                 <div className="p-4 rounded-2xl bg-slate-950/80 border border-slate-800/80">
                   <div className="text-2xl sm:text-3xl font-mono font-black text-teal-400">
-                    €0 Recurring Fees
+                    &lt; €15/mo
                   </div>
                   <div className="text-xs font-mono text-slate-400 mt-1">
-                    Unlimited Foremen &amp; Site Operators
+                    Amortized EU VPS Infrastructure Footprint
                   </div>
                 </div>
               </div>
@@ -506,16 +506,16 @@ export default function OfflineFieldOperationsPwaPage(): React.JSX.Element {
                     How Gradilište OS Digitized Jobsite Delivery Tickets &amp; Offline Concrete Tracking
                   </h2>
                   <p className="text-sm sm:text-base text-slate-300 leading-relaxed">
-                    Explore our flagship offline-first field operations PWA built for heavy construction sites—featuring direct camera delivery-slip OCR, local IndexedDB persistence, and real-time headquarters cost reconciliation.
+                    Read our comprehensive architectural deep dive into Gradilište OS—covering the SvelteKit Field PWA, Next.js 16 Command Portal, PocketBase (Embedded SQLite WAL), UUIDv7 IndexedDB outbox queue, and on-device WebAssembly camera OCR.
                   </p>
                 </div>
 
                 <div className="flex flex-col sm:flex-row gap-3 shrink-0">
                   <Link
-                    href="/#case-studies"
+                    href="/case-studies/gradiliste-os"
                     className="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl bg-teal-400 hover:bg-teal-300 text-slate-950 font-extrabold text-xs uppercase tracking-wider transition-all"
                   >
-                    <span>View Case Study on Homepage</span>
+                    <span>Read Full Gradilište OS Case Study</span>
                     <ArrowUpRight className="w-4 h-4" />
                   </Link>
                   <a

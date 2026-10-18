@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
+import Link from "next/link";
 import {
   ExternalLink,
   Cpu,
@@ -30,7 +31,7 @@ export default function FlagshipCaseStudy(): React.JSX.Element {
               <span>Flagship In-House SaaS Production Spotlight</span>
             </div>
             <h2 className="text-3xl sm:text-5xl font-extrabold text-white tracking-tight">
-              Gradilište Dukatrio: Construction OS &amp; Offline PWA.
+              Gradilište OS: Construction Operations &amp; Offline PWA.
             </h2>
           </div>
           <p className="text-sm sm:text-base text-zinc-400 max-w-lg leading-relaxed">
@@ -43,39 +44,39 @@ export default function FlagshipCaseStudy(): React.JSX.Element {
           {/* Top Row: Executive Summary & Live CTAs */}
           <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6 pb-8 border-b border-zinc-800">
             <div className="space-y-2 max-w-2xl">
-              <div className="flex items-center gap-2 font-mono text-xs text-zinc-400">
+              <div className="flex flex-wrap items-center gap-2 font-mono text-xs text-zinc-400">
                 <span className="text-amber-400 font-bold">FIELD HARDENED</span>
                 <span>·</span>
-                <span>Proprietary Next.js PWA Architecture</span>
+                <span>SvelteKit (Field PWA) + Next.js 16 (Command Portal)</span>
                 <span>·</span>
-                <span className="text-emerald-400 font-semibold">Live in Active Production</span>
+                <span className="text-emerald-400 font-semibold">PocketBase (Embedded SQLite WAL)</span>
               </div>
               <h3 className="text-2xl sm:text-3xl font-extrabold text-white tracking-tight">
                 From Muddy Jobsite Pits to Zero-Loss Digital Infrastructure
               </h3>
               <p className="text-sm text-zinc-400 leading-relaxed">
-                Construction sites are the ultimate stress test for software: dust, rain, spotty cellular networks, and non-technical crews. We engineered Gradilište Dukatrio from the foundation up to run flawlessly on zero bars of signal.
+                Construction sites are the ultimate stress test for software: dust, rain, spotty cellular networks, and non-technical crews. We engineered Gradilište OS from the foundation up to run flawlessly on zero bars of signal.
               </p>
             </div>
 
             {/* CTAs */}
             <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 shrink-0">
+              <Link
+                href="/case-studies/gradiliste-os"
+                className="py-3.5 px-6 rounded-xl bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-400 hover:to-amber-500 text-zinc-950 font-bold text-xs uppercase tracking-wider transition-all shadow-[0_0_25px_-5px_rgba(245,158,11,0.5)] flex items-center justify-center gap-2 group cursor-pointer"
+              >
+                <Cpu className="w-4 h-4" />
+                <span>Read Deep-Dive Case Study</span>
+              </Link>
+
               <a
                 href="https://gradiliste.dukatrio.com"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="py-3.5 px-6 rounded-xl bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-400 hover:to-amber-500 text-zinc-950 font-bold text-xs uppercase tracking-wider transition-all shadow-[0_0_25px_-5px_rgba(245,158,11,0.5)] flex items-center justify-center gap-2 group cursor-pointer"
-              >
-                <span>Explore Live Application</span>
-                <ExternalLink className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
-              </a>
-
-              <a
-                href="#architecture"
                 className="py-3.5 px-6 rounded-xl bg-zinc-900 hover:bg-zinc-800 border border-zinc-800 hover:border-zinc-700 text-zinc-300 hover:text-white font-semibold text-xs uppercase tracking-wider transition-all flex items-center justify-center gap-2"
               >
-                <Cpu className="w-4 h-4 text-cyan-400" />
-                <span>View Engineering Specs</span>
+                <span>Explore Live Application</span>
+                <ExternalLink className="w-4 h-4 text-cyan-400" />
               </a>
             </div>
           </div>
@@ -124,20 +125,20 @@ export default function FlagshipCaseStudy(): React.JSX.Element {
                   02 · HIGH-SPEED TECHNICAL EXECUTION
                 </span>
                 <h4 className="text-lg font-bold text-white tracking-tight">
-                  Offline-First PWA &amp; On-Device Camera OCR
+                  SvelteKit Field PWA, Next.js 16 Portal &amp; PocketBase WAL
                 </h4>
               </div>
               <p className="text-xs sm:text-sm text-zinc-400 leading-relaxed font-sans">
-                Engineered as a high-performance <strong>Progressive Web App (PWA)</strong> with full Service Worker asset and API caching for underground trenches and signal dead-zones. Integrated an on-device camera OCR scanning engine that instantaneously extracts supplier details, batch volumes (m³), and departure timestamps from physical tickets, coupled with an automated real-time chemical countdown timer.
+                Engineered as a split-surface architecture: a runtime-light <strong>SvelteKit Field PWA</strong> with IndexedDB UUIDv7 outbox queuing and on-device WebAssembly camera OCR, paired with a <strong>Next.js 16 Command Portal</strong> and <strong>PocketBase (Embedded SQLite WAL)</strong> backend.
               </p>
               <ul className="pt-2 space-y-2 text-xs font-mono text-zinc-400 border-t border-zinc-800/60">
                 <li className="flex items-center gap-2">
                   <span className="w-1.5 h-1.5 rounded-full bg-cyan-400" />
-                  <span>Zero-signal SQLite local sync</span>
+                  <span>PocketBase (Embedded SQLite WAL) + IndexedDB outbox</span>
                 </li>
                 <li className="flex items-center gap-2">
                   <span className="w-1.5 h-1.5 rounded-full bg-cyan-400" />
-                  <span>Instant camera OCR ticket parser</span>
+                  <span>Instant on-device camera OCR ticket parser</span>
                 </li>
                 <li className="flex items-center gap-2">
                   <span className="w-1.5 h-1.5 rounded-full bg-cyan-400" />

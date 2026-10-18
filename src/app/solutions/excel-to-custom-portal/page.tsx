@@ -512,10 +512,10 @@ export default function ExcelToCustomPortalPage(): React.JSX.Element {
 
                 <div className="flex flex-col sm:flex-row gap-3 shrink-0">
                   <Link
-                    href="/#case-studies"
+                    href="/case-studies/gradiliste-os"
                     className="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl bg-teal-400 hover:bg-teal-300 text-slate-950 font-extrabold text-xs uppercase tracking-wider transition-all"
                   >
-                    <span>View Full Case Study on Homepage</span>
+                    <span>Read Full Gradilište OS Case Study</span>
                     <ArrowUpRight className="w-4 h-4" />
                   </Link>
                   <a
