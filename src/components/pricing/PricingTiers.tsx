@@ -80,7 +80,7 @@ const PRICING_PLANS: PricingPlan[] = [
       "Direct Priority Telegram / Signal engineer channel with 4-hour SLA",
     ],
     ctaLabel: "Inquire for Retainer",
-    scopeType: "Cloud Infrastructure / VPS",
+    scopeType: "B2B Client Intake Engine",
   },
 ];
 

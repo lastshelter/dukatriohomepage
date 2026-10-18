@@ -1,7 +1,26 @@
 import type { Metadata, Viewport } from "next";
+import { Plus_Jakarta_Sans, Space_Grotesk, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import { FAQS } from "@/config/faqs";
 import { SERVICE_PILLARS } from "@/config/servicePillars";
+
+const fontSans = Plus_Jakarta_Sans({
+  subsets: ["latin", "latin-ext"],
+  variable: "--font-sans-loaded",
+  display: "swap",
+});
+
+const fontDisplay = Space_Grotesk({
+  subsets: ["latin", "latin-ext"],
+  variable: "--font-display-loaded",
+  display: "swap",
+});
+
+const fontMono = JetBrains_Mono({
+  subsets: ["latin", "latin-ext"],
+  variable: "--font-mono-loaded",
+  display: "swap",
+});
 
 export const viewport: Viewport = {
   themeColor: "#09090b",
@@ -246,14 +265,17 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="dark scroll-smooth">
+    <html
+      lang="en"
+      className={`dark scroll-smooth ${fontSans.variable} ${fontDisplay.variable} ${fontMono.variable}`}
+    >
       <head>
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
       </head>
-      <body className="min-h-screen bg-[#09090b] text-zinc-100 antialiased selection:bg-cyan-500/20 selection:text-cyan-300">
+      <body className="min-h-screen bg-[#0B0D13] text-zinc-100 antialiased selection:bg-teal-500/20 selection:text-teal-300">
         {children}
       </body>
     </html>

@@ -20,9 +20,6 @@ export const SCOPE_OPTIONS = [
   "Offline Field Operations PWA",
   "B2B Client Intake Engine",
   "Fintech Platform",
-  "Full-Stack Web App",
-  "Cloud Infrastructure / VPS",
-  "Other Inquiry",
 ] as const;
 
 export type ScopeType = (typeof SCOPE_OPTIONS)[number];
@@ -509,7 +506,7 @@ export default function ContactForm({
                   <label className="block text-xs font-mono uppercase tracking-wider text-zinc-400 font-semibold">
                     Project Scope / Discipline <span className="text-cyan-400">*</span>
                   </label>
-                  <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
                     {SCOPE_OPTIONS.map((opt) => {
                       const isSelected = scope === opt;
                       return (
