@@ -116,6 +116,23 @@ export const CASE_STUDIES: CaseStudyData[] = [
 ];
 
 export default function CaseStudySection(): React.JSX.Element {
+  const handleRequestBlueprint = (study: CaseStudyData) => {
+    window.dispatchEvent(
+      new CustomEvent("populate-estimator", {
+        detail: {
+          projectType: `Case Study Blueprint: ${study.title}`,
+          features: study.techStack.slice(0, 4),
+          estimatedRange: "€4,800 Fixed Sprint",
+          timeline: "10–14 Days",
+        },
+      })
+    );
+    const contactEl = document.getElementById("contact");
+    if (contactEl) {
+      contactEl.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+
   return (
     <section id="case-studies" className="py-28 sm:py-36 relative border-t border-slate-800/80 bg-[#0B0D13]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-16">
@@ -136,11 +153,11 @@ export default function CaseStudySection(): React.JSX.Element {
         </div>
 
         {/* Case Studies Grid */}
-        <div className="space-y-10">
+        <div data-stagger className="space-y-10">
           {CASE_STUDIES.map((study) => (
             <div
               key={study.id}
-              className="rounded-3xl border border-slate-800/80 bg-[#0D121F] p-6 sm:p-10 shadow-xl hover:border-slate-700/90 transition-all duration-300 space-y-8 group"
+              className="spotlight-card rounded-3xl border border-slate-800/80 bg-[#0D121F] p-6 sm:p-10 shadow-xl hover:border-slate-700/90 transition-all duration-300 space-y-8 group"
             >
               {/* 1. Prominent Outcome Metrics Strip (Top of Card Hierarchy) */}
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 pb-6 border-b border-slate-800/80 font-mono">
@@ -194,6 +211,15 @@ export default function CaseStudySection(): React.JSX.Element {
                           <span>{study.ctaLabel || "Read Case Study"}</span>
                           <ArrowRight className="w-3.5 h-3.5" />
                         </Link>
+                      ) : study.liveUrl === "#contact" ? (
+                        <button
+                          type="button"
+                          onClick={() => handleRequestBlueprint(study)}
+                          className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-teal-950/40 hover:bg-teal-950/70 text-teal-300 border border-teal-800/60 hover:border-teal-500/50 text-xs font-mono font-semibold transition-colors btn-tactile cursor-pointer"
+                        >
+                          <span>{study.ctaLabel || "Request Blueprint"}</span>
+                          <ArrowRight className="w-3.5 h-3.5" />
+                        </button>
                       ) : (
                         <a
                           href={study.liveUrl}
