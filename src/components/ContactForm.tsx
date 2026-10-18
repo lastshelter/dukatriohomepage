@@ -15,14 +15,17 @@ import {
   Zap,
 } from "lucide-react";
 
-const SCOPE_OPTIONS = [
+export const SCOPE_OPTIONS = [
+  "Excel-to-Custom Portal",
+  "Offline Field Operations PWA",
+  "B2B Client Intake Engine",
   "Fintech Platform",
   "Full-Stack Web App",
   "Cloud Infrastructure / VPS",
   "Other Inquiry",
 ] as const;
 
-type ScopeType = (typeof SCOPE_OPTIONS)[number];
+export type ScopeType = (typeof SCOPE_OPTIONS)[number];
 
 interface PopulateEstimatorDetail {
   scope?: ScopeType;
@@ -33,13 +36,19 @@ interface PopulateEstimatorDetail {
 
 export interface ContactFormProps {
   hideDirectDock?: boolean;
+  defaultScope?: ScopeType;
+  defaultMessage?: string;
+  defaultTab?: "quick" | "rfp";
 }
 
 export default function ContactForm({
   hideDirectDock: _hideDirectDock = false,
+  defaultScope = "Fintech Platform",
+  defaultMessage = "",
+  defaultTab = "quick",
 }: ContactFormProps = {}): React.JSX.Element {
   // Tab mode: 'quick' (1-field callback) vs 'rfp' (detailed project form)
-  const [activeTab, setActiveTab] = useState<"quick" | "rfp">("quick");
+  const [activeTab, setActiveTab] = useState<"quick" | "rfp">(defaultTab);
 
   // 1-Field Quick Callback State
   const [quickContact, setQuickContact] = useState("");
@@ -50,8 +59,8 @@ export default function ContactForm({
   // Detailed Scope Form State
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
-  const [scope, setScope] = useState<ScopeType>("Fintech Platform");
-  const [message, setMessage] = useState("");
+  const [scope, setScope] = useState<ScopeType>(defaultScope);
+  const [message, setMessage] = useState(defaultMessage);
   const [website, setWebsite] = useState(""); // Anti-spam honeypot
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
@@ -69,6 +78,34 @@ export default function ContactForm({
   };
 
   useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const solutionParam = params.get("solution");
+    if (solutionParam) {
+      const solutionMap: Record<string, { scope: ScopeType; message: string }> = {
+        "excel-to-custom-portal": {
+          scope: "Excel-to-Custom Portal",
+          message:
+            "[Solution Inquiry: Excel-to-Custom Portal]\nTarget Scope: Single-tenant internal web portal replacing spreadsheets (€4,800 flat milestone · 10–14 days).\nCore Focus: Role-based access, multi-user concurrency, CSV ingestion & automated audit trails.",
+        },
+        "offline-field-operations-pwa": {
+          scope: "Offline Field Operations PWA",
+          message:
+            "[Solution Inquiry: Offline Field Operations PWA]\nTarget Scope: Resilient offline-first mobile PWA for field operations & ticket management (€4,800 flat milestone · 10–14 days).\nCore Focus: IndexedDB offline queuing, direct camera OCR & automatic sync on reconnect.",
+        },
+        "b2b-client-intake-engine": {
+          scope: "B2B Client Intake Engine",
+          message:
+            "[Solution Inquiry: B2B Client Intake & Underwriting Engine]\nTarget Scope: Bespoke qualification engine & encrypted client vault (€4,800 flat milestone · 10–14 days).\nCore Focus: Sub-60s algorithmic decisioning, KYC document ingestion & private VPS isolation.",
+        },
+      };
+      const matched = solutionMap[solutionParam];
+      if (matched) {
+        setActiveTab("rfp");
+        setScope(matched.scope);
+        setMessage((prev) => prev || matched.message);
+      }
+    }
+
     const handlePopulate = (e: Event) => {
       const customEvent = e as CustomEvent<PopulateEstimatorDetail>;
       if (customEvent.detail) {

@@ -176,6 +176,82 @@ export default function ServicePillars(): React.JSX.Element {
           })}
         </div>
 
+        {/* Dedicated B2B Solution Blueprints Strip */}
+        <div className="pt-4 space-y-4">
+          <div className="flex items-center justify-between">
+            <span className="text-xs font-mono uppercase tracking-widest text-teal-400 font-bold">
+              FIXED €4,800 SPRINT BLUEPRINTS // DEDICATED SOLUTION ARCHITECTURES
+            </span>
+            <span className="hidden sm:inline text-xs font-mono text-slate-500">
+              10–14 Days Delivery · 100% IP Ownership
+            </span>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <Link
+              href="/solutions/excel-to-custom-portal"
+              className="group p-5 rounded-2xl bg-[#0D121F] border border-slate-800/80 hover:border-teal-400/50 transition-all flex flex-col justify-between gap-3"
+            >
+              <div className="space-y-1.5">
+                <span className="text-[11px] font-mono text-teal-400 uppercase font-semibold">
+                  Solution 01 · Internal Operations
+                </span>
+                <h3 className="text-base font-bold text-white group-hover:text-teal-300 transition-colors">
+                  Excel-to-Custom Internal Portal
+                </h3>
+                <p className="text-xs text-slate-400 leading-relaxed">
+                  Replace broken spreadsheets with role-gated PostgreSQL concurrency, CSV ingestion, and immutable audit logs.
+                </p>
+              </div>
+              <span className="inline-flex items-center gap-1.5 text-xs font-mono font-semibold text-teal-400 pt-1">
+                <span>Explore Architecture</span>
+                <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" />
+              </span>
+            </Link>
+
+            <Link
+              href="/solutions/offline-field-operations-pwa"
+              className="group p-5 rounded-2xl bg-[#0D121F] border border-slate-800/80 hover:border-teal-400/50 transition-all flex flex-col justify-between gap-3"
+            >
+              <div className="space-y-1.5">
+                <span className="text-[11px] font-mono text-teal-400 uppercase font-semibold">
+                  Solution 02 · Field &amp; Logistics
+                </span>
+                <h3 className="text-base font-bold text-white group-hover:text-teal-300 transition-colors">
+                  Offline-First Field Operations PWA
+                </h3>
+                <p className="text-xs text-slate-400 leading-relaxed">
+                  Eliminate paper tickets with IndexedDB offline queuing, direct camera receipt OCR, and automatic sync on reconnect.
+                </p>
+              </div>
+              <span className="inline-flex items-center gap-1.5 text-xs font-mono font-semibold text-teal-400 pt-1">
+                <span>Explore Architecture</span>
+                <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" />
+              </span>
+            </Link>
+
+            <Link
+              href="/solutions/b2b-client-intake-engine"
+              className="group p-5 rounded-2xl bg-[#0D121F] border border-slate-800/80 hover:border-teal-400/50 transition-all flex flex-col justify-between gap-3"
+            >
+              <div className="space-y-1.5">
+                <span className="text-[11px] font-mono text-teal-400 uppercase font-semibold">
+                  Solution 03 · Capital &amp; Underwriting
+                </span>
+                <h3 className="text-base font-bold text-white group-hover:text-teal-300 transition-colors">
+                  B2B Client Intake &amp; Underwriting Engine
+                </h3>
+                <p className="text-xs text-slate-400 leading-relaxed">
+                  Accelerate underwriting from days to &lt;60 seconds with algorithmic risk modeling and private VPS KYC vaults.
+                </p>
+              </div>
+              <span className="inline-flex items-center gap-1.5 text-xs font-mono font-semibold text-teal-400 pt-1">
+                <span>Explore Architecture</span>
+                <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" />
+              </span>
+            </Link>
+          </div>
+        </div>
+
         {/* Bottom CTA strip */}
         <div className="rounded-2xl border border-white/10 bg-zinc-950/60 px-5 py-4 sm:px-6 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
           <p className="text-sm text-zinc-400">

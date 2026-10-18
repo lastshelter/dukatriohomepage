@@ -138,38 +138,67 @@ export default function ContactPage(): React.JSX.Element {
       {/* 3. FOOTER BAR */}
       {/* ========================================================================= */}
       <footer className="mt-20 border-t border-zinc-900 bg-zinc-950/60 py-10">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center justify-between gap-6 text-xs font-mono text-zinc-400">
-          <div className="flex flex-wrap items-center justify-center md:justify-start gap-3">
-            <div className="flex items-center gap-2">
-              <span className="w-2 h-2 rounded-full bg-emerald-500" />
-              <span>&copy; 2026 DukaTrio. All systems operational.</span>
-            </div>
-            <span className="hidden sm:inline text-zinc-700">·</span>
-            <div className="inline-flex items-center gap-2 px-2.5 py-1 rounded-full bg-zinc-900/90 border border-zinc-800 text-[11px] text-zinc-300">
-              <span className="relative flex h-2 w-2">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
-                <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500" />
-              </span>
-              <span>Core-01 · Direct Intake Active · 99.9% SLA</span>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6 text-xs font-mono text-zinc-400">
+          {/* Contextual Programmatic Solutions Links */}
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-6 border-b border-zinc-800/80">
+            <span className="text-[11px] uppercase tracking-widest text-teal-400 font-bold">
+              Dedicated B2B Solutions (€4,800 Fixed Sprints):
+            </span>
+            <div className="flex flex-wrap items-center gap-4 sm:gap-6">
+              <Link
+                href="/solutions/excel-to-custom-portal"
+                className="text-zinc-300 hover:text-teal-400 transition"
+              >
+                Excel-to-Custom Portal
+              </Link>
+              <Link
+                href="/solutions/offline-field-operations-pwa"
+                className="text-zinc-300 hover:text-teal-400 transition"
+              >
+                Offline Field Operations PWA
+              </Link>
+              <Link
+                href="/solutions/b2b-client-intake-engine"
+                className="text-zinc-300 hover:text-teal-400 transition"
+              >
+                B2B Client Intake Engine
+              </Link>
             </div>
           </div>
 
-          <div className="flex flex-wrap items-center justify-center gap-5 sm:gap-6">
-            <Link href="/#solutions" className="hover:text-cyan-400 transition">
-              Solutions
-            </Link>
-            <Link href="/#pricing" className="hover:text-cyan-400 transition">
-              Pricing
-            </Link>
-            <Link href="/#case-studies" className="hover:text-cyan-400 transition">
-              Case Studies
-            </Link>
-            <Link href="/#calculator" className="hover:text-cyan-400 transition">
-              Estimator
-            </Link>
-            <Link href="/contact" className="text-cyan-400 transition font-bold">
-              Direct Contact
-            </Link>
+          <div className="flex flex-col md:flex-row items-center justify-between gap-6">
+            <div className="flex flex-wrap items-center justify-center md:justify-start gap-3">
+              <div className="flex items-center gap-2">
+                <span className="w-2 h-2 rounded-full bg-emerald-500" />
+                <span>&copy; 2026 DukaTrio. All systems operational.</span>
+              </div>
+              <span className="hidden sm:inline text-zinc-700">·</span>
+              <div className="inline-flex items-center gap-2 px-2.5 py-1 rounded-full bg-zinc-900/90 border border-zinc-800 text-[11px] text-zinc-300">
+                <span className="relative flex h-2 w-2">
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
+                  <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500" />
+                </span>
+                <span>Core-01 · Direct Intake Active · 99.9% SLA</span>
+              </div>
+            </div>
+
+            <div className="flex flex-wrap items-center justify-center gap-5 sm:gap-6">
+              <Link href="/#solutions" className="hover:text-cyan-400 transition">
+                Solutions
+              </Link>
+              <Link href="/#pricing" className="hover:text-cyan-400 transition">
+                Pricing
+              </Link>
+              <Link href="/#case-studies" className="hover:text-cyan-400 transition">
+                Case Studies
+              </Link>
+              <Link href="/#calculator" className="hover:text-cyan-400 transition">
+                Estimator
+              </Link>
+              <Link href="/contact" className="text-cyan-400 transition font-bold">
+                Direct Contact
+              </Link>
+            </div>
           </div>
         </div>
       </footer>

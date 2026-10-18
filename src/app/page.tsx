@@ -1,6 +1,7 @@
 "use client";
 
 import React from "react";
+import Link from "next/link";
 import ContactForm from "@/components/ContactForm";
 import ScopeEstimator from "@/components/estimator/ScopeEstimator";
 import Navbar from "@/components/layout/Navbar";
@@ -97,42 +98,71 @@ export default function HomePage(): React.JSX.Element {
           <ContactForm />
 
           {/* Footer Bar */}
-          <footer className="mt-16 pt-8 border-t border-slate-800/80 flex flex-col md:flex-row items-center justify-between gap-4 text-xs font-mono text-slate-400">
-            <div className="flex flex-wrap items-center justify-center md:justify-start gap-3">
-              <div className="flex items-center gap-2">
-                <span className="w-2 h-2 rounded-full bg-teal-400" />
-                <span>&copy; 2026 DukaTrio. All systems operational.</span>
-              </div>
-              <span className="hidden sm:inline text-slate-700">·</span>
-              {/* Subtle Status Indicator */}
-              <div className="inline-flex items-center gap-2 px-2.5 py-1 rounded-full bg-[#0D121F] border border-slate-800/80 text-[11px] text-slate-300">
-                <span className="relative flex h-2 w-2">
-                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-teal-400 opacity-75" />
-                  <span className="relative inline-flex rounded-full h-2 w-2 bg-teal-400" />
-                </span>
-                <span>Core-01 · Systems Optimal · 99.9% Uptime</span>
+          <footer className="mt-16 pt-8 border-t border-slate-800/80 space-y-6 text-xs font-mono text-slate-400">
+            {/* Contextual Programmatic Solutions Links */}
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-6 border-b border-slate-800/60">
+              <span className="text-[11px] uppercase tracking-widest text-teal-400 font-bold">
+                Dedicated B2B Solutions (€4,800 Fixed Sprints):
+              </span>
+              <div className="flex flex-wrap items-center gap-4 sm:gap-6">
+                <Link
+                  href="/solutions/excel-to-custom-portal"
+                  className="text-slate-300 hover:text-teal-400 transition"
+                >
+                  Excel-to-Custom Portal
+                </Link>
+                <Link
+                  href="/solutions/offline-field-operations-pwa"
+                  className="text-slate-300 hover:text-teal-400 transition"
+                >
+                  Offline Field Operations PWA
+                </Link>
+                <Link
+                  href="/solutions/b2b-client-intake-engine"
+                  className="text-slate-300 hover:text-teal-400 transition"
+                >
+                  B2B Client Intake Engine
+                </Link>
               </div>
             </div>
 
-            <div className="flex flex-wrap items-center justify-center gap-5 sm:gap-6">
-              <a href="#solutions" className="hover:text-teal-400 transition">
-                Services
-              </a>
-              <a href="#pricing" className="hover:text-teal-400 transition">
-                Pricing
-              </a>
-              <a href="#process" className="hover:text-teal-400 transition">
-                Process
-              </a>
-              <a href="#case-studies" className="hover:text-teal-400 transition">
-                Case Studies
-              </a>
-              <a href="#estimator" className="hover:text-teal-400 transition">
-                Estimator
-              </a>
-              <a href="#contact" className="hover:text-teal-400 transition">
-                Contact Desk
-              </a>
+            <div className="flex flex-col md:flex-row items-center justify-between gap-4">
+              <div className="flex flex-wrap items-center justify-center md:justify-start gap-3">
+                <div className="flex items-center gap-2">
+                  <span className="w-2 h-2 rounded-full bg-teal-400" />
+                  <span>&copy; 2026 DukaTrio. All systems operational.</span>
+                </div>
+                <span className="hidden sm:inline text-slate-700">·</span>
+                {/* Subtle Status Indicator */}
+                <div className="inline-flex items-center gap-2 px-2.5 py-1 rounded-full bg-[#0D121F] border border-slate-800/80 text-[11px] text-slate-300">
+                  <span className="relative flex h-2 w-2">
+                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-teal-400 opacity-75" />
+                    <span className="relative inline-flex rounded-full h-2 w-2 bg-teal-400" />
+                  </span>
+                  <span>Core-01 · Systems Optimal · 99.9% Uptime</span>
+                </div>
+              </div>
+
+              <div className="flex flex-wrap items-center justify-center gap-5 sm:gap-6">
+                <a href="#solutions" className="hover:text-teal-400 transition">
+                  Services
+                </a>
+                <a href="#pricing" className="hover:text-teal-400 transition">
+                  Pricing
+                </a>
+                <a href="#process" className="hover:text-teal-400 transition">
+                  Process
+                </a>
+                <a href="#case-studies" className="hover:text-teal-400 transition">
+                  Case Studies
+                </a>
+                <a href="#estimator" className="hover:text-teal-400 transition">
+                  Estimator
+                </a>
+                <a href="#contact" className="hover:text-teal-400 transition">
+                  Contact Desk
+                </a>
+              </div>
             </div>
           </footer>
         </div>

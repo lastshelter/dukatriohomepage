@@ -194,6 +194,32 @@ export default function Navbar(): React.JSX.Element {
                     </div>
                     <ExternalLink className="w-3.5 h-3.5 text-slate-500 group-hover/eco:text-amber-400 transition-colors shrink-0 mt-1" />
                   </a>
+
+                  <div className="px-3 pt-2 pb-1 text-[10px] font-mono uppercase tracking-widest text-teal-400 font-semibold border-t border-slate-800/80">
+                    B2B Solution Blueprints (€4,800)
+                  </div>
+
+                  <Link
+                    href="/solutions/excel-to-custom-portal"
+                    onClick={() => setEcosystemOpen(false)}
+                    className="block px-3 py-2 rounded-xl hover:bg-slate-900/90 text-xs text-slate-300 hover:text-teal-400 transition-colors"
+                  >
+                    Excel-to-Custom Internal Portal
+                  </Link>
+                  <Link
+                    href="/solutions/offline-field-operations-pwa"
+                    onClick={() => setEcosystemOpen(false)}
+                    className="block px-3 py-2 rounded-xl hover:bg-slate-900/90 text-xs text-slate-300 hover:text-teal-400 transition-colors"
+                  >
+                    Offline-First Field Operations PWA
+                  </Link>
+                  <Link
+                    href="/solutions/b2b-client-intake-engine"
+                    onClick={() => setEcosystemOpen(false)}
+                    className="block px-3 py-2 rounded-xl hover:bg-slate-900/90 text-xs text-slate-300 hover:text-teal-400 transition-colors"
+                  >
+                    B2B Client Intake &amp; Underwriting Engine
+                  </Link>
                 </div>
               </div>
             )}
