@@ -52,6 +52,7 @@ export default function ContactForm({
 
   // 1-Field Quick Callback State
   const [quickContact, setQuickContact] = useState("");
+  const [quickWindow, setQuickWindow] = useState<string>("Immediate (< 15 mins)");
   const [isQuickSubmitting, setIsQuickSubmitting] = useState(false);
   const [quickSuccess, setQuickSuccess] = useState(false);
   const [quickError, setQuickError] = useState<string | null>(null);
@@ -154,8 +155,8 @@ export default function ContactForm({
       phone: !isEmail ? contactVal : "",
       serviceType: "15-Min Quick Callback",
       scopeScale: "Quick Mobile/Web Inquiry",
-      timeline: "Immediate (< 15 mins)",
-      message: `User requested an immediate 15-minute callback via dukatrio.com quick inquiry intake. Provided Contact: ${contactVal}`,
+      timeline: quickWindow,
+      message: `User requested a 15-minute feasibility audit via dukatrio.com quick intake. Preferred Window: ${quickWindow}. Provided Contact: ${contactVal}`,
       source: "website_dualpath_quick",
     };
 
@@ -307,31 +308,61 @@ export default function ContactForm({
                   </div>
                 )}
 
+                <div className="space-y-2">
+                  <span className="block text-[11px] font-mono uppercase tracking-wider text-zinc-400 font-semibold">
+                    Select Preferred 15-Min Audit Window:
+                  </span>
+                  <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
+                    {[
+                      "Immediate (< 15 mins)",
+                      "Today 14:00–18:00 CET",
+                      "Tomorrow 09:00–12:00 CET",
+                      "Async Email / WhatsApp Brief",
+                    ].map((win) => {
+                      const active = quickWindow === win;
+                      return (
+                        <button
+                          key={win}
+                          type="button"
+                          onClick={() => setQuickWindow(win)}
+                          className={`py-2 px-3 rounded-xl border text-[11px] font-mono transition-all cursor-pointer text-center ${
+                            active
+                              ? "bg-teal-950/60 border-teal-400/70 text-teal-300 font-bold"
+                              : "bg-zinc-950/60 border-zinc-800 text-zinc-400 hover:text-zinc-200 hover:border-zinc-700"
+                          }`}
+                        >
+                          {win}
+                        </button>
+                      );
+                    })}
+                  </div>
+                </div>
+
                 <div className="flex flex-col sm:flex-row gap-3">
                   <div className="relative flex-1">
                     <input
                       type="text"
                       required
-                      placeholder="Enter corporate email or callback handle (e.g. petar@company.com)"
+                      placeholder="Enter corporate email, phone, or WhatsApp handle (e.g. petar@company.com)"
                       value={quickContact}
                       onChange={(e) => setQuickContact(e.target.value)}
-                      className="w-full px-4 py-3.5 rounded-xl bg-zinc-950/80 border border-zinc-800 text-base sm:text-sm text-zinc-100 placeholder:text-zinc-600 focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500 outline-none transition font-sans shadow-inner"
+                      className="w-full px-4 py-3.5 rounded-xl bg-zinc-950/80 border border-zinc-800 text-base sm:text-sm text-zinc-100 placeholder:text-zinc-600 focus:border-teal-400 focus:ring-1 focus:ring-teal-400 outline-none transition font-sans shadow-inner"
                     />
                   </div>
 
                   <button
                     type="submit"
                     disabled={isQuickSubmitting}
-                    className="py-3.5 px-7 rounded-xl bg-gradient-to-r from-cyan-500 to-cyan-600 hover:from-cyan-400 hover:to-cyan-500 text-zinc-950 font-bold text-xs uppercase tracking-widest transition-all shadow-[0_0_20px_-5px_rgba(6,182,212,0.5)] flex items-center justify-center gap-2 cursor-pointer disabled:opacity-60 shrink-0"
+                    className="py-3.5 px-7 rounded-xl bg-teal-400 hover:bg-teal-300 text-slate-950 font-extrabold text-xs uppercase tracking-widest transition-all shadow-lg flex items-center justify-center gap-2 cursor-pointer disabled:opacity-60 shrink-0"
                   >
                     {isQuickSubmitting ? (
                       <>
-                        <Loader2 className="w-4 h-4 animate-spin text-zinc-950" />
+                        <Loader2 className="w-4 h-4 animate-spin text-slate-950" />
                         <span>Dispatching...</span>
                       </>
                     ) : (
                       <>
-                        <span>Request Callback</span>
+                        <span>Lock 15-Min Slot</span>
                         <ArrowRight className="w-4 h-4" />
                       </>
                     )}
@@ -340,10 +371,10 @@ export default function ContactForm({
 
                 <div className="flex flex-wrap items-center justify-between text-[11px] font-mono text-zinc-500 pt-2">
                   <span className="flex items-center gap-1.5">
-                    <ShieldCheck className="w-3.5 h-3.5 text-cyan-400" />
-                    Encrypted SMTP Dispatch · Zero Spam Commitment
+                    <ShieldCheck className="w-3.5 h-3.5 text-teal-400" />
+                    Encrypted SMTP Dispatch · Direct Lead Architect Desk
                   </span>
-                  <span className="text-emerald-400 font-semibold">Response: &lt; 15 Mins</span>
+                  <span className="text-teal-400 font-semibold">Window: {quickWindow}</span>
                 </div>
               </form>
             )}
