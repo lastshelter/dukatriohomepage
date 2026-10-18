@@ -12,12 +12,12 @@ export default function FaqSection(): React.JSX.Element {
     <section
       id="faq"
       aria-labelledby="faq-heading"
-      className="py-20 sm:py-28 relative border-t border-zinc-800/80 bg-zinc-950/60"
+      className="py-28 sm:py-36 relative border-t border-slate-800/80 bg-[#0B0D13]"
     >
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
         <div className="text-center space-y-4">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-cyan-950/40 border border-cyan-800/50 text-cyan-400 font-mono text-xs font-semibold">
-            <HelpCircle className="w-3.5 h-3.5 text-cyan-400" />
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#0D121F] border border-slate-800/80 text-teal-400 font-mono text-xs font-semibold">
+            <HelpCircle className="w-3.5 h-3.5 text-teal-400" />
             <span>Straight Answers</span>
           </div>
           <h2
@@ -26,8 +26,8 @@ export default function FaqSection(): React.JSX.Element {
           >
             Frequently Asked Questions.
           </h2>
-          <p className="text-base text-zinc-400 leading-relaxed">
-            Everything buyers ask before commissioning custom software, web applications and client portals.
+          <p className="text-base text-slate-400 leading-relaxed">
+            Everything buyers ask before commissioning custom software, web applications, and client portals.
           </p>
         </div>
 
@@ -38,10 +38,10 @@ export default function FaqSection(): React.JSX.Element {
             return (
               <div
                 key={item.question}
-                className={`rounded-2xl border bg-zinc-900/40 backdrop-blur-sm transition-colors duration-300 ${
+                className={`spotlight-card rounded-2xl border bg-[#0D121F] transition-colors duration-300 ${
                   isOpen
-                    ? "border-cyan-500/30 shadow-[0_0_30px_-12px_rgba(6,182,212,0.35)]"
-                    : "border-zinc-800/80 hover:border-slate-600"
+                    ? "border-teal-400/40"
+                    : "border-slate-800/80 hover:border-slate-700"
                 }`}
               >
                 <h3>
@@ -57,7 +57,7 @@ export default function FaqSection(): React.JSX.Element {
                     </span>
                     <ChevronDown
                       className={`w-4 h-4 shrink-0 transition-transform duration-300 ${
-                        isOpen ? "rotate-180 text-cyan-400" : "text-zinc-500"
+                        isOpen ? "rotate-180 text-teal-400" : "text-slate-500"
                       }`}
                     />
                   </button>
@@ -71,7 +71,7 @@ export default function FaqSection(): React.JSX.Element {
                   transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
                   style={{ overflow: "hidden" }}
                 >
-                  <p className="px-5 sm:px-6 pb-5 text-sm text-zinc-400 leading-relaxed">
+                  <p className="px-5 sm:px-6 pb-5 text-sm text-slate-300 leading-relaxed font-sans">
                     {item.answer}
                   </p>
                 </motion.div>

@@ -5,6 +5,7 @@ import ContactForm from "@/components/ContactForm";
 import ContactDirectChannels from "@/components/contact/ContactDirectChannels";
 import Navbar from "@/components/layout/Navbar";
 import MobileQuickContact from "@/components/layout/MobileQuickContact";
+import ScrollEffects from "@/components/ui/ScrollEffects";
 import {
   Terminal,
   ShieldCheck,
@@ -43,10 +44,12 @@ export const metadata: Metadata = {
 
 export default function ContactPage(): React.JSX.Element {
   return (
-    <div className="relative min-h-screen bg-[#09090b] text-zinc-100 overflow-hidden font-sans pb-16 md:pb-0">
+    <div className="relative min-h-screen bg-[#0B0D13] text-zinc-100 overflow-hidden font-sans pb-16 md:pb-0">
+      <ScrollEffects />
+
       {/* Background Ambience & Grid */}
       <div className="absolute inset-0 bg-tech-grid opacity-60 pointer-events-none" />
-      <div className="absolute -top-40 left-1/2 -translate-x-1/2 w-[700px] h-[350px] bg-cyan-500/10 rounded-full blur-[128px] pointer-events-none" />
+      <div className="absolute -top-40 left-1/2 -translate-x-1/2 w-[700px] h-[350px] bg-teal-500/10 rounded-full blur-[128px] pointer-events-none" />
       <div className="absolute top-[40%] right-[-100px] w-[500px] h-[400px] bg-emerald-500/10 rounded-full blur-[140px] pointer-events-none" />
       <div className="absolute bottom-10 left-[-100px] w-[500px] h-[400px] bg-indigo-500/10 rounded-full blur-[140px] pointer-events-none" />
 
@@ -61,8 +64,8 @@ export default function ContactPage(): React.JSX.Element {
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-20 space-y-12 sm:space-y-16">
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto space-y-4">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-cyan-950/50 border border-cyan-800/50 text-cyan-400 font-mono text-xs font-semibold">
-            <Terminal className="w-3.5 h-3.5 text-cyan-400 animate-pulse" />
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#0D121F] border border-slate-800/80 text-teal-400 font-mono text-xs font-semibold">
+            <Terminal className="w-3.5 h-3.5 text-teal-400 animate-pulse" />
             <span>DIRECT ARCHITECTURAL CONSULTATION // ZERO INTERMEDIARIES</span>
           </div>
 
@@ -70,7 +73,7 @@ export default function ContactPage(): React.JSX.Element {
             Let&apos;s Engineer Your Next Web Application
           </h1>
 
-          <p className="text-sm sm:text-lg text-zinc-300 leading-relaxed font-normal max-w-2xl mx-auto">
+          <p className="text-sm sm:text-lg text-slate-300 leading-relaxed font-normal max-w-2xl mx-auto">
             Direct architectural consultation. No sales intermediaries. All inquiries receive a scoped response or callback within 4 business hours.
           </p>
         </div>
@@ -85,8 +88,8 @@ export default function ContactPage(): React.JSX.Element {
           {/* Right Column: Full Scope Intake Form (lg: 7 cols) */}
           <section className="lg:col-span-7 w-full">
             <div className="space-y-4">
-              <div className="hidden lg:flex items-center justify-between px-2 text-xs font-mono text-zinc-400">
-                <span className="flex items-center gap-1.5 text-cyan-400 font-semibold">
+              <div className="hidden lg:flex items-center justify-between px-2 text-xs font-mono text-slate-400">
+                <span className="flex items-center gap-1.5 text-teal-400 font-semibold">
                   <ShieldCheck className="w-4 h-4" />
                   Dual-Path Scoped Ingestion
                 </span>
@@ -99,34 +102,34 @@ export default function ContactPage(): React.JSX.Element {
         </div>
 
         {/* Trust Badges Strip */}
-        <div className="pt-8 border-t border-zinc-800/80">
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 text-left font-mono">
-            <div className="p-5 rounded-2xl bg-zinc-950/70 border border-zinc-800/70 space-y-2">
+        <div className="pt-8 border-t border-slate-800/80">
+          <div data-stagger className="grid grid-cols-1 sm:grid-cols-3 gap-6 text-left font-mono">
+            <div className="spotlight-card p-6 rounded-2xl bg-[#0D121F] border border-slate-800/80 space-y-2 shadow-xl">
               <div className="flex items-center gap-2 text-emerald-400 text-xs font-bold uppercase tracking-wider">
                 <CheckCircle2 className="w-4 h-4" />
                 <span>Fixed-Price Milestone SLA</span>
               </div>
-              <p className="text-xs text-zinc-400 leading-relaxed font-sans">
+              <p className="text-xs text-slate-400 leading-relaxed font-sans">
                 Transparent delivery agreements with fixed deliverables. Guaranteed zero unexpected scope creep.
               </p>
             </div>
 
-            <div className="p-5 rounded-2xl bg-zinc-950/70 border border-zinc-800/70 space-y-2">
-              <div className="flex items-center gap-2 text-cyan-400 text-xs font-bold uppercase tracking-wider">
+            <div className="spotlight-card p-6 rounded-2xl bg-[#0D121F] border border-slate-800/80 space-y-2 shadow-xl">
+              <div className="flex items-center gap-2 text-teal-400 text-xs font-bold uppercase tracking-wider">
                 <Server className="w-4 h-4" />
                 <span>100% Intellectual Property</span>
               </div>
-              <p className="text-xs text-zinc-400 leading-relaxed font-sans">
+              <p className="text-xs text-slate-400 leading-relaxed font-sans">
                 Full Git repository, Docker images, and PostgreSQL root access handed over upon final delivery.
               </p>
             </div>
 
-            <div className="p-5 rounded-2xl bg-zinc-950/70 border border-zinc-800/70 space-y-2">
+            <div className="spotlight-card p-6 rounded-2xl bg-[#0D121F] border border-slate-800/80 space-y-2 shadow-xl">
               <div className="flex items-center gap-2 text-indigo-400 text-xs font-bold uppercase tracking-wider">
                 <Lock className="w-4 h-4" />
                 <span>EU Bare-Metal Isolation</span>
               </div>
-              <p className="text-xs text-zinc-400 leading-relaxed font-sans">
+              <p className="text-xs text-slate-400 leading-relaxed font-sans">
                 Dedicated Hetzner NVMe cloud instances in Germany and Finland with AES-256 encrypted persistence.
               </p>
             </div>
@@ -137,29 +140,29 @@ export default function ContactPage(): React.JSX.Element {
       {/* ========================================================================= */}
       {/* 3. FOOTER BAR */}
       {/* ========================================================================= */}
-      <footer className="mt-20 border-t border-zinc-900 bg-zinc-950/60 py-10">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6 text-xs font-mono text-zinc-400">
+      <footer className="mt-20 border-t border-slate-800/80 bg-[#0B0F19] py-10">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6 text-xs font-mono text-slate-400">
           {/* Contextual Programmatic Solutions Links */}
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-6 border-b border-zinc-800/80">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-6 border-b border-slate-800/60">
             <span className="text-[11px] uppercase tracking-widest text-teal-400 font-bold">
               Dedicated B2B Solutions (€4,800 Fixed Sprints):
             </span>
             <div className="flex flex-wrap items-center gap-4 sm:gap-6">
               <Link
                 href="/solutions/excel-to-custom-portal"
-                className="text-zinc-300 hover:text-teal-400 transition"
+                className="text-slate-300 hover:text-teal-400 transition"
               >
                 Excel-to-Custom Portal
               </Link>
               <Link
                 href="/solutions/offline-field-operations-pwa"
-                className="text-zinc-300 hover:text-teal-400 transition"
+                className="text-slate-300 hover:text-teal-400 transition"
               >
                 Offline Field Operations PWA
               </Link>
               <Link
                 href="/solutions/b2b-client-intake-engine"
-                className="text-zinc-300 hover:text-teal-400 transition"
+                className="text-slate-300 hover:text-teal-400 transition"
               >
                 B2B Client Intake Engine
               </Link>
@@ -169,33 +172,33 @@ export default function ContactPage(): React.JSX.Element {
           <div className="flex flex-col md:flex-row items-center justify-between gap-6">
             <div className="flex flex-wrap items-center justify-center md:justify-start gap-3">
               <div className="flex items-center gap-2">
-                <span className="w-2 h-2 rounded-full bg-emerald-500" />
+                <span className="w-2 h-2 rounded-full bg-teal-400" />
                 <span>&copy; 2026 DukaTrio. All systems operational.</span>
               </div>
-              <span className="hidden sm:inline text-zinc-700">·</span>
-              <div className="inline-flex items-center gap-2 px-2.5 py-1 rounded-full bg-zinc-900/90 border border-zinc-800 text-[11px] text-zinc-300">
+              <span className="hidden sm:inline text-slate-700">·</span>
+              <div className="inline-flex items-center gap-2 px-2.5 py-1 rounded-full bg-[#0D121F] border border-slate-800/80 text-[11px] text-slate-300">
                 <span className="relative flex h-2 w-2">
-                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
-                  <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500" />
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-teal-400 opacity-75" />
+                  <span className="relative inline-flex rounded-full h-2 w-2 bg-teal-400" />
                 </span>
                 <span>Core-01 · Direct Intake Active · 99.9% SLA</span>
               </div>
             </div>
 
             <div className="flex flex-wrap items-center justify-center gap-5 sm:gap-6">
-              <Link href="/#solutions" className="hover:text-cyan-400 transition">
+              <Link href="/#solutions" className="hover:text-teal-400 transition">
                 Solutions
               </Link>
-              <Link href="/#pricing" className="hover:text-cyan-400 transition">
+              <Link href="/#pricing" className="hover:text-teal-400 transition">
                 Pricing
               </Link>
-              <Link href="/#case-studies" className="hover:text-cyan-400 transition">
+              <Link href="/#case-studies" className="hover:text-teal-400 transition">
                 Case Studies
               </Link>
-              <Link href="/#calculator" className="hover:text-cyan-400 transition">
+              <Link href="/#estimator" className="hover:text-teal-400 transition">
                 Estimator
               </Link>
-              <Link href="/contact" className="text-cyan-400 transition font-bold">
+              <Link href="/contact" className="text-teal-400 transition font-bold">
                 Direct Contact
               </Link>
             </div>
