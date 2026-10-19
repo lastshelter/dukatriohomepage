@@ -11,8 +11,10 @@ import {
   Users,
   AlertTriangle,
   Sparkles,
+  FileDown,
 } from "lucide-react";
 import AnimatedNumber from "@/components/ui/AnimatedNumber";
+import { generateScopeRoiPdfBrief } from "@/utils/generateRoiPdfBrief";
 
 const SEAT_OPTIONS = [
   "1–5 seats",
@@ -34,11 +36,25 @@ export default function ScopeEstimator(): React.JSX.Element {
   const [monthlySaaS, setMonthlySaaS] = useState<number>(850);
   const [seatCount, setSeatCount] = useState<string>("6–15 seats");
   const [bottleneck, setBottleneck] = useState<string>(BOTTLENECK_OPTIONS[0]);
+  const [lastBriefHash, setLastBriefHash] = useState<string | null>(null);
 
   // Dynamic ROI Calculations
   const breakEvenMonths = Math.ceil(FIXED_SPRINT_INVESTMENT / monthlySaaS);
   const threeYearSaaS = monthlySaaS * 36;
   const netThreeYearSavings = Math.max(0, threeYearSaaS - FIXED_SPRINT_INVESTMENT);
+
+  const handleDownloadBrief = () => {
+    const hash = generateScopeRoiPdfBrief({
+      monthlySaaS,
+      seatCount,
+      bottleneck,
+      fixedSprintInvestment: FIXED_SPRINT_INVESTMENT,
+      breakEvenMonths,
+      threeYearSaaS,
+      netThreeYearSavings,
+    });
+    setLastBriefHash(hash);
+  };
 
   const handleBookAudit = () => {
     const summaryMessage = [
@@ -298,18 +314,30 @@ export default function ScopeEstimator(): React.JSX.Element {
               </div>
             </div>
 
-            {/* Single Primary Action CTA */}
+            {/* Primary Action CTAs */}
             <div className="pt-4 space-y-3">
-              <button
-                type="button"
-                onClick={handleBookAudit}
-                className="w-full py-4 px-6 rounded-xl bg-teal-400 hover:bg-teal-300 text-slate-950 font-bold text-xs sm:text-sm uppercase tracking-wider transition-all flex items-center justify-center gap-2.5 cursor-pointer btn-tactile shadow-md"
-              >
-                <span>Book 15-Minute Feasibility Audit</span>
-                <ArrowRight className="w-4 h-4" />
-              </button>
+              <div className="flex flex-col sm:flex-row lg:flex-col xl:flex-row items-stretch gap-3">
+                <button
+                  type="button"
+                  onClick={handleBookAudit}
+                  className="flex-1 py-4 px-5 rounded-xl bg-teal-400 hover:bg-teal-300 text-slate-950 font-bold text-xs sm:text-sm uppercase tracking-wider transition-all flex items-center justify-center gap-2 cursor-pointer btn-tactile shadow-md"
+                >
+                  <span>Book 15-Minute Feasibility Audit</span>
+                  <ArrowRight className="w-4 h-4 shrink-0" />
+                </button>
+                <button
+                  type="button"
+                  onClick={handleDownloadBrief}
+                  className="py-4 px-5 rounded-xl bg-slate-950/90 hover:bg-teal-950/50 border border-teal-500/40 hover:border-teal-400 text-teal-300 hover:text-teal-200 font-bold text-xs sm:text-sm uppercase tracking-wider transition-all flex items-center justify-center gap-2 cursor-pointer btn-tactile shadow-sm hover:shadow-[0_0_20px_-5px_rgba(45,212,191,0.35)]"
+                >
+                  <FileDown className="w-4 h-4 shrink-0 text-teal-400" />
+                  <span>Download Executive Brief (PDF)</span>
+                </button>
+              </div>
               <p className="text-[11px] text-center font-mono text-slate-400">
-                Pre-populates your ROI parameters into our direct engineering intake
+                {lastBriefHash
+                  ? `Executive PDF generated • Verification Hash: ${lastBriefHash}`
+                  : "Pre-populates your ROI parameters or exports a 1-page CFO/Board PDF brief"}
               </p>
             </div>
           </div>
