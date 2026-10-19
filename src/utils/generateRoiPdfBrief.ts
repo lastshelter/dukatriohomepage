@@ -374,17 +374,30 @@ export function generateScopeRoiPdfBrief(input: ScopeRoiBriefInput): string {
   doc.setTextColor(15, 23, 42);
   doc.text("2. ESTIMATED IMPLEMENTATION TIMELINE & FIXED MILESTONES", 14, y);
 
-  y += 3.5;
+  // Table Header
   doc.setFillColor(15, 23, 42);
   doc.rect(14, y, 182, 8, "F");
+
+  // Explicit column layout totaling 182mm (x = 14 to 196):
+  // Col 0: Sprint Phase (14 to 42 -> width 28mm, text at x=16, wrap maxW=25mm)
+  // Col 1: Timeline (42 to 70 -> width 28mm, text at x=44, wrap maxW=25mm)
+  // Col 2: Core Engineering Deliverables (70 to 155 -> width 85mm, text at x=72, wrap maxW=81mm)
+  // Col 3: Tranche (155 to 196 -> width 41mm, right-aligned anchor at 193)
+  const col0X = 16;
+  const col0MaxW = 25;
+  const col1X = 44;
+  const col1MaxW = 25;
+  const col2X = 72;
+  const col2MaxW = 81; // Safe wrap width with clear margin before Col 3
+  const col3RightX = 193; // Right alignment anchor
 
   doc.setFont("helvetica", "bold");
   doc.setFontSize(7.5);
   doc.setTextColor(255, 255, 255);
-  doc.text("SPRINT PHASE", 17, y + 5.3);
-  doc.text("TIMELINE", 63, y + 5.3);
-  doc.text("CORE ENGINEERING DELIVERABLES", 92, y + 5.3);
-  doc.text("TRANCHE", 173, y + 5.3);
+  doc.text("SPRINT PHASE", col0X, y + 5.3);
+  doc.text("TIMELINE", col1X, y + 5.3);
+  doc.text("CORE ENGINEERING DELIVERABLES", col2X, y + 5.3);
+  doc.text("TRANCHE", col3RightX, y + 5.3, { align: "right" });
 
   const timelineRows: [string, string, string, string][] = [
     [
@@ -409,7 +422,25 @@ export function generateScopeRoiPdfBrief(input: ScopeRoiBriefInput): string {
 
   y += 8;
   timelineRows.forEach((row, idx) => {
-    const rowH = 8.5;
+    // Explicitly wrap all text columns to prevent overlap
+    doc.setFont("helvetica", "bold");
+    doc.setFontSize(7.6);
+    const wrappedPhase = doc.splitTextToSize(row[0], col0MaxW);
+
+    doc.setFont("helvetica", "normal");
+    doc.setFontSize(7.4);
+    const wrappedTimeline = doc.splitTextToSize(row[1], col1MaxW);
+
+    doc.setFont("helvetica", "normal");
+    doc.setFontSize(7.6);
+    const wrappedDeliverables = doc.splitTextToSize(row[2], col2MaxW);
+
+    const numLinesPhase = Array.isArray(wrappedPhase) ? wrappedPhase.length : 1;
+    const numLinesTimeline = Array.isArray(wrappedTimeline) ? wrappedTimeline.length : 1;
+    const numLinesDeliverables = Array.isArray(wrappedDeliverables) ? wrappedDeliverables.length : 1;
+    const maxLines = Math.max(numLinesPhase, numLinesTimeline, numLinesDeliverables);
+    const rowH = Math.max(9.5, 3.8 + maxLines * 4.0);
+
     if (idx % 2 === 0) {
       doc.setFillColor(248, 250, 252);
     } else {
@@ -420,21 +451,28 @@ export function generateScopeRoiPdfBrief(input: ScopeRoiBriefInput): string {
     doc.setLineWidth(0.2);
     doc.line(14, y + rowH, 196, y + rowH);
 
+    // Col 0: Phase Title (multi-line wrapped within 25mm)
+    doc.setFont("helvetica", "bold");
+    doc.setFontSize(7.6);
+    doc.setTextColor(15, 23, 42);
+    doc.text(wrappedPhase, col0X, y + 5.0);
+
+    // Col 1: Timeline (multi-line wrapped within 25mm)
+    doc.setFont("helvetica", "normal");
+    doc.setFontSize(7.4);
+    doc.setTextColor(15, 118, 110);
+    doc.text(wrappedTimeline, col1X, y + 5.0);
+
+    // Col 2: Deliverables (multi-line wrapped within 81mm, leaving clean margin before Col 3)
+    doc.setTextColor(51, 65, 85);
+    doc.setFontSize(7.6);
+    doc.text(wrappedDeliverables, col2X, y + 5.0);
+
+    // Col 3: Tranche (Right Aligned at anchor 193mm)
     doc.setFont("helvetica", "bold");
     doc.setFontSize(8);
     doc.setTextColor(15, 23, 42);
-    doc.text(row[0], 17, y + 5.6);
-
-    doc.setFont("helvetica", "normal");
-    doc.setTextColor(15, 118, 110);
-    doc.text(row[1], 63, y + 5.6);
-
-    doc.setTextColor(51, 65, 85);
-    doc.text(row[2], 92, y + 5.6);
-
-    doc.setFont("helvetica", "bold");
-    doc.setTextColor(15, 23, 42);
-    doc.text(row[3], 173, y + 5.6);
+    doc.text(row[3], col3RightX, y + 5.0, { align: "right" });
 
     y += rowH;
   });

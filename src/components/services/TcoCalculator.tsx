@@ -490,33 +490,31 @@ export default function TcoCalculator(): React.JSX.Element {
         </div>
 
         {/* High-Intent CTA Buttons */}
-        <div className="shrink-0 flex flex-col items-center sm:items-end gap-2.5 w-full lg:w-auto">
-          <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 w-full lg:w-auto">
-            <button
-              type="button"
-              onClick={handleCtaClick}
-              className="w-full sm:w-auto py-4 px-7 rounded-2xl bg-gradient-to-r from-emerald-400 via-teal-400 to-cyan-400 hover:from-emerald-300 hover:via-teal-300 hover:to-cyan-300 text-zinc-950 font-black text-xs uppercase tracking-wider transition-all shadow-[0_0_30px_-5px_rgba(16,185,129,0.5)] flex items-center justify-center gap-2 cursor-pointer btn-tactile hover:scale-[1.02] active:scale-[0.98]"
-            >
-              <span>Build Your Dedicated System</span>
-              <ArrowRight className="w-4 h-4 stroke-[2.5]" />
-            </button>
-            <button
-              type="button"
-              onClick={() =>
-                generateTcoPdfBrief({
-                  teamSize,
-                  costPerUser,
-                  timeHorizonYears,
-                  ...calculations,
-                })
-              }
-              className="w-full sm:w-auto py-4 px-6 rounded-2xl bg-zinc-950/90 hover:bg-teal-950/50 border border-teal-500/40 hover:border-teal-400 text-teal-300 hover:text-teal-200 font-bold text-xs uppercase tracking-wider transition-all flex items-center justify-center gap-2 cursor-pointer btn-tactile shadow-sm hover:shadow-[0_0_20px_-5px_rgba(45,212,191,0.35)] hover:scale-[1.02] active:scale-[0.98]"
-            >
-              <FileDown className="w-4 h-4 text-teal-400" />
-              <span>Download Executive Brief (PDF)</span>
-            </button>
-          </div>
-          <span className="text-[10px] font-mono text-zinc-400 text-center sm:text-right">
+        <div className="shrink-0 flex flex-col gap-3 w-full lg:w-80">
+          <button
+            type="button"
+            onClick={handleCtaClick}
+            className="w-full py-4 px-6 rounded-2xl bg-gradient-to-r from-emerald-400 via-teal-400 to-cyan-400 hover:from-emerald-300 hover:via-teal-300 hover:to-cyan-300 text-zinc-950 font-black text-xs uppercase tracking-wider leading-tight text-center transition-all shadow-[0_0_30px_-5px_rgba(16,185,129,0.5)] flex items-center justify-center gap-2 cursor-pointer btn-tactile hover:scale-[1.02] active:scale-[0.98]"
+          >
+            <span className="min-w-0 text-center">Build Your Dedicated System</span>
+            <ArrowRight className="w-4 h-4 shrink-0 stroke-[2.5]" />
+          </button>
+          <button
+            type="button"
+            onClick={() =>
+              generateTcoPdfBrief({
+                teamSize,
+                costPerUser,
+                timeHorizonYears,
+                ...calculations,
+              })
+            }
+            className="w-full py-4 px-6 rounded-2xl bg-zinc-950/90 hover:bg-teal-950/50 border border-zinc-700 hover:border-teal-400 text-teal-300 hover:text-teal-200 font-bold text-xs uppercase tracking-wider leading-tight text-center transition-all flex items-center justify-center gap-2 cursor-pointer btn-tactile shadow-sm hover:shadow-[0_0_20px_-5px_rgba(45,212,191,0.35)] hover:scale-[1.02] active:scale-[0.98]"
+          >
+            <FileDown className="w-4 h-4 shrink-0 text-teal-400" />
+            <span className="min-w-0 text-center">Download Executive Brief (PDF)</span>
+          </button>
+          <span className="text-[10px] font-mono text-zinc-400 text-center">
             Pre-populates team size ({teamSize} seats) into project inquiry or exports 1-page CFO/Board PDF brief
           </span>
         </div>

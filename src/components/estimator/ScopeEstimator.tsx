@@ -316,22 +316,22 @@ export default function ScopeEstimator(): React.JSX.Element {
 
             {/* Primary Action CTAs */}
             <div className="pt-4 space-y-3">
-              <div className="flex flex-col sm:flex-row lg:flex-col xl:flex-row items-stretch gap-3">
+              <div className="flex flex-col gap-3 w-full">
                 <button
                   type="button"
                   onClick={handleBookAudit}
-                  className="flex-1 py-4 px-5 rounded-xl bg-teal-400 hover:bg-teal-300 text-slate-950 font-bold text-xs sm:text-sm uppercase tracking-wider transition-all flex items-center justify-center gap-2 cursor-pointer btn-tactile shadow-md"
+                  className="w-full py-4 px-5 rounded-xl bg-gradient-to-r from-teal-400 to-cyan-400 hover:from-teal-300 hover:to-cyan-300 text-slate-950 font-bold text-xs sm:text-sm uppercase tracking-wider leading-tight text-center transition-all flex items-center justify-center gap-2 cursor-pointer btn-tactile shadow-md"
                 >
-                  <span>Book 15-Minute Feasibility Audit</span>
+                  <span className="min-w-0 text-center">Book 15-Minute Feasibility Audit</span>
                   <ArrowRight className="w-4 h-4 shrink-0" />
                 </button>
                 <button
                   type="button"
                   onClick={handleDownloadBrief}
-                  className="py-4 px-5 rounded-xl bg-slate-950/90 hover:bg-teal-950/50 border border-teal-500/40 hover:border-teal-400 text-teal-300 hover:text-teal-200 font-bold text-xs sm:text-sm uppercase tracking-wider transition-all flex items-center justify-center gap-2 cursor-pointer btn-tactile shadow-sm hover:shadow-[0_0_20px_-5px_rgba(45,212,191,0.35)]"
+                  className="w-full py-4 px-5 rounded-xl bg-slate-950/90 hover:bg-teal-950/50 border border-slate-700 hover:border-teal-400 text-teal-300 hover:text-teal-200 font-bold text-xs sm:text-sm uppercase tracking-wider leading-tight text-center transition-all flex items-center justify-center gap-2 cursor-pointer btn-tactile shadow-sm hover:shadow-[0_0_20px_-5px_rgba(45,212,191,0.35)]"
                 >
                   <FileDown className="w-4 h-4 shrink-0 text-teal-400" />
-                  <span>Download Executive Brief (PDF)</span>
+                  <span className="min-w-0 text-center">Download Executive Brief (PDF)</span>
                 </button>
               </div>
               <p className="text-[11px] text-center font-mono text-slate-400">
