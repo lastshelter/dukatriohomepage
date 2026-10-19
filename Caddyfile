@@ -16,10 +16,20 @@ fundingsolutions.dukatrio.com {
     reverse_proxy 127.0.0.1:3009
 }
 
+# bfstrial.dukatrio.com - DISABLED (App preserved at /var/www/bfstrial on port 3000 for future reuse)
+# Returns 410 Gone + X-Robots-Tag noindex so Google immediately de-indexes it from search results.
 bfstrial.dukatrio.com {
     tls internal
     header {
-        X-Robots-Tag "noindex, nofollow, noarchive"
+        X-Robots-Tag "noindex, nofollow, noarchive, nosnippet"
+        Cache-Control "no-store, no-cache, must-revalidate, max-age=0"
     }
-    reverse_proxy 127.0.0.1:3000
+    handle /robots.txt {
+        header Content-Type "text/plain; charset=utf-8"
+        respond "User-agent: *
+Allow: /
+" 200
+    }
+    respond "410 Gone" 410
+    # reverse_proxy 127.0.0.1:3000
 }
