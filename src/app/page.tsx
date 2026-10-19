@@ -4,9 +4,11 @@ import React from "react";
 import Link from "next/link";
 import ContactForm from "@/components/ContactForm";
 import ScopeEstimator from "@/components/estimator/ScopeEstimator";
+import BlueprintEstimator from "@/components/estimator/BlueprintEstimator";
 import Navbar from "@/components/layout/Navbar";
 import MobileQuickContact from "@/components/layout/MobileQuickContact";
 import CaseStudySection from "@/components/portfolio/CaseStudyCard";
+import CaseStudySandbox from "@/components/sandbox/CaseStudySandbox";
 import SocialProof from "@/components/testimonials/SocialProof";
 import Hero from "@/components/Hero";
 import ScrollEffects from "@/components/ui/ScrollEffects";
@@ -48,12 +50,22 @@ export default function HomePage(): React.JSX.Element {
       <CaseStudySection />
 
       {/* ========================================================================= */}
+      {/* 4b. INTERACTIVE CASE STUDY SANDBOX */}
+      {/* ========================================================================= */}
+      <CaseStudySandbox />
+
+      {/* ========================================================================= */}
       {/* 5. TRANSPARENT FIXED-MILESTONE PRICING TIERS */}
       {/* ========================================================================= */}
       <PricingTiers />
 
       {/* ========================================================================= */}
-      {/* 6. INTERACTIVE SCOPE & ROI ESTIMATOR */}
+      {/* 6a. ARCHITECTURE & BLUEPRINT ESTIMATOR */}
+      {/* ========================================================================= */}
+      <BlueprintEstimator />
+
+      {/* ========================================================================= */}
+      {/* 6b. INTERACTIVE SCOPE & ROI ESTIMATOR */}
       {/* ========================================================================= */}
       <div id="calculator" className="scroll-mt-24" />
       <ScopeEstimator />
@@ -155,6 +167,12 @@ export default function HomePage(): React.JSX.Element {
                 </a>
                 <a href="#case-studies" className="hover:text-teal-400 transition">
                   Case Studies
+                </a>
+                <a href="#sandbox" className="hover:text-teal-400 transition">
+                  Sandbox
+                </a>
+                <a href="#blueprint" className="hover:text-teal-400 transition">
+                  Blueprint
                 </a>
                 <a href="#estimator" className="hover:text-teal-400 transition">
                   Estimator
