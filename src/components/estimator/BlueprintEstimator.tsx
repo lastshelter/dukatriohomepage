@@ -7,6 +7,8 @@ import {
   Check,
   CheckCircle2,
   Cpu,
+  Download,
+  FileCode2,
   Layers,
   Loader2,
   PhoneCall,
@@ -22,6 +24,7 @@ import {
   generateBlueprint,
   type Blueprint,
 } from "@/utils/blueprintEngine";
+import { generateBlueprintPdf } from "@/utils/generateBlueprintPdf";
 import { formatEur } from "@/utils/formatEur";
 import { prefillContactAndScroll } from "@/utils/contactBridge";
 import { prefersReducedMotion, useTimeouts } from "@/utils/useTimeouts";
@@ -57,6 +60,7 @@ export default function BlueprintEstimator(): React.JSX.Element {
   const [blueprint, setBlueprint] = useState<Blueprint | null>(null);
   const [submittedText, setSubmittedText] = useState("");
   const [error, setError] = useState<string | null>(null);
+  const [codeTab, setCodeTab] = useState<"schema" | "routes">("schema");
 
   const runBlueprint = (text: string) => {
     const trimmed = text.trim();
@@ -385,6 +389,73 @@ export default function BlueprintEstimator(): React.JSX.Element {
                     </ul>
                   </div>
 
+                  {/* 02b · Prisma Schema & API Route Contract */}
+                  <div className={`p-5 rounded-2xl bg-slate-950/60 border border-slate-800/80 space-y-3 ${revealClass(reveal >= 2)}`}>
+                    <div className="flex flex-wrap items-center justify-between gap-2">
+                      <div className="flex items-center gap-2 text-teal-400 font-mono text-xs font-bold uppercase tracking-wider">
+                        <FileCode2 className="w-4 h-4 shrink-0" />
+                        <span>Data Model &amp; API Route Contract</span>
+                      </div>
+                      <div className="inline-flex items-center p-0.5 rounded-lg bg-[#0D121F] border border-slate-800 font-mono text-[11px]">
+                        <button
+                          type="button"
+                          onClick={() => setCodeTab("schema")}
+                          className={`px-2.5 py-1 rounded-md transition cursor-pointer ${
+                            codeTab === "schema"
+                              ? "bg-teal-400 text-slate-950 font-bold"
+                              : "text-slate-400 hover:text-white"
+                          }`}
+                        >
+                          schema.prisma
+                        </button>
+                        <button
+                          type="button"
+                          onClick={() => setCodeTab("routes")}
+                          className={`px-2.5 py-1 rounded-md transition cursor-pointer ${
+                            codeTab === "routes"
+                              ? "bg-teal-400 text-slate-950 font-bold"
+                              : "text-slate-400 hover:text-white"
+                          }`}
+                        >
+                          API Endpoints ({blueprint.apiRoutes.length})
+                        </button>
+                      </div>
+                    </div>
+
+                    {codeTab === "schema" ? (
+                      <pre className="p-4 rounded-xl bg-[#090C14] border border-slate-800/90 text-xs font-mono text-teal-300 overflow-x-auto leading-relaxed">
+                        <code>{blueprint.schemaPreview}</code>
+                      </pre>
+                    ) : (
+                      <div className="space-y-2 font-mono text-xs">
+                        {blueprint.apiRoutes.map((route) => (
+                          <div
+                            key={`${route.method}-${route.path}`}
+                            className="p-3 rounded-xl bg-[#090C14] border border-slate-800/90 flex flex-col sm:flex-row sm:items-center justify-between gap-2"
+                          >
+                            <div className="flex items-center gap-2">
+                              <span
+                                className={`px-2 py-0.5 rounded text-[10px] font-bold ${
+                                  route.method === "GET"
+                                    ? "bg-cyan-950/80 text-cyan-300 border border-cyan-800/60"
+                                    : route.method === "POST"
+                                    ? "bg-emerald-950/80 text-emerald-300 border border-emerald-800/60"
+                                    : "bg-amber-950/80 text-amber-300 border border-amber-800/60"
+                                }`}
+                              >
+                                {route.method}
+                              </span>
+                              <span className="text-slate-200 font-semibold">{route.path}</span>
+                            </div>
+                            <span className="text-[11px] text-slate-400 font-sans">
+                              {route.summary}
+                            </span>
+                          </div>
+                        ))}
+                      </div>
+                    )}
+                  </div>
+
                   {/* 03 · Bracket */}
                   <div className={`p-5 rounded-2xl bg-slate-950/60 border border-slate-800/80 space-y-4 ${revealClass(reveal >= 3)}`}>
                     <div className="flex items-center gap-2 text-teal-400 font-mono text-xs font-bold uppercase tracking-wider">
@@ -422,16 +493,26 @@ export default function BlueprintEstimator(): React.JSX.Element {
                       <PhoneCall className="w-4 h-4 shrink-0" />
                       <span>04 · Next Step</span>
                     </div>
-                    <button
-                      type="button"
-                      onClick={handleBookCall}
-                      className="w-full inline-flex items-center justify-center gap-2.5 py-3.5 px-6 rounded-xl bg-teal-400 hover:bg-teal-300 text-slate-950 font-extrabold text-xs sm:text-sm uppercase tracking-wider transition-all shadow-lg btn-tactile cursor-pointer"
-                    >
-                      <span>Book 15-Min Scope Call for This Blueprint</span>
-                      <ArrowRight className="w-4 h-4 shrink-0" />
-                    </button>
+                    <div className="flex flex-col sm:flex-row gap-3">
+                      <button
+                        type="button"
+                        onClick={handleBookCall}
+                        className="flex-1 inline-flex items-center justify-center gap-2.5 py-3.5 px-6 rounded-xl bg-teal-400 hover:bg-teal-300 text-slate-950 font-extrabold text-xs sm:text-sm uppercase tracking-wider transition-all shadow-lg btn-tactile cursor-pointer"
+                      >
+                        <span>Book 15-Min Scope Call for This Blueprint</span>
+                        <ArrowRight className="w-4 h-4 shrink-0" />
+                      </button>
+                      <button
+                        type="button"
+                        onClick={() => void generateBlueprintPdf(blueprint, submittedText)}
+                        className="inline-flex items-center justify-center gap-2 py-3.5 px-5 rounded-xl bg-[#0D121F] hover:bg-slate-900 border border-teal-500/40 text-teal-300 hover:text-white font-mono font-bold text-xs uppercase tracking-wider transition cursor-pointer"
+                      >
+                        <Download className="w-4 h-4 shrink-0" />
+                        <span>Download Blueprint PDF</span>
+                      </button>
+                    </div>
                     <p className="text-[11px] font-mono text-slate-500 text-center">
-                      Opens the contact desk with this blueprint prefilled. You review it before anything is sent.
+                      Opens the contact desk with this blueprint prefilled, or download a 1-page PDF brief for your team.
                     </p>
                   </div>
                 </div>

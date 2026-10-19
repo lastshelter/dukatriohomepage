@@ -13,7 +13,10 @@ import {
   CheckCircle2,
   Sparkles,
   ExternalLink,
+  Network,
+  Columns,
 } from "lucide-react";
+import HeroTopology from "@/components/HeroTopology";
 
 interface BlueprintPreview {
   id: "portal" | "pwa" | "intake";
@@ -100,6 +103,7 @@ const BLUEPRINTS: BlueprintPreview[] = [
 
 export default function Hero(): React.JSX.Element {
   const [activeId, setActiveId] = useState<BlueprintPreview["id"]>("pwa");
+  const [viewMode, setViewMode] = useState<"comparison" | "topology">("comparison");
   const activeBlueprint = BLUEPRINTS.find((b) => b.id === activeId) ?? BLUEPRINTS[0];
 
   const handleScopeBlueprint = (bp: BlueprintPreview) => {
@@ -204,12 +208,42 @@ export default function Hero(): React.JSX.Element {
           className="max-w-6xl mx-auto rounded-3xl bg-[#0D121F]/95 border border-slate-800/90 shadow-2xl shadow-black/60 overflow-hidden spotlight-card"
         >
           {/* Workbench Top Bar: Interactive Blueprint Selector */}
-          <div className="px-4 sm:px-6 py-4 bg-slate-950/80 border-b border-slate-800/90 flex flex-col md:flex-row md:items-center justify-between gap-4">
-            <div className="flex items-center gap-2 text-xs font-mono text-slate-400">
-              <Sparkles className="w-3.5 h-3.5 text-teal-400" />
-              <span className="uppercase tracking-wider font-bold text-slate-300">
-                Interactive System Blueprint Inspector
-              </span>
+          <div className="px-4 sm:px-6 py-4 bg-slate-950/80 border-b border-slate-800/90 flex flex-col xl:flex-row xl:items-center justify-between gap-4">
+            <div className="flex flex-wrap items-center justify-between gap-3">
+              <div className="flex items-center gap-2 text-xs font-mono text-slate-400">
+                <Sparkles className="w-3.5 h-3.5 text-teal-400" />
+                <span className="uppercase tracking-wider font-bold text-slate-300">
+                  Interactive System Blueprint Inspector
+                </span>
+              </div>
+
+              {/* View Mode Switcher: Before/After vs. 5-Node Live Topology */}
+              <div className="inline-flex items-center p-1 rounded-xl bg-slate-900/90 border border-slate-800 font-mono text-[11px]">
+                <button
+                  type="button"
+                  onClick={() => setViewMode("comparison")}
+                  className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg transition cursor-pointer ${
+                    viewMode === "comparison"
+                      ? "bg-teal-400 text-slate-950 font-bold"
+                      : "text-slate-400 hover:text-white"
+                  }`}
+                >
+                  <Columns className="w-3 h-3" />
+                  <span>Before / After</span>
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setViewMode("topology")}
+                  className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg transition cursor-pointer ${
+                    viewMode === "topology"
+                      ? "bg-teal-400 text-slate-950 font-bold"
+                      : "text-slate-400 hover:text-white"
+                  }`}
+                >
+                  <Network className="w-3 h-3" />
+                  <span>Live 5-Node Topology</span>
+                </button>
+              </div>
             </div>
 
             <div className="flex flex-wrap items-center gap-2" role="tablist" aria-label="System Blueprints">
@@ -242,17 +276,20 @@ export default function Hero(): React.JSX.Element {
             </div>
           </div>
 
-          {/* Workbench Body: Animated Before vs. After Comparison */}
+          {/* Workbench Body: Animated Before vs. After Comparison OR Live 5-Node Topology */}
           <AnimatePresence mode="wait">
             <motion.div
-              key={activeBlueprint.id}
+              key={`${activeBlueprint.id}-${viewMode}`}
               initial={{ opacity: 0, y: 8 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -8 }}
               transition={{ duration: 0.22 }}
               className="p-6 sm:p-8 space-y-6"
             >
-              <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch">
+              {viewMode === "topology" ? (
+                <HeroTopology blueprintId={activeBlueprint.id} />
+              ) : (
+                <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch">
                 {/* Left Column: BEFORE (Legacy Bottleneck) */}
                 <div className="lg:col-span-5 p-6 rounded-2xl bg-slate-950/80 border border-rose-900/40 flex flex-col justify-between space-y-5">
                   <div className="space-y-3">
@@ -365,6 +402,7 @@ export default function Hero(): React.JSX.Element {
                   </div>
                 </div>
               </div>
+              )}
             </motion.div>
           </AnimatePresence>
         </motion.div>

@@ -16,6 +16,10 @@ import FaqSection from "@/components/home/FaqSection";
 import ServicePillars from "@/components/services/ServicePillars";
 import PricingTiers from "@/components/pricing/PricingTiers";
 import DeliveryRoadmap from "@/components/home/DeliveryRoadmap";
+import ProductionGuarantees from "@/components/home/ProductionGuarantees";
+import ServiceComparison from "@/components/services/ServiceComparison";
+import BeforeAfterSlider from "@/components/ui/BeforeAfterSlider";
+import TelemetryStrip from "@/components/layout/TelemetryStrip";
 import { Mail } from "lucide-react";
 
 export default function HomePage(): React.JSX.Element {
@@ -35,7 +39,7 @@ export default function HomePage(): React.JSX.Element {
       <Navbar />
 
       {/* ========================================================================= */}
-      {/* 2. HERO SECTION & TRUST STRIP */}
+      {/* 2. HERO SECTION & INTERACTIVE TOPOLOGY WORKBENCH */}
       {/* ========================================================================= */}
       <Hero />
 
@@ -43,6 +47,11 @@ export default function HomePage(): React.JSX.Element {
       {/* 3. 4 CORE ENGINEERING PILLARS */}
       {/* ========================================================================= */}
       <ServicePillars />
+
+      {/* ========================================================================= */}
+      {/* 3b. INTERACTIVE ARCHITECTURAL BENCHMARK (BEFORE / AFTER SLIDER) */}
+      {/* ========================================================================= */}
+      <BeforeAfterSlider />
 
       {/* ========================================================================= */}
       {/* 4. PRODUCTION CASE STUDIES */}
@@ -60,6 +69,11 @@ export default function HomePage(): React.JSX.Element {
       <PricingTiers />
 
       {/* ========================================================================= */}
+      {/* 5b. EXECUTIVE DELIVERY COMPARISON & 36-MONTH TCO MATRIX */}
+      {/* ========================================================================= */}
+      <ServiceComparison />
+
+      {/* ========================================================================= */}
       {/* 6a. ARCHITECTURE & BLUEPRINT ESTIMATOR */}
       {/* ========================================================================= */}
       <BlueprintEstimator />
@@ -74,6 +88,11 @@ export default function HomePage(): React.JSX.Element {
       {/* 7. 3-STEP STRUCTURED DELIVERY ROADMAP */}
       {/* ========================================================================= */}
       <DeliveryRoadmap />
+
+      {/* ========================================================================= */}
+      {/* 7b. PRODUCTION ENGINEERING GUARANTEES & IP SOVEREIGNTY */}
+      {/* ========================================================================= */}
+      <ProductionGuarantees />
 
       {/* ========================================================================= */}
       {/* 8. VERIFIED SOCIAL PROOF & CLIENT REASSURANCE */}
@@ -138,32 +157,23 @@ export default function HomePage(): React.JSX.Element {
               </div>
             </div>
 
-            <div className="flex flex-col md:flex-row items-center justify-between gap-4">
-              <div className="flex flex-wrap items-center justify-center md:justify-start gap-3">
+            <div className="flex flex-col xl:flex-row items-center justify-between gap-4">
+              <div className="flex flex-wrap items-center justify-center xl:justify-start gap-3">
                 <div className="flex items-center gap-2">
                   <span className="w-2 h-2 rounded-full bg-teal-400" />
                   <span>&copy; 2026 DukaTrio. All systems operational.</span>
                 </div>
                 <span className="hidden sm:inline text-slate-700">·</span>
-                {/* Subtle Status Indicator */}
-                <div className="inline-flex items-center gap-2 px-2.5 py-1 rounded-full bg-[#0D121F] border border-slate-800/80 text-[11px] text-slate-300">
-                  <span className="relative flex h-2 w-2">
-                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-teal-400 opacity-75" />
-                    <span className="relative inline-flex rounded-full h-2 w-2 bg-teal-400" />
-                  </span>
-                  <span>Core-01 · Systems Optimal · 99.9% Uptime</span>
-                </div>
+                {/* Live Infrastructure Telemetry Strip */}
+                <TelemetryStrip />
               </div>
 
               <div className="flex flex-wrap items-center justify-center gap-5 sm:gap-6">
                 <a href="#solutions" className="hover:text-teal-400 transition">
                   Services
                 </a>
-                <a href="#pricing" className="hover:text-teal-400 transition">
-                  Pricing
-                </a>
-                <a href="#process" className="hover:text-teal-400 transition">
-                  Process
+                <a href="#benchmark" className="hover:text-teal-400 transition">
+                  Benchmark
                 </a>
                 <a href="#case-studies" className="hover:text-teal-400 transition">
                   Case Studies
@@ -171,11 +181,17 @@ export default function HomePage(): React.JSX.Element {
                 <a href="#sandbox" className="hover:text-teal-400 transition">
                   Sandbox
                 </a>
+                <a href="#pricing" className="hover:text-teal-400 transition">
+                  Pricing
+                </a>
                 <a href="#blueprint" className="hover:text-teal-400 transition">
                   Blueprint
                 </a>
                 <a href="#estimator" className="hover:text-teal-400 transition">
                   Estimator
+                </a>
+                <a href="#guarantees" className="hover:text-teal-400 transition">
+                  SLA &amp; IP
                 </a>
                 <a href="#contact" className="hover:text-teal-400 transition">
                   Contact Desk

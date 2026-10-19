@@ -26,6 +26,12 @@ export interface BlueprintModule {
   detail: string;
 }
 
+export interface BlueprintApiRoute {
+  method: "GET" | "POST" | "PATCH" | "PUT";
+  path: string;
+  summary: string;
+}
+
 export interface Blueprint {
   archetype: ArchetypeId;
   headline: string;
@@ -33,6 +39,8 @@ export interface Blueprint {
   rationale: string;
   stack: BlueprintStackItem[];
   modules: BlueprintModule[];
+  schemaPreview: string;
+  apiRoutes: BlueprintApiRoute[];
   /** Number of add-on modules detected beyond the archetype baseline. */
   extraModuleCount: number;
   priceLow: number;
@@ -197,6 +205,8 @@ interface Archetype {
   keywords: ReadonlyArray<readonly [string, number]>;
   stack: BlueprintStackItem[];
   moduleIds: string[];
+  schemaPreview: string;
+  apiRoutes: BlueprintApiRoute[];
 }
 
 const ARCHETYPES: Archetype[] = [
@@ -221,6 +231,23 @@ const ARCHETYPES: Archetype[] = [
       CORE_INFRA,
     ],
     moduleIds: ["offline-sync", "ocr", "ticket-registry", "rbac"],
+    schemaPreview: `model DeliveryTicket {
+  id            String   @id // UUIDv7 generated offline on device
+  docketNumber  String   @unique
+  supplierName  String
+  netVolumeM3   Decimal  @db.Decimal(8, 2)
+  ocrConfidence Decimal  @db.Decimal(4, 3)
+  siteId        String
+  capturedAt    DateTime
+  syncedAt      DateTime @default(now())
+  status        TicketStatus @default(VERIFIED)
+}`,
+    apiRoutes: [
+      { method: "POST", path: "/api/v1/sync/outbox", summary: "Idempotent batch ingestion of UUIDv7 offline field tickets" },
+      { method: "POST", path: "/api/v1/ocr/verify", summary: "Validates Wasm-extracted docket fields & stores photo hash" },
+      { method: "GET", path: "/api/v1/stream/dispatch", summary: "Real-time SSE feed pushing verified site deliveries to HQ" },
+      { method: "GET", path: "/api/v1/ledger/export.csv", summary: "Dispute-proof reconciliation export filtered by supplier & date" },
+    ],
   },
   {
     id: "saas-replacement",
@@ -242,6 +269,22 @@ const ARCHETYPES: Archetype[] = [
       CORE_INFRA,
     ],
     moduleIds: ["rbac", "csv-import", "workflow", "reporting"],
+    schemaPreview: `model WorkOrder {
+  id          String   @id @default(cuid())
+  reference   String   @unique
+  assignedTo  String
+  stage       OrderStage @default(IN_PROGRESS)
+  amountEur   Decimal  @db.Decimal(12, 2)
+  updatedBy   String
+  auditTrail  AuditEvent[]
+  createdAt   DateTime @default(now())
+}`,
+    apiRoutes: [
+      { method: "POST", path: "/api/v1/migration/import", summary: "Streaming CSV/XLSX parser migrating legacy SaaS exports" },
+      { method: "PATCH", path: "/api/v1/orders/:id/stage", summary: "Role-gated state transition with automatic audit diff" },
+      { method: "GET", path: "/api/v1/kpi/summary", summary: "Sub-50ms aggregated operational & margin metrics" },
+      { method: "POST", path: "/api/v1/webhooks/outbound", summary: "Signed HMAC webhook dispatch replacing paid Zapier tasks" },
+    ],
   },
   {
     id: "client-portal",
@@ -263,6 +306,22 @@ const ARCHETYPES: Archetype[] = [
       CORE_INFRA,
     ],
     moduleIds: ["tenant-isolation", "vault", "rbac", "audit-log"],
+    schemaPreview: `model TenantVaultFile {
+  id            String   @id @default(cuid())
+  tenantId      String   // Enforced row-level tenant scope
+  fileName      String
+  cipherSha256  String   // AES-256-GCM encrypted payload hash
+  uploadedById  String
+  accessLogs    VaultAccessLog[]
+  createdAt     DateTime @default(now())
+  @@index([tenantId, createdAt])
+}`,
+    apiRoutes: [
+      { method: "POST", path: "/api/v1/tenants/:tenantId/vault", summary: "Streams & encrypts client upload with AES-256-GCM at rest" },
+      { method: "GET", path: "/api/v1/tenants/:tenantId/files", summary: "Tenant-scoped document listing with strict session guard" },
+      { method: "POST", path: "/api/v1/vault/:fileId/presign", summary: "Issues 60-second single-use download token & logs audit event" },
+      { method: "GET", path: "/api/v1/compliance/audit-trail", summary: "Append-only ledger of file views, uploads & status changes" },
+    ],
   },
   {
     id: "spreadsheet-portal",
@@ -283,6 +342,21 @@ const ARCHETYPES: Archetype[] = [
       CORE_INFRA,
     ],
     moduleIds: ["csv-import", "rbac", "audit-log", "reporting"],
+    schemaPreview: `model OperationsRecord {
+  id          String   @id @default(cuid())
+  skuCode     String   @unique
+  quantity    Int
+  unitCostEur Decimal  @db.Decimal(10, 2)
+  approvedBy  String?
+  version     Int      @default(1) // Optimistic concurrency lock
+  updatedAt   DateTime @updatedAt
+}`,
+    apiRoutes: [
+      { method: "POST", path: "/api/v1/sheets/ingest", summary: "Validates 10k+ XLSX rows via Zod with line-by-line error report" },
+      { method: "PUT", path: "/api/v1/records/:id", summary: "Optimistic-locked record mutation preventing overwrite collisions" },
+      { method: "GET", path: "/api/v1/records/grid", summary: "Server-paginated, multi-column filtered grid query (<25ms)" },
+      { method: "GET", path: "/api/v1/audit/:recordId/diffs", summary: "Full JSON before/after revision history per row" },
+    ],
   },
   {
     id: "intake-underwriting",
@@ -304,6 +378,21 @@ const ARCHETYPES: Archetype[] = [
       CORE_INFRA,
     ],
     moduleIds: ["decision-engine", "vault", "term-sheet-pdf", "rbac"],
+    schemaPreview: `model UnderwritingDeal {
+  id              String   @id @default(cuid())
+  borrowerEntity  String
+  grossRevenueEur Decimal  @db.Decimal(14, 2)
+  annualDebtEur   Decimal  @db.Decimal(14, 2)
+  computedDscr    Decimal  @db.Decimal(5, 2)
+  tier            RiskTier // PRIME | BORDERLINE | SUBPRIME
+  createdAt       DateTime @default(now())
+}`,
+    apiRoutes: [
+      { method: "POST", path: "/api/v1/underwriting/evaluate", summary: "Runs deterministic DSCR, LTV & debt-yield kernel in <20ms" },
+      { method: "POST", path: "/api/v1/deals/:id/term-sheet.pdf", summary: "Generates branded PDF indicative term sheet from deal figures" },
+      { method: "POST", path: "/api/v1/deals/:id/kyc-upload", summary: "Encrypts borrower financials & tax filings into private EU vault" },
+      { method: "PATCH", path: "/api/v1/deals/:id/decision", summary: "Records underwriter sign-off with immutable compliance hash" },
+    ],
   },
 ];
 
@@ -321,6 +410,21 @@ const CUSTOM_ARCHETYPE: Archetype = {
     CORE_INFRA,
   ],
   moduleIds: ["rbac", "workflow", "reporting", "audit-log"],
+  schemaPreview: `model WorkflowEntity {
+  id          String   @id @default(cuid())
+  title       String
+  status      String   @default("OPEN")
+  ownerUserId String
+  payloadJson Json
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}`,
+  apiRoutes: [
+    { method: "GET", path: "/api/v1/entities", summary: "Role-scoped listing with server-side filtering & pagination" },
+    { method: "POST", path: "/api/v1/entities", summary: "Zod-validated entity creation with automatic audit trail" },
+    { method: "PATCH", path: "/api/v1/entities/:id/transition", summary: "State machine transition with role permission check" },
+    { method: "GET", path: "/api/v1/reports/export.csv", summary: "Instant CSV/PDF operational report generation" },
+  ],
 };
 
 // ---------------------------------------------------------------------------
@@ -472,6 +576,8 @@ export function generateBlueprint(description: string): Blueprint {
     rationale: best.rationale,
     stack: stack.slice(0, MAX_STACK_ITEMS),
     modules,
+    schemaPreview: best.schemaPreview,
+    apiRoutes: best.apiRoutes,
     extraModuleCount,
     priceLow: sizing.priceLow,
     priceHigh: sizing.priceHigh,
