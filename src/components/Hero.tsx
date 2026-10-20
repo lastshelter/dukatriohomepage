@@ -17,6 +17,7 @@ import {
   Columns,
 } from "lucide-react";
 import HeroTopology from "@/components/HeroTopology";
+import { useLanguage } from "@/context/LanguageContext";
 
 interface BlueprintPreview {
   id: "portal" | "pwa" | "intake";
@@ -102,6 +103,7 @@ const BLUEPRINTS: BlueprintPreview[] = [
 ];
 
 export default function Hero(): React.JSX.Element {
+  const { lang } = useLanguage();
   const [activeId, setActiveId] = useState<BlueprintPreview["id"]>("pwa");
   const [viewMode, setViewMode] = useState<"comparison" | "topology">("comparison");
   const activeBlueprint = BLUEPRINTS.find((b) => b.id === activeId) ?? BLUEPRINTS[0];
@@ -138,15 +140,21 @@ export default function Hero(): React.JSX.Element {
             initial={{ opacity: 0, y: -14 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.4, ease: "easeOut" }}
-            className="inline-flex flex-wrap items-center justify-center gap-2.5 px-4 py-1.5 rounded-full bg-[#0D121F] border border-slate-800/90 text-slate-300 font-mono text-[11px] sm:text-xs font-semibold shadow-lg shadow-black/40"
+            className="inline-flex flex-wrap items-center justify-center gap-2.5 px-4 py-1.5 rounded-full bg-[#0B0F17] border border-white/[0.08] text-slate-300 font-mono text-[11px] sm:text-xs font-semibold shadow-lg shadow-black/40"
           >
             <span className="relative flex h-2 w-2">
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-teal-400 opacity-75" />
               <span className="relative inline-flex rounded-full h-2 w-2 bg-teal-400" />
             </span>
-            <span className="text-teal-400 font-bold">2 SPRINT SLOTS OPEN</span>
+            <span className="text-teal-400 font-bold">
+              {lang === "sr" ? "2 SLOBODNA SPRINT TERMINA" : "2 SPRINT SLOTS OPEN"}
+            </span>
             <span className="text-slate-600">//</span>
-            <span className="text-slate-200">10–14 DAY FIXED-PRICE DELIVERY (€4,800)</span>
+            <span className="text-slate-200">
+              {lang === "sr"
+                ? "ISPORUKA ZA 10–14 DANA PO FIKSNOJ CENI (€4,800)"
+                : "10–14 DAY FIXED-PRICE DELIVERY (€4,800)"}
+            </span>
           </motion.div>
 
           {/* 2. Main Headline */}
@@ -156,10 +164,21 @@ export default function Hero(): React.JSX.Element {
             transition={{ duration: 0.5, delay: 0.1, ease: "easeOut" }}
             className="text-4xl sm:text-6xl lg:text-7xl font-extrabold text-white tracking-tight leading-[1.06] text-balance"
           >
-            We Engineer Custom Internal Portals &amp; Field PWAs{" "}
-            <span className="bg-gradient-to-r from-teal-300 via-teal-400 to-cyan-300 bg-clip-text text-transparent block sm:inline">
-              That Eliminate SaaS Rent.
-            </span>
+            {lang === "sr" ? (
+              <>
+                Projektujemo Namenske B2B Portale i Terenske PWA{" "}
+                <span className="bg-gradient-to-r from-teal-300 via-cyan-300 to-indigo-300 bg-clip-text text-transparent block sm:inline">
+                  Koji Eliminišu Mesečnu SaaS Rentu.
+                </span>
+              </>
+            ) : (
+              <>
+                We Engineer Custom Internal Portals &amp; Field PWAs{" "}
+                <span className="bg-gradient-to-r from-teal-300 via-teal-400 to-cyan-300 bg-clip-text text-transparent block sm:inline">
+                  That Eliminate SaaS Rent.
+                </span>
+              </>
+            )}
           </motion.h1>
 
           {/* 3. Subtitle */}
@@ -169,13 +188,27 @@ export default function Hero(): React.JSX.Element {
             transition={{ duration: 0.5, delay: 0.2, ease: "easeOut" }}
             className="text-base sm:text-xl text-slate-400 leading-relaxed font-normal max-w-3xl mx-auto"
           >
-            Replace fragile spreadsheets, paper delivery tickets, and €60+/seat cloud subscriptions with a single-tenant system deployed on your own private EU VPS in 14 days.{" "}
-            <span className="text-slate-200 font-medium">
-              €4,800 flat milestone. 100% source code ownership.
-            </span>
+            {lang === "sr" ? (
+              <>
+                Zamenite krhke Excel tabele, papirne otpremnice i skupe SaaS licence od €60+ po
+                korisniku sopstvenim single-tenant sistemom na privatnom EU VPS serveru za 14 dana.{" "}
+                <span className="text-slate-200 font-medium">
+                  €4,800 fiksno. 100% vlasništvo nad izvornim kodom.
+                </span>
+              </>
+            ) : (
+              <>
+                Replace fragile spreadsheets, paper delivery tickets, and €60+/seat cloud
+                subscriptions with a single-tenant system deployed on your own private EU VPS in 14
+                days.{" "}
+                <span className="text-slate-200 font-medium">
+                  €4,800 flat milestone. 100% source code ownership.
+                </span>
+              </>
+            )}
           </motion.p>
 
-          {/* 4. Primary Action CTAs */}
+          {/* 4. Primary Action CTAs with Animated Laser-Beam Glow */}
           <motion.div
             initial={{ opacity: 0, y: 14 }}
             animate={{ opacity: 1, y: 0 }}
@@ -184,18 +217,26 @@ export default function Hero(): React.JSX.Element {
           >
             <a
               href="#contact"
-              className="w-full sm:w-auto py-4 px-8 rounded-xl bg-teal-400 hover:bg-teal-300 text-slate-950 font-extrabold text-xs sm:text-sm uppercase tracking-wider transition-all duration-200 hover:-translate-y-0.5 active:scale-[0.98] shadow-[0_10px_30px_-10px_rgba(45,212,191,0.5)] flex items-center justify-center gap-2.5 group cursor-pointer"
+              className="relative w-full sm:w-auto py-4 px-8 rounded-xl bg-gradient-to-r from-teal-400 via-cyan-300 to-teal-400 hover:from-teal-300 hover:to-cyan-200 text-slate-950 font-extrabold text-xs sm:text-sm uppercase tracking-wider transition-all duration-200 hover:-translate-y-0.5 active:scale-[0.98] shadow-[0_0_36px_-6px_rgba(34,211,238,0.65)] ring-1 ring-white/40 flex items-center justify-center gap-2.5 group cursor-pointer"
             >
-              <span>Book 15-Minute Feasibility Audit</span>
+              <span>
+                {lang === "sr"
+                  ? "Zakaži 15-Minutni Inženjerski Audit"
+                  : "Book 15-Minute Feasibility Audit"}
+              </span>
               <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
             </a>
 
             <a
               href="#estimator"
-              className="w-full sm:w-auto py-4 px-7 rounded-xl bg-[#0D121F] hover:bg-slate-900 border border-slate-800/90 hover:border-teal-400/40 text-slate-200 hover:text-white font-semibold text-xs sm:text-sm uppercase tracking-wider transition-all duration-200 hover:-translate-y-0.5 active:scale-[0.98] flex items-center justify-center gap-2"
+              className="w-full sm:w-auto py-4 px-7 rounded-xl bg-[#0B0F17] hover:bg-slate-900 border border-white/[0.09] hover:border-cyan-400/40 text-slate-200 hover:text-white font-semibold text-xs sm:text-sm uppercase tracking-wider transition-all duration-200 hover:-translate-y-0.5 active:scale-[0.98] flex items-center justify-center gap-2"
             >
               <Calculator className="w-4 h-4 text-teal-400" />
-              <span>Calculate 3-Year SaaS Savings ↓</span>
+              <span>
+                {lang === "sr"
+                  ? "Izračunaj 3-Godišnju SaaS Uštedu ↓"
+                  : "Calculate 3-Year SaaS Savings ↓"}
+              </span>
             </a>
           </motion.div>
         </div>
@@ -205,10 +246,10 @@ export default function Hero(): React.JSX.Element {
           initial={{ opacity: 0, y: 24 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.4, ease: "easeOut" }}
-          className="max-w-6xl mx-auto rounded-3xl bg-[#0D121F]/95 border border-slate-800/90 shadow-2xl shadow-black/60 overflow-hidden spotlight-card"
+          className="max-w-6xl mx-auto rounded-3xl bento-surface shadow-2xl shadow-black/60 overflow-hidden spotlight-card"
         >
           {/* Workbench Top Bar: Interactive Blueprint Selector */}
-          <div className="px-4 sm:px-6 py-4 bg-slate-950/80 border-b border-slate-800/90 flex flex-col xl:flex-row xl:items-center justify-between gap-4">
+          <div className="px-4 sm:px-6 py-4 bg-[#030712]/90 border-b border-white/[0.07] flex flex-col xl:flex-row xl:items-center justify-between gap-4">
             <div className="flex flex-wrap items-center justify-between gap-3">
               <div className="flex items-center gap-2 text-xs font-mono text-slate-400">
                 <Sparkles className="w-3.5 h-3.5 text-teal-400" />
@@ -276,7 +317,7 @@ export default function Hero(): React.JSX.Element {
             </div>
           </div>
 
-          {/* Workbench Body: Animated Before vs. After Comparison OR Live 5-Node Topology */}
+          {/* Workbench Body */}
           <AnimatePresence mode="wait">
             <motion.div
               key={`${activeBlueprint.id}-${viewMode}`}
@@ -290,118 +331,116 @@ export default function Hero(): React.JSX.Element {
                 <HeroTopology blueprintId={activeBlueprint.id} />
               ) : (
                 <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch">
-                {/* Left Column: BEFORE (Legacy Bottleneck) */}
-                <div className="lg:col-span-5 p-6 rounded-2xl bg-slate-950/80 border border-rose-900/40 flex flex-col justify-between space-y-5">
-                  <div className="space-y-3">
-                    <div className="flex items-center justify-between">
-                      <span className="inline-flex items-center gap-1.5 text-[11px] font-mono uppercase tracking-wider text-rose-400 font-bold">
-                        <AlertTriangle className="w-3.5 h-3.5" />
-                        <span>BEFORE // LEGACY BOTTLENECK</span>
-                      </span>
-                      <span className="text-[11px] font-mono text-slate-500">STATUS: FRAGILE</span>
+                  {/* Left Column: BEFORE */}
+                  <div className="lg:col-span-5 p-6 rounded-2xl bg-slate-950/80 border border-rose-900/40 flex flex-col justify-between space-y-5">
+                    <div className="space-y-3">
+                      <div className="flex items-center justify-between">
+                        <span className="inline-flex items-center gap-1.5 text-[11px] font-mono uppercase tracking-wider text-rose-400 font-bold">
+                          <AlertTriangle className="w-3.5 h-3.5" />
+                          <span>BEFORE // LEGACY BOTTLENECK</span>
+                        </span>
+                        <span className="text-[11px] font-mono text-slate-500">STATUS: FRAGILE</span>
+                      </div>
+
+                      <h2 className="text-lg sm:text-xl font-bold text-white">
+                        {activeBlueprint.beforeTitle}
+                      </h2>
+
+                      <ul className="space-y-2.5 pt-1 text-xs sm:text-sm text-slate-400">
+                        {activeBlueprint.beforePain.map((pain) => (
+                          <li key={pain} className="flex items-start gap-2.5">
+                            <span className="w-1.5 h-1.5 rounded-full bg-rose-400 mt-2 shrink-0" />
+                            <span className="leading-relaxed">{pain}</span>
+                          </li>
+                        ))}
+                      </ul>
                     </div>
 
-                    <h2 className="text-lg sm:text-xl font-bold text-white">
-                      {activeBlueprint.beforeTitle}
-                    </h2>
-
-                    <ul className="space-y-2.5 pt-1 text-xs sm:text-sm text-slate-400">
-                      {activeBlueprint.beforePain.map((pain) => (
-                        <li key={pain} className="flex items-start gap-2.5">
-                          <span className="w-1.5 h-1.5 rounded-full bg-rose-400 mt-2 shrink-0" />
-                          <span className="leading-relaxed">{pain}</span>
-                        </li>
-                      ))}
-                    </ul>
+                    <div className="pt-4 border-t border-slate-800/80 flex items-center justify-between font-mono text-xs">
+                      <span className="text-slate-500">OPERATIONAL DRAIN:</span>
+                      <span className="text-rose-400 font-bold">{activeBlueprint.beforeCost}</span>
+                    </div>
                   </div>
 
-                  <div className="pt-4 border-t border-slate-800/80 flex items-center justify-between font-mono text-xs">
-                    <span className="text-slate-500">OPERATIONAL DRAIN:</span>
-                    <span className="text-rose-400 font-bold">{activeBlueprint.beforeCost}</span>
+                  {/* Right Column: AFTER */}
+                  <div className="lg:col-span-7 p-6 rounded-2xl bg-gradient-to-br from-teal-950/25 via-slate-950/90 to-slate-950/90 border border-teal-500/40 flex flex-col justify-between space-y-5">
+                    <div className="space-y-3">
+                      <div className="flex flex-wrap items-center justify-between gap-2">
+                        <span className="inline-flex items-center gap-1.5 text-[11px] font-mono uppercase tracking-wider text-teal-400 font-bold">
+                          <CheckCircle2 className="w-3.5 h-3.5" />
+                          <span>AFTER // DUKATRIO ENGINEERED SYSTEM</span>
+                        </span>
+                        <span className="px-2.5 py-0.5 rounded-full bg-teal-950/80 border border-teal-500/30 text-[10px] font-mono text-teal-300 font-bold">
+                          {activeBlueprint.badge}
+                        </span>
+                      </div>
+
+                      <h2 className="text-xl sm:text-2xl font-extrabold text-white">
+                        {activeBlueprint.afterTitle}
+                      </h2>
+
+                      <ul className="space-y-2.5 pt-1 text-xs sm:text-sm text-slate-200">
+                        {activeBlueprint.afterSpecs.map((spec) => (
+                          <li key={spec} className="flex items-start gap-2.5">
+                            <CheckCircle2 className="w-4 h-4 text-teal-400 mt-0.5 shrink-0" />
+                            <span className="leading-relaxed">{spec}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+
+                    <div className="pt-4 border-t border-slate-800/80 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                      <div>
+                        <div className="text-[10px] font-mono uppercase text-slate-400">
+                          VERIFIED OUTCOME &amp; TERMS
+                        </div>
+                        <div className="text-sm sm:text-base font-mono font-black text-teal-400">
+                          {activeBlueprint.afterMetric}
+                        </div>
+                      </div>
+
+                      <div className="flex flex-wrap items-center gap-2.5">
+                        {activeBlueprint.liveDemoUrl &&
+                          (activeBlueprint.liveDemoUrl.startsWith("/") ? (
+                            <Link
+                              href={activeBlueprint.liveDemoUrl}
+                              className="inline-flex items-center gap-1.5 px-3.5 py-2.5 rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-700 text-xs font-mono font-semibold text-slate-200 transition-colors"
+                            >
+                              <span>Read Case Study</span>
+                              <ArrowRight className="w-3.5 h-3.5 text-teal-400" />
+                            </Link>
+                          ) : (
+                            <a
+                              href={activeBlueprint.liveDemoUrl}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="inline-flex items-center gap-1.5 px-3.5 py-2.5 rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-700 text-xs font-mono font-semibold text-slate-200 transition-colors"
+                            >
+                              <span>Live Demo</span>
+                              <ExternalLink className="w-3.5 h-3.5 text-teal-400" />
+                            </a>
+                          ))}
+
+                        <Link
+                          href={activeBlueprint.route}
+                          className="inline-flex items-center gap-1.5 px-3.5 py-2.5 rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-700 text-xs font-mono font-semibold text-slate-200 transition-colors"
+                        >
+                          <span>Full Architecture</span>
+                          <ArrowRight className="w-3.5 h-3.5 text-teal-400" />
+                        </Link>
+
+                        <button
+                          type="button"
+                          onClick={() => handleScopeBlueprint(activeBlueprint)}
+                          className="inline-flex items-center gap-1.5 px-4 py-2.5 rounded-xl bg-teal-400 hover:bg-teal-300 text-slate-950 font-mono text-xs font-extrabold uppercase tracking-wider transition-all cursor-pointer"
+                        >
+                          <span>Deploy This Blueprint</span>
+                          <ArrowRight className="w-3.5 h-3.5" />
+                        </button>
+                      </div>
+                    </div>
                   </div>
                 </div>
-
-                {/* Right Column: AFTER (DukaTrio Engineered System) */}
-                <div className="lg:col-span-7 p-6 rounded-2xl bg-gradient-to-br from-teal-950/25 via-slate-950/90 to-slate-950/90 border border-teal-500/40 flex flex-col justify-between space-y-5">
-                  <div className="space-y-3">
-                    <div className="flex flex-wrap items-center justify-between gap-2">
-                      <span className="inline-flex items-center gap-1.5 text-[11px] font-mono uppercase tracking-wider text-teal-400 font-bold">
-                        <CheckCircle2 className="w-3.5 h-3.5" />
-                        <span>AFTER // DUKATRIO ENGINEERED SYSTEM</span>
-                      </span>
-                      <span className="px-2.5 py-0.5 rounded-full bg-teal-950/80 border border-teal-500/30 text-[10px] font-mono text-teal-300 font-bold">
-                        {activeBlueprint.badge}
-                      </span>
-                    </div>
-
-                    <h2 className="text-xl sm:text-2xl font-extrabold text-white">
-                      {activeBlueprint.afterTitle}
-                    </h2>
-
-                    <ul className="space-y-2.5 pt-1 text-xs sm:text-sm text-slate-200">
-                      {activeBlueprint.afterSpecs.map((spec) => (
-                        <li key={spec} className="flex items-start gap-2.5">
-                          <CheckCircle2 className="w-4 h-4 text-teal-400 mt-0.5 shrink-0" />
-                          <span className="leading-relaxed">{spec}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-
-                  {/* Bottom Action Bar inside Workbench */}
-                  <div className="pt-4 border-t border-slate-800/80 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-                    <div>
-                      <div className="text-[10px] font-mono uppercase text-slate-400">
-                        VERIFIED OUTCOME &amp; TERMS
-                      </div>
-                      <div className="text-sm sm:text-base font-mono font-black text-teal-400">
-                        {activeBlueprint.afterMetric}
-                      </div>
-                    </div>
-
-                    <div className="flex flex-wrap items-center gap-2.5">
-                      {activeBlueprint.liveDemoUrl && (
-                        activeBlueprint.liveDemoUrl.startsWith("/") ? (
-                          <Link
-                            href={activeBlueprint.liveDemoUrl}
-                            className="inline-flex items-center gap-1.5 px-3.5 py-2.5 rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-700 text-xs font-mono font-semibold text-slate-200 transition-colors"
-                          >
-                            <span>Read Case Study</span>
-                            <ArrowRight className="w-3.5 h-3.5 text-teal-400" />
-                          </Link>
-                        ) : (
-                          <a
-                            href={activeBlueprint.liveDemoUrl}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="inline-flex items-center gap-1.5 px-3.5 py-2.5 rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-700 text-xs font-mono font-semibold text-slate-200 transition-colors"
-                          >
-                            <span>Live Demo</span>
-                            <ExternalLink className="w-3.5 h-3.5 text-teal-400" />
-                          </a>
-                        )
-                      )}
-
-                      <Link
-                        href={activeBlueprint.route}
-                        className="inline-flex items-center gap-1.5 px-3.5 py-2.5 rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-700 text-xs font-mono font-semibold text-slate-200 transition-colors"
-                      >
-                        <span>Full Architecture</span>
-                        <ArrowRight className="w-3.5 h-3.5 text-teal-400" />
-                      </Link>
-
-                      <button
-                        type="button"
-                        onClick={() => handleScopeBlueprint(activeBlueprint)}
-                        className="inline-flex items-center gap-1.5 px-4 py-2.5 rounded-xl bg-teal-400 hover:bg-teal-300 text-slate-950 font-mono text-xs font-extrabold uppercase tracking-wider transition-all cursor-pointer"
-                      >
-                        <span>Deploy This Blueprint</span>
-                        <ArrowRight className="w-3.5 h-3.5" />
-                      </button>
-                    </div>
-                  </div>
-                </div>
-              </div>
               )}
             </motion.div>
           </AnimatePresence>

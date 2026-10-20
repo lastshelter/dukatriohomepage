@@ -338,6 +338,31 @@ export default function HeroTopology({
         </div>
       </div>
 
+      {/* Animated SVG Laser-Beam Conduit (Desktop) */}
+      <div className="hidden lg:block relative h-3 -my-1 px-12 pointer-events-none" aria-hidden="true">
+        <svg className="w-full h-3 overflow-visible" viewBox="0 0 1000 12" fill="none">
+          <line
+            x1="0"
+            y1="6"
+            x2="1000"
+            y2="6"
+            stroke={isOffline ? "rgba(245,158,11,0.22)" : "rgba(34,211,238,0.22)"}
+            strokeWidth="1.5"
+            strokeDasharray="6 6"
+          />
+          {!isOffline && (
+            <>
+              <circle r="3.5" fill="#22d3ee">
+                <animateMotion dur="2.6s" repeatCount="indefinite" path="M 0 6 L 1000 6" />
+              </circle>
+              <circle r="3" fill="#34d399">
+                <animateMotion dur="2.6s" begin="1.3s" repeatCount="indefinite" path="M 0 6 L 1000 6" />
+              </circle>
+            </>
+          )}
+        </svg>
+      </div>
+
       {/* 5-Node Interactive Architecture Pipeline */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3 relative">
         {nodes.map((node, index) => {

@@ -19,20 +19,27 @@ import {
   Sparkles,
   ShieldCheck,
   Gauge,
+  Globe,
+  Copy,
+  Check,
+  Server,
 } from "lucide-react";
+import { useLanguage } from "@/context/LanguageContext";
+import { SERVICE_PILLARS } from "@/config/servicePillars";
 
 interface CommandItem {
   id: string;
   group: string;
   label: string;
   sublabel: string;
-  href: string;
+  href?: string;
   external?: boolean;
+  action?: "copy-email" | "toggle-lang";
   icon: React.ComponentType<{ className?: string }>;
   badge?: string;
 }
 
-const COMMAND_ITEMS: CommandItem[] = [
+const STATIC_COMMAND_ITEMS: CommandItem[] = [
   {
     id: "audit",
     group: "Quick Actions",
@@ -41,6 +48,24 @@ const COMMAND_ITEMS: CommandItem[] = [
     href: "/#contact",
     icon: CalendarClock,
     badge: "2 SLOTS OPEN",
+  },
+  {
+    id: "action-copy-email",
+    group: "Quick Actions",
+    label: "Copy Direct Engineering Desk Email (office@dukatrio.com)",
+    sublabel: "Instant clipboard copy · Direct to Principal Systems Architect",
+    action: "copy-email",
+    icon: Copy,
+    badge: "CLIPBOARD",
+  },
+  {
+    id: "action-toggle-lang",
+    group: "Quick Actions",
+    label: "Switch Interface Language (EN ⇄ SR)",
+    sublabel: "Toggle between Institutional English and Executive Serbian",
+    action: "toggle-lang",
+    icon: Globe,
+    badge: "EN / SR",
   },
   {
     id: "blueprint",
@@ -87,6 +112,15 @@ const COMMAND_ITEMS: CommandItem[] = [
     icon: ShieldCheck,
     badge: "SLA & IP",
   },
+  ...SERVICE_PILLARS.map((p) => ({
+    id: `bento-${p.id}`,
+    group: "7 Flagship B2B Catalogue Offerings",
+    label: `${p.index} · ${p.title}`,
+    sublabel: p.tagline,
+    href: p.solutionHref ?? "/#solutions",
+    icon: Server,
+    badge: p.metric.value,
+  })),
   {
     id: "sol-excel",
     group: "€4,800 Solution Blueprints",
@@ -173,10 +207,13 @@ const COMMAND_ITEMS: CommandItem[] = [
 ];
 
 export default function Navbar(): React.JSX.Element {
+  const { lang, setLang, toggleLang } = useLanguage();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [ecosystemOpen, setEcosystemOpen] = useState(false);
   const [commandOpen, setCommandOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
+  const [selectedIndex, setSelectedIndex] = useState(0);
+  const [copiedToast, setCopiedToast] = useState(false);
   const [scrollProgress, setScrollProgress] = useState(0);
   const timeoutRef = useRef<NodeJS.Timeout | null>(null);
   const dropdownRef = useRef<HTMLDivElement | null>(null);
@@ -187,14 +224,26 @@ export default function Navbar(): React.JSX.Element {
   const isHome = pathname === "/";
   const isContact = pathname === "/contact";
 
-  // Streamlined Center Navigation
   const navLinks = [
-    { label: "Services", href: isHome ? "#solutions" : "/#solutions" },
-    { label: "Pricing", href: isHome ? "#pricing" : "/#pricing" },
-    { label: "Process", href: isHome ? "#process" : "/#process" },
-    { label: "Case Studies", href: isHome ? "#case-studies" : "/#case-studies" },
-    { label: "Cost Estimator", href: isHome ? "#estimator" : "/#estimator" },
+    { label: lang === "sr" ? "Rešenja" : "Services", href: isHome ? "#solutions" : "/#solutions" },
+    { label: lang === "sr" ? "Cene" : "Pricing", href: isHome ? "#pricing" : "/#pricing" },
+    { label: lang === "sr" ? "Proces" : "Process", href: isHome ? "#process" : "/#process" },
+    {
+      label: lang === "sr" ? "Studije Slučaja" : "Case Studies",
+      href: isHome ? "#case-studies" : "/#case-studies",
+    },
+    {
+      label: lang === "sr" ? "ROI Kalkulator" : "Cost Estimator",
+      href: isHome ? "#estimator" : "/#estimator",
+    },
   ];
+
+  const filteredCommands = STATIC_COMMAND_ITEMS.filter(
+    (item) =>
+      item.label.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      item.sublabel.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      item.group.toLowerCase().includes(searchQuery.toLowerCase())
+  );
 
   const handleMouseEnter = () => {
     if (timeoutRef.current) clearTimeout(timeoutRef.current);
@@ -205,6 +254,36 @@ export default function Navbar(): React.JSX.Element {
     timeoutRef.current = setTimeout(() => {
       setEcosystemOpen(false);
     }, 180);
+  };
+
+  const handleCommandSelect = (item: CommandItem) => {
+    if (item.action === "copy-email") {
+      navigator.clipboard?.writeText("office@dukatrio.com").catch(() => {});
+      setCopiedToast(true);
+      setTimeout(() => setCopiedToast(false), 2400);
+      setCommandOpen(false);
+      return;
+    }
+    if (item.action === "toggle-lang") {
+      toggleLang();
+      setCommandOpen(false);
+      return;
+    }
+    setCommandOpen(false);
+    if (!item.href) return;
+    if (item.external) {
+      window.open(item.href, "_blank", "noopener,noreferrer");
+      return;
+    }
+    if (item.href.startsWith("/#") && isHome) {
+      const targetId = item.href.replace("/#", "");
+      const el = document.getElementById(targetId);
+      if (el) {
+        el.scrollIntoView({ behavior: "smooth" });
+        return;
+      }
+    }
+    router.push(item.href);
   };
 
   useEffect(() => {
@@ -247,15 +326,19 @@ export default function Navbar(): React.JSX.Element {
   }, []);
 
   useEffect(() => {
+    setSelectedIndex(0);
+  }, [searchQuery]);
+
+  useEffect(() => {
     if (commandOpen) {
       const id = requestAnimationFrame(() => searchInputRef.current?.focus());
       return () => cancelAnimationFrame(id);
     } else {
       setSearchQuery("");
+      setSelectedIndex(0);
     }
   }, [commandOpen]);
 
-  // Close the drawer whenever the route changes
   useEffect(() => {
     const id = requestAnimationFrame(() => {
       setMobileMenuOpen(false);
@@ -280,39 +363,32 @@ export default function Navbar(): React.JSX.Element {
     }
   };
 
-  const filteredCommands = COMMAND_ITEMS.filter(
-    (item) =>
-      item.label.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      item.sublabel.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      item.group.toLowerCase().includes(searchQuery.toLowerCase())
-  );
-
-  const handleCommandSelect = (item: CommandItem) => {
-    setCommandOpen(false);
-    if (item.external) {
-      window.open(item.href, "_blank", "noopener,noreferrer");
-      return;
-    }
-    if (item.href.startsWith("/#") && isHome) {
-      const targetId = item.href.replace("/#", "");
-      const el = document.getElementById(targetId);
-      if (el) {
-        el.scrollIntoView({ behavior: "smooth" });
-        return;
+  const handleCommandKeyNav = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (filteredCommands.length === 0) return;
+    if (e.key === "ArrowDown") {
+      e.preventDefault();
+      setSelectedIndex((prev) => (prev + 1) % filteredCommands.length);
+    } else if (e.key === "ArrowUp") {
+      e.preventDefault();
+      setSelectedIndex((prev) => (prev - 1 + filteredCommands.length) % filteredCommands.length);
+    } else if (e.key === "Enter") {
+      e.preventDefault();
+      const target = filteredCommands[selectedIndex];
+      if (target) {
+        handleCommandSelect(target);
       }
     }
-    router.push(item.href);
   };
 
   return (
     <>
       <header className="sticky top-3 sm:top-4 z-50 w-full px-4 sm:px-6 max-w-7xl mx-auto">
         {/* Floating Glassmorphic Dock */}
-        <div className="h-16 px-4 sm:px-6 rounded-2xl bg-[#0D121F]/85 backdrop-blur-xl border border-slate-800/90 shadow-xl shadow-black/50 flex items-center justify-between relative transition-all overflow-visible">
+        <div className="h-16 px-4 sm:px-6 rounded-2xl bg-[#0B0F17]/90 backdrop-blur-xl border border-white/[0.08] shadow-xl shadow-black/50 flex items-center justify-between relative transition-all overflow-visible">
           {/* Bottom Reading Progress Laser Line */}
           <div className="absolute bottom-0 left-3 right-3 h-[1.5px] bg-slate-800/40 overflow-hidden rounded-full pointer-events-none">
             <div
-              className="h-full bg-gradient-to-r from-teal-400 via-cyan-400 to-emerald-400 transition-all duration-150 ease-out"
+              className="h-full bg-gradient-to-r from-teal-400 via-cyan-400 to-indigo-400 transition-all duration-150 ease-out"
               style={{ width: `${scrollProgress}%` }}
             />
           </div>
@@ -336,7 +412,7 @@ export default function Navbar(): React.JSX.Element {
           </Link>
 
           {/* Streamlined Center Navigation Architecture (Desktop) */}
-          <nav className="hidden lg:flex items-center gap-6 xl:gap-7 text-sm font-medium">
+          <nav className="hidden lg:flex items-center gap-5 xl:gap-6 text-sm font-medium">
             {navLinks.map((link) => (
               <Link
                 key={link.label}
@@ -362,7 +438,7 @@ export default function Navbar(): React.JSX.Element {
                   ecosystemOpen ? "text-teal-400" : "text-slate-300 hover:text-teal-400"
                 }`}
               >
-                <span>Live Ecosystem</span>
+                <span>{lang === "sr" ? "Ekosistem" : "Live Ecosystem"}</span>
                 <ChevronDown
                   className={`w-3.5 h-3.5 transition-transform duration-200 ${
                     ecosystemOpen ? "rotate-180 text-teal-400" : ""
@@ -370,15 +446,13 @@ export default function Navbar(): React.JSX.Element {
                 />
               </button>
 
-              {/* Dropdown Menu */}
               {ecosystemOpen && (
                 <div className="absolute top-full -left-12 pt-2.5 w-80 z-50 animate-in fade-in slide-in-from-top-1 duration-150">
-                  <div className="p-2 rounded-2xl bg-[#0D121F]/95 backdrop-blur-xl border border-slate-800/90 shadow-2xl shadow-black/80 space-y-1">
+                  <div className="p-2 rounded-2xl bg-[#0B0F17]/95 backdrop-blur-xl border border-white/[0.08] shadow-2xl shadow-black/80 space-y-1">
                     <div className="px-3 py-1.5 text-[10px] font-mono uppercase tracking-widest text-slate-400 font-semibold border-b border-slate-800/80">
                       Engineered Client Platforms
                     </div>
 
-                    {/* FundingSolutions */}
                     <a
                       href="https://fundingsolutions.dukatrio.com"
                       target="_blank"
@@ -404,7 +478,6 @@ export default function Navbar(): React.JSX.Element {
                       <ExternalLink className="w-3.5 h-3.5 text-slate-500 group-hover/eco:text-emerald-400 transition-colors shrink-0 mt-1" />
                     </a>
 
-                    {/* Gradilište OS */}
                     <a
                       href="https://gradiliste.dukatrio.com"
                       target="_blank"
@@ -475,16 +548,48 @@ export default function Navbar(): React.JSX.Element {
             </div>
           </nav>
 
-          {/* Call-to-Action, Command Palette & Contact (Right) */}
-          <div className="hidden lg:flex items-center gap-2.5 shrink-0">
+          {/* Call-to-Action, Language Switcher, Command Palette & Contact (Right) */}
+          <div className="hidden lg:flex items-center gap-2 shrink-0">
+            {/* Instant EN / SR Bilingual Toggle */}
+            <div
+              role="group"
+              aria-label="Language Switcher"
+              className="inline-flex items-center p-0.5 rounded-xl bg-[#030712]/90 border border-white/[0.08] font-mono text-[11px]"
+            >
+              <button
+                type="button"
+                onClick={() => setLang("en")}
+                className={`px-2 py-1 rounded-lg transition-all cursor-pointer ${
+                  lang === "en"
+                    ? "bg-cyan-500/20 text-cyan-200 font-bold border border-cyan-400/30"
+                    : "text-slate-400 hover:text-white"
+                }`}
+              >
+                EN
+              </button>
+              <button
+                type="button"
+                onClick={() => setLang("sr")}
+                className={`px-2 py-1 rounded-lg transition-all cursor-pointer ${
+                  lang === "sr"
+                    ? "bg-cyan-500/20 text-cyan-200 font-bold border border-cyan-400/30"
+                    : "text-slate-400 hover:text-white"
+                }`}
+              >
+                SR
+              </button>
+            </div>
+
             <button
               type="button"
               onClick={() => setCommandOpen(true)}
               aria-label="Open Command Palette (Ctrl+K or Cmd+K)"
-              className="inline-flex items-center gap-2 px-2.5 py-1.5 rounded-xl bg-slate-950/80 hover:bg-slate-900 border border-slate-800/90 hover:border-teal-400/40 text-xs font-mono text-slate-400 hover:text-slate-200 transition-all cursor-pointer"
+              className="inline-flex items-center gap-2 px-2.5 py-1.5 rounded-xl bg-[#030712]/90 hover:bg-slate-900 border border-white/[0.08] hover:border-teal-400/40 text-xs font-mono text-slate-400 hover:text-slate-200 transition-all cursor-pointer"
             >
               <Search className="w-3.5 h-3.5 text-teal-400" />
-              <span className="hidden xl:inline text-[11px]">Quick Jump</span>
+              <span className="hidden xl:inline text-[11px]">
+                {lang === "sr" ? "Pretraga" : "Quick Jump"}
+              </span>
               <kbd className="px-1.5 py-0.5 rounded bg-slate-900 border border-slate-700/80 text-[10px] text-slate-300 font-mono">
                 ⌘K
               </kbd>
@@ -496,7 +601,7 @@ export default function Navbar(): React.JSX.Element {
                 isContact ? "text-teal-400 font-semibold" : ""
               }`}
             >
-              Contact
+              {lang === "sr" ? "Kontakt" : "Contact"}
             </Link>
 
             <a
@@ -504,13 +609,21 @@ export default function Navbar(): React.JSX.Element {
               onClick={handleCtaClick}
               className="bg-teal-400 hover:bg-teal-300 text-slate-950 font-mono font-bold text-xs tracking-wider uppercase px-4 py-2.5 rounded-xl shadow-md shadow-teal-950/50 transition-all duration-200 flex items-center gap-1.5 cursor-pointer whitespace-nowrap btn-tactile"
             >
-              <span>Book 15-Min Audit</span>
+              <span>{lang === "sr" ? "Zakaži 15-Min Audit" : "Book 15-Min Audit"}</span>
               <ArrowRight className="w-3.5 h-3.5" />
             </a>
           </div>
 
-          {/* Mobile Search + Hamburger Toggle */}
+          {/* Mobile Language + Search + Hamburger Toggle */}
           <div className="flex lg:hidden items-center gap-1.5">
+            <button
+              type="button"
+              onClick={toggleLang}
+              aria-label="Switch language EN/SR"
+              className="px-2 py-1.5 rounded-xl bg-[#030712]/90 border border-white/[0.08] font-mono text-[11px] font-bold text-cyan-300 cursor-pointer"
+            >
+              {lang.toUpperCase()}
+            </button>
             <button
               type="button"
               onClick={() => setCommandOpen(true)}
@@ -532,9 +645,20 @@ export default function Navbar(): React.JSX.Element {
           </div>
         </div>
 
+        {/* Clipboard Toast Notification */}
+        {copiedToast && (
+          <div className="fixed bottom-6 right-6 z-[110] px-4 py-2.5 rounded-xl bg-[#0B0F17] border border-emerald-400/40 text-emerald-300 font-mono text-xs shadow-2xl flex items-center gap-2">
+            <Check className="w-4 h-4 text-emerald-400" />
+            <span>Copied office@dukatrio.com to clipboard</span>
+          </div>
+        )}
+
         {/* Responsive Mobile / Tablet Sheet */}
         {mobileMenuOpen && (
-          <div id="mobile-nav-drawer" className="lg:hidden mt-2 p-5 max-h-[calc(100dvh-6rem)] overflow-y-auto overscroll-contain rounded-2xl bg-[#0D121F]/95 backdrop-blur-xl border border-slate-800/90 shadow-2xl shadow-black/80 space-y-4 animate-in fade-in slide-in-from-top-2 duration-200">
+          <div
+            id="mobile-nav-drawer"
+            className="lg:hidden mt-2 p-5 max-h-[calc(100dvh-6rem)] overflow-y-auto overscroll-contain rounded-2xl bg-[#0B0F17]/95 backdrop-blur-xl border border-white/[0.08] shadow-2xl shadow-black/80 space-y-4 animate-in fade-in slide-in-from-top-2 duration-200"
+          >
             <nav className="flex flex-col space-y-2 text-sm font-medium text-slate-200">
               {navLinks.map((link) => (
                 <Link
@@ -555,11 +679,10 @@ export default function Navbar(): React.JSX.Element {
                     : "hover:bg-slate-900 hover:text-teal-400"
                 }`}
               >
-                Contact Desk
+                {lang === "sr" ? "Kontakt Desk" : "Contact Desk"}
               </Link>
             </nav>
 
-            {/* Mobile Live Ecosystem Section */}
             <div className="pt-3 border-t border-slate-800/80 space-y-2">
               <span className="text-[10px] font-mono uppercase tracking-widest text-slate-400 block font-semibold px-1">
                 Engineered Client Platforms
@@ -601,14 +724,13 @@ export default function Navbar(): React.JSX.Element {
               </div>
             </div>
 
-            {/* Primary Action Button */}
             <div className="pt-2">
               <a
                 href={isContact ? "#intake" : "#contact"}
                 onClick={handleCtaClick}
                 className="w-full py-3 rounded-xl bg-teal-400 hover:bg-teal-300 text-slate-950 font-mono font-bold text-xs uppercase tracking-wider flex items-center justify-center gap-2 shadow-md btn-tactile"
               >
-                <span>Book 15-Min Feasibility Audit</span>
+                <span>{lang === "sr" ? "Zakaži 15-Min Audit" : "Book 15-Min Feasibility Audit"}</span>
                 <ArrowRight className="w-4 h-4" />
               </a>
             </div>
@@ -616,25 +738,26 @@ export default function Navbar(): React.JSX.Element {
         )}
       </header>
 
-      {/* Interactive Cmd+K Engineering Command Palette Modal */}
+      {/* Interactive Cmd+K Engineering Command Palette Modal with Arrow-Key Navigation */}
       {commandOpen && (
         <div
           className="fixed inset-0 z-[100] bg-black/75 backdrop-blur-sm flex items-start justify-center pt-16 sm:pt-24 px-4 animate-in fade-in duration-150"
           onClick={() => setCommandOpen(false)}
         >
           <div
-            className="w-full max-w-2xl rounded-2xl bg-[#0D121F] border border-slate-700/80 shadow-2xl shadow-black overflow-hidden"
+            className="w-full max-w-2xl rounded-2xl bg-[#0B0F17] border border-white/[0.12] shadow-2xl shadow-black overflow-hidden"
             onClick={(e) => e.stopPropagation()}
           >
             {/* Search Bar */}
-            <div className="flex items-center gap-3 px-4 py-3.5 border-b border-slate-800/90 bg-slate-950/70">
+            <div className="flex items-center gap-3 px-4 py-3.5 border-b border-white/[0.08] bg-[#030712]/90">
               <Search className="w-4 h-4 text-teal-400 shrink-0" />
               <input
                 ref={searchInputRef}
                 type="text"
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                placeholder="Search blueprints, ROI calculator, case studies, or live systems..."
+                onKeyDown={handleCommandKeyNav}
+                placeholder="Search 7 B2B offerings, ROI calculator, case studies, or press ↑↓ Enter..."
                 className="w-full bg-transparent text-sm text-white placeholder-slate-500 focus:outline-none font-sans"
               />
               <button
@@ -653,26 +776,36 @@ export default function Navbar(): React.JSX.Element {
                   No matching engineering blueprints found.
                 </div>
               ) : (
-                filteredCommands.map((item) => {
+                filteredCommands.map((item, idx) => {
                   const Icon = item.icon;
+                  const isActiveIndex = idx === selectedIndex;
                   return (
                     <button
                       key={item.id}
                       type="button"
+                      onMouseEnter={() => setSelectedIndex(idx)}
                       onClick={() => handleCommandSelect(item)}
-                      className="w-full text-left p-3 rounded-xl hover:bg-slate-900/90 border border-transparent hover:border-slate-800 transition-all flex items-center justify-between gap-3 group cursor-pointer"
+                      className={`w-full text-left p-3 rounded-xl border transition-all flex items-center justify-between gap-3 group cursor-pointer ${
+                        isActiveIndex
+                          ? "bg-cyan-500/10 border-cyan-400/35"
+                          : "hover:bg-slate-900/90 border-transparent hover:border-slate-800"
+                      }`}
                     >
                       <div className="flex items-center gap-3 min-w-0">
-                        <div className="w-9 h-9 rounded-xl bg-slate-950 border border-slate-800 group-hover:border-teal-500/40 flex items-center justify-center text-teal-400 shrink-0">
+                        <div
+                          className={`w-9 h-9 rounded-xl border flex items-center justify-center shrink-0 ${
+                            isActiveIndex
+                              ? "bg-cyan-500/20 border-cyan-400/50 text-cyan-300"
+                              : "bg-slate-950 border-slate-800 text-teal-400"
+                          }`}
+                        >
                           <Icon className="w-4 h-4" />
                         </div>
                         <div className="min-w-0">
                           <div className="text-xs sm:text-sm font-bold text-white group-hover:text-teal-300 transition-colors truncate">
                             {item.label}
                           </div>
-                          <div className="text-[11px] text-slate-400 truncate">
-                            {item.sublabel}
-                          </div>
+                          <div className="text-[11px] text-slate-400 truncate">{item.sublabel}</div>
                         </div>
                       </div>
                       <div className="flex items-center gap-2 shrink-0">
@@ -690,8 +823,8 @@ export default function Navbar(): React.JSX.Element {
             </div>
 
             {/* Footer */}
-            <div className="px-4 py-2.5 border-t border-slate-800/80 bg-slate-950/80 flex items-center justify-between text-[11px] font-mono text-slate-500">
-              <span>DukaTrio Systems Navigator · Press ESC to close</span>
+            <div className="px-4 py-2.5 border-t border-white/[0.08] bg-[#030712] flex items-center justify-between text-[11px] font-mono text-slate-500">
+              <span>↑↓ Navigate · ↵ Select · ESC Close</span>
               <span className="text-teal-400">Fixed €4,800 Sprints · 100% IP Ownership</span>
             </div>
           </div>
