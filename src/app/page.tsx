@@ -154,6 +154,18 @@ export default function HomePage(): React.JSX.Element {
                 >
                   B2B Client Intake Engine
                 </Link>
+                <Link
+                  href="/solutions/saas-subscription-consolidation"
+                  className="text-slate-300 hover:text-teal-400 transition"
+                >
+                  SaaS Consolidation
+                </Link>
+                <Link
+                  href="/solutions/multi-tenant-client-vault"
+                  className="text-slate-300 hover:text-teal-400 transition"
+                >
+                  Multi-Tenant Client Vault
+                </Link>
               </div>
             </div>
 

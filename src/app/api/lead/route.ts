@@ -1,6 +1,10 @@
 import { NextRequest, NextResponse } from "next/server";
 import nodemailer from "nodemailer";
 import { z } from "zod";
+import {
+  appendLeadToLocalLedger,
+  sendProspectAutoReply,
+} from "@/utils/leadLedgerAndAutoReply";
 
 export const dynamic = "force-dynamic";
 
@@ -223,6 +227,20 @@ export async function POST(req: NextRequest): Promise<NextResponse> {
       }
     }
 
+    // 5b. Persist to local append-only ledger (data/leads.jsonl)
+    const ledgerEntry = {
+      timestamp: new Date().toISOString(),
+      endpoint: "/api/lead" as const,
+      name,
+      email,
+      phone: phone || undefined,
+      scope: serviceType || scopeScale || "General Inquiry",
+      budget: estimatedBudget || undefined,
+      message: message || timeline || "Direct inquiry from dukatrio.com intake terminal.",
+      ip: clientIp,
+    };
+    await appendLeadToLocalLedger(ledgerEntry);
+
     // 6. Dispatch Email via Brevo SMTP (Non-blocking failsafe)
     if (smtpPass || process.env.NODE_ENV !== "production") {
       try {
@@ -264,6 +282,9 @@ Vreme:        ${new Date().toLocaleString("sr-RS", { timeZone: "Europe/Belgrade"
 <p><strong>Vreme:</strong> ${new Date().toLocaleString("sr-RS", { timeZone: "Europe/Belgrade" })}</p>`,
         });
         console.log("[SMTP SUCCESS] Dukatrio lead email sent:", info.messageId);
+
+        // Send instant engineering intake receipt to the prospect
+        await sendProspectAutoReply(transporter, ledgerEntry);
       } catch (err) {
         console.error("[SMTP WARN] Non-fatal dispatch error via Brevo:", err);
       }

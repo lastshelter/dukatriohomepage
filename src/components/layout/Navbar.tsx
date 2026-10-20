@@ -115,11 +115,38 @@ const COMMAND_ITEMS: CommandItem[] = [
     badge: "10–14 DAYS",
   },
   {
+    id: "sol-saas-consolidation",
+    group: "€4,800 Solution Blueprints",
+    label: "Solution 04 · SaaS Subscription Consolidation Platform",
+    sublabel: "Replace 6+ per-seat SaaS tools & Zapier glue with one unified engine",
+    href: "/solutions/saas-subscription-consolidation",
+    icon: Layers,
+    badge: "€0/SEAT",
+  },
+  {
+    id: "sol-client-vault",
+    group: "€4,800 Solution Blueprints",
+    label: "Solution 05 · Multi-Tenant Client Portal & AES-256 Vault",
+    sublabel: "Strict tenant isolation, encrypted document exchange & audit logs",
+    href: "/solutions/multi-tenant-client-vault",
+    icon: ShieldCheck,
+    badge: "AES-256",
+  },
+  {
     id: "cs-gradiliste",
     group: "Architecture & Live Production Systems",
     label: "Case Study · Gradilište OS Technical Deep-Dive",
     sublabel: "SvelteKit + Next.js 16 + PocketBase (SQLite WAL) blueprint",
     href: "/case-studies/gradiliste-os",
+    icon: FileCode2,
+    badge: "DEEP DIVE",
+  },
+  {
+    id: "cs-fundingsolutions",
+    group: "Architecture & Live Production Systems",
+    label: "Case Study · FundingSolutions DSCR & KYC Vault Deep-Dive",
+    sublabel: "Sub-60s TypeScript underwriting kernel + PDF term-sheet engine",
+    href: "/case-studies/fundingsolutions",
     icon: FileCode2,
     badge: "DEEP DIVE",
   },
@@ -427,6 +454,20 @@ export default function Navbar(): React.JSX.Element {
                       className="block px-3 py-2 rounded-xl hover:bg-slate-900/90 text-xs text-slate-300 hover:text-teal-400 transition-colors"
                     >
                       B2B Client Intake &amp; Underwriting Engine
+                    </Link>
+                    <Link
+                      href="/solutions/saas-subscription-consolidation"
+                      onClick={() => setEcosystemOpen(false)}
+                      className="block px-3 py-2 rounded-xl hover:bg-slate-900/90 text-xs text-slate-300 hover:text-teal-400 transition-colors"
+                    >
+                      SaaS Subscription Consolidation
+                    </Link>
+                    <Link
+                      href="/solutions/multi-tenant-client-vault"
+                      onClick={() => setEcosystemOpen(false)}
+                      className="block px-3 py-2 rounded-xl hover:bg-slate-900/90 text-xs text-slate-300 hover:text-teal-400 transition-colors"
+                    >
+                      Multi-Tenant Client Document Vault
                     </Link>
                   </div>
                 </div>

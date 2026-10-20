@@ -1,6 +1,10 @@
 import { NextRequest, NextResponse } from "next/server";
 import nodemailer from "nodemailer";
 import { z } from "zod";
+import {
+  appendLeadToLocalLedger,
+  sendProspectAutoReply,
+} from "@/utils/leadLedgerAndAutoReply";
 
 export const dynamic = "force-dynamic";
 
@@ -191,6 +195,18 @@ export async function POST(req: NextRequest): Promise<NextResponse> {
       }
     }
 
+    // 5b. Persist to local append-only ledger (data/leads.jsonl)
+    const ledgerEntry = {
+      timestamp: new Date().toISOString(),
+      endpoint: "/api/contact" as const,
+      name,
+      email,
+      scope: scope || "General Inquiry",
+      message,
+      ip: clientIp,
+    };
+    await appendLeadToLocalLedger(ledgerEntry);
+
     // 6. SMTP Email Dispatch (Non-blocking failsafe)
     if (smtpPass || process.env.NODE_ENV !== "production") {
       try {
@@ -219,6 +235,9 @@ export async function POST(req: NextRequest): Promise<NextResponse> {
 <p><strong>Vreme:</strong> ${new Date().toLocaleString("sr-RS", { timeZone: "Europe/Belgrade" })}</p>`,
         });
         console.log("[SMTP SUCCESS] Contact mail dispatched:", info.messageId);
+
+        // Send instant engineering intake receipt to the prospect
+        await sendProspectAutoReply(transporter, ledgerEntry);
       } catch (err) {
         console.error("[SMTP WARN] Non-fatal dispatch error via Brevo:", err);
       }

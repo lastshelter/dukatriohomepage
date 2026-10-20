@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Calculator,
   ArrowRight,
@@ -12,6 +12,8 @@ import {
   AlertTriangle,
   Sparkles,
   FileDown,
+  Link2,
+  Check,
 } from "lucide-react";
 import AnimatedNumber from "@/components/ui/AnimatedNumber";
 import { generateScopeRoiPdfBrief } from "@/utils/generateRoiPdfBrief";
@@ -37,6 +39,36 @@ export default function ScopeEstimator(): React.JSX.Element {
   const [seatCount, setSeatCount] = useState<string>("6–15 seats");
   const [bottleneck, setBottleneck] = useState<string>(BOTTLENECK_OPTIONS[0]);
   const [lastBriefHash, setLastBriefHash] = useState<string | null>(null);
+  const [copiedRoiLink, setCopiedRoiLink] = useState<boolean>(false);
+
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    const params = new URLSearchParams(window.location.search);
+    const saasParam = Number(params.get("saas"));
+    const seatsParam = params.get("seats");
+    const bottleneckParam = params.get("bottleneck");
+    if (!Number.isNaN(saasParam) && saasParam >= 200 && saasParam <= 3500) {
+      setMonthlySaaS(Math.round(saasParam / 50) * 50);
+    }
+    if (seatsParam && (SEAT_OPTIONS as readonly string[]).includes(seatsParam)) {
+      setSeatCount(seatsParam);
+    }
+    if (bottleneckParam && (BOTTLENECK_OPTIONS as readonly string[]).includes(bottleneckParam)) {
+      setBottleneck(bottleneckParam);
+    }
+  }, []);
+
+  const handleCopyRoiLink = () => {
+    if (typeof window === "undefined") return;
+    const url = new URL(window.location.href);
+    url.searchParams.set("saas", String(monthlySaaS));
+    url.searchParams.set("seats", seatCount);
+    url.searchParams.set("bottleneck", bottleneck);
+    url.hash = "estimator";
+    void navigator.clipboard?.writeText(url.toString());
+    setCopiedRoiLink(true);
+    setTimeout(() => setCopiedRoiLink(false), 2400);
+  };
 
   // Dynamic ROI Calculations
   const breakEvenMonths = Math.ceil(FIXED_SPRINT_INVESTMENT / monthlySaaS);
@@ -332,6 +364,23 @@ export default function ScopeEstimator(): React.JSX.Element {
                 >
                   <FileDown className="w-4 h-4 shrink-0 text-teal-400" />
                   <span className="min-w-0 text-center">Download Executive Brief (PDF)</span>
+                </button>
+                <button
+                  type="button"
+                  onClick={handleCopyRoiLink}
+                  className="w-full py-3 px-4 rounded-xl bg-slate-950/60 hover:bg-slate-900 border border-slate-800 hover:border-teal-500/40 text-slate-300 hover:text-teal-300 font-mono font-semibold text-xs uppercase tracking-wider transition-all flex items-center justify-center gap-2 cursor-pointer"
+                >
+                  {copiedRoiLink ? (
+                    <>
+                      <Check className="w-3.5 h-3.5 text-emerald-400 shrink-0" />
+                      <span className="text-emerald-300">Shareable ROI Link Copied!</span>
+                    </>
+                  ) : (
+                    <>
+                      <Link2 className="w-3.5 h-3.5 text-teal-400 shrink-0" />
+                      <span>Copy Shareable ROI Link for This Scenario</span>
+                    </>
+                  )}
                 </button>
               </div>
               <p className="text-[11px] text-center font-mono text-slate-400">

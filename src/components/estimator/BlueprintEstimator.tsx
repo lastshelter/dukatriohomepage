@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useId, useState } from "react";
+import React, { useEffect, useId, useState } from "react";
 import {
   ArrowRight,
   Banknote,
@@ -10,6 +10,7 @@ import {
   Download,
   FileCode2,
   Layers,
+  Link2,
   Loader2,
   PhoneCall,
   RotateCcw,
@@ -61,6 +62,7 @@ export default function BlueprintEstimator(): React.JSX.Element {
   const [submittedText, setSubmittedText] = useState("");
   const [error, setError] = useState<string | null>(null);
   const [codeTab, setCodeTab] = useState<"schema" | "routes">("schema");
+  const [copiedLink, setCopiedLink] = useState(false);
 
   const runBlueprint = (text: string) => {
     const trimmed = text.trim();
@@ -127,6 +129,53 @@ export default function BlueprintEstimator(): React.JSX.Element {
       message: buildBlueprintBrief(blueprint, submittedText),
     });
   };
+
+  const handleCopyShareLink = () => {
+    if (typeof window === "undefined") return;
+    const url = new URL(window.location.href);
+    url.searchParams.delete("blueprint");
+    url.searchParams.delete("q");
+    if (activePreset) {
+      url.searchParams.set("blueprint", activePreset);
+    } else if (submittedText) {
+      url.searchParams.set("q", submittedText.slice(0, 220));
+    }
+    url.hash = "blueprint";
+    void navigator.clipboard?.writeText(url.toString());
+    setCopiedLink(true);
+    schedule(() => setCopiedLink(false), 2400);
+  };
+
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    const params = new URLSearchParams(window.location.search);
+    const presetParam = params.get("blueprint");
+    const queryParam = params.get("q");
+    if (presetParam) {
+      const matched = BLUEPRINT_PRESETS.find((p) => p.id === presetParam);
+      if (matched) {
+        setInput(matched.text);
+        setActivePreset(matched.id);
+        const result = generateBlueprint(matched.text);
+        setBlueprint(result);
+        setSubmittedText(matched.text);
+        setPhase("done");
+        setStage(ANALYSIS_STAGES.length);
+        setReveal(4);
+        return;
+      }
+    }
+    if (queryParam && queryParam.trim().length >= BLUEPRINT_MIN_CHARS) {
+      const trimmed = queryParam.trim().slice(0, BLUEPRINT_MAX_CHARS);
+      setInput(trimmed);
+      const result = generateBlueprint(trimmed);
+      setBlueprint(result);
+      setSubmittedText(trimmed);
+      setPhase("done");
+      setStage(ANALYSIS_STAGES.length);
+      setReveal(4);
+    }
+  }, []);
 
   const isAnalyzing = phase === "analyzing";
 
@@ -509,6 +558,23 @@ export default function BlueprintEstimator(): React.JSX.Element {
                       >
                         <Download className="w-4 h-4 shrink-0" />
                         <span>Download Blueprint PDF</span>
+                      </button>
+                      <button
+                        type="button"
+                        onClick={handleCopyShareLink}
+                        className="inline-flex items-center justify-center gap-2 py-3.5 px-4 rounded-xl bg-slate-950/90 hover:bg-slate-900 border border-slate-700 hover:border-teal-500/40 text-slate-300 hover:text-teal-300 font-mono font-bold text-xs uppercase tracking-wider transition cursor-pointer"
+                      >
+                        {copiedLink ? (
+                          <>
+                            <Check className="w-4 h-4 text-emerald-400 shrink-0" />
+                            <span className="text-emerald-300">Link Copied</span>
+                          </>
+                        ) : (
+                          <>
+                            <Link2 className="w-4 h-4 shrink-0 text-teal-400" />
+                            <span>Share Link</span>
+                          </>
+                        )}
                       </button>
                     </div>
                     <p className="text-[11px] font-mono text-slate-500 text-center">

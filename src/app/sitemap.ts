@@ -21,6 +21,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.9,
     },
     {
+      url: "https://dukatrio.com/case-studies/fundingsolutions",
+      lastModified: new Date(),
+      changeFrequency: "monthly",
+      priority: 0.9,
+    },
+    {
       url: "https://dukatrio.com/solutions/excel-to-custom-portal",
       lastModified: new Date(),
       changeFrequency: "weekly",
@@ -34,6 +40,18 @@ export default function sitemap(): MetadataRoute.Sitemap {
     },
     {
       url: "https://dukatrio.com/solutions/b2b-client-intake-engine",
+      lastModified: new Date(),
+      changeFrequency: "weekly",
+      priority: 0.8,
+    },
+    {
+      url: "https://dukatrio.com/solutions/saas-subscription-consolidation",
+      lastModified: new Date(),
+      changeFrequency: "weekly",
+      priority: 0.8,
+    },
+    {
+      url: "https://dukatrio.com/solutions/multi-tenant-client-vault",
       lastModified: new Date(),
       changeFrequency: "weekly",
       priority: 0.8,

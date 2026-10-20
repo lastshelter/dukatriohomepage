@@ -70,8 +70,9 @@ export const CASE_STUDIES: CaseStudyData[] = [
       { label: "Recurring Seat Fees", value: "€0" },
       { label: "Analyzed Pipeline", value: "€14M+" },
     ],
-    liveUrl: "#contact",
-    ctaLabel: "Request Architecture Blueprint",
+    liveUrl: "/case-studies/fundingsolutions",
+    ctaLabel: "Read Technical Case Study",
+    externalUrl: "https://fundingsolutions.dukatrio.com",
   },
   {
     id: "b2b_portal",
