@@ -23,7 +23,7 @@ const fontMono = JetBrains_Mono({
 });
 
 export const viewport: Viewport = {
-  themeColor: "#09090b",
+  themeColor: "#030712",
   colorScheme: "dark",
   width: "device-width",
   initialScale: 1,
@@ -32,7 +32,7 @@ export const viewport: Viewport = {
 export const metadata: Metadata = {
   title: "Dukatrio | Custom Software, SaaS & Client Portal Development",
   description:
-    "Belgrade-based Next.js software studio building bespoke web applications, SaaS platforms and B2B client portals — 100% code ownership, sub-400ms speed, fixed-milestone pricing. Izrada namenskog softvera i web aplikacija.",
+    "Belgrade-based Next.js software studio building bespoke web applications, SaaS platforms and B2B client portals — 100% code ownership, sub-300ms speed, fixed-milestone pricing. Izrada namenskog softvera i web aplikacija.",
   metadataBase: new URL("https://dukatrio.com"),
   alternates: {
     canonical: "https://dukatrio.com",
@@ -141,7 +141,7 @@ const jsonLd = {
         "@id": "https://dukatrio.com/#organization",
       },
       description:
-        "Elite engineering studio delivering Enterprise Next.js & React platforms, high-performance Astro SEO portals, real-time SvelteKit/Nuxt operational desks, and cloud-native Supabase/PostgreSQL backends.",
+        "Elite engineering studio delivering bespoke B2B client intake engines, offline-first field PWAs, interactive financial & ROI calculators, encrypted document vaults, sub-300ms legacy rebuilds, automated data micro-tools, and sovereign European VPS infrastructure.",
       email: "office@dukatrio.com",
       address: {
         "@type": "PostalAddress",
@@ -164,23 +164,21 @@ const jsonLd = {
       ],
       availableLanguage: ["English", "Serbian"],
       knowsAbout: [
-        "Enterprise Next.js & React Platforms",
-        "Multi-tenant B2B SaaS",
-        "Astro Islands & Zero-JS Content Delivery",
-        "Technical SEO & Core Web Vitals",
-        "SvelteKit & Nuxt 3 Real-Time Interfaces",
-        "Operational Telemetry & Field Dispatch Consoles",
-        "Supabase & PostgreSQL",
-        "Directus & Payload Headless CMS",
-        "Dockerized Self-Hosted Infrastructure",
+        "Bespoke B2B Client Intake Engines",
+        "Field Operations & Offline-First PWAs",
+        "Interactive Financial & ROI Calculators",
+        "Encrypted Document Drop Vaults",
+        "Legacy Web Scraping & Instant Rebuilds",
+        "Automated Data Processing & Micro-Tools",
+        "Sovereign Self-Hosted VPS Infrastructure",
         "Next.js 16 App Router",
         "React 19 Server Components",
-        "Fintech & Computational Calculation Engines",
-        "High-Throughput Linux VPS Deployments",
+        "PostgreSQL & Prisma ORM",
+        "Caddy TLS 1.3 & Docker Compose",
       ],
       hasOfferCatalog: {
         "@type": "OfferCatalog",
-        name: "Enterprise Digital Engineering & SaaS Services",
+        name: "Enterprise Digital Engineering & B2B Software Catalogue",
         itemListElement: [
           ...SERVICE_PILLARS.map((pillar) => ({
             "@type": "Offer",
@@ -275,7 +273,7 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
       </head>
-      <body className="min-h-screen bg-[#0B0D13] text-zinc-100 antialiased selection:bg-teal-500/20 selection:text-teal-300">
+      <body className="min-h-screen bg-[#030712] text-zinc-100 antialiased selection:bg-cyan-500/20 selection:text-cyan-200">
         {children}
       </body>
     </html>

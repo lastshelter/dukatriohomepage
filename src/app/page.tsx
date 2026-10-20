@@ -24,14 +24,14 @@ import { Mail } from "lucide-react";
 
 export default function HomePage(): React.JSX.Element {
   return (
-    <div className="relative min-h-screen bg-[#0B0D13] text-zinc-100 overflow-hidden font-sans pb-16 md:pb-0">
+    <div className="relative min-h-screen bg-[#030712] text-zinc-100 overflow-hidden font-sans pb-16 md:pb-0">
       <ScrollEffects />
 
       {/* Background Glows & Grid */}
       <div className="absolute inset-0 bg-tech-grid opacity-60 pointer-events-none" />
-      <div className="absolute -top-40 left-1/2 -translate-x-1/2 w-[700px] h-[350px] bg-cyan-500/10 rounded-full blur-[128px] pointer-events-none" />
-      <div className="absolute top-[40%] right-[-100px] w-[500px] h-[400px] bg-indigo-500/10 rounded-full blur-[140px] pointer-events-none" />
-      <div className="absolute bottom-10 left-[-100px] w-[500px] h-[400px] bg-emerald-500/10 rounded-full blur-[140px] pointer-events-none" />
+      <div className="absolute -top-40 left-1/2 -translate-x-1/2 w-[760px] h-[380px] bg-indigo-500/12 rounded-full blur-[136px] pointer-events-none" />
+      <div className="absolute top-[36%] right-[-100px] w-[540px] h-[420px] bg-cyan-500/10 rounded-full blur-[148px] pointer-events-none" />
+      <div className="absolute bottom-10 left-[-100px] w-[520px] h-[400px] bg-emerald-500/10 rounded-full blur-[140px] pointer-events-none" />
 
       {/* ========================================================================= */}
       {/* 1. NAVBAR */}
