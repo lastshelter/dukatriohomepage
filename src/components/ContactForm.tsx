@@ -14,6 +14,7 @@ import {
   Mail,
   Zap,
 } from "lucide-react";
+import { useLanguage } from "@/context/LanguageContext";
 
 export const SCOPE_OPTIONS = [
   "Excel-to-Custom Portal",
@@ -44,6 +45,7 @@ export default function ContactForm({
   defaultMessage = "",
   defaultTab = "quick",
 }: ContactFormProps = {}): React.JSX.Element {
+  const { lang } = useLanguage();
   // Tab mode: 'quick' (1-field callback) vs 'rfp' (detailed project form)
   const [activeTab, setActiveTab] = useState<"quick" | "rfp">(defaultTab);
 
@@ -67,7 +69,7 @@ export default function ContactForm({
 
   const handleCopyEmail = async () => {
     try {
-      await navigator.clipboard.writeText("petar@dukatrio.com");
+      await navigator.clipboard.writeText("office@dukatrio.com");
       setCopied(true);
       setTimeout(() => setCopied(false), 2000);
     } catch {
@@ -135,7 +137,11 @@ export default function ContactForm({
 
     const contactVal = quickContact.trim();
     if (!contactVal) {
-      setQuickError("Please enter your phone number or email address.");
+      setQuickError(
+        lang === "sr"
+          ? "Molimo unesite Vaš broj telefona ili email adresu."
+          : "Please enter your phone number or email address."
+      );
       return;
     }
 
@@ -186,7 +192,11 @@ export default function ContactForm({
     setErrorMessage(null);
 
     if (!name.trim() || !email.trim() || !message.trim()) {
-      setErrorMessage("Please complete all required fields.");
+      setErrorMessage(
+        lang === "sr"
+          ? "Molimo popunite sva obavezna polja."
+          : "Please complete all required fields."
+      );
       return;
     }
 
@@ -231,11 +241,8 @@ export default function ContactForm({
 
   return (
     <div className="w-full max-w-4xl mx-auto space-y-8">
-      {/* ========================================================================= */}
       {/* INTAKE TERMINAL (1-FIELD CALLBACK vs. DETAILED RFP) */}
-      {/* ========================================================================= */}
-      <div className="backdrop-blur-md bg-zinc-900/60 border border-zinc-800/80 rounded-3xl p-6 sm:p-10 shadow-2xl relative overflow-hidden transition-all">
-        {/* Subtle Ambient Radial Highlight */}
+      <div className="backdrop-blur-md bg-zinc-900/60 border border-zinc-800/80 rounded-3xl p-6 sm:p-10 shadow-2xl relative overflow-hidden transition-all bento-surface">
         <div className="absolute top-0 right-0 w-72 h-72 bg-cyan-500/5 rounded-full blur-3xl pointer-events-none" />
 
         {/* Tab Switcher */}
@@ -250,7 +257,7 @@ export default function ContactForm({
             }`}
           >
             <Zap className="w-3.5 h-3.5 text-cyan-400" />
-            <span>15-Min Quick Callback</span>
+            <span>{lang === "sr" ? "Brzi Poziv (15 Min)" : "15-Min Quick Callback"}</span>
           </button>
 
           <button
@@ -263,7 +270,7 @@ export default function ContactForm({
             }`}
           >
             <Mail className="w-3.5 h-3.5 text-cyan-400" />
-            <span>Detailed Project RFP</span>
+            <span>{lang === "sr" ? "Detaljan Zahtev za Ponudu" : "Detailed Project RFP"}</span>
           </button>
         </div>
 
@@ -272,10 +279,14 @@ export default function ContactForm({
           <div className="space-y-6 text-left">
             <div className="space-y-2">
               <h3 className="text-xl sm:text-2xl font-extrabold text-white tracking-tight">
-                Request an Immediate 15-Minute Callback
+                {lang === "sr"
+                  ? "Zatražite Direktan 15-Minutni Razgovor sa Inženjerom"
+                  : "Request an Immediate 15-Minute Callback"}
               </h3>
               <p className="text-sm text-zinc-400 max-w-xl">
-                Leave your direct phone number or email. A senior systems engineer will connect with you to review your technical scope or estimate.
+                {lang === "sr"
+                  ? "Ostavite Vaš telefon ili email. Glavni inženjer će Vas kontaktirati radi analize tehničkih zahteva ili procene."
+                  : "Leave your direct phone number or email. A senior systems engineer will connect with you to review your technical scope or estimate."}
               </p>
             </div>
 
@@ -283,17 +294,23 @@ export default function ContactForm({
               <div className="p-6 rounded-2xl bg-emerald-950/40 border border-emerald-800/60 text-emerald-300 space-y-3 animate-in fade-in">
                 <div className="flex items-center gap-2.5 font-bold text-base">
                   <CheckCircle2 className="w-5 h-5 text-emerald-400" />
-                  <span>Callback Request Logged Successfully!</span>
+                  <span>
+                    {lang === "sr"
+                      ? "Zahtev je uspešno zabeležen!"
+                      : "Callback Request Logged Successfully!"}
+                  </span>
                 </div>
                 <p className="text-xs sm:text-sm text-zinc-300">
-                  Our engineering desk has received your contact details via secure Brevo SMTP dispatch. Expect our outreach within 15 minutes during standard operational hours.
+                  {lang === "sr"
+                    ? "Inženjerski desk je primio Vaš kontakt. Odgovaramo u roku od 15 minuta tokom radnog vremena."
+                    : "Our engineering desk has received your contact details. Expect our outreach within 15 minutes during standard operational hours."}
                 </p>
                 <button
                   type="button"
                   onClick={() => setQuickSuccess(false)}
-                  className="text-xs font-mono text-cyan-400 underline underline-offset-4 pt-1 block"
+                  className="text-xs font-mono text-cyan-400 underline underline-offset-4 pt-1 block cursor-pointer"
                 >
-                  Send another request
+                  {lang === "sr" ? "Pošaljite još jedan upit" : "Send another request"}
                 </button>
               </div>
             ) : (
@@ -307,7 +324,9 @@ export default function ContactForm({
 
                 <div className="space-y-2">
                   <span className="block text-[11px] font-mono uppercase tracking-wider text-zinc-400 font-semibold">
-                    Select Preferred 15-Min Audit Window:
+                    {lang === "sr"
+                      ? "Izaberite Željeni Vremenski Termin:"
+                      : "Select Preferred 15-Min Audit Window:"}
                   </span>
                   <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
                     {[
@@ -340,7 +359,11 @@ export default function ContactForm({
                     <input
                       type="text"
                       required
-                      placeholder="Enter corporate email, phone, or WhatsApp handle (e.g. petar@company.com)"
+                      placeholder={
+                        lang === "sr"
+                          ? "Unesite email ili telefon / WhatsApp (npr. petar@firma.rs ili 064...)"
+                          : "Enter corporate email, phone, or WhatsApp handle (e.g. petar@company.com)"
+                      }
                       value={quickContact}
                       onChange={(e) => setQuickContact(e.target.value)}
                       className="w-full px-4 py-3.5 rounded-xl bg-zinc-950/80 border border-zinc-800 text-base sm:text-sm text-zinc-100 placeholder:text-zinc-600 focus:border-teal-400 focus:ring-1 focus:ring-teal-400 outline-none transition font-sans shadow-inner"
@@ -350,16 +373,16 @@ export default function ContactForm({
                   <button
                     type="submit"
                     disabled={isQuickSubmitting}
-                    className="py-3.5 px-7 rounded-xl bg-teal-400 hover:bg-teal-300 text-slate-950 font-extrabold text-xs uppercase tracking-widest transition-all shadow-lg flex items-center justify-center gap-2 cursor-pointer disabled:opacity-60 shrink-0"
+                    className="btn-spring py-3.5 px-7 rounded-xl bg-teal-400 hover:bg-teal-300 text-slate-950 font-extrabold text-xs uppercase tracking-widest transition-all shadow-lg flex items-center justify-center gap-2 cursor-pointer disabled:opacity-60 shrink-0"
                   >
                     {isQuickSubmitting ? (
                       <>
                         <Loader2 className="w-4 h-4 animate-spin text-slate-950" />
-                        <span>Dispatching...</span>
+                        <span>{lang === "sr" ? "Slanje..." : "Dispatching..."}</span>
                       </>
                     ) : (
                       <>
-                        <span>Lock 15-Min Slot</span>
+                        <span>{lang === "sr" ? "Rezerviši Termin" : "Lock 15-Min Slot"}</span>
                         <ArrowRight className="w-4 h-4" />
                       </>
                     )}
@@ -369,7 +392,9 @@ export default function ContactForm({
                 <div className="flex flex-wrap items-center justify-between text-[11px] font-mono text-zinc-500 pt-2">
                   <span className="flex items-center gap-1.5">
                     <ShieldCheck className="w-3.5 h-3.5 text-teal-400" />
-                    Encrypted SMTP Dispatch · Direct Lead Architect Desk
+                    {lang === "sr"
+                      ? "Enkriptovano slanje direktno na inženjerski desk"
+                      : "Encrypted SMTP Dispatch · Direct Lead Architect Desk"}
                   </span>
                   <span className="text-teal-400 font-semibold">Window: {quickWindow}</span>
                 </div>
@@ -382,7 +407,6 @@ export default function ContactForm({
         {activeTab === "rfp" && (
           <div>
             {isSubmitted ? (
-              /* Instant Success State */
               <div className="py-8 text-center space-y-5 animate-in fade-in duration-300">
                 <div className="w-16 h-16 rounded-full bg-cyan-950/60 border border-cyan-800/60 text-cyan-400 mx-auto flex items-center justify-center shadow-[0_0_25px_-5px_rgba(6,182,212,0.4)]">
                   <CheckCircle2 className="w-8 h-8" />
@@ -390,13 +414,17 @@ export default function ContactForm({
 
                 <div className="space-y-2">
                   <span className="text-[11px] font-mono uppercase tracking-widest text-emerald-400 font-bold">
-                    Transmission Acknowledged
+                    {lang === "sr" ? "Zahtev Evidentiran" : "Transmission Acknowledged"}
                   </span>
                   <h3 className="text-2xl font-extrabold text-white tracking-tight">
-                    Inquiry Logged into Engineering Desk
+                    {lang === "sr"
+                      ? "Projekat je upisan u inženjerski registar"
+                      : "Inquiry Logged into Engineering Desk"}
                   </h3>
                   <p className="text-sm text-zinc-300 max-w-md mx-auto leading-relaxed">
-                    Transmission received. Engineering desk will review within 12 business hours.
+                    {lang === "sr"
+                      ? "Vodeći inženjer će pregledati zahteve u roku od 12 radnih sati."
+                      : "Transmission received. Engineering desk will review within 12 business hours."}
                   </p>
                 </div>
 
@@ -421,18 +449,19 @@ export default function ContactForm({
                     onClick={() => setIsSubmitted(false)}
                     className="py-2.5 px-6 rounded-xl bg-zinc-800 hover:bg-zinc-700 text-zinc-300 hover:text-white text-xs font-mono font-medium transition cursor-pointer"
                   >
-                    Transmit Another Inquiry
+                    {lang === "sr" ? "Pošalji Još Jedan Upit" : "Transmit Another Inquiry"}
                   </button>
                 </div>
               </div>
             ) : (
-              /* Interactive Contact Form */
               <form onSubmit={handleSubmit} className="space-y-5 relative z-10 text-left">
                 <div className="flex items-center justify-between pb-3 border-b border-zinc-800/80">
                   <div className="flex items-center gap-2">
                     <Sparkles className="w-4 h-4 text-cyan-400" />
                     <span className="text-xs font-mono uppercase tracking-wider text-zinc-300 font-bold">
-                      Direct Systems Inquiry Terminal
+                      {lang === "sr"
+                        ? "Direktan Inženjerski Intake Terminal"
+                        : "Direct Systems Inquiry Terminal"}
                     </span>
                   </div>
                   <span className="text-[10px] font-mono text-zinc-500 uppercase">
@@ -447,7 +476,6 @@ export default function ContactForm({
                   </div>
                 )}
 
-                {/* Anti-spam Honeypot field (hidden from legitimate users) */}
                 <div style={{ display: "none" }} aria-hidden="true">
                   <label htmlFor="website">Leave this field blank</label>
                   <input
@@ -462,38 +490,38 @@ export default function ContactForm({
                 </div>
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                  {/* Field 1: Name */}
                   <div className="space-y-1.5">
                     <label
                       htmlFor="client-name"
                       className="block text-xs font-mono uppercase tracking-wider text-zinc-400 font-semibold"
                     >
-                      Name <span className="text-cyan-400">*</span>
+                      {lang === "sr" ? "Ime i Prezime / Naziv Firme" : "Name"}{" "}
+                      <span className="text-cyan-400">*</span>
                     </label>
                     <input
                       id="client-name"
                       type="text"
                       required
-                      placeholder="e.g. John Doe"
+                      placeholder={lang === "sr" ? "npr. Petar Petrović" : "e.g. John Doe"}
                       value={name}
                       onChange={(e) => setName(e.target.value)}
                       className="w-full px-4 py-2.5 rounded-xl bg-zinc-950/80 border border-zinc-800 text-base sm:text-sm text-zinc-100 placeholder:text-zinc-600 focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500 outline-none transition-all shadow-inner"
                     />
                   </div>
 
-                  {/* Field 2: Client Email */}
                   <div className="space-y-1.5">
                     <label
                       htmlFor="client-email"
                       className="block text-xs font-mono uppercase tracking-wider text-zinc-400 font-semibold"
                     >
-                      Corporate Email <span className="text-cyan-400">*</span>
+                      {lang === "sr" ? "Poslovni Email" : "Corporate Email"}{" "}
+                      <span className="text-cyan-400">*</span>
                     </label>
                     <input
                       id="client-email"
                       type="email"
                       required
-                      placeholder="john@company.com"
+                      placeholder={lang === "sr" ? "petar@vasafirma.rs" : "john@company.com"}
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}
                       className="w-full px-4 py-2.5 rounded-xl bg-zinc-950/80 border border-zinc-800 text-base sm:text-sm text-zinc-100 placeholder:text-zinc-600 focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500 outline-none transition-all shadow-inner font-mono"
@@ -501,10 +529,12 @@ export default function ContactForm({
                   </div>
                 </div>
 
-                {/* Field 3: Project Scope / Service Pills */}
                 <div className="space-y-2">
                   <label className="block text-xs font-mono uppercase tracking-wider text-zinc-400 font-semibold">
-                    Project Scope / Discipline <span className="text-cyan-400">*</span>
+                    {lang === "sr"
+                      ? "Vrsta Softverskog Rešenja"
+                      : "Project Scope / Discipline"}{" "}
+                    <span className="text-cyan-400">*</span>
                   </label>
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
                     {SCOPE_OPTIONS.map((opt) => {
@@ -527,40 +557,49 @@ export default function ContactForm({
                   </div>
                 </div>
 
-                {/* Field 4: Message */}
                 <div className="space-y-1.5">
                   <label
                     htmlFor="client-message"
                     className="block text-xs font-mono uppercase tracking-wider text-zinc-400 font-semibold"
                   >
-                    Project Requirements &amp; Timeline <span className="text-cyan-400">*</span>
+                    {lang === "sr"
+                      ? "Opis Zahteva & Željeni Rok"
+                      : "Project Requirements & Timeline"}{" "}
+                    <span className="text-cyan-400">*</span>
                   </label>
                   <textarea
                     id="client-message"
                     required
                     rows={4}
-                    placeholder="Briefly outline your architectural requirements or timeline..."
+                    placeholder={
+                      lang === "sr"
+                        ? "Ukratko opišite proces koji želite da automatizujete ili zamenite..."
+                        : "Briefly outline your architectural requirements or timeline..."
+                    }
                     value={message}
                     onChange={(e) => setMessage(e.target.value)}
                     className="w-full px-4 py-3 rounded-xl bg-zinc-950/80 border border-zinc-800 text-base sm:text-sm text-zinc-100 placeholder:text-zinc-600 focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500 outline-none transition-all shadow-inner resize-none font-sans"
                   />
                 </div>
 
-                {/* Action Button & Security Micro-Trust */}
                 <div className="pt-2 space-y-3">
                   <button
                     type="submit"
                     disabled={isSubmitting}
-                    className="w-full py-3.5 px-6 rounded-xl bg-gradient-to-r from-cyan-500 to-cyan-600 hover:from-cyan-400 hover:to-cyan-500 text-zinc-950 font-bold text-xs uppercase tracking-widest transition-all shadow-[0_0_25px_-5px_rgba(6,182,212,0.5)] flex items-center justify-center gap-2.5 cursor-pointer disabled:opacity-60 disabled:cursor-not-allowed group"
+                    className="btn-spring w-full py-3.5 px-6 rounded-xl bg-gradient-to-r from-cyan-500 to-cyan-600 hover:from-cyan-400 hover:to-cyan-500 text-zinc-950 font-bold text-xs uppercase tracking-widest transition-all shadow-[0_0_25px_-5px_rgba(6,182,212,0.5)] flex items-center justify-center gap-2.5 cursor-pointer disabled:opacity-60 disabled:cursor-not-allowed group"
                   >
                     {isSubmitting ? (
                       <>
                         <Loader2 className="w-4 h-4 animate-spin text-zinc-950" />
-                        <span>Transmitting to Engineering Desk...</span>
+                        <span>
+                          {lang === "sr"
+                            ? "Slanje na inženjerski desk..."
+                            : "Transmitting to Engineering Desk..."}
+                        </span>
                       </>
                     ) : (
                       <>
-                        <span>Transmit Full Scope</span>
+                        <span>{lang === "sr" ? "Pošalji Zahtev" : "Transmit Full Scope"}</span>
                         <Send className="w-3.5 h-3.5 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
                       </>
                     )}
@@ -594,15 +633,17 @@ export default function ContactForm({
           {copied ? (
             <>
               <Check className="w-3.5 h-3.5 text-cyan-400" />
-              <span className="font-semibold text-cyan-300">✓ COPIED TO CLIPBOARD (petar@dukatrio.com)</span>
+              <span className="font-semibold text-cyan-300">
+                ✓ COPIED TO CLIPBOARD (office@dukatrio.com)
+              </span>
             </>
           ) : (
             <>
               <Copy className="w-3.5 h-3.5 text-zinc-400" />
               <span>
-                Prefer direct email?{" "}
+                {lang === "sr" ? "Želite direktan email? " : "Prefer direct email? "}
                 <span className="text-cyan-400 underline underline-offset-2">
-                  Copy Direct Engineering Desk (petar@dukatrio.com)
+                  office@dukatrio.com
                 </span>
               </span>
             </>

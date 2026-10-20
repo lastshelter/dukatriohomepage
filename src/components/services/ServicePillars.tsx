@@ -32,6 +32,7 @@ import {
   type PillarId,
   type ServicePillar,
 } from "@/config/servicePillars";
+import { useLanguage } from "@/context/LanguageContext";
 
 const PILLAR_ICONS: Record<PillarId, React.ComponentType<{ className?: string }>> = {
   "intake-engines": Sliders,
@@ -606,6 +607,7 @@ function OfferingInteractiveMockup({ pillarId }: { pillarId: PillarId }): React.
 }
 
 export default function ServicePillars(): React.JSX.Element {
+  const { lang } = useLanguage();
   const [activeTabByCard, setActiveTabByCard] = useState<Record<string, "preview" | "specs">>({});
   const [livePingMs, setLivePingMs] = useState<number | null>(null);
   const [isPinging, setIsPinging] = useState<boolean>(false);
@@ -666,20 +668,33 @@ export default function ServicePillars(): React.JSX.Element {
           <div className="space-y-4 max-w-3xl">
             <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#0B0F17] border border-cyan-400/25 text-cyan-300 font-mono text-xs font-semibold shadow-sm">
               <Sparkles className="w-3.5 h-3.5 text-cyan-400" />
-              <span>INSTITUTIONAL B2B ENGINEERING CATALOGUE // 01–07</span>
+              <span>
+                {lang === "sr"
+                  ? "KATALOG INŽENJERSKIH REŠENJA // 01–07"
+                  : "INSTITUTIONAL B2B ENGINEERING CATALOGUE // 01–07"}
+              </span>
             </div>
             <h2
               id="pillars-heading"
               className="text-fluid-h2 font-extrabold tracking-tight text-white"
             >
-              Seven sovereign software architectures.
-              <span className="block text-slate-400">Zero recurring SaaS seat tax.</span>
+              {lang === "sr" ? (
+                <>
+                  Sedam suverenih softverskih arhitektura.
+                  <span className="block text-slate-400">Bez mesečnog poreza na SaaS licence.</span>
+                </>
+              ) : (
+                <>
+                  Seven sovereign software architectures.
+                  <span className="block text-slate-400">Zero recurring SaaS seat tax.</span>
+                </>
+              )}
             </h2>
           </div>
           <p className="text-sm sm:text-base text-slate-400 max-w-md leading-relaxed">
-            Every system is engineered for sub-300ms response times, deployed to dedicated European
-            infrastructure, and handed over with 100% source-code ownership. Interact with each live
-            architecture mockup below.
+            {lang === "sr"
+              ? "Svaki sistem projektujemo za odziv ispod 300ms, hostujemo na posvećenoj evropskoj infrastrukturi i predajemo sa 100% vlasništva nad kodom. Isprobajte interaktivne simulacije ispod."
+              : "Every system is engineered for sub-300ms response times, deployed to dedicated European infrastructure, and handed over with 100% source-code ownership. Interact with each live architecture mockup below."}
           </p>
         </div>
 

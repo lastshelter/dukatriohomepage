@@ -23,6 +23,107 @@ export async function appendLeadToLocalLedger(entry: LeadLedgerEntry): Promise<v
   } catch (err) {
     console.warn("[LEAD LEDGER WARN] Could not append to local leads.jsonl:", err);
   }
+
+  // Also dispatch async webhook notifications to Telegram / Discord / Slack if configured
+  await dispatchLeadWebhookNotification(entry).catch((err) => {
+    console.warn("[WEBHOOK NOTIFY WARN] Non-fatal notification error:", err);
+  });
+}
+
+/**
+ * Dispatches instant lead alerts to Telegram, Discord, Slack or generic webhook URL.
+ * Fails safely without interrupting the user's HTTP request.
+ */
+export async function dispatchLeadWebhookNotification(entry: LeadLedgerEntry): Promise<void> {
+  const telegramToken = process.env.TELEGRAM_BOT_TOKEN;
+  const telegramChatId = process.env.TELEGRAM_CHAT_ID;
+  const discordWebhook = process.env.DISCORD_WEBHOOK_URL;
+  const slackWebhook = process.env.SLACK_WEBHOOK_URL;
+  const genericWebhook = process.env.LEAD_WEBHOOK_URL;
+
+  const summary = `🚨 *NEW DUKATRIO INQUIRY*
+*Name:* ${entry.name}
+*Email:* ${entry.email}
+*Phone:* ${entry.phone || "N/A"}
+*Scope:* ${entry.scope}
+*Budget:* ${entry.budget || "€4,800 Baseline"}
+*Endpoint:* ${entry.endpoint}
+*IP:* ${entry.ip}
+*Context:*
+${entry.message.slice(0, 400)}`;
+
+  const promises: Promise<unknown>[] = [];
+
+  // 1. Telegram
+  if (telegramToken && telegramChatId) {
+    promises.push(
+      fetch(`https://api.telegram.org/bot${telegramToken}/sendMessage`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          chat_id: telegramChatId,
+          text: summary,
+          parse_mode: "Markdown",
+        }),
+      })
+    );
+  }
+
+  // 2. Discord
+  if (discordWebhook) {
+    promises.push(
+      fetch(discordWebhook, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          username: "Dukatrio Lead Desk",
+          content: `🚨 **New Engineering Inquiry Logged**`,
+          embeds: [
+            {
+              title: entry.scope,
+              color: 0x22d3ee,
+              fields: [
+                { name: "Name", value: entry.name, inline: true },
+                { name: "Email", value: entry.email, inline: true },
+                { name: "Phone", value: entry.phone || "N/A", inline: true },
+                { name: "Budget", value: entry.budget || "€4,800 Baseline", inline: true },
+                { name: "Message", value: entry.message.slice(0, 500) },
+              ],
+              footer: { text: `IP: ${entry.ip} · ${entry.timestamp}` },
+            },
+          ],
+        }),
+      })
+    );
+  }
+
+  // 3. Slack
+  if (slackWebhook) {
+    promises.push(
+      fetch(slackWebhook, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          text: `🚨 *New Dukatrio Inquiry:* ${entry.name} (${entry.email}) — ${entry.scope}`,
+        }),
+      })
+    );
+  }
+
+  // 4. Generic Webhook (Zapier/Make/n8n)
+  if (genericWebhook) {
+    promises.push(
+      fetch(genericWebhook, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(entry),
+      })
+    );
+  }
+
+  if (promises.length > 0) {
+    await Promise.allSettled(promises);
+  }
 }
 
 function escapeHtml(str: string): string {

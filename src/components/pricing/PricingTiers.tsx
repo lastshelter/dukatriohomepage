@@ -3,6 +3,7 @@
 import React from "react";
 import { CheckCircle2, ArrowRight, Zap, Clock } from "lucide-react";
 import type { ScopeType } from "@/components/ContactForm";
+import { useLanguage } from "@/context/LanguageContext";
 
 interface PricingPlan {
   id: string;
@@ -19,7 +20,7 @@ interface PricingPlan {
   scopeType: ScopeType;
 }
 
-const PRICING_PLANS: PricingPlan[] = [
+const PRICING_PLANS_EN: PricingPlan[] = [
   {
     id: "core_sprint",
     name: "Core System Sprint",
@@ -84,7 +85,75 @@ const PRICING_PLANS: PricingPlan[] = [
   },
 ];
 
+const PRICING_PLANS_SR: PricingPlan[] = [
+  {
+    id: "core_sprint",
+    name: "Namenski Sistem Sprint",
+    badge: "FIKSNA CENA // SPRINT",
+    price: "€4,800 – €5,800",
+    billing: "Plaćanje po fazama (50/50)",
+    timeline: "2–3 Nedelje do Produkcije",
+    description:
+      "Projektovano za firme koje žele da zamene haotične Excel tabele ili skupe SaaS pretplate namenskom web aplikacijom na sopstvenom serveru.",
+    accent: "cyan",
+    deliverables: [
+      "Single-tenant Next.js 16 + PostgreSQL/PocketBase operativna web platforma",
+      "2 do 3 automatizovana procesa (intake deskovi, klijentski portali, PDF generator)",
+      "Produkciono postavljanje na privatni Hetzner EU VPS uz Caddy TLS i dnevne bekape",
+      "Kompletan Git repozitorijum, Docker konfiguracije i 100% prenos intelektualne svojine",
+      "30 dana garancije nakon lansiranja uz tehničku podršku",
+    ],
+    ctaLabel: "Zakaži Core Sprint (€4,800)",
+    scopeType: "Excel-to-Custom Portal",
+  },
+  {
+    id: "enterprise_kernel",
+    name: "Enterprise Platforme & Kerneli",
+    badge: "NAJTRAŽENIJE // KOMPLEKSNI SISTEMI",
+    price: "€8,500 – €14,000",
+    billing: "Protokol u 3 Faze",
+    timeline: "4–6 Nedelja do Produkcije",
+    description:
+      "Kompletne operativne platforme sa multi-tenant izolacijom, offline-first PWA mobilnim aplikacijama, matematičkim kernelima ili sigurnosnim trezorima.",
+    highlighted: true,
+    accent: "emerald",
+    deliverables: [
+      "Napredna arhitektura: Offline PWA, OCR skeniranje terenskih otpremnica, real-time sync",
+      "Algoritamski obračunski kerneli (amortizacija, DSCR procena rizika, EUR/RSD zarade)",
+      "Višeslojna RBAC kontrola pristupa (Administrator, Šef gradilišta, Radnik, Klijent)",
+      "Integracija sa eksternim sistemima: ERP, bankarski izvodi, knjigovodstveni API",
+      "Izolovani Linux kontejneri, automatska obnova SSL sertifikata i zaštita podataka",
+      "100% prenos koda + 60 dana garancije i kompletna tehnička dokumentacija",
+    ],
+    ctaLabel: "Zakaži Enterprise Sistem",
+    scopeType: "Offline Field Operations PWA",
+  },
+  {
+    id: "sla_retainer",
+    name: "Održavanje & DevOps SLA",
+    badge: "MESEČNI SLA BEZBEDNOSTI",
+    price: "€190 – €350",
+    billing: "Mesečna pretplata · Bez ugovorne obaveze",
+    timeline: "Kontinualni Monitoring",
+    description:
+      "Kompletno upravljanje serverom i tekuće DevOps održavanje za timove kojima je potrebna bezbrižnost bez zapošljavanja internog inženjera.",
+    accent: "amber",
+    deliverables: [
+      "Dnevni enkriptovani bekapi baze na sekundarnu lokaciju sa testiranjem oporavka",
+      "Bezbednosna ažuriranja Linux kernela, kontejnera i praćenje SSL sertifikata",
+      "Kontinualni monitoring rada servera uz odziv u roku od 15 minuta",
+      "2–3 radna sata mesečno za sitne izmene šeme baze ili nova polja",
+      "Direktan Telegram / WhatsApp kanal sa vodećim inženjerom (SLA &lt; 4h)",
+    ],
+    ctaLabel: "Pošalji Upit za SLA",
+    scopeType: "B2B Client Intake Engine",
+  },
+];
+
 export default function PricingTiers(): React.JSX.Element {
+  const { lang } = useLanguage();
+  const plans = lang === "sr" ? PRICING_PLANS_SR : PRICING_PLANS_EN;
+
   const handleSelectPlan = (plan: PricingPlan) => {
     window.dispatchEvent(
       new CustomEvent("populate-estimator", {
@@ -105,47 +174,49 @@ export default function PricingTiers(): React.JSX.Element {
   };
 
   return (
-    <section id="pricing" className="py-28 sm:py-36 relative border-t border-slate-800/80 bg-[#0B0D13]">
+    <section id="pricing" className="py-28 sm:py-36 relative border-t border-white/[0.08] bg-[#030712]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-16">
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto space-y-4">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#0D121F] border border-slate-800/80 text-teal-400 font-mono text-xs font-semibold">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#0B0F17] border border-white/[0.08] text-teal-400 font-mono text-xs font-semibold">
             <Zap className="w-3.5 h-3.5 text-teal-400" />
-            <span>Predictable Commercial Models</span>
+            <span>{lang === "sr" ? "Predvidivi Modeli Saradnje" : "Predictable Commercial Models"}</span>
           </div>
 
           <h2 className="text-3xl sm:text-5xl font-extrabold text-white tracking-tight">
-            Transparent Fixed-Milestone Pricing.
+            {lang === "sr" ? "Transparentne Fiksne Cene po Fazama." : "Transparent Fixed-Milestone Pricing."}
           </h2>
 
           <p className="text-base text-slate-400 leading-relaxed font-normal">
-            No ambiguous hourly billable traps. No per-seat recurring platform taxes. Guaranteed fixed scopes with 100% source code handover upon delivery.
+            {lang === "sr"
+              ? "Bez nepredvidivih radnih sati. Bez mesečnih naknada po broju korisnika. Fiksni obim posla uz 100% predaju koda i servera."
+              : "No ambiguous hourly billable traps. No per-seat recurring platform taxes. Guaranteed fixed scopes with 100% source code handover upon delivery."}
           </p>
         </div>
 
         {/* 3 Pricing Cards Grid */}
         <div data-stagger className="grid grid-cols-1 lg:grid-cols-3 gap-8 items-stretch">
-          {PRICING_PLANS.map((plan) => {
+          {plans.map((plan) => {
             const isHighlighted = plan.highlighted;
             return (
               <div
                 key={plan.id}
-                className={`spotlight-card rounded-3xl p-8 sm:p-9 flex flex-col justify-between transition-all duration-300 relative group ${
+                className={`spotlight-card rounded-3xl p-8 sm:p-9 flex flex-col justify-between transition-all duration-300 relative group bento-surface ${
                   isHighlighted
-                    ? "bg-[#0D121F] border-2 border-teal-400/60 shadow-2xl shadow-teal-500/10 hover:border-teal-400"
-                    : "bg-[#0D121F] border border-slate-800/80 hover:border-slate-700 shadow-lg shadow-black/40 hover:-translate-y-1"
+                    ? "border-2 border-teal-400/60 shadow-2xl shadow-teal-500/10 hover:border-teal-400"
+                    : "border border-white/[0.08] hover:border-slate-700 shadow-lg shadow-black/40 hover:-translate-y-1"
                 }`}
               >
                 {/* Optional Highlight Badge */}
                 {isHighlighted && (
                   <div className="absolute -top-3.5 left-1/2 -translate-x-1/2 px-4 py-1 rounded-full bg-teal-400 text-slate-950 font-mono text-[10px] font-extrabold uppercase tracking-widest shadow-md">
-                    Recommended Architecture
+                    {lang === "sr" ? "Preporučena Arhitektura" : "Recommended Architecture"}
                   </div>
                 )}
 
                 <div className="space-y-6">
                   {/* Badge & Timeline */}
-                  <div className="flex items-center justify-between gap-2 border-b border-slate-800/80 pb-4">
+                  <div className="flex items-center justify-between gap-2 border-b border-white/[0.08] pb-4">
                     <span
                       className={`text-[11px] font-mono font-bold tracking-wider uppercase ${
                         plan.accent === "emerald"
@@ -171,7 +242,9 @@ export default function PricingTiers(): React.JSX.Element {
                         {plan.price}
                       </span>
                       {plan.id === "sla_retainer" && (
-                        <span className="text-xs text-slate-400 font-mono">/ mo</span>
+                        <span className="text-xs text-slate-400 font-mono">
+                          {lang === "sr" ? "/ mesec" : "/ mo"}
+                        </span>
                       )}
                     </div>
                     <span className="text-xs text-slate-500 font-mono block mt-1">{plan.billing}</span>
@@ -181,9 +254,9 @@ export default function PricingTiers(): React.JSX.Element {
                   <p className="text-sm text-slate-400 leading-relaxed font-sans">{plan.description}</p>
 
                   {/* Deliverables List */}
-                  <div className="pt-4 border-t border-slate-800/80 space-y-3">
+                  <div className="pt-4 border-t border-white/[0.08] space-y-3">
                     <span className="text-[11px] font-mono uppercase tracking-wider text-slate-500 block font-semibold">
-                      Included Engineering Deliverables:
+                      {lang === "sr" ? "Uključene Inženjerske Stavke:" : "Included Engineering Deliverables:"}
                     </span>
                     <ul className="space-y-2.5 text-xs text-slate-300">
                       {plan.deliverables.map((item, idx) => (
@@ -209,7 +282,7 @@ export default function PricingTiers(): React.JSX.Element {
                   <button
                     type="button"
                     onClick={() => handleSelectPlan(plan)}
-                    className={`w-full py-3.5 px-6 rounded-xl font-bold text-xs uppercase tracking-wider flex items-center justify-center gap-2 transition-all duration-200 btn-tactile cursor-pointer ${
+                    className={`w-full py-3.5 px-6 rounded-xl font-bold text-xs uppercase tracking-wider flex items-center justify-center gap-2 transition-all duration-200 btn-spring cursor-pointer ${
                       isHighlighted
                         ? "bg-teal-400 hover:bg-teal-300 text-slate-950 shadow-lg shadow-teal-500/15"
                         : "bg-slate-900 hover:bg-slate-800 border border-slate-800 hover:border-teal-400/40 text-white"
@@ -227,12 +300,16 @@ export default function PricingTiers(): React.JSX.Element {
         {/* Dual Funnel Note: Link to Interactive Calculator */}
         <div className="text-center pt-4">
           <p className="text-xs sm:text-sm text-zinc-500 font-mono">
-            Need multi-service scaling, custom mathematical algorithms, or expedited delivery?{" "}
+            {lang === "sr"
+              ? "Potrebna vam je procena za kompleksniji sistem ili prilagođeni matematički model? "
+              : "Need multi-service scaling, custom mathematical algorithms, or expedited delivery? "}
             <a
               href="#estimator"
               className="text-cyan-400 hover:text-cyan-300 underline underline-offset-4 font-semibold transition-colors"
             >
-              Configure custom parameters in our Interactive Scope Estimator ↓
+              {lang === "sr"
+                ? "Podesite parametre u interaktivnom kalkulatoru uštede ↓"
+                : "Configure custom parameters in our Interactive Scope Estimator ↓"}
             </a>
           </p>
         </div>

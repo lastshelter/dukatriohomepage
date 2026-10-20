@@ -68,6 +68,15 @@ const STATIC_COMMAND_ITEMS: CommandItem[] = [
     badge: "EN / SR",
   },
   {
+    id: "portal-demo",
+    group: "Interactive Engineering Tools",
+    label: "Launch 14-Day Sprint Client Portal Demo",
+    sublabel: "Simulate live milestone tracking, Git commits, VPS telemetry & architect desk",
+    href: "/portal/demo",
+    icon: Server,
+    badge: "CLIENT DEMO",
+  },
+  {
     id: "blueprint",
     group: "Interactive Engineering Tools",
     label: "Launch AI Architecture & Blueprint Studio",
