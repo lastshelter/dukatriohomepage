@@ -166,6 +166,18 @@ export default function HomePage(): React.JSX.Element {
                 >
                   Multi-Tenant Client Vault
                 </Link>
+                <Link
+                  href="/solutions/field-ticket-material-ocr"
+                  className="text-slate-300 hover:text-amber-400 transition"
+                >
+                  Field Ticket OCR
+                </Link>
+                <Link
+                  href="/solutions/specialized-fleet-dispatch-desk"
+                  className="text-slate-300 hover:text-cyan-400 transition"
+                >
+                  Fleet Dispatch Desk
+                </Link>
               </div>
             </div>
 

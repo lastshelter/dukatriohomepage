@@ -56,7 +56,7 @@ export const CASE_STUDIES: CaseStudyData[] = [
   {
     id: "capital_syndication_terminal",
     badge: "FINTECH & ALGORITHMIC UNDERWRITING",
-    title: "BFS Harvest: SvelteKit Commercial Debt & DSCR Underwriting Terminal",
+    title: "Funding Desk: SvelteKit Commercial Debt & DSCR Underwriting Terminal",
     clientType: "Commercial Capital Advisory & Private Debt Underwriting",
     techStack: [
       "SvelteKit 2",
@@ -77,9 +77,9 @@ export const CASE_STUDIES: CaseStudyData[] = [
       { label: "Recurring Seat Fees", value: "€0" },
       { label: "Analyzed Pipeline", value: "€14M+" },
     ],
-    liveUrl: "/case-studies/bfs-harvest",
-    ctaLabel: "Read BFS Harvest Study",
-    externalUrl: "https://fundingsolutions.dukatrio.com",
+    liveUrl: "/case-studies/fundingdesk",
+    ctaLabel: "Read Funding Desk Study",
+    externalUrl: "https://fundingdesk.dukatrio.com",
   },
   {
     id: "b2b_portal",

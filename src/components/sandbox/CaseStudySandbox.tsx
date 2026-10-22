@@ -15,8 +15,8 @@ const TABS = [
   },
   {
     id: "dscr",
-    label: "BFS Harvest · DSCR Terminal",
-    blurb: "Simulate the real-time financial ratio kernel powering the BFS Harvest fintech platform on Hetzner VPS.",
+    label: "Funding Desk · DSCR Terminal",
+    blurb: "Simulate the real-time financial ratio kernel powering the Funding Desk fintech platform on Hetzner VPS.",
     Icon: Gauge,
   },
 ] as const;

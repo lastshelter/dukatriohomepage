@@ -81,9 +81,9 @@ const BLUEPRINTS: BlueprintPreview[] = [
   {
     id: "intake",
     label: "03 · B2B Underwriting Engine",
-    badge: "FINTECH & CAPITAL (BFS HARVEST)",
+    badge: "FINTECH & CAPITAL (FUNDING DESK)",
     route: "/solutions/b2b-client-intake-engine",
-    liveDemoUrl: "/case-studies/bfs-harvest",
+    liveDemoUrl: "/case-studies/fundingdesk",
     beforeTitle: "72-Hour Manual Underwriting & Email Attachments",
     beforePain: [
       "62% high-intent borrower drop-off during multi-day manual review",

@@ -15,19 +15,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.9,
     },
     {
-      url: "https://dukatrio.com/case-studies/bfs-harvest",
-      lastModified: new Date(),
-      changeFrequency: "weekly",
-      priority: 0.95,
-    },
-    {
       url: "https://dukatrio.com/case-studies/gradiliste-os",
       lastModified: new Date(),
       changeFrequency: "monthly",
       priority: 0.9,
     },
     {
-      url: "https://dukatrio.com/case-studies/fundingsolutions",
+      url: "https://dukatrio.com/case-studies/fundingdesk",
       lastModified: new Date(),
       changeFrequency: "monthly",
       priority: 0.85,
@@ -61,6 +55,18 @@ export default function sitemap(): MetadataRoute.Sitemap {
       lastModified: new Date(),
       changeFrequency: "weekly",
       priority: 0.8,
+    },
+    {
+      url: "https://dukatrio.com/solutions/field-ticket-material-ocr",
+      lastModified: new Date(),
+      changeFrequency: "weekly",
+      priority: 0.9,
+    },
+    {
+      url: "https://dukatrio.com/solutions/specialized-fleet-dispatch-desk",
+      lastModified: new Date(),
+      changeFrequency: "weekly",
+      priority: 0.9,
     },
   ];
 }

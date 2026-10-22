@@ -62,7 +62,7 @@ export const metadata: Metadata = {
     "izrada B2B portala",
     "SaaS razvoj Srbija",
     "Gradilište Dukatrio",
-    "FundingSolutions",
+    "Funding Desk",
     "Astro SEO Portals",
     "SvelteKit Real-Time Desks",
     "Nuxt 3 Operations",
@@ -122,7 +122,7 @@ const jsonLd = {
       },
       sameAs: [
         "https://gradiliste.dukatrio.com",
-        "https://fundingsolutions.dukatrio.com",
+        "https://fundingdesk.dukatrio.com",
         "https://github.com/lastshelter",
       ],
       founder: {
@@ -198,16 +198,16 @@ const jsonLd = {
           })),
           {
             "@type": "Offer",
-            name: "Flagship Fintech Case Study: BFS Harvest Platform",
+            name: "Flagship Fintech Case Study: Funding Desk Platform",
             description:
-              "Flagship production fintech platform engineered and deployed by DukaTrio: BFS Harvest (https://dukatrio.com/case-studies/bfs-harvest), a high-speed commercial capital intake and algorithmic DSCR underwriting engine built on SvelteKit 2 and hosted on a sovereign Hetzner Linux VPS.",
-            url: "https://dukatrio.com/case-studies/bfs-harvest",
+              "Flagship production fintech platform engineered and deployed by DukaTrio: Funding Desk (https://dukatrio.com/case-studies/fundingdesk), a high-speed commercial capital intake and algorithmic DSCR underwriting engine built on SvelteKit 2 and hosted on a sovereign Hetzner Linux VPS.",
+            url: "https://dukatrio.com/case-studies/fundingdesk",
             itemOffered: {
               "@type": "SoftwareApplication",
-              name: "BFS Harvest - Fintech Underwriting Platform",
+              name: "Funding Desk - Fintech Underwriting Platform",
               applicationCategory: "FintechApplication",
               operatingSystem: "Web, macOS, Windows, iOS, Android",
-              url: "https://dukatrio.com/case-studies/bfs-harvest",
+              url: "https://dukatrio.com/case-studies/fundingdesk",
               description:
                 "Commercial debt intake and risk decisioning platform featuring deterministic TypeScript DSCR calculation kernels, programmatic PDF term sheets, and single-tenant AES-256 KYC vaults.",
             },
@@ -230,16 +230,16 @@ const jsonLd = {
           },
           {
             "@type": "Offer",
-            name: "B2B Systems Case Study: FundingSolutions Decisioning Terminal",
+            name: "B2B Systems Case Study: Funding Desk Decisioning Terminal",
             description:
-              "Anonymized B2B client platform custom-built by DukaTrio: FundingSolutions (https://fundingsolutions.dukatrio.com), a commercial capital intake portal and DSCR underwriting decisioning terminal.",
-            url: "https://fundingsolutions.dukatrio.com",
+              "Anonymized B2B client platform custom-built by DukaTrio: Funding Desk (https://fundingdesk.dukatrio.com), a commercial capital intake portal and DSCR underwriting decisioning terminal.",
+            url: "https://fundingdesk.dukatrio.com",
             itemOffered: {
               "@type": "SoftwareApplication",
-              name: "FundingSolutions - Capital Decisioning Terminal",
+              name: "Funding Desk - Capital Decisioning Terminal",
               applicationCategory: "FintechApplication",
               operatingSystem: "Web",
-              url: "https://fundingsolutions.dukatrio.com",
+              url: "https://fundingdesk.dukatrio.com",
               description:
                 "Enterprise commercial capital intake and risk decisioning terminal featuring real-time DSCR calculation engines and automated PDF term-sheet generation.",
             },

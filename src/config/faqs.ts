@@ -36,7 +36,7 @@ export const FAQS: FaqItem[] = [
   {
     question: "Can you build industry-specific platforms such as construction or fintech systems?",
     answer:
-      "Yes. Our production case studies include Gradilište OS — built on SvelteKit (Field PWA) + Next.js 16 (Command Portal) and PocketBase (Embedded SQLite WAL) with an IndexedDB outbox queue and on-device camera OCR — and FundingSolutions, a B2B capital intake and DSCR decisioning terminal custom-built for a commercial syndication desk.",
+      "Yes. Our production case studies include Gradilište OS — built on SvelteKit (Field PWA) + Next.js 16 (Command Portal) and PocketBase (Embedded SQLite WAL) with an IndexedDB outbox queue and on-device camera OCR — and Funding Desk, a B2B capital intake and DSCR decisioning terminal custom-built for a commercial syndication desk.",
   },
   {
     question: "Do you work with clients in Serbia and across Europe?",

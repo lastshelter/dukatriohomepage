@@ -23,6 +23,8 @@ import {
   Copy,
   Check,
   Server,
+  Camera,
+  Truck,
 } from "lucide-react";
 import { useLanguage } from "@/context/LanguageContext";
 import { SERVICE_PILLARS } from "@/config/servicePillars";
@@ -89,7 +91,7 @@ const STATIC_COMMAND_ITEMS: CommandItem[] = [
     id: "sandbox",
     group: "Interactive Engineering Tools",
     label: "Interactive Case Study Sandbox (OCR & DSCR Terminal)",
-    sublabel: "Test live Gradilište ticket OCR extraction & FundingSolutions DSCR underwriting",
+    sublabel: "Test live Gradilište ticket OCR extraction & Funding Desk DSCR underwriting",
     href: "/#sandbox",
     icon: FileCode2,
     badge: "LIVE SANDBOX",
@@ -176,11 +178,47 @@ const STATIC_COMMAND_ITEMS: CommandItem[] = [
     badge: "AES-256",
   },
   {
-    id: "cs-bfs-harvest",
+    id: "sol-ticket-ocr",
+    group: "€4,800 Solution Blueprints",
+    label: "Solution 06 · Field Ticket & Material OCR Pipeline",
+    sublabel: "Offline mobile scanner, automated PO matching & QuickBooks/Xero export",
+    href: "/solutions/field-ticket-material-ocr",
+    icon: Camera,
+    badge: "10–14 DAYS",
+  },
+  {
+    id: "sol-fleet-dispatch",
+    group: "€4,800 Solution Blueprints",
+    label: "Solution 07 · Specialized Fleet & Dispatch Desk",
+    sublabel: "Visual machine Gantt timeline, 30s rate quotes & driver WhatsApp push",
+    href: "/solutions/specialized-fleet-dispatch-desk",
+    icon: Truck,
+    badge: "14–21 DAYS",
+  },
+  {
+    id: "cs-ticket-ocr",
     group: "Architecture & Live Production Systems",
-    label: "Case Study · BFS Harvest SvelteKit Fintech Platform",
+    label: "Solution Blueprint · Field Ticket & Material OCR Pipeline",
+    sublabel: "Offline-first PWA, Web Workers OCR & zero unbilled deliveries",
+    href: "/solutions/field-ticket-material-ocr",
+    icon: Camera,
+    badge: "OCR ENGINE",
+  },
+  {
+    id: "cs-fleet-dispatch",
+    group: "Architecture & Live Production Systems",
+    label: "Solution Blueprint · Specialized Fleet & Dispatch Desk",
+    sublabel: "Gantt timeline, algorithmic quoting & WhatsApp operator dispatch",
+    href: "/solutions/specialized-fleet-dispatch-desk",
+    icon: Truck,
+    badge: "DISPATCH DESK",
+  },
+  {
+    id: "cs-fundingdesk",
+    group: "Architecture & Live Production Systems",
+    label: "Case Study · Funding Desk SvelteKit Fintech Platform",
     sublabel: "Sub-60s underwriting, real-time DSCR kernel & sovereign Hetzner VPS",
-    href: "/case-studies/bfs-harvest",
+    href: "/case-studies/fundingdesk",
     icon: FileCode2,
     badge: "FLAGSHIP",
   },
@@ -194,20 +232,11 @@ const STATIC_COMMAND_ITEMS: CommandItem[] = [
     badge: "DEEP DIVE",
   },
   {
-    id: "cs-fundingsolutions",
-    group: "Architecture & Live Production Systems",
-    label: "Case Study · FundingSolutions DSCR & KYC Vault Deep-Dive",
-    sublabel: "Sub-60s TypeScript underwriting kernel + PDF term-sheet engine",
-    href: "/case-studies/fundingsolutions",
-    icon: FileCode2,
-    badge: "DEEP DIVE",
-  },
-  {
     id: "live-funding",
     group: "Architecture & Live Production Systems",
-    label: "Launch FundingSolutions Decisioning Terminal",
-    sublabel: "https://fundingsolutions.dukatrio.com",
-    href: "https://fundingsolutions.dukatrio.com",
+    label: "Launch Funding Desk Decisioning Terminal",
+    sublabel: "https://fundingdesk.dukatrio.com",
+    href: "https://fundingdesk.dukatrio.com",
     external: true,
     icon: ExternalLink,
     badge: "LIVE SYSTEM",
@@ -472,7 +501,7 @@ export default function Navbar(): React.JSX.Element {
                     </div>
 
                     <a
-                      href="https://fundingsolutions.dukatrio.com"
+                      href="https://fundingdesk.dukatrio.com"
                       target="_blank"
                       rel="noopener noreferrer"
                       className="p-3 rounded-xl hover:bg-slate-900/90 border border-transparent hover:border-emerald-500/30 transition-all flex items-start gap-3 group/eco"
@@ -483,7 +512,7 @@ export default function Navbar(): React.JSX.Element {
                       <div className="flex-1 min-w-0">
                         <div className="flex items-center justify-between gap-2">
                           <span className="text-xs font-bold text-slate-200 group-hover/eco:text-emerald-400 transition-colors">
-                            BFS Harvest (Fintech Platform)
+                            Funding Desk (Fintech Platform)
                           </span>
                           <span className="text-[9px] font-mono font-bold uppercase tracking-wider px-1.5 py-0.5 rounded bg-emerald-950/80 border border-emerald-800/60 text-emerald-300">
                             Deployed
@@ -559,6 +588,20 @@ export default function Navbar(): React.JSX.Element {
                       className="block px-3 py-2 rounded-xl hover:bg-slate-900/90 text-xs text-slate-300 hover:text-teal-400 transition-colors"
                     >
                       Multi-Tenant Client Document Vault
+                    </Link>
+                    <Link
+                      href="/solutions/field-ticket-material-ocr"
+                      onClick={() => setEcosystemOpen(false)}
+                      className="block px-3 py-2 rounded-xl hover:bg-slate-900/90 text-xs text-slate-300 hover:text-amber-400 transition-colors"
+                    >
+                      Field Ticket &amp; Material OCR Pipeline
+                    </Link>
+                    <Link
+                      href="/solutions/specialized-fleet-dispatch-desk"
+                      onClick={() => setEcosystemOpen(false)}
+                      className="block px-3 py-2 rounded-xl hover:bg-slate-900/90 text-xs text-slate-300 hover:text-cyan-400 transition-colors"
+                    >
+                      Specialized Fleet &amp; Dispatch Desk
                     </Link>
                   </div>
                 </div>
@@ -703,11 +746,59 @@ export default function Navbar(): React.JSX.Element {
 
             <div className="pt-3 border-t border-slate-800/80 space-y-2">
               <span className="text-[10px] font-mono uppercase tracking-widest text-slate-400 block font-semibold px-1">
+                B2B Solution Blueprints (€4,800)
+              </span>
+              <div className="flex flex-col space-y-1 text-xs">
+                <Link
+                  href="/solutions/field-ticket-material-ocr"
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="py-1 px-2.5 rounded-lg text-slate-300 hover:text-amber-400 hover:bg-slate-900 transition-colors flex items-center justify-between"
+                >
+                  <span>Field Ticket &amp; Material OCR</span>
+                  <span className="text-[10px] font-mono text-amber-400 font-bold">10–14D</span>
+                </Link>
+                <Link
+                  href="/solutions/specialized-fleet-dispatch-desk"
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="py-1 px-2.5 rounded-lg text-slate-300 hover:text-cyan-400 hover:bg-slate-900 transition-colors flex items-center justify-between"
+                >
+                  <span>Specialized Fleet &amp; Dispatch Desk</span>
+                  <span className="text-[10px] font-mono text-cyan-400 font-bold">14–21D</span>
+                </Link>
+                <Link
+                  href="/solutions/excel-to-custom-portal"
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="py-1 px-2.5 rounded-lg text-slate-300 hover:text-teal-400 hover:bg-slate-900 transition-colors flex items-center justify-between"
+                >
+                  <span>Excel-to-Custom Portal</span>
+                  <span className="text-[10px] font-mono text-teal-400 font-bold">10–14D</span>
+                </Link>
+                <Link
+                  href="/solutions/offline-field-operations-pwa"
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="py-1 px-2.5 rounded-lg text-slate-300 hover:text-teal-400 hover:bg-slate-900 transition-colors flex items-center justify-between"
+                >
+                  <span>Offline Field Operations PWA</span>
+                  <span className="text-[10px] font-mono text-teal-400 font-bold">10–14D</span>
+                </Link>
+                <Link
+                  href="/solutions/b2b-client-intake-engine"
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="py-1 px-2.5 rounded-lg text-slate-300 hover:text-teal-400 hover:bg-slate-900 transition-colors flex items-center justify-between"
+                >
+                  <span>B2B Client Intake Engine</span>
+                  <span className="text-[10px] font-mono text-teal-400 font-bold">10–14D</span>
+                </Link>
+              </div>
+            </div>
+
+            <div className="pt-3 border-t border-slate-800/80 space-y-2">
+              <span className="text-[10px] font-mono uppercase tracking-widest text-slate-400 block font-semibold px-1">
                 Engineered Client Platforms
               </span>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
                 <a
-                  href="https://fundingsolutions.dukatrio.com"
+                  href="https://fundingdesk.dukatrio.com"
                   target="_blank"
                   rel="noopener noreferrer"
                   onClick={() => setMobileMenuOpen(false)}
@@ -716,7 +807,7 @@ export default function Navbar(): React.JSX.Element {
                   <div className="flex items-center gap-2.5">
                     <Briefcase className="w-4 h-4 text-emerald-400 shrink-0" />
                     <div>
-                      <span className="font-bold block">BFS Harvest</span>
+                      <span className="font-bold block">Funding Desk</span>
                       <span className="text-[10px] text-slate-400">SvelteKit Fintech Terminal</span>
                     </div>
                   </div>

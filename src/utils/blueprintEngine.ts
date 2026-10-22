@@ -62,6 +62,16 @@ export const BLUEPRINT_PRESETS = [
     text: "Our drivers and site supervisors run on paper delivery tickets, WhatsApp photos and a shared spreadsheet. Signal drops on site, tickets get lost and we end up in billing disputes.",
   },
   {
+    id: "ticket-ocr",
+    label: "Field Ticket & Material OCR",
+    text: "Our field foremen collect paper delivery tickets and slips on site. We need an offline mobile OCR scanner that extracts volumes, checks purchase orders, and exports to accounting automatically.",
+  },
+  {
+    id: "fleet-dispatch",
+    label: "Specialized Fleet & Dispatch Desk",
+    text: "We run cranes, pumpers and heavy equipment. We need a real-time visual dispatch timeline, collision prevention, automated job quoting, and driver WhatsApp dispatch cards.",
+  },
+  {
     id: "saas-bloat",
     label: "B2B SaaS License Bloat",
     text: "We pay for six SaaS tools and about 25 per-seat licenses plus Zapier glue, mostly to track jobs and invoices. The monthly bill keeps growing and we only use a fraction of the features.",

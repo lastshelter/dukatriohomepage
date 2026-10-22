@@ -28,6 +28,7 @@ const SEAT_OPTIONS = [
 const BOTTLENECK_OPTIONS = [
   "Fragile Excel / Google Sheets with high error rate",
   "Paper Field Tickets & Delivery Slips",
+  "Whiteboard Heavy Equipment & Fleet Dispatch",
   "High Per-Seat SaaS Tax (€60+/user)",
   "Manual Intake & Underwriting Latency",
 ] as const;

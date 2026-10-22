@@ -1,6 +1,6 @@
 import { formatEur } from "@/utils/formatEur";
 
-/** DSCR maths and sample term-sheet content for the FundingSolutions sandbox. */
+/** DSCR maths and sample term-sheet content for the Funding Desk sandbox. */
 
 export const DSCR_FLOOR = 1.0;
 export const DSCR_PRIME_MIN = 1.25;

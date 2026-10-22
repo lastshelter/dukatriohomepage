@@ -246,7 +246,7 @@ export default function B2BClientIntakeEnginePage(): React.JSX.Element {
                     href="/#case-studies"
                     className="inline-flex items-center justify-center gap-2 px-6 py-4 rounded-xl bg-[#0D121F] hover:bg-slate-800/90 border border-slate-800/80 text-slate-200 font-semibold text-sm transition-all"
                   >
-                    <span>See FundingSolutions Case Study</span>
+                    <span>See Funding Desk Case Study</span>
                     <ArrowUpRight className="w-4 h-4 text-teal-400" />
                   </Link>
                 </div>
@@ -499,10 +499,10 @@ export default function B2BClientIntakeEnginePage(): React.JSX.Element {
               <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-8">
                 <div className="space-y-3 max-w-2xl">
                   <span className="text-xs font-mono uppercase tracking-widest text-teal-400 font-bold">
-                    FLAGSHIP CASE STUDY // FUNDINGSOLUTIONS CAPITAL TERMINAL
+                    FLAGSHIP CASE STUDY // FUNDING DESK CAPITAL TERMINAL
                   </span>
                   <h2 className="text-2xl sm:text-3xl font-extrabold text-white tracking-tight">
-                    How FundingSolutions Replaced 72-Hour Manual Reviews with a Sub-60-Second Underwriting Terminal
+                    How Funding Desk Replaced 72-Hour Manual Reviews with a Sub-60-Second Underwriting Terminal
                   </h2>
                   <p className="text-sm sm:text-base text-slate-300 leading-relaxed">
                     Inspect our live production commercial capital intake and algorithmic DSCR underwriting engine—engineered to pre-qualify borrowers, model risk tiers in real time, and route verified dossiers directly to senior underwriters.
@@ -518,7 +518,7 @@ export default function B2BClientIntakeEnginePage(): React.JSX.Element {
                     <ArrowUpRight className="w-4 h-4" />
                   </Link>
                   <a
-                    href="https://fundingsolutions.dukatrio.com"
+                    href="https://fundingdesk.dukatrio.com"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="inline-flex items-center justify-center gap-2 px-5 py-3.5 rounded-xl bg-slate-950 hover:bg-slate-900 border border-slate-800 text-slate-200 font-mono text-xs font-semibold transition-all"

@@ -129,8 +129,8 @@ export const SERVICE_PILLARS: ServicePillar[] = [
       "One-click executive PDF brief & term-sheet generator with custom branding",
     ],
     metric: { value: "3.4×", label: "Higher B2B conversion lift" },
-    solutionHref: "/case-studies/fundingsolutions",
-    solutionLabel: "FundingSolutions Study",
+    solutionHref: "/case-studies/fundingdesk",
+    solutionLabel: "Funding Desk Study",
     schemaDescription:
       "Interactive financial and ROI calculators with live underwriting sliders, payment payoff visualizers, and instant executive PDF quote exports.",
   },

@@ -24,11 +24,11 @@ import {
   TrendingUp,
 } from "lucide-react";
 
-const PAGE_URL = "https://dukatrio.com/case-studies/bfs-harvest";
+const PAGE_URL = "https://dukatrio.com/case-studies/fundingdesk";
 const PAGE_TITLE =
-  "BFS Harvest Case Study: SvelteKit Fintech Platform, Real-Time DSCR Kernel & Hetzner Deployment | DukaTrio";
+  "Funding Desk // Institutional Capital Intake & Underwriting Suite | DukaTrio";
 const PAGE_DESCRIPTION =
-  "Deep-dive architectural case study of BFS Harvest: how a bespoke SvelteKit 2 fintech platform, TypeScript algorithmic DSCR decisioning kernel, programmatic PDF term-sheet engine, and single-tenant Hetzner VPS cut debt underwriting from 72 hours to under 60 seconds.";
+  "Deep-dive architectural case study of Funding Desk: how a bespoke SvelteKit 2 fintech platform, TypeScript algorithmic DSCR decisioning kernel, programmatic PDF term-sheet engine, and single-tenant Hetzner VPS cut debt underwriting from 72 hours to under 60 seconds.";
 
 export const metadata: Metadata = {
   title: PAGE_TITLE,
@@ -106,14 +106,14 @@ export function evaluateDealKernel(input: UnderwritingInput): UnderwritingResult
 }`;
 
 const DEFAULT_INQUIRY_MESSAGE =
-  "[Case Study Inquiry: BFS Harvest / B2B Fintech & Underwriting Engine]\nTarget Architecture: SvelteKit 2 + TypeScript Financial Kernel + PostgreSQL/SQLite WAL + AES-256 KYC Vault + Hetzner VPS.\nCore Scope: Real-time borrower qualification, automated PDF term-sheet generation, single-tenant data isolation, and €0 recurring per-seat fees (€4,800 – €14,000 fixed milestone).";
+  "[Case Study Inquiry: Funding Desk / B2B Fintech & Underwriting Engine]\nTarget Architecture: SvelteKit 2 + TypeScript Financial Kernel + PostgreSQL/SQLite WAL + AES-256 KYC Vault + Hetzner VPS.\nCore Scope: Real-time borrower qualification, automated PDF term-sheet generation, single-tenant data isolation, and €0 recurring per-seat fees (€4,800 – €14,000 fixed milestone).";
 
-export default function BFSHarvestCaseStudyPage(): React.JSX.Element {
+export default function FundingDeskCaseStudyPage(): React.JSX.Element {
   const techArticleSchema = {
     "@context": "https://schema.org",
     "@type": "TechArticle",
     headline:
-      "BFS Harvest: Sub-60s Commercial Debt Underwriting & KYC Vault on SvelteKit and Hetzner VPS",
+      "Funding Desk: Sub-60s Commercial Debt Underwriting & KYC Vault on SvelteKit and Hetzner VPS",
     description: PAGE_DESCRIPTION,
     url: PAGE_URL,
     datePublished: "2026-10-22",
@@ -154,7 +154,7 @@ export default function BFSHarvestCaseStudyPage(): React.JSX.Element {
       {
         "@type": "ListItem",
         position: 3,
-        name: "BFS Harvest",
+        name: "Funding Desk",
         item: PAGE_URL,
       },
     ],
@@ -163,8 +163,8 @@ export default function BFSHarvestCaseStudyPage(): React.JSX.Element {
   const softwareSchema = {
     "@context": "https://schema.org",
     "@type": "SoftwareApplication",
-    name: "BFS Harvest Fintech Platform",
-    url: "https://fundingsolutions.dukatrio.com",
+    name: "Funding Desk Fintech Platform",
+    url: "https://fundingdesk.dukatrio.com",
     applicationCategory: "FintechApplication",
     operatingSystem: "Web, macOS, Windows, Linux, iOS, Android",
     description:
@@ -224,7 +224,7 @@ export default function BFSHarvestCaseStudyPage(): React.JSX.Element {
               </Link>
               <ChevronRight className="w-3.5 h-3.5 text-slate-600" />
               <span className="text-teal-400 font-semibold" aria-current="page">
-                BFS Harvest Platform
+                Funding Desk Platform
               </span>
             </nav>
 
@@ -246,7 +246,7 @@ export default function BFSHarvestCaseStudyPage(): React.JSX.Element {
               </div>
 
               <h1 className="text-3xl sm:text-5xl lg:text-6xl font-extrabold text-white tracking-tight leading-[1.08]">
-                BFS Harvest: Sub-60s Underwriting, Algorithmic DSCR &amp;{" "}
+                Funding Desk: Sub-60s Underwriting, Algorithmic DSCR &amp;{" "}
                 <span className="bg-gradient-to-r from-teal-300 via-cyan-300 to-emerald-400 bg-clip-text text-transparent">
                   Sovereign Hetzner VPS.
                 </span>
@@ -258,12 +258,12 @@ export default function BFSHarvestCaseStudyPage(): React.JSX.Element {
 
               <div className="flex flex-wrap items-center gap-4 pt-2">
                 <a
-                  href="https://fundingsolutions.dukatrio.com"
+                  href="https://fundingdesk.dukatrio.com"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center gap-2 px-6 py-3.5 rounded-xl bg-teal-400 hover:bg-teal-300 text-slate-950 font-extrabold text-xs uppercase tracking-wider transition-all shadow-lg"
                 >
-                  <span>Explore Live Terminal (fundingsolutions.dukatrio.com)</span>
+                  <span>Explore Live Terminal (fundingdesk.dukatrio.com)</span>
                   <ExternalLink className="w-4 h-4" />
                 </a>
                 <Link
@@ -281,7 +281,7 @@ export default function BFSHarvestCaseStudyPage(): React.JSX.Element {
               <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pb-5 mb-6 border-b border-slate-800 font-mono text-xs">
                 <span className="text-teal-400 font-bold uppercase tracking-widest flex items-center gap-2">
                   <Zap className="w-4 h-4 text-teal-400" />
-                  <span>VERIFIED PRODUCTION TELEMETRY // BFS HARVEST DEPLOYMENT</span>
+                  <span>VERIFIED PRODUCTION TELEMETRY // FUNDING DESK DEPLOYMENT</span>
                 </span>
                 <span className="text-slate-400">
                   Target: Commercial Debt &amp; Capital Advisory · 100% Client IP Ownership
@@ -528,7 +528,7 @@ export default function BFSHarvestCaseStudyPage(): React.JSX.Element {
                 <section id="pdf-engine" className="scroll-mt-24 space-y-6">
                   <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-950/40 border border-cyan-800/50 text-cyan-300 font-mono text-xs font-semibold">
                     <FileText className="w-3.5 h-3.5 text-cyan-400" />
-                    <span>SECTION 03 // PROGRAMMATIC TERM SHEET &amp; HARVEST PIPELINE</span>
+                    <span>SECTION 03 // PROGRAMMATIC TERM SHEET &amp; INTAKE PIPELINE</span>
                   </div>
 
                   <h2 className="text-2xl sm:text-4xl font-extrabold text-white tracking-tight">
@@ -597,7 +597,7 @@ export default function BFSHarvestCaseStudyPage(): React.JSX.Element {
                   </h2>
 
                   <p className="text-slate-300 leading-relaxed">
-                    Financial advisory firms cannot afford to have borrower tax documents and financial statements stored on shared multi-tenant SaaS clouds where a misconfigured row-level security policy exposes competing deal data. BFS Harvest was deployed directly to a sovereign <strong className="text-white">Hetzner Cloud VPS (Nuremberg / Falkenstein, Germany)</strong> running Ubuntu 24.04 LTS behind Caddy v2 with automated TLS encryption.
+                    Financial advisory firms cannot afford to have borrower tax documents and financial statements stored on shared multi-tenant SaaS clouds where a misconfigured row-level security policy exposes competing deal data. Funding Desk was deployed directly to a sovereign <strong className="text-white">Hetzner Cloud VPS (Nuremberg / Falkenstein, Germany)</strong> running Ubuntu 24.04 LTS behind Caddy v2 with automated TLS encryption.
                   </p>
 
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
@@ -656,7 +656,7 @@ export default function BFSHarvestCaseStudyPage(): React.JSX.Element {
                             <span className="font-mono text-white text-lg">€25,200+</span> over 36 months in recurring subscription fees + setup taxes. Zero code ownership.
                           </div>
                           <div className="p-4 rounded-xl bg-teal-950/30 border border-teal-800/40 text-slate-300">
-                            <span className="font-bold text-teal-300 block mb-1">BFS Harvest Bespoke Platform</span>
+                            <span className="font-bold text-teal-300 block mb-1">Funding Desk Bespoke Platform</span>
                             <span className="font-mono text-white text-lg">€5,340 total</span> (Fixed build + €15/mo Hetzner VPS). 100% intellectual property ownership.
                           </div>
                         </div>
