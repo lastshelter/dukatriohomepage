@@ -2,6 +2,20 @@
 const nextConfig = {
   reactStrictMode: true,
   output: 'standalone',
+  async redirects() {
+    return [
+      {
+        source: '/case-studies/fundingsolutions',
+        destination: '/case-studies/fundingdesk',
+        permanent: true,
+      },
+      {
+        source: '/case-studies/bfs-harvest',
+        destination: '/case-studies/fundingdesk',
+        permanent: true,
+      },
+    ];
+  },
   async headers() {
     return [
       {
