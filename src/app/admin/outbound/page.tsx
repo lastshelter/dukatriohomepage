@@ -35,7 +35,7 @@ import type { OutboundLead, OutboundMetrics, NewOutboundLead } from "@/utils/out
 const WEDGE_OPTIONS = [
   "Field Ticket & Material OCR Pipeline",
   "Specialized Fleet & Dispatch Desk",
-  "B2B Underwriting / BFS Harvest",
+  "B2B Underwriting / Funding Desk",
   "Excel-to-Custom Portal",
   "SaaS Subscription Consolidation",
   "Multi-Tenant Client Vault",
@@ -168,7 +168,7 @@ export default function OutboundLeadsAdminPage(): React.JSX.Element {
       profile_url: lead.profile_url || "",
       wedge_type: lead.wedge_type,
       status: lead.status,
-      last_followup_at: lead.last_followup_at || "",
+      last_followup_at: lead.last_followup_at ? lead.last_followup_at.slice(0, 10) : "",
       notes: lead.notes || "",
     });
     setErrorMsg(null);
@@ -738,11 +738,10 @@ export default function OutboundLeadsAdminPage(): React.JSX.Element {
               <div className="space-y-1.5">
                 <label className="text-slate-300 font-semibold font-mono">Follow-up Target</label>
                 <input
-                  type="text"
-                  placeholder="e.g. Next Monday 10:00 or 2026-10-26"
-                  value={formData.last_followup_at || ""}
+                  type="date"
+                  value={formData.last_followup_at ? formData.last_followup_at.slice(0, 10) : ""}
                   onChange={(e) => setFormData({ ...formData, last_followup_at: e.target.value })}
-                  className="w-full px-3 py-2 rounded-xl bg-slate-950 border border-slate-800 text-slate-200 placeholder-slate-600 focus:outline-none focus:border-teal-400"
+                  className="w-full px-3 py-2 rounded-xl bg-slate-950 border border-slate-800 text-slate-200 focus:outline-none focus:border-teal-400 [color-scheme:dark]"
                 />
               </div>
 

@@ -63,6 +63,11 @@ function getDb(): DatabaseSync {
     );
   `);
 
+  // Migration: align legacy wedge name to Funding Desk
+  db.exec(
+    "UPDATE outbound_leads SET wedge_type = 'B2B Underwriting / Funding Desk' WHERE wedge_type = 'B2B Underwriting / BFS Harvest';"
+  );
+
   // Seed sample leads if empty
   const countRow = db.prepare("SELECT COUNT(*) as count FROM outbound_leads").get() as { count: number };
   if (countRow.count === 0) {
@@ -99,7 +104,7 @@ function getDb(): DatabaseSync {
       "Managing Partner",
       "linkedin",
       "https://linkedin.com",
-      "B2B Underwriting / BFS Harvest",
+      "B2B Underwriting / Funding Desk",
       "contacted",
       "Sent case study link for BFS Harvest. Commercial lending syndicate dealing with manual DSCR workbooks."
     );
