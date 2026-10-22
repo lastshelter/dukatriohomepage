@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
+import { isAuthenticated } from "@/utils/adminAuth";
 import {
   getAllOutboundLeads,
   createOutboundLead,
@@ -12,6 +13,13 @@ export const dynamic = "force-dynamic";
 
 export async function GET(request: NextRequest) {
   try {
+    if (!(await isAuthenticated())) {
+      return NextResponse.json(
+        { success: false, error: "Unauthorized: Sovereign session token required." },
+        { status: 401 }
+      );
+    }
+
     const { searchParams } = new URL(request.url);
     const status = searchParams.get("status") || "all";
     const wedge = searchParams.get("wedge") || "all";
@@ -38,6 +46,13 @@ export async function GET(request: NextRequest) {
 
 export async function POST(request: NextRequest) {
   try {
+    if (!(await isAuthenticated())) {
+      return NextResponse.json(
+        { success: false, error: "Unauthorized: Sovereign session token required." },
+        { status: 401 }
+      );
+    }
+
     const body = (await request.json()) as Partial<NewOutboundLead>;
 
     if (!body.company_name || !body.contact_name || !body.wedge_type) {
@@ -79,6 +94,13 @@ export async function POST(request: NextRequest) {
 
 export async function PATCH(request: NextRequest) {
   try {
+    if (!(await isAuthenticated())) {
+      return NextResponse.json(
+        { success: false, error: "Unauthorized: Sovereign session token required." },
+        { status: 401 }
+      );
+    }
+
     const body = await request.json();
     const id = Number(body.id);
 
@@ -117,6 +139,13 @@ export async function PATCH(request: NextRequest) {
 
 export async function DELETE(request: NextRequest) {
   try {
+    if (!(await isAuthenticated())) {
+      return NextResponse.json(
+        { success: false, error: "Unauthorized: Sovereign session token required." },
+        { status: 401 }
+      );
+    }
+
     const { searchParams } = new URL(request.url);
     const idParam = searchParams.get("id");
     const id = Number(idParam);

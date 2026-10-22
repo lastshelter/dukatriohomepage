@@ -27,6 +27,8 @@ import {
   Globe,
   AlertCircle,
   X,
+  LogOut,
+  Lock,
 } from "lucide-react";
 import type { OutboundLead, OutboundMetrics, NewOutboundLead } from "@/utils/outboundDb";
 
@@ -111,6 +113,10 @@ export default function OutboundLeadsAdminPage(): React.JSX.Element {
       if (wedgeFilter !== "all") params.set("wedge", wedgeFilter);
 
       const res = await fetch(`/api/admin/outbound?${params.toString()}`);
+      if (res.status === 401) {
+        window.location.href = "/admin/login?from=/admin/outbound";
+        return;
+      }
       const json = await res.json();
       if (json.success) {
         setLeads(json.data.leads);
@@ -122,6 +128,14 @@ export default function OutboundLeadsAdminPage(): React.JSX.Element {
       setLoading(false);
     }
   }, [search, statusFilter, wedgeFilter]);
+
+  const handleLogout = async () => {
+    try {
+      await fetch("/api/admin/auth", { method: "DELETE" });
+    } finally {
+      window.location.href = "/admin/login";
+    }
+  };
 
   useEffect(() => {
     fetchLeads();
@@ -334,7 +348,7 @@ export default function OutboundLeadsAdminPage(): React.JSX.Element {
             </div>
           </div>
 
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-2.5 sm:gap-3">
             <button
               onClick={fetchLeads}
               className="p-2 rounded-xl bg-slate-900 border border-slate-800 text-slate-400 hover:text-white transition"
@@ -355,6 +369,14 @@ export default function OutboundLeadsAdminPage(): React.JSX.Element {
             >
               <Plus className="w-4 h-4" />
               <span>New Prospect</span>
+            </button>
+            <button
+              onClick={handleLogout}
+              className="inline-flex items-center gap-1.5 px-3 py-2 rounded-xl bg-slate-900 border border-slate-800 hover:border-rose-900/60 hover:bg-rose-950/20 text-slate-400 hover:text-rose-300 text-xs font-mono font-medium transition cursor-pointer"
+              title="Terminate Admin Session & Lock"
+            >
+              <LogOut className="w-3.5 h-3.5" />
+              <span className="hidden sm:inline">Lock Desk</span>
             </button>
           </div>
         </div>
