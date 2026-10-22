@@ -176,6 +176,15 @@ const STATIC_COMMAND_ITEMS: CommandItem[] = [
     badge: "AES-256",
   },
   {
+    id: "cs-bfs-harvest",
+    group: "Architecture & Live Production Systems",
+    label: "Case Study · BFS Harvest SvelteKit Fintech Platform",
+    sublabel: "Sub-60s underwriting, real-time DSCR kernel & sovereign Hetzner VPS",
+    href: "/case-studies/bfs-harvest",
+    icon: FileCode2,
+    badge: "FLAGSHIP",
+  },
+  {
     id: "cs-gradiliste",
     group: "Architecture & Live Production Systems",
     label: "Case Study · Gradilište OS Technical Deep-Dive",
@@ -474,14 +483,14 @@ export default function Navbar(): React.JSX.Element {
                       <div className="flex-1 min-w-0">
                         <div className="flex items-center justify-between gap-2">
                           <span className="text-xs font-bold text-slate-200 group-hover/eco:text-emerald-400 transition-colors">
-                            FundingSolutions Terminal
+                            BFS Harvest (Fintech Platform)
                           </span>
                           <span className="text-[9px] font-mono font-bold uppercase tracking-wider px-1.5 py-0.5 rounded bg-emerald-950/80 border border-emerald-800/60 text-emerald-300">
-                            B2B Build
+                            Deployed
                           </span>
                         </div>
                         <p className="text-[11px] text-slate-400 leading-snug mt-0.5">
-                          Commercial Capital Intake &amp; DSCR Decisioning Terminal
+                          SvelteKit Commercial Debt &amp; Underwriting Terminal
                         </p>
                       </div>
                       <ExternalLink className="w-3.5 h-3.5 text-slate-500 group-hover/eco:text-emerald-400 transition-colors shrink-0 mt-1" />
@@ -707,8 +716,8 @@ export default function Navbar(): React.JSX.Element {
                   <div className="flex items-center gap-2.5">
                     <Briefcase className="w-4 h-4 text-emerald-400 shrink-0" />
                     <div>
-                      <span className="font-bold block">FundingSolutions</span>
-                      <span className="text-[10px] text-slate-400">DSCR Underwriting Engine</span>
+                      <span className="font-bold block">BFS Harvest</span>
+                      <span className="text-[10px] text-slate-400">SvelteKit Fintech Terminal</span>
                     </div>
                   </div>
                   <ExternalLink className="w-3.5 h-3.5 text-slate-500" />

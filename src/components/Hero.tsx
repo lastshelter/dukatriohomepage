@@ -81,9 +81,9 @@ const BLUEPRINTS: BlueprintPreview[] = [
   {
     id: "intake",
     label: "03 · B2B Underwriting Engine",
-    badge: "CAPITAL & FINTECH (FUNDINGSOLUTIONS)",
+    badge: "FINTECH & CAPITAL (BFS HARVEST)",
     route: "/solutions/b2b-client-intake-engine",
-    liveDemoUrl: "https://fundingsolutions.dukatrio.com",
+    liveDemoUrl: "/case-studies/bfs-harvest",
     beforeTitle: "72-Hour Manual Underwriting & Email Attachments",
     beforePain: [
       "62% high-intent borrower drop-off during multi-day manual review",
@@ -91,13 +91,13 @@ const BLUEPRINTS: BlueprintPreview[] = [
       "Senior analysts buried in manually spreading unqualified deals",
     ],
     beforeCost: "72h turnaround · High deal attrition",
-    afterTitle: "Sub-60s Algorithmic Qualification & KYC Vault",
+    afterTitle: "SvelteKit Underwriting Engine & KYC Vault",
     afterSpecs: [
       "Real-time DSCR, LTV & amortization calculation kernel in TypeScript",
       "Instant programmatic PDF indicative term-sheet generation",
-      "AES-256 encrypted KYC document vault on isolated EU Hetzner VPS",
+      "Single-tenant Hetzner Linux VPS (<€15/mo) with AES-256 KYC encryption",
     ],
-    afterMetric: "< 60s Decisioning · +310% Conversion",
+    afterMetric: "< 60s Decisioning · €0 Seat Taxes",
     scopeType: "B2B Client Intake Engine",
   },
 ];

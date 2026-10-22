@@ -15,8 +15,8 @@ const TABS = [
   },
   {
     id: "dscr",
-    label: "FundingSolutions · DSCR Terminal",
-    blurb: "Move the sliders to see real-time coverage ratio, risk tier and a sample term sheet.",
+    label: "BFS Harvest · DSCR Terminal",
+    blurb: "Simulate the real-time financial ratio kernel powering the BFS Harvest fintech platform on Hetzner VPS.",
     Icon: Gauge,
   },
 ] as const;

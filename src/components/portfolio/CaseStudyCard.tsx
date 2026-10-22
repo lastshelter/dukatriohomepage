@@ -55,23 +55,30 @@ export const CASE_STUDIES: CaseStudyData[] = [
   },
   {
     id: "capital_syndication_terminal",
-    badge: "FINTECH & COMPUTATION KERNEL",
-    title: "Commercial Capital Intake & DSCR Decisioning Terminal",
-    clientType: "Private Debt & Commercial Real Estate Underwriting",
-    techStack: ["Next.js 16", "React 19", "TypeScript Engine", "Prisma ORM", "PostgreSQL", "Caddy Edge"],
+    badge: "FINTECH & ALGORITHMIC UNDERWRITING",
+    title: "BFS Harvest: SvelteKit Commercial Debt & DSCR Underwriting Terminal",
+    clientType: "Commercial Capital Advisory & Private Debt Underwriting",
+    techStack: [
+      "SvelteKit 2",
+      "TypeScript Kernel",
+      "PostgreSQL / SQLite WAL",
+      "AES-256 KYC Vault",
+      "Caddy v2",
+      "Hetzner Cloud VPS",
+    ],
     bottleneck:
-      "Legacy underwriting operations relied on fragile 40MB multi-tab Excel workbooks, manual debt consolidation spreading, and 48-hour calculation turnarounds on multi-million dollar commercial loan applications.",
+      "Legacy underwriting operations relied on fragile 40MB multi-tab Excel workbooks, unencrypted borrower email attachments, and 72-hour calculation turnarounds on multi-million dollar commercial loan applications.",
     architecture:
-      "Constructed a self-hosted client intake terminal featuring real-time financial ratio calculation kernels (DSCR, MCA consolidation, amortization schedules) and programmatic one-click term sheet PDF generation.",
+      "Constructed a high-speed SvelteKit 2 client intake platform on a single-tenant Hetzner VPS, featuring a deterministic TypeScript ratio kernel (DSCR, MCA debt consolidation, stress haircuts), automated vector PDF term-sheet generation, and AES-256 encrypted KYC storage.",
     outcome:
-      "Reduced underwriting turnaround from 48 hours to under 60 seconds. Eliminated recurring €8k/yr commercial SaaS portal licenses with 100% single-tenant database ownership and zero per-seat taxes.",
+      "Reduced borrower stress-decisioning from 72 hours to under 60 seconds. Eliminated recurring €8.4k/yr commercial lending SaaS fees with 100% sovereign database ownership and <€15/mo server costs.",
     metrics: [
       { label: "Stress Decisioning", value: "< 60s" },
       { label: "Recurring Seat Fees", value: "€0" },
       { label: "Analyzed Pipeline", value: "€14M+" },
     ],
-    liveUrl: "/case-studies/fundingsolutions",
-    ctaLabel: "Read Technical Case Study",
+    liveUrl: "/case-studies/bfs-harvest",
+    ctaLabel: "Read BFS Harvest Study",
     externalUrl: "https://fundingsolutions.dukatrio.com",
   },
   {

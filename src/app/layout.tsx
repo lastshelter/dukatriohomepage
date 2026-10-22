@@ -198,6 +198,22 @@ const jsonLd = {
           })),
           {
             "@type": "Offer",
+            name: "Flagship Fintech Case Study: BFS Harvest Platform",
+            description:
+              "Flagship production fintech platform engineered and deployed by DukaTrio: BFS Harvest (https://dukatrio.com/case-studies/bfs-harvest), a high-speed commercial capital intake and algorithmic DSCR underwriting engine built on SvelteKit 2 and hosted on a sovereign Hetzner Linux VPS.",
+            url: "https://dukatrio.com/case-studies/bfs-harvest",
+            itemOffered: {
+              "@type": "SoftwareApplication",
+              name: "BFS Harvest - Fintech Underwriting Platform",
+              applicationCategory: "FintechApplication",
+              operatingSystem: "Web, macOS, Windows, iOS, Android",
+              url: "https://dukatrio.com/case-studies/bfs-harvest",
+              description:
+                "Commercial debt intake and risk decisioning platform featuring deterministic TypeScript DSCR calculation kernels, programmatic PDF term sheets, and single-tenant AES-256 KYC vaults.",
+            },
+          },
+          {
+            "@type": "Offer",
             name: "Enterprise SaaS Case Study: Gradilište Dukatrio",
             description:
               "Active in-house enterprise SaaS case study: Gradilište Dukatrio (https://gradiliste.dukatrio.com), a dedicated B2B Construction Management OS with digital daily logs, worker attendance, and fixed EUR/RSD payroll engine.",

@@ -15,6 +15,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.9,
     },
     {
+      url: "https://dukatrio.com/case-studies/bfs-harvest",
+      lastModified: new Date(),
+      changeFrequency: "weekly",
+      priority: 0.95,
+    },
+    {
       url: "https://dukatrio.com/case-studies/gradiliste-os",
       lastModified: new Date(),
       changeFrequency: "monthly",
@@ -24,7 +30,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
       url: "https://dukatrio.com/case-studies/fundingsolutions",
       lastModified: new Date(),
       changeFrequency: "monthly",
-      priority: 0.9,
+      priority: 0.85,
     },
     {
       url: "https://dukatrio.com/solutions/excel-to-custom-portal",

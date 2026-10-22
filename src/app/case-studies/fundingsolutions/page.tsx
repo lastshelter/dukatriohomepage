@@ -194,6 +194,25 @@ export default function FundingSolutionsCaseStudyPage(): React.JSX.Element {
             </nav>
 
             <div className="space-y-6 max-w-4xl">
+              <div className="p-4 rounded-2xl bg-teal-950/40 border border-teal-500/40 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 shadow-[0_0_15px_rgba(20,184,166,0.15)]">
+                <div className="space-y-0.5">
+                  <div className="text-xs font-mono font-bold text-teal-300 uppercase tracking-wider flex items-center gap-1.5">
+                    <span className="w-2 h-2 rounded-full bg-teal-400 animate-pulse" />
+                    <span>PRODUCTION UPGRADE: BFS HARVEST DEPLOYED</span>
+                  </div>
+                  <p className="text-xs text-slate-300">
+                    This fintech platform has been expanded and deployed into production as <strong>BFS Harvest</strong> (SvelteKit 2 + Hetzner Cloud VPS).
+                  </p>
+                </div>
+                <Link
+                  href="/case-studies/bfs-harvest"
+                  className="px-3.5 py-1.5 rounded-lg bg-teal-400 hover:bg-teal-300 text-slate-950 font-mono text-xs font-bold transition-all shrink-0 flex items-center gap-1"
+                >
+                  <span>View BFS Harvest Study</span>
+                  <ArrowRight className="w-3.5 h-3.5" />
+                </Link>
+              </div>
+
               <div className="flex flex-wrap items-center gap-2.5 font-mono text-xs">
                 <span className="px-3 py-1 rounded-full bg-[#0D121F] border border-teal-500/30 text-teal-400 font-bold">
                   FINTECH ARCHITECTURAL CASE STUDY

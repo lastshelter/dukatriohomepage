@@ -21,6 +21,8 @@ export const SCOPE_OPTIONS = [
   "Offline Field Operations PWA",
   "B2B Client Intake Engine",
   "Fintech Platform",
+  "Field Ticket & Material OCR Pipeline",
+  "Specialized Fleet & Dispatch Desk",
 ] as const;
 
 export type ScopeType = (typeof SCOPE_OPTIONS)[number];
@@ -97,6 +99,16 @@ export default function ContactForm({
           scope: "B2B Client Intake Engine",
           message:
             "[Solution Inquiry: B2B Client Intake & Underwriting Engine]\nTarget Scope: Bespoke qualification engine & encrypted client vault (€4,800 flat milestone · 10–14 days).\nCore Focus: Sub-60s algorithmic decisioning, KYC document ingestion & private VPS isolation.",
+        },
+        "field-ticket-material-ocr": {
+          scope: "Field Ticket & Material OCR Pipeline",
+          message:
+            "[Solution Inquiry: Field Ticket & Material OCR Ingestion Pipeline]\nTarget Scope: Offline-capable mobile OCR scanner & automated material invoicing ledger (€4,800 flat milestone · 10–14 days).\nCore Focus: Zero unbilled deliveries, automated PO matching, edge camera OCR & QuickBooks/Xero export.",
+        },
+        "specialized-fleet-dispatch-desk": {
+          scope: "Specialized Fleet & Dispatch Desk",
+          message:
+            "[Solution Inquiry: Specialized Fleet & Dispatch Desk]\nTarget Scope: Real-time heavy equipment dispatch console & automated quoting engine (€4,800 – €6,500 flat milestone · 14–21 days).\nCore Focus: Visual machine Gantt timeline, 30s algorithmic quoting, driver WhatsApp job cards & private Hetzner cloud.",
         },
       };
       const matched = solutionMap[normalizedKey];
